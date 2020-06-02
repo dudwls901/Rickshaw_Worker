@@ -14,5 +14,6 @@ public class MainActivity extends AppCompatActivity {
         //김영진이 바꿔요
         //ㅋㅇㄻㅇㅁㄹㅇㅁㄹ
         //내 브런치에서 올린 걸 마스터에서 해보자
+        //내 브런치에서 커밋 후 로컬 마스터에 merge 후 로컬 마스터에서 리모트 마스터로 푸시푸시
     }
 }
