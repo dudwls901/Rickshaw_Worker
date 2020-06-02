@@ -12,6 +12,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 //머러움랑
         //김영진이 바꿔요
-        //동연의 브랜치
+        //git에서 바꿔보기
     }
 }
