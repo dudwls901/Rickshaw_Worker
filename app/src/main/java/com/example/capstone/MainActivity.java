@@ -13,5 +13,6 @@ public class MainActivity extends AppCompatActivity {
 //머러움랑
         //김영진이 바꿔요
         //git에서 바꿔보기
+        //브랜치 만들기 dy
     }
 }
