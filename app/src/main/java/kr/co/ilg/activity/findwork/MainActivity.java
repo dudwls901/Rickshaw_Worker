@@ -20,5 +20,6 @@ public class MainActivity extends AppCompatActivity {
         // 나는 바꾸고 있는데 누가 수정을 했다네
 //캉아아아아아아
         //안알려준다잉
+        // 동연에서 커밋앤 푸시
     }
 }
