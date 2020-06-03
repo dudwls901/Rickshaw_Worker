@@ -17,5 +17,5 @@
             </intent-filter>
         </activity>
     </application>
-
+<!--동연이 매니페스트 바꿈-->
 </manifest>
