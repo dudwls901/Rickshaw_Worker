@@ -7,7 +7,7 @@ import androidx.annotation.Nullable;
 
 import com.example.capstone.R;
 
-public class ApplyStateActivity extends Activity {
+public class MyApplyStateActivity extends Activity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
