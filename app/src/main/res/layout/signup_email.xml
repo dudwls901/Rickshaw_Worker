@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/emailTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:text="이메일"
+        android:textSize="20sp"
+        />
+
+    <EditText
+        android:id="@+id/emailET"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/emailTV"
+        android:ems="10"
+        />
+
+    <Button
+        android:id="@+id/emailBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/emailET"
+        android:text="인증번호 발송"
+       />
+
+    <TextView
+        android:id="@+id/codeTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/emailET"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:text="인증번호"
+        android:textSize="20sp"
+        />
+
+    <EditText
+        android:id="@+id/codeET"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/emailET"
+        app:layout_constraintLeft_toRightOf="@+id/codeTV"
+        android:ems="10"
+        />
+
+    <Button
+        android:id="@+id/codeBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/emailET"
+        app:layout_constraintLeft_toRightOf="@+id/codeET"
+        android:text="인증"
+        />
+
+    <Button
+        android:id="@+id/nxtBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/codeET"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:text="다음"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

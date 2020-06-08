@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context="kr.co.ilg.activity.findwork.MainActivity">
 
     <TextView
         android:layout_width="wrap_content"
@@ -17,5 +17,8 @@
 
         />
 <!-- ㅁㅇㄻㅇㄻㅇ내 브런치에서 커밋 후 로컬 마스터에 merge 후 로컬 마스터에서 리모트 마스터로 푸시푸시-->
+    <!--메인엑셈엘-->
+
+    <!--ㅋㅇㄹㅋㅇㄹㅋㄹㅇㅋㄹㅇㅋ-->
     <!--메인엑셈엘-->
 </androidx.constraintlayout.widget.ConstraintLayout>
