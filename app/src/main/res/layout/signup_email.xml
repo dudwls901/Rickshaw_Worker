@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toRightOf="@+id/emailTV"
-        android:ems="10"
+        android:ems="12"
         />
 
     <Button
@@ -28,7 +28,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toRightOf="@+id/emailET"
+        app:layout_constraintRight_toRightOf="parent"
         android:text="인증번호 발송"
        />
 
@@ -56,7 +56,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/emailET"
-        app:layout_constraintLeft_toRightOf="@+id/codeET"
+        app:layout_constraintRight_toRightOf="parent"
         android:text="인증"
         />
 
