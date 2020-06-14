@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/nameTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:text="이                름"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/nameET"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:paddingLeft="120dp" />
+
+    <TextView
+        android:id="@+id/rrnTV"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/nameET"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_weight="1.3"
+        android:text="주민등록 번호"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/rrnET"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/nameET"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:paddingLeft="120dp" />
+
+    <TextView
+        android:id="@+id/pnumTV"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/rrnET"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_weight="1.3"
+        android:text="휴대전화 번호"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/pnumET"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/rrnET"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:paddingLeft="120dp"
+        android:hint="하이픈(-) 제외하고 입력"
+        />
+
+    <Button
+        android:id="@+id/signUpBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/pnumET"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="10dp"
+        android:text="회원가입" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
