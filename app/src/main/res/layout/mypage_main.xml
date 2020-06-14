@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        android:background="@drawable/line"
+        >
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/man"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="  사용자"
+            android:textSize="25dp"
+            android:gravity="center"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text=" 님"
+            android:textSize="25dp"
+            android:gravity="center"/>
+
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="3">
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="80dp"
+            android:text="내 정보 관리"
+            android:background="@drawable/line"
+            android:textAlignment="center"
+            android:textSize="20dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            />
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="80dp"
+            android:text="계좌 관리"
+            android:background="@drawable/line"
+            android:textSize="20dp"
+            android:layout_weight="1"
+            android:textAlignment="center"
+            android:gravity="center"
+            />
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="80dp"
+            android:text="리뷰 관리"
+            android:background="@drawable/line"
+            android:textSize="20dp"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:textAlignment="center"
+            />
+
+
+    </LinearLayout>
+    
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/listview"
+        android:divider="@android:color/black"
+        />
+
+
+
+
+
+
+
+
+</LinearLayout>
