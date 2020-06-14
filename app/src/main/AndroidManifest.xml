@@ -16,7 +16,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="kr.co.ilg.activity.login.LoginActivity"/>
+        <activity android:name="kr.co.ilg.activity.login.LoginActivity" android:label="일자리 찾기"/>
     </application>
-<!--동연이 매니페스트 바꿈-->
 </manifest>
