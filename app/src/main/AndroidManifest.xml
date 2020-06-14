@@ -9,8 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-<!--        <activity android:name="kr.co.ilg.activity.findwork.MainActivity" android:label="일자리 찾기">-->
-        <activity android:name="kr.co.ilg.activity.login.SignupEmailActivity" android:label="회원가입">
+       <activity android:name="kr.co.ilg.activity.findwork.MainActivity" android:label="일자리 찾기">
+<!--        <activity android:name="kr.co.ilg.activity.login.SignupEmailActivity" android:label="회원가입">-->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
