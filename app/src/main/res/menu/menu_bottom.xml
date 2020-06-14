@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/tab1"
+        android:checked="true"
+        android:enabled="true"
+        android:icon="@drawable/search"
+
+        android:title="@string/title_home"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/tab2"
+        android:enabled="true"
+        android:icon="@drawable/building"
+        android:title="@string/title_myfield"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/tab3"
+        android:enabled="true"
+        android:icon="@drawable/profile"
+        android:title="@string/title_myinfo"
+        app:showAsAction="always" />
+</menu>
+
