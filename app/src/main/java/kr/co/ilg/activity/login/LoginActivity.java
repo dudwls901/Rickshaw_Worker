@@ -13,5 +13,7 @@ public class LoginActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        // 나한테 왜이래
+
     }
 }
