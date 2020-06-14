@@ -18,7 +18,7 @@
             </intent-filter>
         </activity>
         <activity android:name="kr.co.ilg.activity.login.LoginActivity" android:label="로그인"/>
-        <activity android:name="kr.co.ilg.activity.findwork.FieldInfoActivity" android:label="현장 정보"/>
+        <activity android:name="kr.co.ilg.activity.findwork.FieldInfoActivity" android:label="현장 정보" android:parentActivityName="kr.co.ilg.activity.findwork.MainActivity"/>
         <activity android:name="kr.co.ilg.activity.findwork.OfficeInfoActivity" android:label="인력사무소 정보"/>
         <activity android:name="kr.co.ilg.activity.findwork.WorkInfoActivity" android:label="일자리 정보"/>
         <activity android:name="kr.co.ilg.activity.findwork.WorkMapActivity" android:label="일자리 지도"/>

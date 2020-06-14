@@ -1,6 +1,8 @@
 package kr.co.ilg.activity.findwork;
 
+import android.app.ActionBar;
 import android.app.Activity;
+import android.drm.DrmStore;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -13,6 +15,10 @@ public class FieldInfoActivity extends Activity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.field_info);
+        ActionBar ad=getActionBar();
+        ad.setDisplayHomeAsUpEnabled(true);
 
     }
+
+
 }

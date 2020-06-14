@@ -61,7 +61,5 @@ public class MainActivity extends AppCompatActivity {
         usually_RecyclerView.setAdapter(usuallyAdapter);
 
 
-
-
     }
 }

@@ -1,5 +1,6 @@
 package kr.co.ilg.activity.findwork;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +28,13 @@ public class ListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             office=view.findViewById(R.id.office);
             current_people=view.findViewById(R.id.current_people);
             total_people=view.findViewById(R.id.total_people);
+
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                }
+            });
         }
     }
 
