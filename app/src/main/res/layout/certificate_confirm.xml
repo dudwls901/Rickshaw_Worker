@@ -60,4 +60,5 @@
         app:layout_constraintRight_toRightOf="parent"
         android:text="업로드"/>
 
+    
 </androidx.constraintlayout.widget.ConstraintLayout>
