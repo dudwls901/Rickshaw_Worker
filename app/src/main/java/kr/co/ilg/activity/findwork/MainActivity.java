@@ -12,7 +12,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {//1
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        setTitle("일자리 찾기");
+
 
     }
 }
