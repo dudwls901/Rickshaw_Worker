@@ -1,5 +1,6 @@
 package kr.co.ilg.activity.findwork;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.os.Bundle;
 
@@ -12,6 +13,9 @@ public class WorkInfoActivity extends Activity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.work_info);
+        ActionBar ad=getActionBar();
+        ad.setDisplayHomeAsUpEnabled(true);
+
     }
 }

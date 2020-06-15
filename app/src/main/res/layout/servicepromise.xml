@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <TableLayout
+        android:layout_marginTop="15dp"
+        android:id="@+id/TLDay"
+        android:scaleType="fitXY"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:stretchColumns="*"
+        >
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:weightSum="2">
+            <Button
+                android:id="@+id/btn1"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:gravity="center"
+                android:background="@drawable/line"
+                android:textColor="@android:color/black"
+                android:text="이용약관"/>
+            <Button
+                android:id="@+id/btn2"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:gravity="center"
+                android:background="@drawable/line"
+                android:textColor="@android:color/black"
+                android:text="전자금융이용거래"
+                />
+
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2"
+            android:layout_marginHorizontal="10dp">
+            <Button
+                android:id="@+id/btn5"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:gravity="center"
+                android:background="@drawable/line"
+                android:textColor="@android:color/black"
+                android:layout_weight="1"
+                android:text="개인정보 제3자 제공동의"/>
+            <Button
+                android:id="@+id/btn6"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:gravity="center"
+                android:background="@drawable/line"
+                android:layout_weight="1"
+                android:textColor="@android:color/black"
+                android:text="위치기반 서비스 이용약관"/>
+
+        </TableRow>
+
+    </TableLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/line"
+        android:text="약관 내용"
+        android:padding="25dp"
+        />
+
+
+</LinearLayout>
