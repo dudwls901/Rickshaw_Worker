@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
 
                     }
                     case R.id.tab2: {
-                        Intent intent = new Intent(MainActivity.this, MainActivity.class);
+                        Intent intent = new Intent(MainActivity.this, MyFieldActivity.class);
                         startActivity(intent);
                     }
                     case R.id.tab3: {
