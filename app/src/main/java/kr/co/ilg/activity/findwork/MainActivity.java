@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.capstone.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -84,6 +85,12 @@ public class MainActivity extends AppCompatActivity {
 //        usually_RecyclerView.setAdapter(usuallyAdapter);
 
         bottomNavigationView = findViewById(R.id.bottomNavigationView1); //프래그먼트 생성
+        Log.d("chk1", String.valueOf(bottomNavigationView.getMenu().getItem(1)));
+        Toast.makeText(MainActivity.this,String.valueOf(bottomNavigationView.getMenu().getItem(1)),Toast.LENGTH_LONG).show();
+        bottomNavigationView.getMenu().getItem(0).setChecked(false);
+        bottomNavigationView.getMenu().getItem(0).setIcon(R.drawable.check);
+        bottomNavigationView.getMenu().getItem(1).setIcon(R.drawable.check);
+        bottomNavigationView.getMenu().getItem(0).
 //        fragment1 = new Fragment1();
 //        fragment2 = new Fragment2();
 //        fragment3 = new Fragment3(); //제일 처음 띄워줄 뷰를 세팅해줍니다. commit();까지 해줘야 합니다.
@@ -97,11 +104,10 @@ public class MainActivity extends AppCompatActivity {
 //                        getSupportFragmentManager().beginTransaction().replace(R.id.main_layout, fragment1).commitAllowingStateLoss();
 //                        return true;
 
-                        Intent intent1 = new Intent(MainActivity.this, MainActivity.class);
-                        startActivity(intent1);
                         return false;
                     }
                     case R.id.tab2: {
+
                         bottomNavigationView.getMenu().getItem(1).setChecked(true);
                         bottomNavigationView.getMenu().getItem(0).setChecked(false);
 //                        item2.setChecked(true);

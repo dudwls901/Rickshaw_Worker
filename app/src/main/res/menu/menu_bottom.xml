@@ -3,10 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/tab1"
-        android:checked="true"
+
         android:enabled="true"
         android:icon="@drawable/search"
-        app:itemIconTint="@drawable/item_color"
+
         android:title="@string/title_home"
         app:showAsAction="always" />
     <item
@@ -14,14 +14,14 @@
         android:enabled="true"
         android:icon="@drawable/building"
         android:title="@string/title_myfield"
-        app:itemIconTint="@drawable/item_color"
+
         app:showAsAction="always" />
     <item
         android:id="@+id/tab3"
         android:enabled="true"
         android:icon="@drawable/profile"
         android:title="@string/title_myinfo"
-        app:itemIconTint="@drawable/item_color"
+
         app:showAsAction="always" />
 </menu>
 

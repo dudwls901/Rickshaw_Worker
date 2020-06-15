@@ -21,6 +21,9 @@ public class MyFieldActivity extends AppCompatActivity {
         setContentView(R.layout.myfield);
 
         bottomNavigationView = findViewById(R.id.bottomNavigationView2); //프래그먼트 생성
+
+        bottomNavigationView.getMenu().getItem(1).setChecked(true);
+        bottomNavigationView.getMenu().getItem(0).setChecked(false);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
