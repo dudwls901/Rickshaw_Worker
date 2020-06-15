@@ -11,63 +11,91 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:text="이메일"
+        android:text="이 메 일"
         android:textSize="20sp"
         />
 
-    <EditText
-        android:id="@+id/emailET"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/l1"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toRightOf="@+id/emailTV"
-        android:ems="12"
-        />
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/emailBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:text="인증번호 발송"
-       />
+        <EditText
+            android:id="@+id/emailET"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/emailTV"
+            android:layout_gravity="center"
+            android:layout_weight="4"
+            android:paddingLeft="75dp"
+            />
+
+        <Button
+            android:id="@+id/sendCodeBtn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_weight="1.2"
+            android:layout_gravity="center"
+            android:text="인증번호발송"
+            />
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/codeTV"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/emailET"
+        app:layout_constraintTop_toBottomOf="@id/l1"
         app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_weight="1.3"
         android:text="인증번호"
-        android:textSize="20sp"
+        android:textSize="18sp"
         />
 
-    <EditText
-        android:id="@+id/codeET"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/emailET"
-        app:layout_constraintLeft_toRightOf="@+id/codeTV"
-        android:ems="10"
-        />
-
-    <Button
-        android:id="@+id/codeBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/emailET"
-        app:layout_constraintRight_toRightOf="parent"
-        android:text="인증"
-        />
-
-    <Button
-        android:id="@+id/nxtBtn"
+    <LinearLayout
+        android:id="@+id/l2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/codeET"
+        app:layout_constraintTop_toBottomOf="@+id/l1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/codeET"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/emailET"
+            app:layout_constraintLeft_toRightOf="@+id/codeTV"
+            android:layout_weight="4"
+            android:paddingLeft="75dp"
+            />
+
+        <Button
+            android:id="@+id/codeBtn"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            app:layout_constraintTop_toBottomOf="@id/emailET"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_weight="1.2"
+            android:layout_gravity="center"
+            android:text="인증"
+            />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/nextBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/l2"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="10dp"
         android:text="다음"
         />
 

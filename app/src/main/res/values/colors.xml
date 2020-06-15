@@ -6,4 +6,5 @@
     <color name="mainColor">#2EC5D4</color>
     <color name="LightColor">#BBEEF2</color>
     <color name="DarkColor">#1F8E98</color>
+    <color name="WhiteColor">#ffffff</color>
 </resources>
