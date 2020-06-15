@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
@@ -43,9 +44,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        item1 = (MenuItem) findViewById(R.menu.menu_bottom);
-             item2 = (MenuItem)findViewById(R.id.tab2);
-        item3 = (MenuItem)findViewById(R.id.tab3);
+
 
 //        spinner1=findViewById(R.id.spinner1);
 //        spinner2=findViewById(R.id.spinner2);
@@ -103,16 +102,20 @@ public class MainActivity extends AppCompatActivity {
                         return false;
                     }
                     case R.id.tab2: {
-
-                        item2.setChecked(true);
-                        item1.setChecked(false);
+                        bottomNavigationView.getMenu().getItem(1).setChecked(true);
+                        bottomNavigationView.getMenu().getItem(0).setChecked(false);
+//                        item2.setChecked(true);
+//                        item1.setChecked(false);
                         Intent intent2 = new Intent(MainActivity.this, MyFieldActivity.class);
                         startActivity(intent2);
                         return false;
                     }
                     case R.id.tab3: {
-                       item3.setChecked(true);
-                       item1.setChecked(false);
+
+                        bottomNavigationView.getMenu().getItem(2).setChecked(true);
+                        bottomNavigationView.getMenu().getItem(0).setChecked(false);
+//                       item3.setChecked(true);
+//                       item1.setChecked(false);
                         Intent intent3 = new Intent(MainActivity.this, MypageMainActivity.class);
                         startActivity(intent3);
                         return false;
