@@ -14,7 +14,6 @@ android:layout_height="match_parent">
     android:textSize="20dp"
     app:layout_constraintLeft_toLeftOf="parent"
     app:layout_constraintTop_toBottomOf="@id/work_detail_info">
-
 </Button>
 
 <LinearLayout
@@ -66,7 +65,7 @@ android:layout_height="match_parent">
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:text="일자리 제목 넣을곳"
+        android:text="레미안 건축"
         android:textSize="20dp"
         android:textStyle="bold" />
 
@@ -75,7 +74,7 @@ android:layout_height="match_parent">
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:text="일자리 주소 넣을곳"
+        android:text="서울시 마포구 상수동 레미안아파트"
         android:textSize="15dp" />
 
     <TextView
@@ -83,7 +82,7 @@ android:layout_height="match_parent">
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:text="인력사무소 정보 넣을곳"
+        android:text="개미인력소"
         android:textSize="15dp" />
 
 </LinearLayout>
@@ -110,7 +109,7 @@ android:layout_height="match_parent">
             android:layout_gravity="center"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="일자리 제목"
+            android:text="레미안건축"
             android:textSize="20dp" />
     </TableRow>
 
@@ -132,7 +131,7 @@ android:layout_height="match_parent">
             android:layout_height="match_parent"
             android:layout_weight="2"
             android:gravity="center"
-            android:text="철거" />
+            android:text="건축" />
     </TableRow>
 
     <TableRow
@@ -173,7 +172,7 @@ android:layout_height="match_parent">
             android:layout_height="match_parent"
             android:layout_weight="2"
             android:gravity="center"
-            android:text="2020-06-15" />
+            android:text="2020-06-14" />
     </TableRow>
 
     <TableRow
@@ -215,7 +214,7 @@ android:layout_height="match_parent">
             android:layout_height="match_parent"
             android:layout_weight="2"
             android:gravity="center"
-            android:text="5명" />
+            android:text="3명" />
     </TableRow>
 
     <TableRow
@@ -237,7 +236,7 @@ android:layout_height="match_parent">
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:layout_weight="2"
-            android:text="여의도 신송센터빌딩 철거 3명 구합니다. 일당은 오후 18시 이전에 입금해드리고,
+            android:text="상수 레미안 신축건물 일자리 3명 구합니다. 일당은 오후 18시 이전에 입금해드리고,
                                 안전 이수증만 있으시면 누구나 가능한 간단한 철거 작업입니다." />
     </TableRow>
 </TableLayout>

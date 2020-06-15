@@ -58,7 +58,7 @@ public class Fragment1 extends Fragment {
         ArrayList<ListViewItem> workInfoArrayList=new ArrayList<>();
         workInfoArrayList.add(new ListViewItem("레미안 건축","2020-06-14","150,000","상수 레미안 아파트","건축","개미인력소","1","3"));
 
-        ListAdapter urgencyAdapter=new ListAdapter(workInfoArrayList);
+        ListAdapter urgencyAdapter=new ListAdapter(context,workInfoArrayList);
         urgency_RecyclerView.setAdapter(urgencyAdapter);
 
         usually_RecyclerView=viewGroup.findViewById(R.id.list_usually);
@@ -70,7 +70,7 @@ public class Fragment1 extends Fragment {
         workInfoArrayList2.add(new ListViewItem("레미안아파트 건축","2020-06-14","150,000","상수 레미안 아파트","건축","개미인력소","1","3"));
         workInfoArrayList2.add(new ListViewItem("자이아파트 건축","2020-06-30","150,000","광흥창 자이 아파트","건축","코끼리인력소","2","4"));
 
-        ListAdapter usuallyAdapter=new ListAdapter(workInfoArrayList2);
+        ListAdapter usuallyAdapter=new ListAdapter(context,workInfoArrayList2);
         usually_RecyclerView.setAdapter(usuallyAdapter);
 
         return viewGroup;

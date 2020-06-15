@@ -33,7 +33,7 @@ public class FieldInfoActivity extends Activity {
         ArrayList<ListViewItem> workInfoArrayList=new ArrayList<>();
         workInfoArrayList.add(new ListViewItem("레미안 건축","2020-06-14","150,000","상수 레미안 아파트","건축","개미인력소","1","3"));
 
-        ListAdapter workAdapter=new ListAdapter(workInfoArrayList);
+        ListAdapter workAdapter=new ListAdapter(getApplicationContext(),workInfoArrayList);
         work_info_RecyclerView.setAdapter(workAdapter);
 
 
@@ -41,7 +41,7 @@ public class FieldInfoActivity extends Activity {
         review_RecyclerView.setHasFixedSize(true);
         review_layoutManager=new LinearLayoutManager(this);
         review_RecyclerView.setLayoutManager(review_layoutManager);
-//프로세스텍스트좀띄워주라!!그게모야 내가 깃프로세승 ㅏ프아 잠만
+
         ArrayList<ReviewItem> reviewList=new ArrayList<>();
         reviewList.add(new ReviewItem("김영진","2020-06-14","14일 15층 철거하고 왔습니다.\n 이번 달 내로 철거 마무리될 것 같습니다.\n 현장 분위기도 좋고 환경도 좋은편인데,\n 구르마좀 말없이 갖다 쓰지 마쇼\"\n"));
         reviewList.add(new ReviewItem("정선우","2020-06-17","오늘 첫 출근한 노린이입니다.\n 구르마가 뭔가요 ㅜㅜ?????"));

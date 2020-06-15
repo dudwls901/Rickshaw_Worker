@@ -1,5 +1,6 @@
 package kr.co.ilg.activity.findwork;
 
+import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,7 +17,6 @@ import java.util.List;
 
 public class ListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-
     public static class MyViewHolder extends RecyclerView.ViewHolder{
         TextView title,date,pay,job,place,office,current_people,total_people;
 
@@ -31,17 +31,13 @@ public class ListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             current_people=view.findViewById(R.id.current_people);
             total_people=view.findViewById(R.id.total_people);
 
-            view.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                }
-            });
         }
     }
 
+    private  Context context;
     private ArrayList<ListViewItem> workInfo;
-    public ListAdapter(ArrayList<ListViewItem> workInfo){
+    public ListAdapter(Context context, ArrayList<ListViewItem> workInfo){
+        this.context=context;
         this.workInfo=workInfo;
     }
 
@@ -63,6 +59,21 @@ public class ListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         myViewHolder.office.setText(workInfo.get(position).office);
         myViewHolder.current_people.setText(workInfo.get(position).current_people);
         myViewHolder.total_people.setText(workInfo.get(position).total_people);
+
+        myViewHolder.itemView.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                Context context=view.getContext();
+                Intent intent=new Intent(context,WorkInfoActivity.class);
+                context.startActivity(intent);
+            }
+
+
+
+        });
+
+
     }
     @Override
     public int getItemCount() {
