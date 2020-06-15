@@ -51,7 +51,9 @@ public class MypageMainActivity extends AppCompatActivity {
         list.add("공지사항");
         list.add("인력거안내");
         list.add("로그아웃");
-        bottomNavigationView = findViewById(R.id.bottomNavigationView3); //프래그먼트 생성
+        bottomNavigationView = findViewById(R.id.bottomNavigationView3);
+        bottomNavigationView.getMenu().getItem(0).setIcon(R.drawable.search_black);
+        bottomNavigationView.getMenu().getItem(2).setIcon(R.drawable.profile_color);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {

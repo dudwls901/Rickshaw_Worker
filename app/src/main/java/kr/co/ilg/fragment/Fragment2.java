@@ -20,6 +20,7 @@ import kr.co.ilg.fragment.Fragment22;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.capstone.R;
@@ -106,40 +107,3 @@ private Context context;
 
 }
 
-
-class PagerAdapter extends FragmentPagerAdapter {
-
-    @StringRes
-    private static final int[] TAB_TITLES = new int[]{R.string.tab_text_2, R.string.tab_text_22};
-    private final Context mContext;
-
-    public PagerAdapter(Context context, FragmentManager fm) {
-        super(fm);
-        mContext = context;
-    }
-
-    @Override
-    public Fragment getItem(int position) {
-    switch (position)
-    {
-        case 0:
-            return new Fragment2();
-        case 1:
-            return new Fragment22();
-        default:
-            return null;
-    }
-    }
-
-    @Nullable
-    @Override
-    public CharSequence getPageTitle(int position) {
-        return mContext.getResources().getString(TAB_TITLES[position]);
-    }
-
-    @Override
-    public int getCount() {
-        // Show 2 total pages.
-        return 2;
-    }
-}
