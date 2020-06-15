@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
@@ -15,6 +17,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 
+//import kr.co.ilg.activity.mypage.MypageMainActivity;
+
+import kr.co.ilg.activity.mypage.MypageMainActivity;
 import kr.co.ilg.fragment.Fragment1;
 import kr.co.ilg.fragment.Fragment2;
 import kr.co.ilg.fragment.Fragment3;
@@ -26,14 +31,21 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView urgency_RecyclerView;
     RecyclerView.LayoutManager layoutManager;
     BottomNavigationView bottomNavigationView;
-    Fragment1 fragment1;
-    Fragment2 fragment2;
-    Fragment3 fragment3;
+    MenuItem item1;
+    MenuItem item2;
+    MenuItem item3;
+
+//    Fragment1 fragment1;
+//    Fragment2 fragment2;
+//    Fragment3 fragment3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        item1 = (MenuItem) findViewById(R.id.tab1);
+             item2 = (MenuItem)findViewById(R.id.tab2);
+        item3 = (MenuItem)findViewById(R.id.tab3);
 
         spinner1=findViewById(R.id.spinner1);
         spinner2=findViewById(R.id.spinner2);
@@ -63,27 +75,38 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        bottomNavigationView = findViewById(R.id.bottomNavigationView); //프래그먼트 생성
-        fragment1 = new Fragment1();
-        fragment2 = new Fragment2();
-        fragment3 = new Fragment3(); //제일 처음 띄워줄 뷰를 세팅해줍니다. commit();까지 해줘야 합니다.
-
-        getSupportFragmentManager().beginTransaction().replace(R.id.main_layout, fragment1).commitAllowingStateLoss(); //bottomnavigationview의 아이콘을 선택 했을때 원하는 프래그먼트가 띄워질 수 있도록 리스너를 추가합니다.
+        bottomNavigationView = findViewById(R.id.bottomNavigationView1); //프래그먼트 생성
+//        fragment1 = new Fragment1();
+//        fragment2 = new Fragment2();
+//        fragment3 = new Fragment3(); //제일 처음 띄워줄 뷰를 세팅해줍니다. commit();까지 해줘야 합니다.
+//        getSupportFragmentManager().beginTransaction().replace(R.id.main_layout, fragment1).commitAllowingStateLoss(); //bottomnavigationview의 아이콘을 선택 했을때 원하는 프래그먼트가 띄워질 수 있도록 리스너를 추가합니다.
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                //  Log.d("chk",String.valueOf(menuItem.getItemId()));
                 switch (menuItem.getItemId()) { //menu_bottom.xml에서 지정해줬던 아이디 값을 받아와서 각 아이디값마다 다른 이벤트를 발생시킵니다.
                     case R.id.tab1: {
-                        getSupportFragmentManager().beginTransaction().replace(R.id.main_layout, fragment1).commitAllowingStateLoss();
-                        return true;
+//                        getSupportFragmentManager().beginTransaction().replace(R.id.main_layout, fragment1).commitAllowingStateLoss();
+//                        return true;
+
+                        Intent intent1 = new Intent(MainActivity.this, MainActivity.class);
+                        startActivity(intent1);
+                        return false;
                     }
                     case R.id.tab2: {
-                        getSupportFragmentManager().beginTransaction().replace(R.id.main_layout, fragment2).commitAllowingStateLoss();
-                        return true;
+
+                        item2.setChecked(true);
+                        item1.setChecked(false);
+                        Intent intent2 = new Intent(MainActivity.this, MyFieldActivity.class);
+                        startActivity(intent2);
+                        return false;
                     }
                     case R.id.tab3: {
-                        getSupportFragmentManager().beginTransaction().replace(R.id.main_layout, fragment3).commitAllowingStateLoss();
-                        return true;
+                       item3.setChecked(true);
+                       item1.setChecked(false);
+                        Intent intent3 = new Intent(MainActivity.this, MypageMainActivity.class);
+                        startActivity(intent3);
+                        return false;
                     }
                     default:
                         return false;
