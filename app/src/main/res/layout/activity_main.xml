@@ -87,22 +87,22 @@
         android:layout_height="match_parent"
         android:layout_marginBottom="?attr/actionBarSize" />
 
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bottomNavigationView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_marginStart="0dp"
-            android:layout_marginEnd="0dp"
-            android:background="@color/WhiteColor"
-            app:itemIconTint="@drawable/item_color"
-            app:itemTextColor="#000000"
-    app:itemIconSize="30dp"
-            app:menu="@menu/menu_bottom"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="0dp"
+        android:background="@color/WhiteColor"
+        app:itemIconSize="30dp"
+        app:itemIconTint="@drawable/item_color"
+        app:itemTextColor="#000000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:menu="@menu/menu_bottom"
 
-            />
+        />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -31,7 +31,7 @@ public class ListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     private ArrayList<ListViewItem> workInfo;
-    ListAdapter(ArrayList<ListViewItem> workInfo){
+    public ListAdapter(ArrayList<ListViewItem> workInfo){
         this.workInfo=workInfo;
     }
 
