@@ -63,8 +63,6 @@ public class ListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         myViewHolder.office.setText(workInfo.get(position).office);
         myViewHolder.current_people.setText(workInfo.get(position).current_people);
         myViewHolder.total_people.setText(workInfo.get(position).total_people);
-
-
     }
     @Override
     public int getItemCount() {

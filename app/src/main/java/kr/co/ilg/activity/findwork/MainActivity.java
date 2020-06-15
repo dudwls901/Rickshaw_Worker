@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
     Spinner spinner1, spinner2;
     ArrayList spinner1_array, spinner2_array;
     ArrayAdapter spinner1_Adapter, spinner2_Adapter;
-    RecyclerView urgency_RecyclerView, usually_RecyclerView;
+    RecyclerView urgency_RecyclerView;
     RecyclerView.LayoutManager layoutManager;
     BottomNavigationView bottomNavigationView;
     Fragment1 fragment1;
@@ -57,18 +57,17 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<ListViewItem> workInfoArrayList=new ArrayList<>();
         workInfoArrayList.add(new ListViewItem("레미안 건축","2020-06-14","150,000","상수 레미안 아파트","건축","개미인력소","1","3"));
 
+
         ListAdapter urgencyAdapter=new ListAdapter(workInfoArrayList);
         urgency_RecyclerView.setAdapter(urgencyAdapter);
 
-        usually_RecyclerView=findViewById(R.id.list_usually);
-        usually_RecyclerView.setHasFixedSize(true);
-        layoutManager=new LinearLayoutManager(this);
-        usually_RecyclerView.setLayoutManager(layoutManager);
+
 
         bottomNavigationView = findViewById(R.id.bottomNavigationView); //프래그먼트 생성
         fragment1 = new Fragment1();
         fragment2 = new Fragment2();
         fragment3 = new Fragment3(); //제일 처음 띄워줄 뷰를 세팅해줍니다. commit();까지 해줘야 합니다.
+
         getSupportFragmentManager().beginTransaction().replace(R.id.main_layout, fragment1).commitAllowingStateLoss(); //bottomnavigationview의 아이콘을 선택 했을때 원하는 프래그먼트가 띄워질 수 있도록 리스너를 추가합니다.
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
