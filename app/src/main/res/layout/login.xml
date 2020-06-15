@@ -1,36 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="10dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/idTV"
+    <ImageView
+        android:id="@+id/logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:text="아이디"
-        android:textSize="20sp"
-        />
+        android:scaleX="0.8"
+        android:scaleY="0.8"
+        android:src="@drawable/logo_ilg"
+        android:layout_marginTop="20dp"/>
 
     <EditText
         android:id="@+id/idET"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toRightOf="@+id/idTV"
-        android:ems="12"
-        />
-
-    <TextView
-        android:id="@+id/pwTV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/idET"
+        app:layout_constraintTop_toBottomOf="@id/logo"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:text="비밀번호"
-        android:textSize="20sp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:background="@drawable/edittext_custom1"
+        android:layout_marginTop="20dp"
+        android:padding="15dp"
+        android:hint="이메일"
+        android:ems="15"
         />
 
     <EditText
@@ -38,8 +37,73 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/idET"
-        app:layout_constraintLeft_toRightOf="@+id/pwTV"
-        android:ems="12"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:background="@drawable/edittext_custom1"
+        android:layout_marginTop="10dp"
+        android:padding="15dp"
+        android:hint="비밀번호"
+        android:ems="15"
         />
+
+    <CheckBox
+        android:id="@+id/cb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/pwET"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_margin="10dp"
+        android:text="로그인 상태 유지"/>
+
+    <Button
+        android:id="@+id/loginBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/cb"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_margin="5dp"
+        android:text="로그인"/>
+
+    <Button
+        android:id="@+id/findPwBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/loginBtn"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_margin="5dp"
+        android:text="비밀번호 찾기"/>
+
+    <TextView
+        android:id="@+id/orTV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/findPwBtn"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:gravity="center"
+        android:text="ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ또는ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ"/>
+
+    <Button
+        android:id="@+id/kakaoLoginBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/orTV"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_margin="5dp"
+        android:text="카카오 로그인"/>
+
+    <Button
+        android:id="@+id/signUpBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/kakaoLoginBtn"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_margin="5dp"
+        android:text="회원가입"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

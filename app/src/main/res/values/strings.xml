@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Capstone</string>
+    <string name="title_home">일자리 찾기</string>
+    <string name="title_myfield">나의 현장</string>
+    <string name="title_myinfo">내 정보</string>
+    <string name="tab_text_2">지원 현황</string>
+    <string name="tab_text_22">지난 현장</string>
 </resources>
