@@ -23,7 +23,7 @@
         <activity android:name="kr.co.ilg.activity.findwork.OfficeInfoActivity" android:label="인력사무소 정보"/>
         <activity android:name="kr.co.ilg.activity.findwork.WorkInfoActivity" android:label="일자리 정보"/>
         <activity android:name="kr.co.ilg.activity.findwork.WorkMapActivity" android:label="일자리 지도"/>
-
+        <activity android:name="kr.co.ilg.activity.findwork.MyFieldActivity" android:label="나의 현장"/>
         <activity android:name="kr.co.ilg.activity.login.SignupEmailActivity" android:label="회원가입"/>
         <activity android:name="kr.co.ilg.activity.login.SignupPasswordActivity" android:label="회원가입2"/>
         <activity android:name="kr.co.ilg.activity.login.SignupUserInfoActivity" android:label="회원가입3"/>
@@ -32,6 +32,7 @@
         <activity android:name="kr.co.ilg.activity.mypage.JobSelectActivity" android:label="희망 직종 선택"/>
         <activity android:name="kr.co.ilg.activity.mypage.CareerActivity" android:label="경력 등록"/>
         <activity android:name="kr.co.ilg.activity.mypage.AccountAddActivity" android:label="계좌 등록"/>
+        <activity android:name="kr.co.ilg.activity.mypage.MypageMainActivity" android:label="계좌 등록"/>
         <activity android:name="kr.co.ilg.activity.login.FindPasswordInfoActivity" android:label="비밀번호 찾기"/>
         <activity android:name="kr.co.ilg.activity.login.FindPasswordShowActivity" android:label="비밀번호 확인"/>
 
