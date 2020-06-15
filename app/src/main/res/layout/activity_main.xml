@@ -101,8 +101,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:menu="@menu/menu_bottom"
-
-
+        app:layout_behavior="tech.thdev.app.view.BottomNavigationBehavior"
+<!--a-->
         />
 
 

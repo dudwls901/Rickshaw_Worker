@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        item1 = (MenuItem) findViewById(R.id.tab1);
+        item1 = (MenuItem) findViewById(R.menu.menu_bottom);
              item2 = (MenuItem)findViewById(R.id.tab2);
         item3 = (MenuItem)findViewById(R.id.tab3);
 
