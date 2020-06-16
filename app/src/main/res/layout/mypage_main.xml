@@ -13,6 +13,7 @@
         android:padding="10dp"
         android:background="@drawable/line"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
         android:id="@+id/linear1"
         >
         <ImageView
@@ -41,7 +42,8 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:weightSum="3"
-        app:layout_constraintTop_toBottomOf="@+id/linear1"
+        app:layout_constraintTop_toBottomOf="@id/linear1"
+        app:layout_constraintLeft_toLeftOf="parent"
         android:id="@+id/linear2">
 
         <Button
@@ -50,6 +52,7 @@
             android:text="내 정보 관리"
             android:background="@drawable/line"
             android:textAlignment="center"
+            android:id="@+id/myinform"
             android:textSize="20dp"
             android:layout_weight="1"
             android:gravity="center"
@@ -63,6 +66,7 @@
             android:layout_weight="1"
             android:textAlignment="center"
             android:gravity="center"
+            android:id="@+id/accountmanage"
             />
         <Button
             android:layout_width="0dp"
@@ -73,6 +77,7 @@
             android:gravity="center"
             android:layout_weight="1"
             android:textAlignment="center"
+            android:id="@+id/reviewmanage"
             />
 
 
@@ -80,10 +85,12 @@
     
     <ListView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:id="@+id/listview"
         android:divider="@android:color/black"
-        app:layout_constraintTop_toBottomOf="@+id/linear2"
+        android:dividerHeight="1dp"
+        app:layout_constraintTop_toBottomOf="@id/linear2"
+        app:layout_constraintLeft_toLeftOf="parent"
         />
 
 

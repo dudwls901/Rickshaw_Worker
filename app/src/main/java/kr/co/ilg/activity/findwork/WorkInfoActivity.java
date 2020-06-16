@@ -7,6 +7,7 @@ import android.graphics.Paint;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -16,6 +17,7 @@ import com.example.capstone.R;
 
 public class WorkInfoActivity extends AppCompatActivity {
     TextView field_address,office_name;
+    Button map_btn;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,8 +27,17 @@ public class WorkInfoActivity extends AppCompatActivity {
 
         field_address=findViewById(R.id.place);
         office_name=findViewById(R.id.office_info);
+        map_btn=findViewById(R.id.map_btn);
         field_address.setPaintFlags(field_address.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG);
         office_name.setPaintFlags(field_address.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG);
+
+        map_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(WorkInfoActivity.this,WorkMapActivity.class);
+                startActivity(intent);
+            }
+        });
 
         field_address.setOnClickListener(new View.OnClickListener() {
             @Override
