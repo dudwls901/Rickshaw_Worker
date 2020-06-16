@@ -69,8 +69,6 @@ public class ListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 context.startActivity(intent);
             }
 
-
-
         });
 
 
