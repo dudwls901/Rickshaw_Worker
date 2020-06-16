@@ -7,13 +7,14 @@ import android.view.View;
 import android.widget.Button;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.capstone.R;
 
 import kr.co.ilg.activity.login.SignupPasswordActivity;
 import kr.co.ilg.activity.login.SignupUserInfoActivity;
 
-public class PasswordChangeActivity extends Activity {
+public class PasswordChangeActivity extends AppCompatActivity {
 
     Button changeBtn;
 
