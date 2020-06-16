@@ -1,23 +1,15 @@
 package kr.co.ilg.activity.findwork;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
-import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentStatePagerAdapter;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.PagerAdapter;
-import androidx.viewpager.widget.ViewPager;
 
 import com.example.capstone.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -25,11 +17,14 @@ import com.google.android.material.tabs.TabLayout;
 
 import kr.co.ilg.activity.mypage.MypageMainActivity;
 import kr.co.ilg.fragment.Fragment2;
-import kr.co.ilg.fragment.Fragment22;
+import kr.co.ilg.fragment.Fragment3;
 
 public class MyFieldActivity extends AppCompatActivity {
 
     BottomNavigationView bottomNavigationView;
+    private final int FRAGMENT2 = 2;
+    private final int FRAGMENT3 = 3;
+    private TabLayout tabs;
 
     RecyclerView urgency_RecyclerView, usually_RecyclerView;
     RecyclerView.LayoutManager layoutManager;
@@ -38,19 +33,44 @@ public class MyFieldActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.myfield);
+        tabs = findViewById(R.id.tabs);
+        tabs.addTab(tabs.newTab(), true);
+        tabs.addTab(tabs.newTab());
+tabs.getTabAt(0).setText("지원 현황");
+tabs.getTabAt(1).setText("지난 현장");
 
+        tabs.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                if (tab.getPosition() == 0) {
+                callFragment(FRAGMENT2);
 
+                }
+                else if(tab.getPosition()==1)
+                {
+                    callFragment(FRAGMENT3);
 
+                }
+            }
 
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
 
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
 
 
         bottomNavigationView = findViewById(R.id.bottomNavigationView2); //프래그먼트 생성
 //        bottomNavigationView.getMenu().getItem(0).setIcon(R.drawable.search_charcol);
 //        bottomNavigationView.getMenu().getItem(1).setIcon(R.drawable.building_color);
 //        bottomNavigationView.getMenu().getItem(2).setIcon(R.drawable.profile_charcol);
-     //   bottomNavigationView.getMenu().getItem(1).getIcon(R.id.tab2).setTintList(null);
-      //  bottomNavigationView.getMenu().getItem(1).
+        //   bottomNavigationView.getMenu().getItem(1).getIcon(R.id.tab2).setTintList(null);
+        //  bottomNavigationView.getMenu().getItem(1).
         bottomNavigationView.setItemIconTintList(null);
         //MenuItem item = bottomNavigationView.getMenu().getItem(1);
         //item.setIconTintList(null);
@@ -82,6 +102,28 @@ public class MyFieldActivity extends AppCompatActivity {
             }
         });
 
+
+    }
+    private void callFragment(int frament_no){
+
+        // 프래그먼트 사용을 위해
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+        switch (frament_no){
+            case 2:
+                // '프래그먼트1' 호출
+                Fragment2 fragment2 = new Fragment2();
+                transaction.replace(R.id.myfieldcontainer, fragment2);
+                transaction.commit();
+                break;
+
+            case 22:
+                // '프래그먼트2' 호출
+                Fragment3 fragment3 = new Fragment3();
+                transaction.replace(R.id.myfieldcontainer, fragment3);
+                transaction.commit();
+                break;
+        }
 
     }
 }

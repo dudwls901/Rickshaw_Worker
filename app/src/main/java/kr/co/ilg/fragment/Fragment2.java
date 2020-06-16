@@ -9,45 +9,26 @@ import android.widget.ArrayAdapter;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
-import kr.co.ilg.activity.findwork.ListAdapter;
-import kr.co.ilg.activity.findwork.ListViewItem;
-import kr.co.ilg.fragment.Fragment22;
 
-import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.PagerAdapter;
-import androidx.viewpager.widget.ViewPager;
 
 import com.example.capstone.R;
-import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
 
 public class Fragment2 extends Fragment {
     ViewGroup viewGroup;
 private Context context;
-    ArrayList spinner1_array, spinner2_array;
-    ArrayAdapter spinner1_Adapter, spinner2_Adapter;
-    RecyclerView urgency_RecyclerView, usually_RecyclerView;
-    RecyclerView.LayoutManager layoutManager;
+//    ArrayList spinner1_array, spinner2_array;
+//    ArrayAdapter spinner1_Adapter, spinner2_Adapter;
+//    RecyclerView urgency_RecyclerView, usually_RecyclerView;
+//    RecyclerView.LayoutManager layoutManager;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         viewGroup = (ViewGroup) inflater.inflate(R.layout.fragment2, container, false);
-
-
-
-     //  tabs.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(viewPager));
-       // viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabs));
-
-
-
-
+context = container.getContext();
 
 //        urgency_RecyclerView=viewGroup.findViewById(R.id.list_selection);
 //        urgency_RecyclerView.setHasFixedSize(true);
