@@ -94,10 +94,11 @@
         android:layout_gravity="bottom"
         android:layout_marginStart="0dp"
         android:layout_marginEnd="0dp"
-        android:background="@color/WhiteColor"
-        app:itemIconSize="30dp"
 
+        app:itemIconSize="30dp"
+app:itemIconTint="#000000"
         app:itemTextColor="#000000"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:menu="@menu/menu_bottom"

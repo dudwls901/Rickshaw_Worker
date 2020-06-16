@@ -3,25 +3,29 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/tab1"
-
         android:enabled="true"
-        android:icon="@drawable/search"
-
+        android:icon="@drawable/search_mint"
         android:title="@string/title_home"
-        app:showAsAction="always" />
+        app:showAsAction="always"
+
+        />
+
     <item
         android:id="@+id/tab2"
         android:enabled="true"
-        android:icon="@drawable/building"
+        android:icon="@drawable/building_mint"
         android:title="@string/title_myfield"
+        app:showAsAction="always"
 
-        app:showAsAction="always" />
+        />
+
     <item
         android:id="@+id/tab3"
         android:enabled="true"
-        android:icon="@drawable/profile"
+        android:icon="@drawable/profile_mint"
         android:title="@string/title_myinfo"
+        app:showAsAction="always"
 
-        app:showAsAction="always" />
+        />
 </menu>
 
