@@ -58,8 +58,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintTop_toBottomOf="@id/field_info"
-        app:layout_constraintLeft_toLeftOf="parent"
-        >
+        app:layout_constraintLeft_toLeftOf="parent">
         <TextView
             android:layout_margin="5dp"
             android:layout_width="match_parent"

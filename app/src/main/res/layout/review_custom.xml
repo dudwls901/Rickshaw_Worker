@@ -12,32 +12,30 @@
         android:layout_margin="5dp"
         >
         <TextView
-            android:layout_marginTop="2dp"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:id="@+id/user"
             android:layout_height="wrap_content"
-            android:text="김영진"
-            android:textSize="20dp"
+            android:text="댓글작성자"
+            android:textSize="15dp"
             android:textStyle="bold"
             android:layout_marginLeft="3dp"
             android:gravity="left"
             ></TextView>
         <TextView
             android:id="@+id/date"
-            android:layout_marginTop="2dp"
             android:layout_marginRight="3dp"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:text="2020-06-15"
+            android:textSize="15dp"
+            android:text="댓글 작성 날짜"
             android:gravity="right"
             ></TextView>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             >
             <TextView
@@ -47,7 +45,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/contents"
-                android:text="14일 15층 철거하고 왔습니다.\n 이번 달 내로 철거 마무리될 것 같습니다.\n 현장 분위기도 좋고 환경도 좋은편인데,\n 구르마좀 말업이 갖다 쓰지 마쇼"
+                android:text="댓글"
                 ></TextView>
         </LinearLayout>
     </LinearLayout>
