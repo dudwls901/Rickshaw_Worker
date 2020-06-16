@@ -11,13 +11,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="kr.co.ilg.activity.login.LoginActivity" android:label="로그인">
+<!--       <activity android:name="kr.co.ilg.activity.findwork.MainActivity" android:label="일자리 찾기">-->
+           <activity android:name="kr.co.ilg.activity.login.LoginActivity" android:label="로그인">
+<!--        <activity android:name="kr.co.ilg.activity.login.SignupEmailActivity" android:label="회원가입">-->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+<!--        <activity android:name="kr.co.ilg.activity.login.LoginActivity" android:label="로그인"/>-->
         <activity android:name="kr.co.ilg.activity.findwork.MainActivity" android:label="일자리 찾기"/>
         <activity android:name="kr.co.ilg.activity.findwork.FieldInfoActivity" android:label="현장 정보"/>
         <activity android:name="kr.co.ilg.activity.findwork.OfficeInfoActivity" android:label="인력사무소 정보"/>
