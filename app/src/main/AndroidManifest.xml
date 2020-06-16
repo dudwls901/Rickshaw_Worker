@@ -53,7 +53,17 @@
         <activity android:name="kr.co.ilg.activity.mypage.JobSelectActivity" android:label="희망 직종 선택"/>
         <activity android:name="kr.co.ilg.activity.mypage.CareerActivity" android:label="경력 등록"/>
         <activity android:name="kr.co.ilg.activity.mypage.AccountAddActivity" android:label="계좌 등록"/>
-        <activity android:name="kr.co.ilg.activity.mypage.MypageMainActivity" android:label="계좌 등록"/>
+        <activity android:name="kr.co.ilg.activity.mypage.MypageMainActivity" android:label="내 정보"/>
+        <activity android:name="kr.co.ilg.activity.mypage.MyInfomanageActivity" android:label="내 정보"/>
+        <activity android:name="kr.co.ilg.activity.mypage.AccountManageActivity" android:label="계좌 관리"/>
+        <activity android:name="kr.co.ilg.activity.mypage.ReviewManageActivity" android:label="후기 관리"/>
+        <activity android:name="kr.co.ilg.activity.mypage.OptionActivity" android:label="설정"/>
+        <activity android:name="kr.co.ilg.activity.mypage.NoticeActivity" android:label="공지사항"/>
+        <activity android:name="kr.co.ilg.activity.mypage.NoticeInfoActivity" android:label="공지사항"/>
+        <activity android:name="kr.co.ilg.activity.mypage.ilgIntrodutionActivity" android:label="인력거 안내"/>
+        <activity android:name="kr.co.ilg.activity.mypage.ServiceInfoActivity" android:label="이용약관"/>
+        <activity android:name="kr.co.ilg.activity.mypage.PasswordChangeActivity" android:label="비밀번호 변경"/>
+        <activity android:name="kr.co.ilg.activity.mypage.MemberRemoveActivity" android:label="회원탈퇴"/>
         <activity android:name="kr.co.ilg.activity.login.FindPasswordInfoActivity" android:label="비밀번호 찾기"/>
         <activity android:name="kr.co.ilg.activity.login.FindPasswordShowActivity" android:label="비밀번호 확인"/>
 
