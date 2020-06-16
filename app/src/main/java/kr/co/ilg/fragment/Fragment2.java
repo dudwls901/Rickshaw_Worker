@@ -6,11 +6,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ExpandableListAdapter;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.capstone.R;
@@ -20,6 +22,7 @@ import java.util.ArrayList;
 public class Fragment2 extends Fragment {
     ViewGroup viewGroup;
 private Context context;
+private RecyclerView recyclerView1;
 //    ArrayList spinner1_array, spinner2_array;
 //    ArrayAdapter spinner1_Adapter, spinner2_Adapter;
 //    RecyclerView urgency_RecyclerView, usually_RecyclerView;
@@ -29,6 +32,20 @@ private Context context;
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         viewGroup = (ViewGroup) inflater.inflate(R.layout.fragment2, container, false);
 context = container.getContext();
+
+
+
+        return viewGroup;
+    }
+
+
+}
+
+
+
+
+
+
 
 //        urgency_RecyclerView=viewGroup.findViewById(R.id.list_selection);
 //        urgency_RecyclerView.setHasFixedSize(true);
@@ -52,10 +69,3 @@ context = container.getContext();
 //
 //        ListAdapter usuallyAdapter=new ListAdapter(workInfoArrayList2);
 //        usually_RecyclerView.setAdapter(usuallyAdapter);
-
-        return viewGroup;
-    }
-
-
-}
-
