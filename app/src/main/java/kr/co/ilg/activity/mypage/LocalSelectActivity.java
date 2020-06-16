@@ -7,13 +7,14 @@ import android.view.View;
 import android.widget.Button;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.capstone.R;
 
 import kr.co.ilg.activity.findwork.MainActivity;
 import kr.co.ilg.activity.login.LoginActivity;
 
-public class LocalSelectActivity extends Activity {
+public class LocalSelectActivity extends AppCompatActivity {
 
     Button okBtn;
 
