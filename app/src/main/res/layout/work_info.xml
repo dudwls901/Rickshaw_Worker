@@ -13,7 +13,7 @@ android:layout_height="match_parent">
     android:textColor="@color/LightColor"
     android:textSize="20dp"
     app:layout_constraintLeft_toLeftOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/work_detail_info">
+    app:layout_constraintBottom_toBottomOf="parent">
 </Button>
 
 <LinearLayout
@@ -30,11 +30,13 @@ android:layout_height="match_parent">
         android:layout_width="0dp"
         android:layout_height="45dp"
         android:layout_weight="1"
+        android:textSize="17dp"
         android:text="전화"></Button>
 
     <Button
         android:id="@+id/map_btn"
         android:layout_width="0dp"
+        android:textSize="17dp"
         android:layout_height="45dp"
         android:layout_weight="1"
         android:text="지도"></Button>
@@ -42,6 +44,7 @@ android:layout_height="match_parent">
     <Button
         android:id="@+id/message_btn"
         android:layout_width="0dp"
+        android:textSize="17dp"
         android:layout_height="45dp"
         android:layout_weight="1"
         android:text="문자"></Button>
@@ -75,7 +78,10 @@ android:layout_height="match_parent">
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:text="서울시 마포구 상수동 레미안아파트"
-        android:textSize="15dp" />
+        android:textSize="15dp"
+        android:clickable="true"
+        android:textColor="@color/colorPrimary"
+        />
 
     <TextView
         android:id="@+id/office_info"
@@ -83,7 +89,10 @@ android:layout_height="match_parent">
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:text="개미인력소"
-        android:textSize="15dp" />
+        android:textSize="15dp"
+        android:clickable="true"
+        android:textColor="@color/colorPrimary"
+        />
 
 </LinearLayout>
 
@@ -109,6 +118,7 @@ android:layout_height="match_parent">
             android:layout_gravity="center"
             android:layout_weight="1"
             android:gravity="center"
+            android:background="@color/LightColor"
             android:text="레미안건축"
             android:textSize="20dp" />
     </TableRow>
@@ -236,6 +246,7 @@ android:layout_height="match_parent">
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:layout_weight="2"
+            android:padding="3dp"
             android:text="상수 레미안 신축건물 일자리 3명 구합니다. 일당은 오후 18시 이전에 입금해드리고,
                                 안전 이수증만 있으시면 누구나 가능한 간단한 철거 작업입니다." />
     </TableRow>
