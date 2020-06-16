@@ -1,17 +1,19 @@
-package kr.co.ilg.activity.mypage;
+package kr.co.ilg.activity.login;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 
-import com.example.capstone.R;
-
-public class ReviewManageActivity extends Activity {
-
+public class SplashActivity extends Activity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.writtenreview);
+
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+
+        finish();
     }
 }

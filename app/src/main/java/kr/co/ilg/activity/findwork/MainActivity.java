@@ -2,22 +2,40 @@ package kr.co.ilg.activity.findwork;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.capstone.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.ArrayList;
+import java.util.Dictionary;
+
 //import kr.co.ilg.activity.mypage.MypageMainActivity;
 
 import kr.co.ilg.activity.mypage.MypageMainActivity;
+import kr.co.ilg.fragment.Fragment1;
+import kr.co.ilg.fragment.Fragment2;
+import kr.co.ilg.fragment.Fragment3;
 
 public class MainActivity extends AppCompatActivity {
 
+    Spinner spinner1, spinner2;
+    ArrayList spinner1_array, spinner2_array;
+    ArrayAdapter spinner1_Adapter, spinner2_Adapter;
+    RecyclerView urgency_RecyclerView;
+    RecyclerView.LayoutManager layoutManager;
     BottomNavigationView bottomNavigationView;
 
 
@@ -29,6 +47,40 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+//        item1 = (MenuItem) findViewById(R.id.tab1);
+//        item2 = (MenuItem)findViewById(R.id.tab2);
+//        item3 = (MenuItem)findViewById(R.id.tab3);
+
+        spinner1=findViewById(R.id.spinner1);
+        spinner2=findViewById(R.id.spinner2);
+
+        spinner1_array=new ArrayList();
+        spinner2_array=new ArrayList();
+        spinner1_array.add(" 서울 마포구 ");
+        spinner2_array.add(" 전체 ");
+
+        spinner1_Adapter=new ArrayAdapter<>(getApplicationContext(),android.R.layout.simple_spinner_dropdown_item,spinner1_array);
+        spinner2_Adapter=new ArrayAdapter<>(getApplicationContext(),android.R.layout.simple_spinner_dropdown_item,spinner2_array);
+
+        spinner1.setAdapter(spinner1_Adapter);
+        spinner2.setAdapter(spinner2_Adapter);
+
+        urgency_RecyclerView=findViewById(R.id.list_urgency);
+        urgency_RecyclerView.setHasFixedSize(true);
+        layoutManager=new LinearLayoutManager(this);
+        urgency_RecyclerView.setLayoutManager(layoutManager);
+
+        final ArrayList<ListViewItem> workInfoArrayList=new ArrayList<>();
+        workInfoArrayList.add(new ListViewItem("레미안 건축","2020-06-14","150,000","건축","상수 레미안 아파트","개미인력소","1","3"));
+        workInfoArrayList.add(new ListViewItem("해모로 아파트 건축","2020-06-17","130,000","건축","광흥창 해모로 아파트","베짱이인력소","2","4"));
+        workInfoArrayList.add(new ListViewItem("자이아파트 신축","2020-06-20","160,000","건축","광흥창 자이 아파트","사람인력소","1","5"));
+        workInfoArrayList.add(new ListViewItem("마포 체육관 보수공사","2020-07-03","110,000","보수","마포구민체육관","당근인력소","1","3"));
+
+
+
+        ListAdapter urgencyAdapter=new ListAdapter(getApplicationContext(),workInfoArrayList);
+        urgency_RecyclerView.setAdapter(urgencyAdapter);
 
 
 
@@ -50,6 +102,8 @@ public class MainActivity extends AppCompatActivity {
 //                        getSupportFragmentManager().beginTransaction().replace(R.id.main_layout, fragment1).commitAllowingStateLoss();
 //                        return true;
 
+                        Intent intent1 = new Intent(MainActivity.this, MainActivity.class);
+                        startActivity(intent1);
                         return false;
                     }
                     case R.id.tab2: {

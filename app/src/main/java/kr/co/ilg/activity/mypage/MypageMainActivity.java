@@ -7,6 +7,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
@@ -22,15 +23,24 @@ import java.util.List;
 import kr.co.ilg.activity.findwork.MainActivity;
 import kr.co.ilg.activity.findwork.MyFieldActivity;
 
-public class MypageMainActivity extends AppCompatActivity {
+public class MypageMainActivity extends AppCompatActivity implements View.OnClickListener {
     BottomNavigationView bottomNavigationView;
+    Button myinform, accountmanage, reviewmanage;
+    Button[] buttons = {myinform, accountmanage, reviewmanage};
+    int[] buttonsid = {R.id.myinform, R.id.accountmanage, R.id.reviewmanage};
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.mypage_main);
 
-        ListView listview = (ListView) findViewById(R.id.listview);
+        for(int i=0; i<3; i++){
+            buttons[i] = (Button) findViewById(buttonsid[i]);
+            buttons[i].setOnClickListener(this);
+        }
+
+
+        final ListView listview = (ListView) findViewById(R.id.listview);
 
 
         List<String> list = new ArrayList<>();
@@ -43,7 +53,17 @@ public class MypageMainActivity extends AppCompatActivity {
 
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                //intent
+                Intent intent;
+                switch (position){
+                    case 0 : intent = new Intent(MypageMainActivity.this, OptionActivity.class);
+                            startActivity(intent); break;
+                    case 1 : intent = new Intent(MypageMainActivity.this, NoticeActivity.class);
+                        startActivity(intent); break;
+                    case 2 : intent = new Intent(MypageMainActivity.this, ilgIntrodutionActivity.class);
+                        startActivity(intent); break;
+                    case 3 : intent = new Intent(MypageMainActivity.this, kr.co.ilg.activity.login.LoginActivity.class);
+                        startActivity(intent); break;
+                }
             }
         });
 
@@ -82,6 +102,23 @@ public class MypageMainActivity extends AppCompatActivity {
             }
         });
 
+
+
+
+    }
+
+    @Override
+    public void onClick(View v) {
+        Intent intent;
+
+        switch (v.getId()){
+            case R.id.myinform : intent = new Intent(getApplicationContext(),MyInfomanageActivity.class);
+                                        startActivity(intent);break;
+            case R.id.accountmanage : intent = new Intent(getApplicationContext(),AccountManageActivity.class);
+                                        startActivity(intent);break;
+            case R.id.reviewmanage : intent = new Intent(getApplicationContext(),ReviewManageActivity.class);
+                                        startActivity(intent);break;
+        }
 
     }
 }
