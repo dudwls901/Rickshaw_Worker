@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import kr.co.ilg.activity.findwork.ListAdapter;
 import kr.co.ilg.activity.findwork.ListViewItem;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,7 +17,7 @@ import com.example.capstone.R;
 
 import java.util.ArrayList;
 
-public class FieldInfoActivity extends Activity {
+public class FieldInfoActivity extends AppCompatActivity {
     RecyclerView work_info_RecyclerView, review_RecyclerView;
     RecyclerView.LayoutManager layoutManager, review_layoutManager;
 

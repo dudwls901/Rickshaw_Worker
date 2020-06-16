@@ -133,6 +133,7 @@
         android:background="@android:color/white"
         android:textAlignment="viewStart"
         android:textSize="20dp"
+        android:id="@+id/servicepromise"
         android:textColor="@android:color/black"
         tools:ignore="RtlCompat"
         android:layout_marginHorizontal="10dp"/>
@@ -147,6 +148,7 @@
         android:gravity="center"
         android:textAlignment="viewStart"
         android:textSize="20dp"
+        android:id="@+id/changepassword"
         android:textColor="@android:color/black"
         android:background="@android:color/white"
         tools:ignore="RtlCompat"
@@ -160,6 +162,7 @@
         android:layout_height="50dp"
         android:text="회원 탈퇴"
         android:gravity="center"
+        android:id="@+id/deletemb"
         android:textAlignment="viewStart"
         android:textSize="20dp"
         android:textColor="@android:color/black"
