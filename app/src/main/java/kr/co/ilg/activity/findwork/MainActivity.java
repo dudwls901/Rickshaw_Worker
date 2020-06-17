@@ -2,7 +2,6 @@ package kr.co.ilg.activity.findwork;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -10,9 +9,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.MotionEvent;
-import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -20,14 +18,10 @@ import com.example.capstone.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
-import java.util.Dictionary;
 
 //import kr.co.ilg.activity.mypage.MypageMainActivity;
 
 import kr.co.ilg.activity.mypage.MypageMainActivity;
-import kr.co.ilg.fragment.Fragment1;
-import kr.co.ilg.fragment.Fragment2;
-import kr.co.ilg.fragment.Fragment3;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -37,7 +31,6 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView urgency_RecyclerView;
     RecyclerView.LayoutManager layoutManager;
     BottomNavigationView bottomNavigationView;
-
 
 //    Fragment1 fragment1;
 //    Fragment2 fragment2;
@@ -81,6 +74,8 @@ public class MainActivity extends AppCompatActivity {
 
         ListAdapter urgencyAdapter=new ListAdapter(getApplicationContext(),workInfoArrayList);
         urgency_RecyclerView.setAdapter(urgencyAdapter);
+
+
 
 
 

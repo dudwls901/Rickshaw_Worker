@@ -9,11 +9,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.capstone.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.tabs.TabLayout;
+
+import java.util.ArrayList;
 
 import kr.co.ilg.activity.mypage.MypageMainActivity;
 import kr.co.ilg.fragment.Fragment2;
@@ -26,19 +29,17 @@ public class MyFieldActivity extends AppCompatActivity {
     private final int FRAGMENT3 = 3;
     private TabLayout tabs;
 
-    RecyclerView urgency_RecyclerView, usually_RecyclerView;
-    RecyclerView.LayoutManager layoutManager;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.myfield);
         tabs = findViewById(R.id.tabs);
-        tabs.addTab(tabs.newTab(), true);
+        tabs.addTab(tabs.newTab(),true);
         tabs.addTab(tabs.newTab());
 tabs.getTabAt(0).setText("지원 현황");
 tabs.getTabAt(1).setText("지난 현장");
-
+        callFragment(FRAGMENT2);
         tabs.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -63,6 +64,7 @@ tabs.getTabAt(1).setText("지난 현장");
 
             }
         });
+
 
 
         bottomNavigationView = findViewById(R.id.bottomNavigationView2); //프래그먼트 생성
@@ -117,7 +119,7 @@ tabs.getTabAt(1).setText("지난 현장");
                 transaction.commit();
                 break;
 
-            case 22:
+            case 3:
                 // '프래그먼트2' 호출
                 Fragment3 fragment3 = new Fragment3();
                 transaction.replace(R.id.myfieldcontainer, fragment3);
