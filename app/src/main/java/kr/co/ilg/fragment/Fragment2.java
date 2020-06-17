@@ -42,15 +42,27 @@ private Context context;
         layoutManager=new LinearLayoutManager(context);
         recyclerView1.setLayoutManager(layoutManager);
 
+        final ArrayList<ListViewItem> pickworkInfoArrayList=new ArrayList<>();
+        pickworkInfoArrayList.add(new ListViewItem("레미안 건축","2020-06-14","150,000","건축","상수 레미안 아파트","개미인력소",true));
+        pickworkInfoArrayList.add(new ListViewItem("해모로 아파트 건축","2020-06-17","130,000","건축","광흥창 해모로 아파트","베짱이인력소"));
+        pickworkInfoArrayList.add(new ListViewItem("자이아파트 신축","2020-06-20","160,000","건축","광흥창 자이 아파트","사람인력소"));
+        pickworkInfoArrayList.add(new ListViewItem("마포 체육관 보수공사","2020-07-03","110,000","보수","마포구민체육관","당근인력소"));
+
+        ListExpandableAdapter myworkAdapter1=new ListExpandableAdapter(context.getApplicationContext(),pickworkInfoArrayList);
+        recyclerView1.setAdapter(myworkAdapter1);
+
+//선발대기 리스트뷰 생성
         final ArrayList<ListViewItem> workInfoArrayList=new ArrayList<>();
-        workInfoArrayList.add(new ListViewItem("레미안 건축","2020-06-14","150,000","건축","상수 레미안 아파트","개미인력소"));
-        workInfoArrayList.add(new ListViewItem("해모로 아파트 건축","2020-06-17","130,000","건축","광흥창 해모로 아파트","베짱이인력소"));
-        workInfoArrayList.add(new ListViewItem("자이아파트 신축","2020-06-20","160,000","건축","광흥창 자이 아파트","사람인력소"));
-        workInfoArrayList.add(new ListViewItem("마포 체육관 보수공사","2020-07-03","110,000","보수","마포구민체육관","당근인력소"));
+        recyclerView2=viewGroup.findViewById(R.id.recyclerview1);
+        recyclerView2.setHasFixedSize(true);
+        recyclerView2.setLayoutManager(layoutManager);
 
-        ListExpandableAdapter myworkAdapter=new ListExpandableAdapter(context.getApplicationContext(),workInfoArrayList);
-        recyclerView1.setAdapter(myworkAdapter);
+        workInfoArrayList.add(new ListViewItem("마포 체육관 보수공사","2020-07-03","110,000","보수","마포구민체육관","당근인력소","1","3"));
+        workInfoArrayList.add(new ListViewItem("명지전문대학 운동장 공사","2020-07-04","120,000","보통인부","명지전문대학","당근인력소","2","3"));
+        workInfoArrayList.add(new ListViewItem("명지대학교 기숙사 철거","2020-07-05","130,000","보통인부","명지대학교","사람인력소","1","2"));
 
+        ListExpandableAdapter myworkAdapter2=new ListExpandableAdapter(context.getApplicationContext(),workInfoArrayList);
+        recyclerView1.setAdapter(myworkAdapter2);
 
         return viewGroup;
     }
