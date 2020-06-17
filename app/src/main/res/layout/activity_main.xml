@@ -92,9 +92,10 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:menu="@menu/menu_bottom"
-
+        app:layout_behavior="tech.thdev.app.view.BottomNavigationBehavior"
 
         />
-
+<!--         app:layout_behavior="tech.thdev.app.view.BottomNavigationBehavior"
+바텀네비게이션뷰를 밑으로 스크롤시에는 사라지고 위로 스크롤할 때 다시 띄움-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

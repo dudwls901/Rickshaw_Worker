@@ -8,8 +8,9 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
 import com.example.capstone.R;
+
+
 
 public class Fragment3 extends Fragment {
     ViewGroup viewGroup;
@@ -21,4 +22,3 @@ public class Fragment3 extends Fragment {
         return viewGroup;
     }
 }
-

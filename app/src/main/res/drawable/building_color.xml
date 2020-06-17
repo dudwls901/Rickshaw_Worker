@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@drawable/building" android:state_selected="false" android:color="#57000000"/>
-    <item android:drawable="@drawable/building" android:state_selected="true" android:color="#1F8E98"/>
+    <item android:state_checked="true" android:drawable="@drawable/building_mint" android:color="#2EC5D4"/>
+
+    <item android:state_checked="false" android:drawable="@drawable/building_mint" android:color="#2EC5D4"/>
 
 
 </selector>

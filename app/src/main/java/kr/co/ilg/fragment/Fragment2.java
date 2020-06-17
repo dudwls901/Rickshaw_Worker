@@ -10,12 +10,21 @@ import android.widget.ExpandableListAdapter;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+import kr.co.ilg.activity.findwork.ListAdapter;
+import kr.co.ilg.activity.findwork.ListViewItem;
+import kr.co.ilg.fragment.Fragment22;
 
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 
 import com.example.capstone.R;
+import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
 

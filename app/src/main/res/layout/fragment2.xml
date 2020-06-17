@@ -3,34 +3,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-
     android:gravity="center"
-    android:orientation="vertical"
->
+    >
+
                 <TextView
                     android:id="@+id/selection_complete"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="선발완료"
                     android:layout_marginLeft="5dp"
-                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tabs"
                     android:layout_marginTop="50dp"
-    />
 
 
-
-    <androidx.recyclerview.widget.RecyclerView
+                    />
+    <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerview1"
-
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="250dp"
         app:layout_constraintTop_toBottomOf="@+id/selection_complete"
-        app:layout_constraintLeft_toLeftOf="parent"
-
         />
-
-
-
 
                 <TextView
                     android:layout_width="match_parent"
@@ -40,14 +32,73 @@
                     android:id="@+id/selection_wating"
                     app:layout_constraintTop_toBottomOf="@+id/recyclerview1"
                    />
-    <androidx.recyclerview.widget.RecyclerView
+    <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerview2"
-
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-
-
-
+        android:layout_height="250dp"
+        app:layout_constraintTop_toBottomOf="@+id/selection_wating"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+    <!--        <LinearLayout-->
+    <!--            android:orientation="vertical"-->
+    <!--            app:layout_constraintTop_toBottomOf="@+id/tabs"-->
+    <!--            app:layout_constraintLeft_toLeftOf="parent"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="200dp"-->
+    <!--            android:id="@+id/linear_urgency"-->
+    <!--            android:layout_marginTop="50dp"-->
+    <!--            >-->
+    <!--            <TextView-->
+    <!--                android:id="@+id/selection_complete"-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:text="선발완료"-->
+    <!--                android:layout_marginLeft="5dp"-->
+    <!--                app:layout_constraintTop_toBottomOf="@+id/tabs"-->
+
+    <!--             />-->
+
+    <!--            <androidx.recyclerview.widget.RecyclerView-->
+    <!--                android:layout_marginTop="5dp"-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                app:layout_constraintTop_toBottomOf="@+id/selection_complete"-->
+    <!--                android:id="@+id/list_selection"-->
+    <!--                />-->
+    <!--        </LinearLayout>-->
+
+    <!--        <LinearLayout-->
+    <!--            android:orientation="vertical"-->
+    <!--            android:id="@+id/linear_usually"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="300dp"-->
+    <!--            app:layout_constraintTop_toBottomOf="@id/linear_urgency"-->
+    <!--            app:layout_constraintLeft_toLeftOf="parent"-->
+    <!--            >-->
+    <!--            <TextView-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:layout_marginLeft="5dp"-->
+    <!--                android:text="선발대기"-->
+    <!--                android:id="@+id/title_usually"-->
+    <!--                ></TextView>-->
+    <!--            <androidx.recyclerview.widget.RecyclerView-->
+    <!--                android:layout_marginTop="5dp"-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:id="@+id/list_usually"/>-->
+
+
+    <!--        </LinearLayout>-->
+    <!--        <LinearLayout-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            app:layout_constraintTop_toBottomOf="@id/linear_usually"-->
+    <!--            app:layout_constraintLeft_toLeftOf="parent"-->
+    <!--            ></LinearLayout>-->
