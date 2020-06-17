@@ -7,10 +7,11 @@ import android.view.View;
 import android.widget.Button;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.capstone.R;
 
-public class JobSelectActivity extends Activity {
+public class JobSelectActivity extends AppCompatActivity {
 
     Button okBtn;
 

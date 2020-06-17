@@ -9,12 +9,13 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.capstone.R;
 
 import kr.co.ilg.activity.login.LoginActivity;
 
-public class CertificateConfirmActivity extends Activity {
+public class CertificateConfirmActivity extends AppCompatActivity {
 
     TextView nextTimeTV;
     Button uploadBtn;
