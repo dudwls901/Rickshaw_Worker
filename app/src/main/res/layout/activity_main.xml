@@ -88,8 +88,7 @@
         android:layout_marginEnd="0dp"
         android:background="@color/WhiteColor"
         app:itemIconSize="30dp"
-        app:itemIconTint="@drawable/item_color"
-        app:itemTextColor="#000000"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:menu="@menu/menu_bottom"
