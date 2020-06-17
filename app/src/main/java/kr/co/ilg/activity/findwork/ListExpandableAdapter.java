@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -24,9 +25,8 @@ public class ListExpandableAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
 
-        TextView title,date,pay,job,place,office,current_people,total_people,gotoworkText,getoffworkText;
-ImageView gotoworkImage, getoffworkImage;
-LinearLayout workcheckLayout;
+        TextView title,date,pay,job,place,office,current_people,total_people;
+
 
         MyViewHolder(View view){
             super(view);
@@ -39,18 +39,14 @@ LinearLayout workcheckLayout;
             office=view.findViewById(R.id.office);
             current_people=view.findViewById(R.id.current_people);
             total_people=view.findViewById(R.id.total_people);
-            gotoworkText=view.findViewById(R.id.gotoworkText);
-            getoffworkText=view.findViewById(R.id.getoffworkText);
-            gotoworkImage=view.findViewById(R.id.gotoworkImage);
-            getoffworkImage=view.findViewById(R.id.getoffworkImage);
-            workcheckLayout=view.findViewById(R.id.workcheckLayout);
+
         }
     }
 
 
     private  Context context;
-    private ArrayList<ListExpandableViewItem> workInfo;
-    public ListExpandableAdapter(Context context, ArrayList<ListExpandableViewItem> workInfo){
+    private ArrayList<ListViewItem> workInfo;
+    public ListExpandableAdapter(Context context, ArrayList<ListViewItem> workInfo){
         this.context=context;
         this.workInfo=workInfo;
     }
@@ -75,35 +71,18 @@ LinearLayout workcheckLayout;
         myViewHolder.place.setText(workInfo.get(position).place);
         myViewHolder.office.setText(workInfo.get(position).office);
 
-//        int mExpandedPosition=-1;
-//        final boolean isExpanded = position==mExpandedPosition;
-//        myViewHolder.workcheckLayout.setVisibility(View.GONE);
-//        myViewHolder.workcheckLayout.setActivated(false);
-  //      notifyItemChanged(position);
- //      myViewHolder.current_people.setText(workInfo.get(position).current_people);
- //       myViewHolder.total_people.setText(workInfo.get(position).total_people);
-//       myViewHolder.gotoworkImage.setImageResource(R.drawable.building);
-//        myViewHolder.getoffworkImage.setImageResource(R.drawable.building);
+
 
         myViewHolder.itemView.setOnClickListener(new View.OnClickListener(){
-            private SparseBooleanArray selectedItems = new SparseBooleanArray();
-            private int prePosition = -1;
+
 
             @Override
             public void onClick(View view) {
 //                Context context=view.getContext();
 //                Intent intent=new Intent(context,WorkInfoActivity.class);
 //                context.startActivity(intent);
-                if(myViewHolder.workcheckLayout.getVisibility()==View.GONE) {
-                    myViewHolder.workcheckLayout.setVisibility(View.VISIBLE);
-                }
-                else
-                {
-                    myViewHolder.workcheckLayout.setVisibility(View.GONE);
 
-                }
-     //myViewHolder.workcheckLayout.removeViewInLayout(view);
-//     selectedItems.delete(position);
+
 
             }
 

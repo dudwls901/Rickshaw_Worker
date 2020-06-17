@@ -5,31 +5,21 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ExpandableListAdapter;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
+
 import kr.co.ilg.activity.findwork.ListAdapter;
+import kr.co.ilg.activity.findwork.ListExpandableAdapter;
 import kr.co.ilg.activity.findwork.ListViewItem;
 
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.ViewPager;
 
 import com.example.capstone.R;
-import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
-
-import kr.co.ilg.activity.findwork.ListExpandableAdapter;
-import kr.co.ilg.activity.findwork.ListExpandableViewItem;
-import kr.co.ilg.activity.findwork.ListViewItem;
 
 public class Fragment2 extends Fragment {
     ViewGroup viewGroup;
@@ -52,11 +42,11 @@ private Context context;
         layoutManager=new LinearLayoutManager(context);
         recyclerView1.setLayoutManager(layoutManager);
 
-        final ArrayList<ListExpandableViewItem> workInfoArrayList=new ArrayList<>();
-        workInfoArrayList.add(new ListExpandableViewItem("레미안 건축","2020-06-14","150,000","건축","상수 레미안 아파트","개미인력소"));
-        workInfoArrayList.add(new ListExpandableViewItem("해모로 아파트 건축","2020-06-17","130,000","건축","광흥창 해모로 아파트","베짱이인력소"));
-        workInfoArrayList.add(new ListExpandableViewItem("자이아파트 신축","2020-06-20","160,000","건축","광흥창 자이 아파트","사람인력소"));
-        workInfoArrayList.add(new ListExpandableViewItem("마포 체육관 보수공사","2020-07-03","110,000","보수","마포구민체육관","당근인력소"));
+        final ArrayList<ListViewItem> workInfoArrayList=new ArrayList<>();
+        workInfoArrayList.add(new ListViewItem("레미안 건축","2020-06-14","150,000","건축","상수 레미안 아파트","개미인력소"));
+        workInfoArrayList.add(new ListViewItem("해모로 아파트 건축","2020-06-17","130,000","건축","광흥창 해모로 아파트","베짱이인력소"));
+        workInfoArrayList.add(new ListViewItem("자이아파트 신축","2020-06-20","160,000","건축","광흥창 자이 아파트","사람인력소"));
+        workInfoArrayList.add(new ListViewItem("마포 체육관 보수공사","2020-07-03","110,000","보수","마포구민체육관","당근인력소"));
 
         ListExpandableAdapter myworkAdapter=new ListExpandableAdapter(context.getApplicationContext(),workInfoArrayList);
         recyclerView1.setAdapter(myworkAdapter);
