@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/layoutborder"
+    android:id="@+id/linear1"
     >
     <LinearLayout
         android:layout_width="0dp"
@@ -19,7 +20,7 @@
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20dp"
+            android:textSize="18dp"
             android:text="제목"
             android:textStyle="bold"
             ></TextView>
@@ -28,16 +29,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="17dp"
-            android:text="날짜 :  "
-            ></TextView>
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                android:text="날짜 :  "
+                ></TextView>
             <TextView
                 android:id="@+id/date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="17dp"
+                android:textSize="15dp"
                 android:text="sample_date"
                 ></TextView>
         </LinearLayout>
@@ -48,14 +49,14 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="17dp"
+                android:textSize="15dp"
                 android:text="단가 :  "
                 ></TextView>
             <TextView
                 android:id="@+id/pay"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="17dp"
+                android:textSize="15dp"
                 android:text="sample_pay"
                 ></TextView>
         </LinearLayout>
@@ -66,14 +67,14 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="17dp"
+                android:textSize="15dp"
                 android:text="구인 직종 :  "
                 ></TextView>
             <TextView
                 android:id="@+id/job"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="17dp"
+                android:textSize="15dp"
                 android:text="sample_job"
                 ></TextView>
         </LinearLayout>
@@ -85,14 +86,14 @@
                 android:id="@+id/where"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="17dp"
+                android:textSize="15dp"
                 android:text="현장 위치 :  "
                 ></TextView>
             <TextView
                 android:id="@+id/place"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="17dp"
+                android:textSize="15dp"
                 android:text="sample_place"
                 ></TextView>
         </LinearLayout>
@@ -103,14 +104,14 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="17dp"
+                android:textSize="15dp"
                 android:text="인력사무소 :  "
                 ></TextView>
             <TextView
                 android:id="@+id/office"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="17dp"
+                android:textSize="15dp"
                 android:text="sample_office"
                 ></TextView>
         </LinearLayout>
@@ -118,7 +119,7 @@
     </LinearLayout>
     <LinearLayout
         android:orientation="vertical"
-        android:background="@drawable/circle_gray"
+
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
@@ -129,39 +130,11 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="인원"
-            android:textSize="20dp"
-            ></TextView>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            >
-            <TextView
-                android:id="@+id/current_people"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="n"
-                android:textSize="20dp"
-                android:layout_margin="1dp"
-                ></TextView>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=" / "
-                android:textSize="20dp"
-                android:layout_margin="1dp"
-                ></TextView>
-            <TextView
-                android:id="@+id/total_people"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="n"
-                android:textSize="20dp"
-                android:layout_margin="1dp"
-                ></TextView>
+            android:text="pay"
+            android:textSize="18dp"
+            android:id="@+id/paid"
+            />
 
-        </LinearLayout>
 
     </LinearLayout>
 
