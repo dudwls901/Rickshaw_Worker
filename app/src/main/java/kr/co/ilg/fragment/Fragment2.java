@@ -11,7 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import kr.co.ilg.activity.findwork.ListAdapter;
-import kr.co.ilg.activity.findwork.ListExpandableAdapter;
+import kr.co.ilg.activity.findwork.ListWorkPickOutAdapter;
 import kr.co.ilg.activity.findwork.ListViewItem;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -27,7 +27,7 @@ private Context context;
 
 
     RecyclerView recyclerView1,recyclerView2;
-    RecyclerView.LayoutManager layoutManager;
+    RecyclerView.LayoutManager layoutManager1, layoutManager2;
 //    ArrayList spinner1_array, spinner2_array;
 //    ArrayAdapter spinner1_Adapter, spinner2_Adapter;
 //    RecyclerView urgency_RecyclerView, usually_RecyclerView;
@@ -39,30 +39,31 @@ private Context context;
         context = container.getContext();
         recyclerView1=viewGroup.findViewById(R.id.recyclerview1);
         recyclerView1.setHasFixedSize(true);
-        layoutManager=new LinearLayoutManager(context);
-        recyclerView1.setLayoutManager(layoutManager);
+        layoutManager1=new LinearLayoutManager(context);
+        recyclerView1.setLayoutManager(layoutManager1);
 
         final ArrayList<ListViewItem> pickworkInfoArrayList=new ArrayList<>();
         pickworkInfoArrayList.add(new ListViewItem("레미안 건축","2020-06-14","150,000","건축","상수 레미안 아파트","개미인력소",true));
-        pickworkInfoArrayList.add(new ListViewItem("해모로 아파트 건축","2020-06-17","130,000","건축","광흥창 해모로 아파트","베짱이인력소"));
-        pickworkInfoArrayList.add(new ListViewItem("자이아파트 신축","2020-06-20","160,000","건축","광흥창 자이 아파트","사람인력소"));
-        pickworkInfoArrayList.add(new ListViewItem("마포 체육관 보수공사","2020-07-03","110,000","보수","마포구민체육관","당근인력소"));
+        pickworkInfoArrayList.add(new ListViewItem("해모로 아파트 건축","2020-06-17","130,000","건축","광흥창 해모로 아파트","베짱이인력소",false));
+        pickworkInfoArrayList.add(new ListViewItem("자이아파트 신축","2020-06-20","160,000","건축","광흥창 자이 아파트","사람인력소",false));
 
-        ListExpandableAdapter myworkAdapter1=new ListExpandableAdapter(context.getApplicationContext(),pickworkInfoArrayList);
+
+        ListWorkPickOutAdapter myworkAdapter1=new ListWorkPickOutAdapter(context.getApplicationContext(),pickworkInfoArrayList);
         recyclerView1.setAdapter(myworkAdapter1);
 
 //선발대기 리스트뷰 생성
         final ArrayList<ListViewItem> workInfoArrayList=new ArrayList<>();
-        recyclerView2=viewGroup.findViewById(R.id.recyclerview1);
+        recyclerView2=viewGroup.findViewById(R.id.recyclerview2);
         recyclerView2.setHasFixedSize(true);
-        recyclerView2.setLayoutManager(layoutManager);
+        layoutManager2=new LinearLayoutManager(context);
+        recyclerView2.setLayoutManager(layoutManager2);
 
         workInfoArrayList.add(new ListViewItem("마포 체육관 보수공사","2020-07-03","110,000","보수","마포구민체육관","당근인력소","1","3"));
         workInfoArrayList.add(new ListViewItem("명지전문대학 운동장 공사","2020-07-04","120,000","보통인부","명지전문대학","당근인력소","2","3"));
         workInfoArrayList.add(new ListViewItem("명지대학교 기숙사 철거","2020-07-05","130,000","보통인부","명지대학교","사람인력소","1","2"));
 
-        ListExpandableAdapter myworkAdapter2=new ListExpandableAdapter(context.getApplicationContext(),workInfoArrayList);
-        recyclerView1.setAdapter(myworkAdapter2);
+        ListAdapter myworkAdapter2=new ListAdapter(context.getApplicationContext(),workInfoArrayList);
+        recyclerView2.setAdapter(myworkAdapter2);
 
         return viewGroup;
     }
