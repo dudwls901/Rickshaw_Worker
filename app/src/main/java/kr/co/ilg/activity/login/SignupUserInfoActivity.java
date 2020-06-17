@@ -7,12 +7,13 @@ import android.view.View;
 import android.widget.Button;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.capstone.R;
 
 import kr.co.ilg.activity.mypage.CertificateConfirmActivity;
 
-public class SignupUserInfoActivity extends Activity {
+public class SignupUserInfoActivity extends AppCompatActivity {
 
     Button signUpBtn;
 

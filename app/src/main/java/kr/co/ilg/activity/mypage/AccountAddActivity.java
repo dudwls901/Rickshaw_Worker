@@ -12,6 +12,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.capstone.R;
 
@@ -19,7 +20,7 @@ import java.util.ArrayList;
 
 import kr.co.ilg.activity.login.LoginActivity;
 
-public class AccountAddActivity extends Activity {
+public class AccountAddActivity extends AppCompatActivity {
 
     Button addBtn;
     Spinner bankSelectSpn;

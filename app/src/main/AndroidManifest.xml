@@ -30,7 +30,7 @@
             android:value="AIzaSyCPDPoKy_UbzVcIcrEtVKAtNaafvx42Nio"/>
 
 <!--       <activity android:name="kr.co.ilg.activity.findwork.MainActivity" android:label="일자리 찾기">-->
-           <activity android:name="kr.co.ilg.activity.login.LoginActivity" android:label="로그인">
+           <activity android:name="kr.co.ilg.activity.login.SplashActivity" android:theme="@style/SplashTheme" android:label="스플래시">
 <!--        <activity android:name="kr.co.ilg.activity.login.SignupEmailActivity" android:label="회원가입">-->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -38,16 +38,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-<!--        <activity android:name="kr.co.ilg.activity.login.LoginActivity" android:label="로그인"/>-->
+        <activity android:name="kr.co.ilg.activity.login.LoginActivity" android:label="로그인"/>
         <activity android:name="kr.co.ilg.activity.findwork.MainActivity" android:label="일자리 찾기"/>
         <activity android:name="kr.co.ilg.activity.findwork.FieldInfoActivity" android:label="현장 정보"/>
         <activity android:name="kr.co.ilg.activity.findwork.OfficeInfoActivity" android:label="인력사무소 정보"/>
         <activity android:name="kr.co.ilg.activity.findwork.WorkInfoActivity" android:label="일자리 정보"/>
         <activity android:name="kr.co.ilg.activity.findwork.WorkMapActivity" android:label="일자리 지도"/>
         <activity android:name="kr.co.ilg.activity.findwork.MyFieldActivity" android:label="나의 현장"/>
-        <activity android:name="kr.co.ilg.activity.login.SignupEmailActivity" android:label="회원가입"/>
-        <activity android:name="kr.co.ilg.activity.login.SignupPasswordActivity" android:label="회원가입2"/>
-        <activity android:name="kr.co.ilg.activity.login.SignupUserInfoActivity" android:label="회원가입3"/>
+        <activity android:name="kr.co.ilg.activity.login.SignupEmailActivity" android:label="이메일 인증" android:parentActivityName="kr.co.ilg.activity.login.LoginActivity"/>
+        <activity android:name="kr.co.ilg.activity.login.SignupPasswordActivity" android:label="비밀번호 설정" android:parentActivityName="kr.co.ilg.activity.login.SignupEmailActivity"/>
+        <activity android:name="kr.co.ilg.activity.login.SignupUserInfoActivity" android:label="개인 정보 입력" android:parentActivityName="kr.co.ilg.activity.login.SignupPasswordActivity"/>
         <activity android:name="kr.co.ilg.activity.mypage.CertificateConfirmActivity" android:label="건설업 기초안전보건교육 이수증 인증"/>
         <activity android:name="kr.co.ilg.activity.mypage.LocalSelectActivity" android:label="희망 근무 지역 선택"/>
         <activity android:name="kr.co.ilg.activity.mypage.JobSelectActivity" android:label="희망 직종 선택"/>
@@ -64,8 +64,8 @@
         <activity android:name="kr.co.ilg.activity.mypage.ServiceInfoActivity" android:label="이용약관"/>
         <activity android:name="kr.co.ilg.activity.mypage.PasswordChangeActivity" android:label="비밀번호 변경"/>
         <activity android:name="kr.co.ilg.activity.mypage.MemberRemoveActivity" android:label="회원탈퇴"/>
-        <activity android:name="kr.co.ilg.activity.login.FindPasswordInfoActivity" android:label="비밀번호 찾기"/>
-        <activity android:name="kr.co.ilg.activity.login.FindPasswordShowActivity" android:label="비밀번호 확인"/>
+        <activity android:name="kr.co.ilg.activity.login.FindPasswordInfoActivity" android:label="비밀번호 찾기" android:parentActivityName="kr.co.ilg.activity.login.LoginActivity"/>
+        <activity android:name="kr.co.ilg.activity.login.FindPasswordShowActivity" android:label="비밀번호 확인" android:parentActivityName="kr.co.ilg.activity.login.FindPasswordInfoActivity"/>
 
     </application>
 </manifest>
