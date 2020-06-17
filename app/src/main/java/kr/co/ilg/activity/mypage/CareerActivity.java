@@ -5,8 +5,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RadioButton;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,9 +17,10 @@ import com.example.capstone.R;
 
 import java.util.ArrayList;
 
-public class CareerActivity extends Activity {
+public class CareerActivity extends AppCompatActivity {
 
     Button okBtn;
+    //RadioButton year_1, year_3;
     ArrayList<CareerRVItem> cList;
     CareerRVAdapter myAdapter;
     RecyclerView mRecyclerView;
@@ -27,6 +30,11 @@ public class CareerActivity extends Activity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.career);
+
+//        year_1 = findViewById(R.id.year_1);
+//        year_3 = findViewById(R.id.year_3);
+//        year_1.setText("1년\n이하");
+//        year_3.setText("3년\n이상");
 
         mRecyclerView = findViewById(R.id.rcV);
 

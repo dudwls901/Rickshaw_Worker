@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -21,12 +22,11 @@ import java.util.List;
 
 public class ListExpandableAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private int position;
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
 
         TextView title,date,pay,job,place,office,current_people,total_people;
-
+        LinearLayout linear1;
 
         MyViewHolder(View view){
             super(view);
@@ -39,7 +39,7 @@ public class ListExpandableAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             office=view.findViewById(R.id.office);
             current_people=view.findViewById(R.id.current_people);
             total_people=view.findViewById(R.id.total_people);
-
+            linear1 = view.findViewById(R.id.linear1);
         }
     }
 
@@ -63,15 +63,26 @@ public class ListExpandableAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
 
         final MyViewHolder myViewHolder=(MyViewHolder) holder;
-      this.position = position;
-        myViewHolder.title.setText(workInfo.get(position).title);
-        myViewHolder.date.setText(workInfo.get(position).date);
-        myViewHolder.pay.setText(workInfo.get(position).pay);
-        myViewHolder.job.setText(workInfo.get(position).job);
-        myViewHolder.place.setText(workInfo.get(position).place);
-        myViewHolder.office.setText(workInfo.get(position).office);
 
 
+
+        if(workInfo.get(position).urgency==false) {
+            myViewHolder.title.setText(workInfo.get(position).title);
+            myViewHolder.date.setText(workInfo.get(position).date);
+            myViewHolder.pay.setText(workInfo.get(position).pay);
+            myViewHolder.job.setText(workInfo.get(position).job);
+            myViewHolder.place.setText(workInfo.get(position).place);
+            myViewHolder.office.setText(workInfo.get(position).office);
+        }
+        else if (workInfo.get(position).urgency==true) {
+            myViewHolder.title.setText(workInfo.get(position).title);
+            myViewHolder.date.setText(workInfo.get(position).date);
+            myViewHolder.pay.setText(workInfo.get(position).pay);
+            myViewHolder.job.setText(workInfo.get(position).job);
+            myViewHolder.place.setText(workInfo.get(position).place);
+            myViewHolder.office.setText(workInfo.get(position).office);
+            myViewHolder.linear1.setBackgroundColor(context.getResources().getColor(R.color.UrgencyColor));
+        }
 
         myViewHolder.itemView.setOnClickListener(new View.OnClickListener(){
 

@@ -1,109 +1,144 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="10dp"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="10dp">
 
-    <ImageView
-        android:id="@+id/logo"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:scaleX="0.8"
-        android:scaleY="0.8"
-        android:src="@drawable/logo_ilg"
-        android:layout_marginTop="20dp"/>
+        app:layout_constraintRight_toRightOf="parent">
 
-    <EditText
-        android:id="@+id/idET"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/logo"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:background="@drawable/edittext_custom1"
-        android:layout_marginTop="20dp"
-        android:padding="15dp"
-        android:hint="이메일"
-        android:ems="15"
-        />
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:scaleX="0.8"
+            android:scaleY="0.8"
+            android:src="@drawable/logo_ilg"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/pwET"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/idET"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:background="@drawable/edittext_custom1"
-        android:layout_marginTop="10dp"
-        android:padding="15dp"
-        android:hint="비밀번호"
-        android:ems="15"
-        />
+        <EditText
+            android:id="@+id/idET"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/edittext_custom1"
+            android:hint="이메일"
+            android:padding="15dp"
+            app:layout_constraintLeft_toLeftOf="@id/guideline9"
+            app:layout_constraintRight_toRightOf="@id/guideline10"
+            app:layout_constraintTop_toBottomOf="@id/logo" />
 
-    <CheckBox
-        android:id="@+id/cb"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/pwET"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_margin="10dp"
-        android:text="로그인 상태 유지"/>
+        <EditText
+            android:id="@+id/pwET"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:background="@drawable/edittext_custom1"
+            android:hint="비밀번호"
+            android:inputType="textPassword"
+            android:padding="15dp"
+            app:layout_constraintLeft_toLeftOf="@id/guideline9"
+            app:layout_constraintRight_toRightOf="@id/guideline10"
+            app:layout_constraintTop_toBottomOf="@+id/idET" />
 
-    <Button
-        android:id="@+id/loginBtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/cb"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_margin="5dp"
-        android:text="로그인"/>
+        <Button
+            android:id="@+id/loginBtn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/custom_btn_mainclr"
+            app:layout_constraintLeft_toLeftOf="@id/guideline9"
+            app:layout_constraintRight_toRightOf="@id/guideline10"
+            app:layout_constraintTop_toBottomOf="@+id/pwET"
+            android:text="로그인"
+            android:textColor="@color/WhiteColor"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"/>
 
-    <Button
-        android:id="@+id/findPwBtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/loginBtn"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_margin="5dp"
-        android:text="비밀번호 찾기"/>
+        <CheckBox
+            android:id="@+id/cb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            app:layout_constraintLeft_toLeftOf="@id/guideline9"
+            app:layout_constraintTop_toBottomOf="@+id/loginBtn"
+            android:text="자동 로그인"
+            android:textColor="#7A7A7A"
+            android:textSize="16sp" />
 
-    <TextView
-        android:id="@+id/orTV"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/findPwBtn"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:gravity="center"
-        android:text="ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ또는ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ"/>
+        <TextView
+            android:id="@+id/orTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cb"
+            android:layout_marginTop="15dp"
+            android:maxLines="1"
+            android:text="------------------------------ 또는 ------------------------------"
+            android:textSize="16sp" />
 
-    <Button
-        android:id="@+id/kakaoLoginBtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/orTV"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_margin="5dp"
-        android:text="카카오 로그인"/>
+        <ImageButton
+            android:id="@+id/kakaoLoginBtn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="@id/guideline9"
+            app:layout_constraintRight_toRightOf="@id/guideline10"
+            app:layout_constraintTop_toBottomOf="@+id/orTV"
+            android:src="@drawable/kakao_login"
+            android:layout_marginTop="20dp"
+            android:padding="0dp"
+            android:scaleType="fitXY"/>
 
-    <Button
-        android:id="@+id/signUpBtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/kakaoLoginBtn"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_margin="5dp"
-        android:text="회원가입"/>
+        <TextView
+            android:id="@+id/signUpBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="@id/guideline9"
+            app:layout_constraintTop_toBottomOf="@+id/kakaoLoginBtn"
+            app:layout_constraintRight_toLeftOf="@+id/findPwBtn"
+            android:layout_marginTop="25dp"
+            android:clickable="true"
+            android:text="회원가입"
+            android:textSize="17sp"
+            android:textColor="@color/mainColor"/>
+
+        <TextView
+            android:id="@+id/findPwBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintRight_toRightOf="@id/guideline10"
+            app:layout_constraintTop_toBottomOf="@+id/kakaoLoginBtn"
+            app:layout_constraintLeft_toRightOf="@+id/signUpBtn"
+            android:layout_marginTop="25dp"
+            android:clickable="true"
+            android:text="비밀번호 찾기"
+            android:textSize="17sp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.06" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.94"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
