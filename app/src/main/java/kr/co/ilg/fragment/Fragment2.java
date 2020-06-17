@@ -16,7 +16,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import kr.co.ilg.activity.findwork.ListAdapter;
 import kr.co.ilg.activity.findwork.ListViewItem;
-import kr.co.ilg.fragment.Fragment22;
 
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;

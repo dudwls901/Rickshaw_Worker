@@ -17,7 +17,7 @@
 
 
                     />
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview1"
         android:layout_width="match_parent"
         android:layout_height="250dp"
@@ -32,7 +32,7 @@
                     android:id="@+id/selection_wating"
                     app:layout_constraintTop_toBottomOf="@+id/recyclerview1"
                    />
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview2"
         android:layout_width="match_parent"
         android:layout_height="250dp"
