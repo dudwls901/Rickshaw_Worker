@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView urgency_RecyclerView;
     RecyclerView.LayoutManager layoutManager;
     BottomNavigationView bottomNavigationView;
-
+Intent intent;
 //    Fragment1 fragment1;
 //    Fragment2 fragment2;
 //    Fragment3 fragment3;
@@ -65,10 +65,10 @@ public class MainActivity extends AppCompatActivity {
         urgency_RecyclerView.setLayoutManager(layoutManager);
 
         final ArrayList<ListViewItem> workInfoArrayList=new ArrayList<>();
-        workInfoArrayList.add(new ListViewItem("레미안 건축","2020-06-14","150,000","건축","상수 레미안 아파트","개미인력소","1","3"));
-        workInfoArrayList.add(new ListViewItem("해모로 아파트 건축","2020-06-17","130,000","건축","광흥창 해모로 아파트","베짱이인력소","2","4"));
-        workInfoArrayList.add(new ListViewItem("자이아파트 신축","2020-06-20","160,000","건축","광흥창 자이 아파트","사람인력소","1","5"));
-        workInfoArrayList.add(new ListViewItem("마포 체육관 보수공사","2020-07-03","110,000","보수","마포구민체육관","당근인력소","1","3"));
+        workInfoArrayList.add(new ListViewItem("레미안 건축","2020-06-14","150,000","건축","상수 레미안 아파트","개미인력소","1","3",true));
+        workInfoArrayList.add(new ListViewItem("해모로 아파트 건축","2020-06-17","130,000","건축","광흥창 해모로 아파트","베짱이인력소","2","4",false));
+        workInfoArrayList.add(new ListViewItem("자이아파트 신축","2020-06-20","160,000","건축","광흥창 자이 아파트","사람인력소","1","5",false));
+        workInfoArrayList.add(new ListViewItem("마포 체육관 보수공사","2020-07-03","110,000","보수","마포구민체육관","당근인력소","1","3",false));
 
 
 
@@ -80,11 +80,11 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        bottomNavigationView = findViewById(R.id.bottomNavigationView1); //프래그먼트 생성
+        bottomNavigationView = findViewById(R.id.bottomNavigationView); //프래그먼트 생성
 //        bottomNavigationView.getMenu().getItem(0).setIcon(R.drawable.search_mint);
 //        bottomNavigationView.getMenu().getItem(1).setIcon(R.drawable.building_charcol);
 //        bottomNavigationView.getMenu().getItem(2).setIcon(R.drawable.profile_charcol);
-        Log.d("chk1", String.valueOf(bottomNavigationView.getMenu().getItem(1)));
+
         Toast.makeText(MainActivity.this,String.valueOf(bottomNavigationView.getMenu().getItem(1)),Toast.LENGTH_LONG).show();
 
 
@@ -97,8 +97,8 @@ public class MainActivity extends AppCompatActivity {
 //                        getSupportFragmentManager().beginTransaction().replace(R.id.main_layout, fragment1).commitAllowingStateLoss();
 //                        return true;
 
-                        Intent intent1 = new Intent(MainActivity.this, MainActivity.class);
-                        startActivity(intent1);
+                        intent = new Intent(MainActivity.this, MainActivity.class);
+                        startActivity(intent);
                         return false;
                     }
                     case R.id.tab2: {
@@ -107,8 +107,8 @@ public class MainActivity extends AppCompatActivity {
 //                        bottomNavigationView.getMenu().getItem(0).setChecked(false);
 //                        item2.setChecked(true);
 //                        item1.setChecked(false);
-                        Intent intent2 = new Intent(MainActivity.this, MyFieldActivity.class);
-                        startActivity(intent2);
+                        intent = new Intent(MainActivity.this, MyFieldActivity.class);
+                        startActivity(intent);
                         return false;
                     }
                     case R.id.tab3: {
@@ -117,8 +117,8 @@ public class MainActivity extends AppCompatActivity {
 //                        bottomNavigationView.getMenu().getItem(0).setChecked(false);
 //                       item3.setChecked(true);
 //                       item1.setChecked(false);
-                        Intent intent3 = new Intent(MainActivity.this, MypageMainActivity.class);
-                        startActivity(intent3);
+                        intent = new Intent(MainActivity.this, MypageMainActivity.class);
+                        startActivity(intent);
                         return false;
                     }
                     default:

@@ -23,7 +23,7 @@ import kr.co.ilg.fragment.Fragment2;
 import kr.co.ilg.fragment.Fragment3;
 
 public class MyFieldActivity extends AppCompatActivity {
-
+    Intent intent;
     BottomNavigationView bottomNavigationView;
     private final int FRAGMENT2 = 2;
     private final int FRAGMENT3 = 3;
@@ -67,7 +67,7 @@ tabs.getTabAt(1).setText("지난 현장");
 
 
 
-        bottomNavigationView = findViewById(R.id.bottomNavigationView2); //프래그먼트 생성
+        bottomNavigationView = findViewById(R.id.bottomNavigationView); //프래그먼트 생성
 //        bottomNavigationView.getMenu().getItem(0).setIcon(R.drawable.search_charcol);
 //        bottomNavigationView.getMenu().getItem(1).setIcon(R.drawable.building_color);
 //        bottomNavigationView.getMenu().getItem(2).setIcon(R.drawable.profile_charcol);
@@ -84,18 +84,18 @@ tabs.getTabAt(1).setText("지난 현장");
                     case R.id.tab1: {
 //                        getSupportFragmentManager().beginTransaction().replace(R.id.main_layout, fragment1).commitAllowingStateLoss();
 //                        return true;
-                        Intent intent1 = new Intent(MyFieldActivity.this, MainActivity.class);
-                        startActivity(intent1);
+                         intent = new Intent(MyFieldActivity.this, MainActivity.class);
+                        startActivity(intent);
                         return false;
                     }
                     case R.id.tab2: {
-                        Intent intent2 = new Intent(MyFieldActivity.this, MyFieldActivity.class);
-                        startActivity(intent2);
+                         intent = new Intent(MyFieldActivity.this, MyFieldActivity.class);
+                        startActivity(intent);
                         return false;
                     }
                     case R.id.tab3: {
-                        Intent intent3 = new Intent(MyFieldActivity.this, MypageMainActivity.class);
-                        startActivity(intent3);
+                         intent = new Intent(MyFieldActivity.this, MypageMainActivity.class);
+                        startActivity(intent);
                         return false;
                     }
                     default:
