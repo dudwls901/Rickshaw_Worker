@@ -21,20 +21,20 @@
             android:textSize="18sp"/>
 
         <TextView
+            android:id="@+id/sltTV"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="4"
-            android:text="보통인부  용접공"
+            android:layout_weight="5"
             android:textSize="18sp"
             android:textColor="@color/mainColor"/>
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="right"
-            android:text="(2/3)"
-            android:textSize="18sp"/>
+<!--        <TextView-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_weight="1"-->
+<!--            android:gravity="right"-->
+<!--            android:text="(2/3)"-->
+<!--            android:textSize="18sp"/>-->
 
     </LinearLayout>
 
@@ -52,13 +52,13 @@
             android:gravity="center_horizontal">
 
             <Button
+                android:id="@+id/botong"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:text="보통인부"
                 android:textSize="18sp"
-                android:textColor="#ffffff"
-                android:background="@drawable/custom_btn_mainclr"/>
+                android:background="@drawable/custom_btn_lightclr"/>
 
             <Button
                 android:layout_width="match_parent"
@@ -85,13 +85,13 @@
                 android:background="@drawable/custom_btn_lightclr"/>
 
             <Button
+                android:id="@+id/yong"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:text="용접공"
                 android:textSize="18sp"
-                android:textColor="#ffffff"
-                android:background="@drawable/custom_btn_mainclr"/>
+                android:background="@drawable/custom_btn_lightclr"/>
 
             <Button
                 android:layout_width="match_parent"

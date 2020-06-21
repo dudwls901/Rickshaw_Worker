@@ -21,20 +21,20 @@
             android:textSize="18sp"/>
 
         <TextView
+            android:id="@+id/sltTV"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="4"
-            android:text="영등포구  서대문구"
+            android:layout_weight="5"
             android:textSize="18sp"
             android:textColor="@color/mainColor"/>
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="right"
-            android:text="(2/3)"
-            android:textSize="18sp"/>
+<!--        <TextView-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_weight="1"-->
+<!--            android:gravity="right"-->
+<!--            android:text="(2/3)"-->
+<!--            android:textSize="18sp"/>-->
 
     </LinearLayout>
 
@@ -172,12 +172,12 @@
                 android:background="#FFFFFF"/>
 
             <Button
+                android:id="@+id/SDMG"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="서대문구"
                 android:textSize="18sp"
-                android:textColor="#ffffff"
-                android:background="@color/mainColor"/>
+                android:background="#FFFFFF"/>
 
             <Button
                 android:layout_width="match_parent"
@@ -219,8 +219,7 @@
                 android:layout_height="wrap_content"
                 android:text="영등포구"
                 android:textSize="18sp"
-                android:textColor="#ffffff"
-                android:background="@color/mainColor"/>
+                android:background="#FFFFFF"/>
 
         </LinearLayout>
 
