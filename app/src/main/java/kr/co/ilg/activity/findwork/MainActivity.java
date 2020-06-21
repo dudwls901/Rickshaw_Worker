@@ -1,7 +1,9 @@
 package kr.co.ilg.activity.findwork;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -32,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView.LayoutManager layoutManager;
     BottomNavigationView bottomNavigationView;
 Intent intent;
+Toolbar toolbar;
 //    Fragment1 fragment1;
 //    Fragment2 fragment2;
 //    Fragment3 fragment3;
@@ -45,6 +48,10 @@ Intent intent;
 //        item2 = (MenuItem)findViewById(R.id.tab2);
 //        item3 = (MenuItem)findViewById(R.id.tab3);
 
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        ActionBar actionBar =getSupportActionBar();
+        actionBar.setHomeAsUpIndicator(R.drawable.search);
         spinner1=findViewById(R.id.spinner1);
         spinner2=findViewById(R.id.spinner2);
 
