@@ -24,6 +24,7 @@ import kr.co.ilg.activity.findwork.MainActivity;
 import kr.co.ilg.activity.findwork.MyFieldActivity;
 
 public class MypageMainActivity extends AppCompatActivity implements View.OnClickListener {
+    Intent intent;
     BottomNavigationView bottomNavigationView;
     Button myinform, accountmanage, reviewmanage;
     Button[] buttons = {myinform, accountmanage, reviewmanage};
@@ -71,7 +72,7 @@ public class MypageMainActivity extends AppCompatActivity implements View.OnClic
         list.add("공지사항");
         list.add("인력거안내");
         list.add("로그아웃");
-        bottomNavigationView = findViewById(R.id.bottomNavigationView3);
+        bottomNavigationView = findViewById(R.id.bottomNavigationView);
 //        bottomNavigationView.getMenu().getItem(0).setIcon(R.drawable.search_charcol);
 //        bottomNavigationView.getMenu().getItem(1).setIcon(R.drawable.building_charcol);
 //        bottomNavigationView.getMenu().getItem(2).setIcon(R.drawable.profile_mint);
@@ -82,18 +83,18 @@ public class MypageMainActivity extends AppCompatActivity implements View.OnClic
                     case R.id.tab1: {
 //                        getSupportFragmentManager().beginTransaction().replace(R.id.main_layout, fragment1).commitAllowingStateLoss();
 //                        return true;
-                        Intent intent1 = new Intent(MypageMainActivity.this, MainActivity.class);
-                        startActivity(intent1);
+                         intent = new Intent(MypageMainActivity.this, MainActivity.class);
+                        startActivity(intent);
                         return false;
                     }
                     case R.id.tab2: {
-                        Intent intent2 = new Intent(MypageMainActivity.this, MyFieldActivity.class);
-                        startActivity(intent2);
+                         intent = new Intent(MypageMainActivity.this, MyFieldActivity.class);
+                        startActivity(intent);
                         return false;
                     }
                     case R.id.tab3: {
-                        Intent intent3 = new Intent(MypageMainActivity.this, MypageMainActivity.class);
-                        startActivity(intent3);
+                         intent = new Intent(MypageMainActivity.this, MypageMainActivity.class);
+                        startActivity(intent);
                         return false;
                     }
                     default:

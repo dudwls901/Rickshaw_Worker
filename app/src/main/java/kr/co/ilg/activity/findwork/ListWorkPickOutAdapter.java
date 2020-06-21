@@ -1,6 +1,12 @@
 package kr.co.ilg.activity.findwork;
 
+//import android.app.AlertDialog;
+
+import androidx.appcompat.app.AlertDialog;
+
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.capstone.R;
@@ -15,7 +22,9 @@ import com.example.capstone.R;
 import java.util.ArrayList;
 
 public class ListWorkPickOutAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-
+    LinearLayout gotoworkCheck, gotohomeCheck;
+    Intent intent;
+    View dialogView;
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
 
@@ -70,8 +79,7 @@ public class ListWorkPickOutAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             myViewHolder.place.setText(workInfo.get(position).place);
             myViewHolder.office.setText(workInfo.get(position).office);
 
-        }
-        else if (workInfo.get(position).urgency == true) {
+        } else if (workInfo.get(position).urgency == true) {
             myViewHolder.title.setText(workInfo.get(position).title);
             myViewHolder.date.setText(workInfo.get(position).date);
             myViewHolder.pay.setText(workInfo.get(position).pay);
@@ -86,10 +94,32 @@ public class ListWorkPickOutAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
             @Override
             public void onClick(View view) {
+                context = view.getContext();
+                final AlertDialog.Builder dlg = new AlertDialog.Builder(context);
+                dialogView = View.inflate(context, R.layout.work_check, null);
+                dlg.setView(dialogView);
+                gotoworkCheck = dialogView.findViewById(R.id.gotoworkCheck);
+                gotohomeCheck = dialogView.findViewById(R.id.gotohomeCheck);
 
+                dlg.setNegativeButton("닫기", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
 
-
-
+                    }
+                });
+                gotoworkCheck.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        gotoworkCheck.setBackgroundColor(context.getResources().getColor(R.color.UrgencyColor));
+                    }
+                });
+                gotohomeCheck.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        gotohomeCheck.setBackgroundColor(context.getResources().getColor(R.color.UrgencyColor));
+                    }
+                });
+                dlg.show();
             }
 
         });
