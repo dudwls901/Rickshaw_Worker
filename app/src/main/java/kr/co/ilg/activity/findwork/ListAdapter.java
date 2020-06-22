@@ -32,7 +32,6 @@ public class ListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             current_people=view.findViewById(R.id.current_people);
             total_people=view.findViewById(R.id.total_people);
             linear1 = view.findViewById(R.id.linear1);
-
         }
     }
 

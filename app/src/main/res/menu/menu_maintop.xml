@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/search"
+        android:title="검색"
+        android:icon="@drawable/search_white"
+        app:showAsAction="ifRoom"
+        app:actionViewClass="android.widget.SearchView"
+        android:iconTint="@color/WhiteColor"/>
+    <item
+        android:id="@+id/map"
+        android:title="지도"
+        android:icon="@drawable/location_white"
+        app:showAsAction="ifRoom"
+        />
+
+
+</menu>
+
