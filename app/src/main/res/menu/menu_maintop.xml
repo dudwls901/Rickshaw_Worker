@@ -6,8 +6,8 @@
         android:title="검색"
         android:icon="@drawable/search_white"
         app:showAsAction="ifRoom"
-
-        />
+        app:actionViewClass="android.widget.SearchView"
+        android:iconTint="@color/WhiteColor"/>
     <item
         android:id="@+id/map"
         android:title="지도"
