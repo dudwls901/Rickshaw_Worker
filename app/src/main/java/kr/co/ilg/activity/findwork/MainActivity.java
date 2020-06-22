@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
+import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
     Intent intent;
     Toolbar toolbar;
+
 //    Fragment1 fragment1;
 //    Fragment2 fragment2;
 //    Fragment3 fragment3;
@@ -43,6 +45,9 @@ public class MainActivity extends AppCompatActivity {
         //return super.onCreateOptionsMenu(menu);
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.menu_maintop, menu);
+        SearchView searchView = (SearchView)menu.findItem(R.id.search).getActionView();
+        searchView.setMaxWidth(Integer.MAX_VALUE);
+
         return true;
     }
 
@@ -115,42 +120,27 @@ public class MainActivity extends AppCompatActivity {
 
 
                     bottomNavigationView = findViewById(R.id.bottomNavigationView); //프래그먼트 생성
-//        bottomNavigationView.getMenu().getItem(0).setIcon(R.drawable.search_mint);
-//        bottomNavigationView.getMenu().getItem(1).setIcon(R.drawable.building_charcol);
-//        bottomNavigationView.getMenu().getItem(2).setIcon(R.drawable.profile_charcol);
-
                     Toast.makeText(MainActivity.this, String.valueOf(bottomNavigationView.getMenu().getItem(1)), Toast.LENGTH_LONG).show();
 
 
                     bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
                         @Override
                         public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                            //  Log.d("chk",String.valueOf(menuItem.getItemId()));
+
                             switch (menuItem.getItemId()) { //menu_bottom.xml에서 지정해줬던 아이디 값을 받아와서 각 아이디값마다 다른 이벤트를 발생시킵니다.
                                 case R.id.tab1: {
-//                        getSupportFragmentManager().beginTransaction().replace(R.id.main_layout, fragment1).commitAllowingStateLoss();
-//                        return true;
-
                                     intent = new Intent(MainActivity.this, MainActivity.class);
                                     startActivity(intent);
                                     return false;
                                 }
                                 case R.id.tab2: {
 
-//                        bottomNavigationView.getMenu().getItem(1).setChecked(true);
-//                        bottomNavigationView.getMenu().getItem(0).setChecked(false);
-//                        item2.setChecked(true);
-//                        item1.setChecked(false);
                                     intent = new Intent(MainActivity.this, MyFieldActivity.class);
                                     startActivity(intent);
                                     return false;
                                 }
                                 case R.id.tab3: {
 //
-//                        bottomNavigationView.getMenu().getItem(2).setChecked(true);
-//                        bottomNavigationView.getMenu().getItem(0).setChecked(false);
-//                       item3.setChecked(true);
-//                       item1.setChecked(false);
                                     intent = new Intent(MainActivity.this, MypageMainActivity.class);
                                     startActivity(intent);
                                     return false;

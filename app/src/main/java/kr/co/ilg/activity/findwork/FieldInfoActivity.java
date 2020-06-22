@@ -4,12 +4,14 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.drm.DrmStore;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import kr.co.ilg.activity.findwork.ListAdapter;
 import kr.co.ilg.activity.findwork.ListViewItem;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -20,12 +22,28 @@ import java.util.ArrayList;
 public class FieldInfoActivity extends AppCompatActivity {
     RecyclerView work_info_RecyclerView, review_RecyclerView;
     RecyclerView.LayoutManager layoutManager, review_layoutManager;
+    Toolbar toolbar;
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch (id) {
+            case android.R.id.home: {
+                finish();
+
+            }
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {//현장정보
         super.onCreate(savedInstanceState);
         setContentView(R.layout.field_info);
-
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         work_info_RecyclerView = findViewById(R.id.work_list);
         work_info_RecyclerView.setHasFixedSize(true);
         layoutManager=new LinearLayoutManager(this);
