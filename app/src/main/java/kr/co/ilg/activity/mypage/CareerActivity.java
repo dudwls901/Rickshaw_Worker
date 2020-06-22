@@ -49,7 +49,7 @@ public class CareerActivity extends AppCompatActivity {
 
         cList.add(new CareerRVItem("보통 인부"));
         cList.add(new CareerRVItem("용접공"));
-        cList.add(new CareerRVItem("청소"));
+        //cList.add(new CareerRVItem("청소"));
 
         myAdapter = new CareerRVAdapter(cList);
         mRecyclerView.setAdapter(myAdapter);
