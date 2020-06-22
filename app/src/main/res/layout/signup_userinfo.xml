@@ -2,81 +2,107 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="10dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <TextView
-        android:id="@+id/nameTv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@+id/nameET"
-        app:layout_constraintBottom_toBottomOf="@+id/nameET"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:text="이                름"
-        android:textSize="18sp" />
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/mainColor"
+        android:theme="@style/AppTheme"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <EditText
-        android:id="@+id/nameET"
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="개인정보 입력"
+            android:textColor="@color/WhiteColor"
+            android:textSize="20sp" />
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:paddingLeft="115dp" />
+        android:padding="10dp">
 
-    <TextView
-        android:id="@+id/rrnTV"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@+id/rrnET"
-        app:layout_constraintBottom_toBottomOf="@+id/rrnET"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_weight="1.3"
-        android:text="주민등록 번호"
-        android:textSize="18sp" />
 
-    <EditText
-        android:id="@+id/rrnET"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/nameET"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:inputType="numberPassword"
-        android:paddingLeft="115dp" />
+        <TextView
+            android:id="@+id/nameTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@+id/nameET"
+            app:layout_constraintBottom_toBottomOf="@+id/nameET"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:text="이                름"
+            android:textSize="18sp" />
 
-    <TextView
-        android:id="@+id/pnumTV"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@+id/pnumET"
-        app:layout_constraintBottom_toBottomOf="@+id/pnumET"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_weight="1.3"
-        android:text="휴대전화 번호"
-        android:textSize="18sp" />
+        <EditText
+            android:id="@+id/nameET"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:paddingLeft="115dp" />
 
-    <EditText
-        android:id="@+id/pnumET"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/rrnET"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:paddingLeft="115dp"
-        android:inputType="number"
-        android:hint="하이픈(-) 제외하고 입력"
-        />
+        <TextView
+            android:id="@+id/rrnTV"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@+id/rrnET"
+            app:layout_constraintBottom_toBottomOf="@+id/rrnET"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_weight="1.3"
+            android:text="주민등록 번호"
+            android:textSize="18sp" />
 
-    <Button
-        android:id="@+id/signUpBtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/pnumET"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="15dp"
-        android:background="@drawable/custom_btn_mainclr"
-        android:text="회원가입"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:textColor="@color/WhiteColor"/>
+        <EditText
+            android:id="@+id/rrnET"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/nameET"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:inputType="numberPassword"
+            android:paddingLeft="115dp" />
 
+        <TextView
+            android:id="@+id/pnumTV"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@+id/pnumET"
+            app:layout_constraintBottom_toBottomOf="@+id/pnumET"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_weight="1.3"
+            android:text="휴대전화 번호"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/pnumET"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/rrnET"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:paddingLeft="115dp"
+            android:inputType="number"
+            android:hint="하이픈(-) 제외하고 입력"
+            />
+
+        <Button
+            android:id="@+id/signUpBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/pnumET"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/custom_btn_mainclr"
+            android:text="회원가입"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/WhiteColor"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
