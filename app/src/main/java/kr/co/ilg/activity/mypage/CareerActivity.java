@@ -47,7 +47,6 @@ public class CareerActivity extends AppCompatActivity {
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getApplicationContext(),new LinearLayoutManager(this).getOrientation());
         mRecyclerView.addItemDecoration(dividerItemDecoration);
 
-        cList = new ArrayList<>();
         cList.add(new CareerRVItem("보통 인부"));
         cList.add(new CareerRVItem("용접공"));
         cList.add(new CareerRVItem("청소"));

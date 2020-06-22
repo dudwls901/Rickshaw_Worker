@@ -1,308 +1,178 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-
-
-        <ImageView
-            android:id="@+id/profil"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="10dp"
-            android:src="@drawable/man"
-            app:layout_constraintLeft_toRightOf="@id/guideline"
-            app:layout_constraintTop_toTopOf="parent" />
-        <ImageButton
-            android:id="@+id/changeprofil"
-            android:layout_width="30dp"
-            android:layout_height="20dp"
-            android:layout_gravity="bottom"
-            android:src="@drawable/abc_vector_test"
-            app:layout_constraintBottom_toTopOf="@id/guideline4"
-            app:layout_constraintLeft_toRightOf="@id/profil" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="수정"
-            app:layout_constraintLeft_toRightOf="@id/changeprofil"
-            app:layout_constraintBottom_toTopOf="@id/guideline4"/>
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.44" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline4"
-            android:layout_width="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/myinfomanage_guin_stroke">
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="개미인력"
+                android:textSize="20dp"
+                android:textColor="@android:color/black"
+                />
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_begin="60dp" />
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="이름"
-        android:textSize="25dp"
-        android:id="@+id/myname"
-        android:textAlignment="center"/>
-
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@drawable/myprofile"
-        android:layout_marginHorizontal="10dp"
-        android:text="내 정보"
-        android:textSize="20dp"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="7dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="나이 : "
-            android:textSize="17dp"
-        />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="나이"
-            android:textSize="17dp"
-            android:id="@+id/age"
-            />
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="7dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="휴대폰 번호 : "
-            android:textSize="17dp"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="휴대폰번호"
-            android:textSize="17dp"
-            android:id="@+id/phonenum"
-            />
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="7dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="거주지 : "
-            android:textSize="17dp"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="거주지"
-            android:textSize="17dp"
-            android:id="@+id/address"
-            />
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="7dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="한줄소개 : "
-            android:textSize="17dp"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="소개"
-            android:textSize="17dp"
-            android:id="@+id/introduce"
-            />
-
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="right">
-        <ImageButton
-            android:layout_width="30dp"
-            android:layout_height="20dp"
-            android:layout_gravity="bottom"
-            android:src="@drawable/abc_vector_test" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="수정"/>
-    </LinearLayout>
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:layout_marginHorizontal="10dp"
-        android:layout_marginTop="3dp"
-        android:src="@drawable/line"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="10dp"
-        android:text="희망직종 및 근로지"
-        android:textSize="20dp"
-        android:textColor="@android:color/black"
-        />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="17dp"
-            android:text="희망 직종 : "/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="17dp"
-            android:text="희망 근무지"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginBottom="5dp"
-        android:layout_marginTop="5dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="17dp"
-            android:text="희망 근로지 : "
-            />
-        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="7dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="주소 : "
+                android:textSize="17dp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="주소"
+                android:textSize="17dp"
+                android:id="@+id/phonenum"
+                />
+        </LinearLayout>
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="17dp"
-            android:text="희망 근로지 "/>
-
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="right">
-        <ImageButton
-            android:layout_width="30dp"
-            android:layout_height="20dp"
-            android:layout_gravity="bottom"
-            android:src="@drawable/abc_vector_test" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="수정"/>
-    </LinearLayout>
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:layout_marginHorizontal="10dp"
-        android:layout_marginTop="3dp"
-        android:src="@drawable/line"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="5dp"
-        android:text="경력"
-        android:textSize="20dp"
-        android:textColor="@android:color/black"
-        />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:textSize="17dp"
-            android:layout_height="wrap_content"
-            android:text="경력 : "
-            />
-        <TextView
+            android:orientation="horizontal"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="3dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="담당자 : "
+                android:textSize="17dp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="이름"
+                android:textSize="17dp"
+                android:id="@+id/address"
+                />
+        </LinearLayout>
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="17dp"
-            android:text="경력 "/>
+            android:orientation="horizontal"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="3dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="담당자 연락처 : "
+                android:textSize="17dp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="번호"
+                android:textSize="17dp"
+                android:id="@+id/introduce"
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="3dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="사무소 연락처 : "
+                android:textSize="17dp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="번호"
+                android:textSize="17dp"
+                android:id="@+id/age"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="right">
+                <ImageButton
+                    android:layout_width="30dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="bottom"
+                    android:src="@drawable/abc_vector_test" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="수정"/>
+            </LinearLayout>
+        </LinearLayout>
 
     </LinearLayout>
-    <Button
-        android:layout_width="110dp"
-        android:layout_height="30dp"
-        android:text="근무 기록 보기"
-        android:background="@drawable/line"
-        android:layout_gravity="right"/>
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:layout_marginHorizontal="10dp"
-        android:layout_marginTop="3dp"
-        android:src="@drawable/line"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:text="안전교육이수증 인증 여부"
-        android:textSize="20dp"
-        android:textColor="@android:color/black"
-        />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:text="부 "
+        android:text="상세정보"
+        android:layout_gravity="center"
+        android:layout_margin="3dp"
         android:textSize="17dp"
+        android:textColor="@android:color/black"
         />
-    <Button
-        android:layout_width="70dp"
-        android:layout_height="35dp"
-        android:text="인증하기"
-        android:background="@drawable/line"
-        android:layout_gravity="right"/>
-    <ImageView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:layout_marginHorizontal="10dp"
-        android:layout_marginTop="3dp"
-        android:src="@drawable/line"/>
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/myinfomanage_guin_stroke">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="안녕하세요## 개미인력입니다. 현재 영등포구에 보내는 인력만해도 17명이고, 마포구까지 일 있습니다~
+               단가도 평균 15만원~16만원 정도 합니다. 초보,경력 상관없이 다 일자리 있으니 많은 문의 및 신청 바랍니다."
 
 
-
-
+        android:textSize="17dp"
+        android:padding="5dp"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="right"
+        android:layout_marginBottom="3dp">
+        <ImageButton
+            android:layout_width="30dp"
+            android:layout_height="20dp"
+            android:layout_gravity="bottom"
+            android:src="@drawable/abc_vector_test" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="수정"/>
+    </LinearLayout>
+    </LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="후기"
+        android:layout_gravity="center"
+        android:layout_margin="3dp"
+        android:textSize="17dp"
+        android:textColor="@android:color/black"
+        />
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/myinfomanage_guin_stroke"
+        android:id="@+id/reviewrecycle2"
+        />
 
 </LinearLayout>
