@@ -58,7 +58,6 @@ public class MainActivity extends AppCompatActivity {
                 return true;
 
             case R.id.map :
-                Toast.makeText(getApplicationContext(), "map 클릭", Toast.LENGTH_LONG).show();
                 Intent intent=new Intent(MainActivity.this,WorkMapActivity.class);
                 startActivity(intent);
                 return true;
