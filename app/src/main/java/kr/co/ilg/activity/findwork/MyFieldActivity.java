@@ -68,15 +68,6 @@ tabs.getTabAt(1).setText("지난 현장");
 
 
         bottomNavigationView = findViewById(R.id.bottomNavigationView); //프래그먼트 생성
-//        bottomNavigationView.getMenu().getItem(0).setIcon(R.drawable.search_charcol);
-//        bottomNavigationView.getMenu().getItem(1).setIcon(R.drawable.building_color);
-//        bottomNavigationView.getMenu().getItem(2).setIcon(R.drawable.profile_charcol);
-        //   bottomNavigationView.getMenu().getItem(1).getIcon(R.id.tab2).setTintList(null);
-        //  bottomNavigationView.getMenu().getItem(1).
-        bottomNavigationView.setItemIconTintList(null);
-        //MenuItem item = bottomNavigationView.getMenu().getItem(1);
-        //item.setIconTintList(null);
-        //Log.d("test",String.valueOf(item));
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
