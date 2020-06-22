@@ -34,9 +34,7 @@ public class MainActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
     Intent intent;
     Toolbar toolbar;
-//    Fragment1 fragment1;
-//    Fragment2 fragment2;
-//    Fragment3 fragment3;
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -47,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-@Override
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         //return super.onOptionsItemSelected(item);
         switch (item.getItemId()) {
@@ -56,9 +54,11 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "search 클릭", Toast.LENGTH_LONG).show();
                 return true;
 
-            case R.id.map :
-                    Toast.makeText(getApplicationContext(), "map 클릭", Toast.LENGTH_LONG).show();
-                    return true;
+            case R.id.map:
+                Toast.makeText(getApplicationContext(), "map 클릭", Toast.LENGTH_LONG).show();
+                Intent intent=new Intent(MainActivity.this,WorkMapActivity.class);
+                startActivity(intent);
+                return true;
 
             default:
                 return false;
@@ -66,101 +66,87 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-                @Override
-                protected void onCreate (Bundle savedInstanceState){
-                    super.onCreate(savedInstanceState);
-                    setContentView(R.layout.activity_main);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
 
-//        item1 = (MenuItem) findViewById(R.id.tab1);
-//        item2 = (MenuItem)findViewById(R.id.tab2);
-//        item3 = (MenuItem)findViewById(R.id.tab3);
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
-                    toolbar = findViewById(R.id.toolbar);
-                    setSupportActionBar(toolbar);
-                    //추가된 소스코드, Toolbar의 왼쪽에 버튼을 추가하고 버튼의 아이콘을 바꾼다.
-                    //     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-                    //     getSupportActionBar().setHomeAsUpIndicator(R.drawable.search_white_24dp);
+        spinner1 = findViewById(R.id.spinner1);
+        spinner2 = findViewById(R.id.spinner2);
 
+        spinner1_array = new ArrayList();
+        spinner2_array = new ArrayList();
+        spinner1_array.add(" 서울 마포구 ");
+        spinner2_array.add(" 전체 ");
 
+        spinner1_Adapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, spinner1_array);
+        spinner2_Adapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, spinner2_array);
 
+        spinner1.setAdapter(spinner1_Adapter);
+        spinner2.setAdapter(spinner2_Adapter);
 
-                    spinner1 = findViewById(R.id.spinner1);
-                    spinner2 = findViewById(R.id.spinner2);
+        urgency_RecyclerView = findViewById(R.id.list_urgency);
+        urgency_RecyclerView.setHasFixedSize(true);
+        layoutManager = new LinearLayoutManager(this);
+        urgency_RecyclerView.setLayoutManager(layoutManager);
 
-                    spinner1_array = new ArrayList();
-                    spinner2_array = new ArrayList();
-                    spinner1_array.add(" 서울 마포구 ");
-                    spinner2_array.add(" 전체 ");
-
-                    spinner1_Adapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, spinner1_array);
-                    spinner2_Adapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, spinner2_array);
-
-                    spinner1.setAdapter(spinner1_Adapter);
-                    spinner2.setAdapter(spinner2_Adapter);
-
-                    urgency_RecyclerView = findViewById(R.id.list_urgency);
-                    urgency_RecyclerView.setHasFixedSize(true);
-                    layoutManager = new LinearLayoutManager(this);
-                    urgency_RecyclerView.setLayoutManager(layoutManager);
-
-                    final ArrayList<ListViewItem> workInfoArrayList = new ArrayList<>();
-                    workInfoArrayList.add(new ListViewItem("레미안 건축", "2020-06-14", "150,000", "건축", "상수 레미안 아파트", "개미인력소", "1", "3", true));
-                    workInfoArrayList.add(new ListViewItem("해모로 아파트 건축", "2020-06-17", "130,000", "건축", "광흥창 해모로 아파트", "베짱이인력소", "2", "4", false));
-                    workInfoArrayList.add(new ListViewItem("자이아파트 신축", "2020-06-20", "160,000", "건축", "광흥창 자이 아파트", "사람인력소", "1", "5", false));
-                    workInfoArrayList.add(new ListViewItem("마포 체육관 보수공사", "2020-07-03", "110,000", "보수", "마포구민체육관", "당근인력소", "1", "3", false));
+        final ArrayList<ListViewItem> workInfoArrayList = new ArrayList<>();
+        workInfoArrayList.add(new ListViewItem("레미안 건축", "2020-06-14", "150,000", "건축", "상수 레미안 아파트", "개미인력소", "1", "3", true));
+        workInfoArrayList.add(new ListViewItem("해모로 아파트 건축", "2020-06-17", "130,000", "건축", "광흥창 해모로 아파트", "베짱이인력소", "2", "4", false));
+        workInfoArrayList.add(new ListViewItem("자이아파트 신축", "2020-06-20", "160,000", "건축", "광흥창 자이 아파트", "사람인력소", "1", "5", false));
+        workInfoArrayList.add(new ListViewItem("마포 체육관 보수공사", "2020-07-03", "110,000", "보수", "마포구민체육관", "당근인력소", "1", "3", false));
 
 
-                    ListAdapter urgencyAdapter = new ListAdapter(getApplicationContext(), workInfoArrayList);
-                    urgency_RecyclerView.setAdapter(urgencyAdapter);
+        ListAdapter urgencyAdapter = new ListAdapter(getApplicationContext(), workInfoArrayList);
+        urgency_RecyclerView.setAdapter(urgencyAdapter);
 
 
-                    bottomNavigationView = findViewById(R.id.bottomNavigationView); //프래그먼트 생성
-//        bottomNavigationView.getMenu().getItem(0).setIcon(R.drawable.search_mint);
-//        bottomNavigationView.getMenu().getItem(1).setIcon(R.drawable.building_charcol);
-//        bottomNavigationView.getMenu().getItem(2).setIcon(R.drawable.profile_charcol);
-
-                    Toast.makeText(MainActivity.this, String.valueOf(bottomNavigationView.getMenu().getItem(1)), Toast.LENGTH_LONG).show();
+        bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        Toast.makeText(MainActivity.this, String.valueOf(bottomNavigationView.getMenu().getItem(1)), Toast.LENGTH_LONG).show();
 
 
-                    bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-                        @Override
-                        public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                            //  Log.d("chk",String.valueOf(menuItem.getItemId()));
-                            switch (menuItem.getItemId()) { //menu_bottom.xml에서 지정해줬던 아이디 값을 받아와서 각 아이디값마다 다른 이벤트를 발생시킵니다.
-                                case R.id.tab1: {
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                //  Log.d("chk",String.valueOf(menuItem.getItemId()));
+                switch (menuItem.getItemId()) { //menu_bottom.xml에서 지정해줬던 아이디 값을 받아와서 각 아이디값마다 다른 이벤트를 발생시킵니다.
+                    case R.id.tab1: {
 //                        getSupportFragmentManager().beginTransaction().replace(R.id.main_layout, fragment1).commitAllowingStateLoss();
 //                        return true;
 
-                                    intent = new Intent(MainActivity.this, MainActivity.class);
-                                    startActivity(intent);
-                                    return false;
-                                }
-                                case R.id.tab2: {
+                        intent = new Intent(MainActivity.this, MainActivity.class);
+                        startActivity(intent);
+                        return false;
+                    }
+                    case R.id.tab2: {
 
 //                        bottomNavigationView.getMenu().getItem(1).setChecked(true);
 //                        bottomNavigationView.getMenu().getItem(0).setChecked(false);
 //                        item2.setChecked(true);
 //                        item1.setChecked(false);
-                                    intent = new Intent(MainActivity.this, MyFieldActivity.class);
-                                    startActivity(intent);
-                                    return false;
-                                }
-                                case R.id.tab3: {
+                        intent = new Intent(MainActivity.this, MyFieldActivity.class);
+                        startActivity(intent);
+                        return false;
+                    }
+                    case R.id.tab3: {
 //
 //                        bottomNavigationView.getMenu().getItem(2).setChecked(true);
 //                        bottomNavigationView.getMenu().getItem(0).setChecked(false);
 //                       item3.setChecked(true);
 //                       item1.setChecked(false);
-                                    intent = new Intent(MainActivity.this, MypageMainActivity.class);
-                                    startActivity(intent);
-                                    return false;
-                                }
-                                default:
-                                    return false;
-                            }
-                        }
-                    });
-
-
+                        intent = new Intent(MainActivity.this, MypageMainActivity.class);
+                        startActivity(intent);
+                        return false;
+                    }
+                    default:
+                        return false;
                 }
             }
+        });
+
+
+    }
+}
