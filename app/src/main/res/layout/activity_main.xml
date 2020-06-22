@@ -11,21 +11,16 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/colorPrimary"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="100dp"
             android:gravity="center"
             android:text="@string/title_home"
             android:textColor="@color/WhiteColor"
             android:textSize="20sp" />
-<ImageView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:src="@drawable/search"
-    />
 
     </androidx.appcompat.widget.Toolbar>
 
@@ -76,7 +71,8 @@
         android:layout_marginEnd="0dp"
         android:background="@color/WhiteColor"
         app:itemIconSize="30dp"
-
+        app:itemIconTint="#000000"
+        app:itemTextColor="#000000"
         app:layout_behavior="tech.thdev.app.view.BottomNavigationBehavior"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
