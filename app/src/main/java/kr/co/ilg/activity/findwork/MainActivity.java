@@ -58,8 +58,10 @@ public class MainActivity extends AppCompatActivity {
                 return true;
 
             case R.id.map :
-                    Toast.makeText(getApplicationContext(), "map 클릭", Toast.LENGTH_LONG).show();
-                    return true;
+                Toast.makeText(getApplicationContext(), "map 클릭", Toast.LENGTH_LONG).show();
+                Intent intent=new Intent(MainActivity.this,WorkMapActivity.class);
+                startActivity(intent);
+                return true;
 
             default:
                 return false;
@@ -120,7 +122,6 @@ public class MainActivity extends AppCompatActivity {
 //        bottomNavigationView.getMenu().getItem(1).setIcon(R.drawable.building_charcol);
 //        bottomNavigationView.getMenu().getItem(2).setIcon(R.drawable.profile_charcol);
 
-                    Toast.makeText(MainActivity.this, String.valueOf(bottomNavigationView.getMenu().getItem(1)), Toast.LENGTH_LONG).show();
 
 
                     bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
