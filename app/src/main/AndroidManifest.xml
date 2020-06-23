@@ -66,8 +66,8 @@
         <activity android:name="kr.co.ilg.activity.mypage.ServiceInfoActivity" android:label="이용약관"/>
         <activity android:name="kr.co.ilg.activity.mypage.PasswordChangeActivity" android:label="비밀번호 변경"/>
         <activity android:name="kr.co.ilg.activity.mypage.MemberRemoveActivity" android:label="회원탈퇴"/>
-        <activity android:name="kr.co.ilg.activity.login.FindPasswordInfoActivity" android:label="비밀번호 찾기" android:parentActivityName="kr.co.ilg.activity.login.LoginActivity"/>
-        <activity android:name="kr.co.ilg.activity.login.FindPasswordShowActivity" android:label="비밀번호 확인" android:parentActivityName="kr.co.ilg.activity.login.FindPasswordInfoActivity"/>
+        <activity android:name="kr.co.ilg.activity.login.FindPasswordInfoActivity" android:label="비밀번호 찾기"/>
+        <activity android:name="kr.co.ilg.activity.login.FindPasswordShowActivity" android:label="비밀번호 확인"/>
 
     </application>
 </manifest>
