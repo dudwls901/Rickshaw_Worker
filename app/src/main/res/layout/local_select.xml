@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
 
     <androidx.appcompat.widget.Toolbar
@@ -93,7 +93,17 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="9">
+        android:layout_weight="9"
+        android:orientation="vertical"
+        tools:context=".LocalSelectActivity">
+
+        <kr.co.ilg.activity.mypage.LocalSelectList
+            android:id="@+id/localView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/WhiteColor"/>
+
+<!--
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -238,6 +248,7 @@
                 android:background="#FFFFFF"/>
 
         </LinearLayout>
+-->
 
     </LinearLayout>
 

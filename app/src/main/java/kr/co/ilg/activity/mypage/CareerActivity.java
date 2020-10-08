@@ -20,7 +20,6 @@ import java.util.ArrayList;
 public class CareerActivity extends AppCompatActivity {
 
     Button okBtn;
-    //RadioButton year_1, year_3;
     ArrayList<CareerRVItem> cList;
     CareerRVAdapter myAdapter;
     RecyclerView mRecyclerView;
@@ -30,11 +29,6 @@ public class CareerActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.career);
-
-//        year_1 = findViewById(R.id.year_1);
-//        year_3 = findViewById(R.id.year_3);
-//        year_1.setText("1년\n이하");
-//        year_3.setText("3년\n이상");
 
         mRecyclerView = findViewById(R.id.rcV);
 
@@ -50,7 +44,6 @@ public class CareerActivity extends AppCompatActivity {
         cList = new ArrayList<>();
         cList.add(new CareerRVItem("보통 인부"));
         cList.add(new CareerRVItem("용접공"));
-        //cList.add(new CareerRVItem("청소"));
 
         myAdapter = new CareerRVAdapter(cList);
         mRecyclerView.setAdapter(myAdapter);
