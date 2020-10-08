@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.capstone">
     <uses-feature
         android:required="true"
@@ -63,6 +64,7 @@
         <activity android:name="kr.co.ilg.activity.login.SignupUserInfoActivity" android:label="개인 정보 입력"/>
         <activity android:name="kr.co.ilg.activity.mypage.CertificateConfirmActivity" android:label="건설업 기초안전보건교육 이수증 인증"/>
         <activity android:name="kr.co.ilg.activity.mypage.LocalSelectActivity" android:label="희망 근무 지역 선택"/>
+        <activity android:name="kr.co.ilg.activity.mypage.LocalSelectList" tools:ignore="Instantiatable" />
         <activity android:name="kr.co.ilg.activity.mypage.JobSelectActivity" android:label="희망 직종 선택"/>
         <activity android:name="kr.co.ilg.activity.mypage.CareerActivity" android:label="경력 등록"/>
         <activity android:name="kr.co.ilg.activity.mypage.AccountAddActivity" android:label="계좌 등록"/>
