@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="8dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="3dp"
+            android:id="@+id/noticelayout">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="버섯현장"
+                android:textSize="15dp"
+                android:layout_marginBottom="3dp"
+                android:id="@+id/reviewfield"
+                android:textColor="@android:color/black"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="초보인데 일 천천히 알려주셔서 감사합니다."
+                android:textSize="15dp"
+                android:id="@+id/mypagereview"
+                android:textColor="@android:color/darker_gray"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="2020.05.05"
+                android:textSize="12dp"
+                android:textAlignment="textEnd"
+                android:id="@+id/mypagereviewdate"
+                android:textColor="@android:color/darker_gray"/>
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+</LinearLayout>
