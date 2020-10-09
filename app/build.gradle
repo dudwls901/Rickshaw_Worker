@@ -47,4 +47,6 @@ dependencies {
     compile group: project.KAKAO_SDK_GROUP, name: 'usermgmt',
 
             version: project.KAKAO_SDK_VERSION
+    /*compile group: 'com.kakao.sdk', name: 'kakaolink', version: '1.5.1'
+    compile fileTree(dir: 'libs', include: ['*.jar'])*/
 }

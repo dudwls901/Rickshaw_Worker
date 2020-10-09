@@ -23,12 +23,7 @@
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
 
-    <meta-data
-        android:name="com.google.android.gms.version"
-        android:value="@integer/google_play_services_version"/>
-    <meta-data
-        android:name="com.kakao.sdk.AppKey"
-        android:value="@string/kakao_app_key" />
+
 
     <application
         android:allowBackup="true"
@@ -42,6 +37,12 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCPDPoKy_UbzVcIcrEtVKAtNaafvx42Nio"/>
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version"/>
+        <meta-data
+            android:name="com.kakao.sdk.AppKey"
+            android:value="@string/kakao_app_key" />
 
 <!--       <activity android:name="kr.co.ilg.activity.findwork.MainActivity" android:label="일자리 찾기">-->
            <activity android:name="kr.co.ilg.activity.login.SplashActivity" android:theme="@style/SplashTheme" android:label="스플래시">
