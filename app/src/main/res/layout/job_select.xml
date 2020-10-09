@@ -26,23 +26,22 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:orientation="horizontal"
-        android:padding="10dp"
-        android:gravity="center">
+        android:padding="10dp">
 
         <TextView
-            android:layout_width="0dp"
+            android:layout_width="50dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:text="선택 :"
+            android:layout_marginLeft="5dp"
             android:textSize="18sp"/>
 
         <TextView
             android:id="@+id/sltTV"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="5"
             android:textSize="18sp"
             android:textColor="@color/mainColor"/>
+
 
 <!--        <TextView-->
 <!--            android:layout_width="0dp"-->
@@ -68,7 +67,7 @@
             android:gravity="center_horizontal">
 
             <Button
-                android:id="@+id/botong"
+                android:id="@+id/btn1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
@@ -77,6 +76,7 @@
                 android:background="@drawable/custom_btn_lightclr"/>
 
             <Button
+                android:id="@+id/btn2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
@@ -85,6 +85,7 @@
                 android:background="@drawable/custom_btn_lightclr"/>
 
             <Button
+                android:id="@+id/btn3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
@@ -93,6 +94,7 @@
                 android:background="@drawable/custom_btn_lightclr"/>
 
             <Button
+                android:id="@+id/btn4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
@@ -101,7 +103,7 @@
                 android:background="@drawable/custom_btn_lightclr"/>
 
             <Button
-                android:id="@+id/yong"
+                android:id="@+id/btn5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
@@ -110,6 +112,7 @@
                 android:background="@drawable/custom_btn_lightclr"/>
 
             <Button
+                android:id="@+id/btn6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
@@ -118,6 +121,7 @@
                 android:background="@drawable/custom_btn_lightclr"/>
 
             <Button
+                android:id="@+id/btn7"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
@@ -126,6 +130,7 @@
                 android:background="@drawable/custom_btn_lightclr"/>
 
             <Button
+                android:id="@+id/btn8"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
@@ -142,6 +147,7 @@
             android:gravity="center_horizontal">
 
             <Button
+                android:id="@+id/btn9"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
@@ -150,6 +156,7 @@
                 android:background="@drawable/custom_btn_lightclr"/>
 
             <Button
+                android:id="@+id/btn10"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
@@ -158,6 +165,7 @@
                 android:background="@drawable/custom_btn_lightclr"/>
 
             <Button
+                android:id="@+id/btn11"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
@@ -166,6 +174,7 @@
                 android:background="@drawable/custom_btn_lightclr"/>
 
             <Button
+                android:id="@+id/btn12"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
@@ -174,6 +183,7 @@
                 android:background="@drawable/custom_btn_lightclr"/>
 
             <Button
+                android:id="@+id/btn13"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
@@ -182,6 +192,7 @@
                 android:background="@drawable/custom_btn_lightclr"/>
 
             <Button
+                android:id="@+id/btn14"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
@@ -190,6 +201,7 @@
                 android:background="@drawable/custom_btn_lightclr"/>
 
             <Button
+                android:id="@+id/btn15"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
@@ -198,6 +210,7 @@
                 android:background="@drawable/custom_btn_lightclr"/>
 
             <Button
+                android:id="@+id/btn16"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"

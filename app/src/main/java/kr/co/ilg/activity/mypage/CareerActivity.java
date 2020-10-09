@@ -25,7 +25,7 @@ public class CareerActivity extends AppCompatActivity {
     CareerRVAdapter myAdapter;
     RecyclerView mRecyclerView;
     RecyclerView.LayoutManager mLayoutManager;
-
+    String jobs;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +35,11 @@ public class CareerActivity extends AppCompatActivity {
 //        year_3 = findViewById(R.id.year_3);
 //        year_1.setText("1년\n이하");
 //        year_3.setText("3년\n이상");
+
+        Intent intent = getIntent();
+        jobs = intent.getStringExtra("jobs");
+
+        String[] jobarray = jobs.split("  ");
 
         mRecyclerView = findViewById(R.id.rcV);
 
@@ -47,10 +52,12 @@ public class CareerActivity extends AppCompatActivity {
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getApplicationContext(),new LinearLayoutManager(this).getOrientation());
         mRecyclerView.addItemDecoration(dividerItemDecoration);
 
+
         cList = new ArrayList<>();
-        cList.add(new CareerRVItem("보통 인부"));
-        cList.add(new CareerRVItem("용접공"));
-        //cList.add(new CareerRVItem("청소"));
+
+        for(int i=0; i<jobarray.length; i++){
+            cList.add(new CareerRVItem(jobarray[i]));
+        }
 
         myAdapter = new CareerRVAdapter(cList);
         mRecyclerView.setAdapter(myAdapter);
