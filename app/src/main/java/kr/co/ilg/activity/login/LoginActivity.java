@@ -41,7 +41,6 @@ public class LoginActivity extends Activity {
                 Session session = Session.getCurrentSession();
                 session.addCallback(new SessionCallback());
                 session.open(AuthType.KAKAO_LOGIN_ALL, LoginActivity.this);
-
             }
 
         });
