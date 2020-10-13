@@ -43,12 +43,15 @@ public class SignupEmailActivity extends AppCompatActivity {
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               if (sign == true ) {
+//               if (sign == true ) {
+//
+//                    Intent intent = new Intent(SignupEmailActivity.this, SignupPasswordActivity.class);
+//                    startActivity(intent);
+//                }
+//                else{Toast.makeText(SignupEmailActivity.this, "인증 완료해주십시오", Toast.LENGTH_SHORT).show();}
+                Intent intent = new Intent(SignupEmailActivity.this, SignupPasswordActivity.class);
+                startActivity(intent);
 
-                    Intent intent = new Intent(SignupEmailActivity.this, SignupPasswordActivity.class);
-                    startActivity(intent);
-                }
-                else{Toast.makeText(SignupEmailActivity.this, "인증 완료해주십시오", Toast.LENGTH_SHORT).show();}
             }
         });
         codeBtn.setOnClickListener(new View.OnClickListener() {
