@@ -34,7 +34,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import kr.co.ilg.activity.login.LoginActivity;
+import com.example.capstone.MainActivity;
 
 public class CertificateConfirmActivity extends AppCompatActivity implements View.OnClickListener {
 

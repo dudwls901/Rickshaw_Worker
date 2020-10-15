@@ -42,14 +42,16 @@ public class SignupPasswordActivity extends AppCompatActivity {
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               if(passwdET.getText().toString().equals(checkPwET.getText().toString())) {
+               /*if(passwdET.getText().toString().equals(checkPwET.getText().toString())) {
                     Toast.makeText(SignupPasswordActivity.this, "설정 완료", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(SignupPasswordActivity.this, SignupUserInfoActivity.class);
                     startActivity(intent);
                 }
                 else{
                     Toast.makeText(SignupPasswordActivity.this, "비밀번호가 다릅니다", Toast.LENGTH_SHORT).show();
-                }
+                }*/
+                Intent intent = new Intent(SignupPasswordActivity.this, SignupUserInfoActivity.class);
+                startActivity(intent);
             }
         });
 

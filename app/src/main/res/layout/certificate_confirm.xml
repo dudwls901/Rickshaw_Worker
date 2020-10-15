@@ -10,8 +10,14 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.6" />
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/imageview"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/sfv"/>
 
-    <SurfaceView
+    <kr.co.ilg.activity.mypage.CameraSurfaceView
         android:id="@+id/sfv"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -34,6 +40,7 @@
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/capture"
         app:layout_constraintTop_toBottomOf="@id/tv"
         app:layout_constraintBottom_toTopOf="@id/uploadBtn"
         app:layout_constraintLeft_toLeftOf="parent"

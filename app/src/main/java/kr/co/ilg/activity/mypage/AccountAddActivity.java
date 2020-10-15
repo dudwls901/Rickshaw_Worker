@@ -1,6 +1,5 @@
 package kr.co.ilg.activity.mypage;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
@@ -14,11 +13,10 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.capstone.MainActivity;
 import com.example.capstone.R;
 
 import java.util.ArrayList;
-
-import kr.co.ilg.activity.login.LoginActivity;
 
 public class AccountAddActivity extends AppCompatActivity {
 
@@ -63,7 +61,7 @@ public class AccountAddActivity extends AppCompatActivity {
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AccountAddActivity.this, LoginActivity.class);
+                Intent intent = new Intent(AccountAddActivity.this, MainActivity.class);
                 startActivity(intent);
             }
         });
@@ -72,7 +70,7 @@ public class AccountAddActivity extends AppCompatActivity {
         nextTimeTV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AccountAddActivity.this, LoginActivity.class);
+                Intent intent = new Intent(AccountAddActivity.this, MainActivity.class);
                 startActivity(intent);
             }
         });

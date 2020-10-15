@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.capstone">
+    <queries>
+        <package android:name="com.kakao.talk" />
+    </queries>
     <uses-feature
         android:required="true"
         android:glEsVersion="0x00020000"/>
@@ -32,8 +35,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:name="kr.co.ilg.activity.login.GlobalApplication"
         android:usesCleartextTraffic="true"
+        android:name=".GlobalApplication"
         >
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -54,7 +57,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="kr.co.ilg.activity.login.LoginActivity" android:label="로그인"/>
+        <activity android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:host="oauth"
+                    android:scheme="kakao6aa177e3434fa7493fc20db8757d054b" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.example.capstone.MainActivity" android:label="로그인"/>
         <activity android:name="kr.co.ilg.activity.findwork.MainActivity" android:label="일자리 찾기"/>
         <activity android:name="kr.co.ilg.activity.findwork.FieldInfoActivity" android:label="현장 정보"/>
         <activity android:name="kr.co.ilg.activity.findwork.OfficeInfoActivity" android:label="인력사무소 정보"/>
@@ -83,6 +95,8 @@
         <activity android:name="kr.co.ilg.activity.mypage.MemberRemoveActivity" android:label="회원탈퇴"/>
         <activity android:name="kr.co.ilg.activity.login.FindPasswordInfoActivity" android:label="비밀번호 찾기"/>
         <activity android:name="kr.co.ilg.activity.login.FindPasswordShowActivity" android:label="비밀번호 확인"/>
+
+
 
         <provider
             android:name="androidx.core.content.FileProvider"

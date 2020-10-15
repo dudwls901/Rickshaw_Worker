@@ -10,9 +10,9 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.capstone.MainActivity;
 import com.example.capstone.R;
 
-import kr.co.ilg.activity.findwork.MainActivity;
 
 public class FindPasswordShowActivity extends AppCompatActivity {
 
@@ -35,7 +35,7 @@ public class FindPasswordShowActivity extends AppCompatActivity {
         goLoginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(FindPasswordShowActivity.this, LoginActivity.class);
+                Intent intent = new Intent(FindPasswordShowActivity.this, MainActivity.class);
                 startActivity(intent);
             }
         });

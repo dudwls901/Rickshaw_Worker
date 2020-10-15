@@ -1,6 +1,5 @@
 package kr.co.ilg.activity.mypage;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -14,9 +13,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.capstone.R;
-
-import kr.co.ilg.activity.findwork.MainActivity;
-import kr.co.ilg.activity.login.LoginActivity;
 
 public class LocalSelectActivity extends AppCompatActivity {
 
