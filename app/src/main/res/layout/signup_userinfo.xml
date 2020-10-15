@@ -28,6 +28,44 @@
         app:layout_constraintLeft_toLeftOf="parent"
         android:padding="10dp">
 
+        <TextView
+            android:id="@+id/genderTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:text="성                별"
+            android:textSize="18sp" />
+
+        <RadioGroup
+            android:id="@+id/rg"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/genderTv"
+            app:layout_constraintBottom_toBottomOf="@id/genderTv"
+            app:layout_constraintLeft_toRightOf="@id/genderTv"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:orientation="horizontal"
+            android:layout_marginLeft="20dp">
+
+            <RadioButton
+                android:id="@+id/manRb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="남"
+                android:textSize="18sp"
+                android:layout_marginRight="15dp"/>
+
+            <RadioButton
+                android:id="@+id/womanRb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="여"
+                android:textSize="18sp"/>
+
+        </RadioGroup>
+
 
         <TextView
             android:id="@+id/nameTv"
@@ -43,9 +81,9 @@
             android:id="@+id/nameET"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/rg"
             app:layout_constraintLeft_toLeftOf="parent"
-            android:paddingLeft="115dp" />
+            android:paddingLeft="130dp" />
 
         <TextView
             android:id="@+id/rrnTV"
@@ -55,7 +93,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/rrnET"
             app:layout_constraintLeft_toLeftOf="parent"
             android:layout_weight="1.3"
-            android:text="주민등록 번호"
+            android:text="생   년   월   일"
             android:textSize="18sp" />
 
         <EditText
@@ -64,8 +102,9 @@
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/nameET"
             app:layout_constraintLeft_toLeftOf="parent"
-            android:inputType="numberPassword"
-            android:paddingLeft="115dp" />
+            android:hint="YYYYMMDD"
+            android:inputType="number"
+            android:paddingLeft="130dp" />
 
         <TextView
             android:id="@+id/pnumTV"
@@ -75,7 +114,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/pnumET"
             app:layout_constraintLeft_toLeftOf="parent"
             android:layout_weight="1.3"
-            android:text="휴대전화 번호"
+            android:text="전   화   번   호"
             android:textSize="18sp" />
 
         <EditText
@@ -84,7 +123,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/rrnET"
             app:layout_constraintLeft_toLeftOf="parent"
-            android:paddingLeft="115dp"
+            android:paddingLeft="130dp"
             android:inputType="number"
             android:hint="하이픈(-) 제외하고 입력"
             />

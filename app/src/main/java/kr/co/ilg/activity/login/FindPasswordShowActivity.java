@@ -27,7 +27,11 @@ public class FindPasswordShowActivity extends AppCompatActivity {
         showPwTV = findViewById(R.id.showPwTV);
         goLoginBtn = findViewById(R.id.goLoginBtn);
 
-        showPwTV.setText("일개미님의 비밀번호는\nantwork** 입니다.");
+        Intent inIntent = getIntent();
+        String worker_pw = inIntent.getStringExtra("pw");
+        String worker_email = inIntent.getStringExtra("email");
+
+        showPwTV.setText(worker_email + " 님의 비밀번호는\n" + worker_pw + " 입니다.");
         goLoginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
