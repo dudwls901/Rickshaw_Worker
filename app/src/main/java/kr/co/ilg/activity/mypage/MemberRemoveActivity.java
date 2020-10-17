@@ -8,9 +8,8 @@ import android.widget.Button;
 
 import androidx.annotation.Nullable;
 
+import com.example.capstone.MainActivity;
 import com.example.capstone.R;
-
-import kr.co.ilg.activity.login.LoginActivity;
 
 public class MemberRemoveActivity extends Activity{
 
@@ -23,7 +22,7 @@ public class MemberRemoveActivity extends Activity{
         accountmodify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), LoginActivity.class); startActivity(intent);
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class); startActivity(intent);
             }
         });
     }

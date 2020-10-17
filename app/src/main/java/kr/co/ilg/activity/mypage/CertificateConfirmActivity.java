@@ -44,6 +44,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import com.android.volley.Response;
 
+import com.example.capstone.MainActivity;
 import kr.co.ilg.activity.findwork.MainActivity;
 import kr.co.ilg.activity.login.LoginActivity;
 

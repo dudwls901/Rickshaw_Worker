@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion 29
@@ -19,6 +20,17 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+    }
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
     }
 
 }
@@ -43,6 +55,15 @@ dependencies {
     implementation 'com.google.android.gms:play-services-location:17.0.0'
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
     implementation 'com.android.volley:volley:1.1.0'
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.0.0'
+    implementation "com.kakao.sdk:v2-user:2.0.3" // 카카오 로그인, 사용자 관리
+    implementation "com.kakao.sdk:v2-talk:2.0.3" // 친구, 메시지(카카오톡)
+    implementation "com.kakao.sdk:v2-story:2.0.3" // 카카오스토리
+    implementation "com.kakao.sdk:v2-link:2.0.3" // 메시지(카카오링크)
+    implementation "com.kakao.sdk:v2-navi:2.0.3" // 카카오내비
+
+    implementation 'com.android.volley:volley:1.1.0'
+
     compile group: project.KAKAO_SDK_GROUP, name: 'usermgmt',
 
             version: project.KAKAO_SDK_VERSION
