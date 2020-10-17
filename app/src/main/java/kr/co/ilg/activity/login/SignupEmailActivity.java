@@ -50,7 +50,9 @@ public class SignupEmailActivity extends AppCompatActivity {
 //                }
 //                else{Toast.makeText(SignupEmailActivity.this, "인증 완료해주십시오", Toast.LENGTH_SHORT).show();}
                 Intent intent = new Intent(SignupEmailActivity.this, SignupPasswordActivity.class);
+                intent.putExtra("worker_email",emailET.getText().toString());
                 startActivity(intent);
+
 
             }
         });

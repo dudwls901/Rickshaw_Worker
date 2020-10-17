@@ -26,11 +26,14 @@ public class SignupPasswordActivity extends AppCompatActivity {
     Button nextBtn;
     EditText passwdET,checkPwET;
     private Context mContext;
-
+    String worker_email;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.signup_password);
+
+        Intent receiver = getIntent();
+        worker_email = receiver.getExtras().getString("worker_email");
 
         mContext = getApplicationContext();
         getHashKey(mContext);
@@ -45,6 +48,10 @@ public class SignupPasswordActivity extends AppCompatActivity {
                if(passwdET.getText().toString().equals(checkPwET.getText().toString())) {
                     Toast.makeText(SignupPasswordActivity.this, "설정 완료", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(SignupPasswordActivity.this, SignupUserInfoActivity.class);
+
+                    intent.putExtra("worker_email",worker_email);
+                    intent.putExtra("worker_pw",passwdET.getText().toString());
+
                     startActivity(intent);
                 }
                 else{

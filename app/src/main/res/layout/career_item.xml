@@ -36,7 +36,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="7dp"
-            android:text="1년 ↓"
+            android:text="1년 이하"
             android:textSize="16sp"/>
 
         <RadioButton
@@ -51,7 +51,7 @@
             android:id="@+id/year_3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="3년 ↑"
+            android:text="3년 이상"
             android:textSize="16sp"/>
 
     </RadioGroup>
