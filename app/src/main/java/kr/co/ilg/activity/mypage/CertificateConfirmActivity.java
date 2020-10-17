@@ -10,8 +10,10 @@ import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.media.ExifInterface;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Debug;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -20,6 +22,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -29,11 +32,19 @@ import androidx.core.content.FileProvider;
 
 import com.example.capstone.R;
 
+import org.json.JSONObject;
+
+import java.io.DataOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import com.android.volley.Response;
 
+import kr.co.ilg.activity.findwork.MainActivity;
 import kr.co.ilg.activity.login.LoginActivity;
 
 public class CertificateConfirmActivity extends AppCompatActivity implements View.OnClickListener {
@@ -42,17 +53,27 @@ public class CertificateConfirmActivity extends AppCompatActivity implements Vie
     Button uploadBtn;
     ImageButton cameraBtn;
     ImageView certificateImg;
-
+    String worker_email, worker_pw, worker_name, worker_gender, worker_birth, worker_phonenum, worker_certicipate;
     final String TAG = getClass().getSimpleName();
     final static int TAKE_PICTURE = 1;
-
+    String phpUrl ="http://rickshaw.dothome.co.kr/ImageUpload.php";
+    URL url;
     String mCurrentPhotoPath;
     static final int REQUEST_TAKE_PHOTO = 1;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.certificate_picture);
+
+        Intent receiver = getIntent();
+        worker_email = receiver.getExtras().getString("worker_email");
+        worker_pw = receiver.getExtras().getString("worker_pw");
+        worker_name = receiver.getExtras().getString("worker_name");
+        worker_gender = receiver.getExtras().getString("worker_gender");
+        worker_birth = receiver.getExtras().getString("worker_birth");
+        worker_phonenum = receiver.getExtras().getString("worker_phonenum");
 
         uploadBtn = findViewById(R.id.uploadBtn);
         nextTimeTV = findViewById(R.id.nextTimeTV);
@@ -63,6 +84,39 @@ public class CertificateConfirmActivity extends AppCompatActivity implements Vie
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(CertificateConfirmActivity.this, LocalSelectActivity.class);
+                intent.putExtra("worker_email", worker_email);
+                intent.putExtra("worker_pw", worker_pw);
+                intent.putExtra("worker_gender", worker_gender);
+                intent.putExtra("worker_name", worker_name);
+                intent.putExtra("worker_birth",worker_birth);
+                intent.putExtra("worker_phonenum", worker_phonenum);
+                intent.putExtra("worker_certicipate", worker_certicipate);
+
+          //TODO 이미지 업로드 하기
+            //이미지 총 경로(서버에 쓸 거)    mCurrentPhotoPath
+            //이미지 이름(db에 넘어갈 것)      certicipate
+            atask at = new atask();
+            at.execute(mCurrentPhotoPath);
+
+          /*      Response.Listener responseListener = new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        try {
+                            //   JSONObject jsonResponse = new JSONObject(response);
+                            Log.d("mytesstt", response);
+                            JSONObject jsonResponse = new JSONObject(response.substring(response.indexOf("{"),response.lastIndexOf("}")+1));
+                            String result = jsonResponse.getString("result");
+                            Log.d("mytest4", jsonResponse.toString());
+                            Log.d("mytest5", result);
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                };
+*/
+
                 startActivity(intent);
             }
         });
@@ -72,6 +126,13 @@ public class CertificateConfirmActivity extends AppCompatActivity implements Vie
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(CertificateConfirmActivity.this, LocalSelectActivity.class);
+                intent.putExtra("worker_email", worker_email);
+                intent.putExtra("worker_pw", worker_pw);
+                intent.putExtra("worker_gender", worker_gender);
+                intent.putExtra("worker_name", worker_name);
+                intent.putExtra("worker_birth",worker_birth);
+                intent.putExtra("worker_phonenum", worker_phonenum);
+                //certicipate추가
                 startActivity(intent);
             }
         });
@@ -180,10 +241,16 @@ public class CertificateConfirmActivity extends AppCompatActivity implements Vie
                 imageFileName,  /* prefix */
                 ".jpg",         /* suffix */
                 storageDir      /* directory */
+
+
         );
 
         // Save a file: path for use with ACTION_VIEW intents
+
         mCurrentPhotoPath = image.getAbsolutePath();
+        String[] array = mCurrentPhotoPath.split("/");
+        worker_certicipate = array[9];
+        Log.d("cccccccccc", mCurrentPhotoPath);
         return image;
     }
 
@@ -216,5 +283,58 @@ public class CertificateConfirmActivity extends AppCompatActivity implements Vie
         matrix.postRotate(angle);
         return Bitmap.createBitmap(source, 0, 0, source.getWidth(), source.getHeight(),
                 matrix, true);
+    }
+
+    private class atask extends AsyncTask<String, String, String>
+    {
+        @Override
+        protected String doInBackground(String... strings) {
+           String imgPath = strings[0]; //이미지파일 경로 받아오기
+
+            DataOutputStream os = null;
+            String border = "#";
+            String two = "--";
+            String nl ="\n";
+            byte[] buf = null;
+            int bufSz = 1024*1024, ret=0;
+            File imgFile = new File(imgPath);
+            Log.d("ccccisfile",String.valueOf(imgFile.isFile()));
+            if(imgFile.isFile())
+            { Log.d("cccc됐놔용?","1");
+                try {
+                    Log.d("cccc됐냐고?","2");
+                    FileInputStream fis = new FileInputStream(imgFile);
+                    url = new URL(phpUrl);
+                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                    conn.setDoOutput(true);
+                    conn.setDoInput(true);
+                    conn.setRequestMethod("POST");
+                    conn.setRequestProperty("Content-Type", "multipart/form-data;boundary="+ border);
+                    os = new DataOutputStream(conn.getOutputStream());
+                    os.writeBytes(two + border + nl);
+                    os.writeBytes("Content-Disposition: form-data; name=\"phone\";filename=\""+imgPath+"\"" + nl);
+                    os.writeBytes(nl);
+                    Log.d("cccc됐냐고?","3");
+                    do {
+                        if(buf ==null) buf = new byte[bufSz];
+                        ret = fis.read(buf,0,bufSz); //그림파일 입력
+                        os.write(buf,0,bufSz);
+                    }while(ret>0);
+
+                    os.writeBytes(nl + two + border + two + nl); //--#  --#--
+                    conn.getResponseCode();
+                    fis.close();
+                    os.close();
+                Log.d("cccc됐니?","4");
+                }catch(Exception ex) {ex.printStackTrace();}
+
+            }
+
+            return "=>imgUploading OK";
+        }
+        protected void onPostExecute(String string)
+        {
+         Log.d("cccccc",string);
+        }
     }
 }

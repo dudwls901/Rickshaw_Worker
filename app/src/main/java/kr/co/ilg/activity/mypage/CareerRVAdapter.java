@@ -1,8 +1,12 @@
 package kr.co.ilg.activity.mypage;
 
+import android.os.Debug;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,18 +18,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CareerRVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+    public ArrayList<CareerRVItem> cList =null;
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         TextView job;
 
-        MyViewHolder(View view){
+
+        MyViewHolder(View view) {
             super(view);
             job = view.findViewById(R.id.job);
+
         }
     }
 
-    private ArrayList<CareerRVItem> cList;
-    CareerRVAdapter(ArrayList<CareerRVItem> cList){
+
+
+    CareerRVAdapter(ArrayList<CareerRVItem> cList) {
         this.cList = cList;
     }
 
@@ -40,12 +48,15 @@ public class CareerRVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         MyViewHolder myViewHolder = (MyViewHolder) holder;
-
+        Log.d("qq onBindViewHolder", String.valueOf(position));
         myViewHolder.job.setText(cList.get(position).c_job);
+
     }
 
     @Override
     public int getItemCount() {
         return cList.size();
     }
+
+
 }

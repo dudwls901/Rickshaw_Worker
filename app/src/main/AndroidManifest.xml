@@ -2,87 +2,146 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.capstone">
+
     <uses-feature
-        android:required="true"
-        android:glEsVersion="0x00020000"/>
+        android:glEsVersion="0x00020000"
+        android:required="true" />
     <permission
         android:name="kr.co.ilg.permission.MAPS_RECEIVE"
-        android:label="signiture"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES"/>
+        android:label="signiture" />
+
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-feature android:name="android.hardware.camera"
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+
+
+    <uses-feature
+        android:name="android.hardware.camera"
         android:required="true" />
-    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
+        android:name="kr.co.ilg.activity.login.GlobalApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:name="kr.co.ilg.activity.login.GlobalApplication"
-        android:usesCleartextTraffic="true"
-        >
+        android:usesCleartextTraffic="true">
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyCPDPoKy_UbzVcIcrEtVKAtNaafvx42Nio"/>
+            android:value="AIzaSyCPDPoKy_UbzVcIcrEtVKAtNaafvx42Nio" />
         <meta-data
             android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version"/>
+            android:value="@integer/google_play_services_version" />
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="@string/kakao_app_key" />
 
-<!--       <activity android:name="kr.co.ilg.activity.findwork.MainActivity" android:label="일자리 찾기">-->
-           <activity android:name="kr.co.ilg.activity.login.SplashActivity" android:theme="@style/SplashTheme" android:label="스플래시">
-<!--        <activity android:name="kr.co.ilg.activity.login.SignupEmailActivity" android:label="회원가입">-->
+        <!--       <activity android:name="kr.co.ilg.activity.findwork.MainActivity" android:label="일자리 찾기">-->
+        <activity
+            android:name="kr.co.ilg.activity.login.SplashActivity"
+            android:label="스플래시"
+            android:theme="@style/SplashTheme">
+            <!--        <activity android:name="kr.co.ilg.activity.login.SignupEmailActivity" android:label="회원가입">-->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="kr.co.ilg.activity.login.LoginActivity" android:label="로그인"/>
-        <activity android:name="kr.co.ilg.activity.findwork.MainActivity" android:label="일자리 찾기"/>
-        <activity android:name="kr.co.ilg.activity.findwork.FieldInfoActivity" android:label="현장 정보"/>
-        <activity android:name="kr.co.ilg.activity.findwork.OfficeInfoActivity" android:label="인력사무소 정보"/>
-        <activity android:name="kr.co.ilg.activity.findwork.WorkInfoActivity" android:label="일자리 정보"/>
-        <activity android:name="kr.co.ilg.activity.findwork.WorkMapActivity" android:label="일자리 지도"/>
-        <activity android:name="kr.co.ilg.activity.findwork.MyFieldActivity" android:label="나의 현장"/>
-        <activity android:name="kr.co.ilg.activity.login.SignupEmailActivity" android:label="이메일 인증"/>
-        <activity android:name="kr.co.ilg.activity.login.SignupPasswordActivity" android:label="비밀번호 설정"/>
-        <activity android:name="kr.co.ilg.activity.login.SignupUserInfoActivity" android:label="개인 정보 입력"/>
-        <activity android:name="kr.co.ilg.activity.mypage.CertificateConfirmActivity" android:label="건설업 기초안전보건교육 이수증 인증"/>
-        <activity android:name="kr.co.ilg.activity.mypage.LocalSelectActivity" android:label="희망 근무 지역 선택"/>
-        <activity android:name="kr.co.ilg.activity.mypage.LocalSelectList" tools:ignore="Instantiatable" />
-        <activity android:name="kr.co.ilg.activity.mypage.JobSelectActivity" android:label="희망 직종 선택"/>
-        <activity android:name="kr.co.ilg.activity.mypage.CareerActivity" android:label="경력 등록"/>
-        <activity android:name="kr.co.ilg.activity.mypage.AccountAddActivity" android:label="계좌 등록"/>
-        <activity android:name="kr.co.ilg.activity.mypage.MypageMainActivity" android:label="내 정보"/>
-        <activity android:name="kr.co.ilg.activity.mypage.MyInfomanageActivity" android:label="내 정보"/>
-        <activity android:name="kr.co.ilg.activity.mypage.AccountManageActivity" android:label="계좌 관리"/>
-        <activity android:name="kr.co.ilg.activity.mypage.ReviewManageActivity" android:label="후기 관리"/>
-        <activity android:name="kr.co.ilg.activity.mypage.OptionActivity" android:label="설정"/>
-        <activity android:name="kr.co.ilg.activity.mypage.NoticeActivity" android:label="공지사항"/>
-        <activity android:name="kr.co.ilg.activity.mypage.NoticeInfoActivity" android:label="공지사항"/>
-        <activity android:name="kr.co.ilg.activity.mypage.ilgIntrodutionActivity" android:label="인력거 안내"/>
-        <activity android:name="kr.co.ilg.activity.mypage.ServiceInfoActivity" android:label="이용약관"/>
-        <activity android:name="kr.co.ilg.activity.mypage.PasswordChangeActivity" android:label="비밀번호 변경"/>
-        <activity android:name="kr.co.ilg.activity.mypage.MemberRemoveActivity" android:label="회원탈퇴"/>
-        <activity android:name="kr.co.ilg.activity.login.FindPasswordInfoActivity" android:label="비밀번호 찾기"/>
-        <activity android:name="kr.co.ilg.activity.login.FindPasswordShowActivity" android:label="비밀번호 확인"/>
+        <activity
+            android:name="kr.co.ilg.activity.login.LoginActivity"
+            android:label="로그인" />
+        <activity
+            android:name="kr.co.ilg.activity.findwork.MainActivity"
+            android:label="일자리 찾기" />
+        <activity
+            android:name="kr.co.ilg.activity.findwork.FieldInfoActivity"
+            android:label="현장 정보" />
+        <activity
+            android:name="kr.co.ilg.activity.findwork.OfficeInfoActivity"
+            android:label="인력사무소 정보" />
+        <activity
+            android:name="kr.co.ilg.activity.findwork.WorkInfoActivity"
+            android:label="일자리 정보" />
+        <activity
+            android:name="kr.co.ilg.activity.findwork.WorkMapActivity"
+            android:label="일자리 지도" />
+        <activity
+            android:name="kr.co.ilg.activity.findwork.MyFieldActivity"
+            android:label="나의 현장" />
+        <activity
+            android:name="kr.co.ilg.activity.login.SignupEmailActivity"
+            android:label="이메일 인증" />
+        <activity
+            android:name="kr.co.ilg.activity.login.SignupPasswordActivity"
+            android:label="비밀번호 설정" />
+        <activity
+            android:name="kr.co.ilg.activity.login.SignupUserInfoActivity"
+            android:label="개인 정보 입력" />
+        <activity
+            android:name="kr.co.ilg.activity.mypage.CertificateConfirmActivity"
+            android:label="건설업 기초안전보건교육 이수증 인증" />
+        <activity
+            android:name="kr.co.ilg.activity.mypage.LocalSelectActivity"
+            android:label="희망 근무 지역 선택" />
+        <activity
+            android:name="kr.co.ilg.activity.mypage.LocalSelectList"
+            tools:ignore="Instantiatable" />
+        <activity
+            android:name="kr.co.ilg.activity.mypage.JobSelectActivity"
+            android:label="희망 직종 선택" />
+        <activity
+            android:name="kr.co.ilg.activity.mypage.CareerActivity"
+            android:label="경력 등록" />
+        <activity
+            android:name="kr.co.ilg.activity.mypage.AccountAddActivity"
+            android:label="계좌 등록" />
+        <activity
+            android:name="kr.co.ilg.activity.mypage.MypageMainActivity"
+            android:label="내 정보" />
+        <activity
+            android:name="kr.co.ilg.activity.mypage.MyInfomanageActivity"
+            android:label="내 정보" />
+        <activity
+            android:name="kr.co.ilg.activity.mypage.AccountManageActivity"
+            android:label="계좌 관리" />
+        <activity
+            android:name="kr.co.ilg.activity.mypage.ReviewManageActivity"
+            android:label="후기 관리" />
+        <activity
+            android:name="kr.co.ilg.activity.mypage.OptionActivity"
+            android:label="설정" />
+        <activity
+            android:name="kr.co.ilg.activity.mypage.NoticeActivity"
+            android:label="공지사항" />
+        <activity
+            android:name="kr.co.ilg.activity.mypage.NoticeInfoActivity"
+            android:label="공지사항" />
+        <activity
+            android:name="kr.co.ilg.activity.mypage.ilgIntrodutionActivity"
+            android:label="인력거 안내" />
+        <activity
+            android:name="kr.co.ilg.activity.mypage.ServiceInfoActivity"
+            android:label="이용약관" />
+        <activity
+            android:name="kr.co.ilg.activity.mypage.PasswordChangeActivity"
+            android:label="비밀번호 변경" />
+        <activity
+            android:name="kr.co.ilg.activity.mypage.MemberRemoveActivity"
+            android:label="회원탈퇴" />
+        <activity
+            android:name="kr.co.ilg.activity.login.FindPasswordInfoActivity"
+            android:label="비밀번호 찾기" />
+        <activity
+            android:name="kr.co.ilg.activity.login.FindPasswordShowActivity"
+            android:label="비밀번호 확인" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -91,7 +150,7 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths"></meta-data>
+                android:resource="@xml/file_paths" />
         </provider>
 
     </application>

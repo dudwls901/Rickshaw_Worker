@@ -1,11 +1,15 @@
 package kr.co.ilg.activity.mypage;
 
-import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,26 +24,44 @@ import java.util.ArrayList;
 public class CareerActivity extends AppCompatActivity {
 
     Button okBtn;
-    //RadioButton year_1, year_3;
     ArrayList<CareerRVItem> cList;
     CareerRVAdapter myAdapter;
     RecyclerView mRecyclerView;
     RecyclerView.LayoutManager mLayoutManager;
+    RadioGroup rg;
+    RadioButton year_1, year_1to3, year_3;
     String jobs;
+    String worker_email, worker_pw, worker_name, worker_gender, worker_birth, worker_phonenum, hope_local_sido, hope_local_sigugun,worker_certicipate;
+    String[] career = new String[3];
+    String[] jobarray;
+    int[] job_code;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.career);
 
-//        year_1 = findViewById(R.id.year_1);
-//        year_3 = findViewById(R.id.year_3);
-//        year_1.setText("1년\n이하");
-//        year_3.setText("3년\n이상");
+        Intent receiver = getIntent();
+        worker_email = receiver.getExtras().getString("worker_email");
+        worker_pw = receiver.getExtras().getString("worker_pw");
+        worker_name = receiver.getExtras().getString("worker_name");
+        worker_gender = receiver.getExtras().getString("worker_gender");
+        worker_birth = receiver.getExtras().getString("worker_birth");
+        worker_phonenum = receiver.getExtras().getString("worker_phonenum");
+        worker_certicipate = receiver.getExtras().getString("worker_certicipate");
+        hope_local_sido = receiver.getExtras().getString("hope_local_sido");
+        hope_local_sigugun = receiver.getExtras().getString("hope_local_sigugun");
+        jobs = receiver.getStringExtra("jobs");
+        job_code = receiver.getIntArrayExtra("job_code");
 
-        Intent intent = getIntent();
-        jobs = intent.getStringExtra("jobs");
+        //  System.out.println("aaaaaaaaaaaaaaaaaaaaaaa"+job_code.get(0).toString()+job_code.get(1).toString()+job_code.get(2).toString());
+        Log.d("rrrrrrrrrr", String.valueOf(job_code[0]) + job_code[1] + job_code[2]);
+        Log.d("rrrrrreceiver", worker_email + worker_pw + worker_name + worker_gender + worker_birth + worker_phonenum + hope_local_sido + hope_local_sigugun + jobs);
+        //certicipate 추가
+//TODO RADIBUTTON
 
-        String[] jobarray = jobs.split("  ");
+
+        jobarray = jobs.split("  ");
 
         mRecyclerView = findViewById(R.id.rcV);
 
@@ -49,26 +71,136 @@ public class CareerActivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         // 구분선 넣기
-        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getApplicationContext(),new LinearLayoutManager(this).getOrientation());
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getApplicationContext(), new LinearLayoutManager(this).getOrientation());
         mRecyclerView.addItemDecoration(dividerItemDecoration);
 
 
         cList = new ArrayList<>();
 
-        for(int i=0; i<jobarray.length; i++){
+        for (int i = 0; i < jobarray.length; i++) {
             cList.add(new CareerRVItem(jobarray[i]));
         }
 
         myAdapter = new CareerRVAdapter(cList);
         mRecyclerView.setAdapter(myAdapter);
 
+        //커스텀한 RecyclerTouchListener를 아이템터치리스너에설정
+        mRecyclerView.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), mRecyclerView, new ClickListener() {
+            @Override
+            public void onClick(View view, final int position) { //view로 CareerRVItem의 id들에 접근
+                Log.d("career", career[0] + career[1] + career[2]);
+                Log.d("career", String.valueOf(position));
+                rg = view.findViewById(R.id.rg);
+                year_1 = view.findViewById(R.id.year_1);
+                year_1to3 = view.findViewById(R.id.year_1to3);
+                year_3 = view.findViewById(R.id.year_3);
+                Log.d("career", year_1.getText().toString());
+                rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(RadioGroup group, int checkedId) {
+                        for (int i = 0; i < career.length; i++) {
+                            if (i == position) {
+                                if (checkedId == R.id.year_1) {
+                                    career[i] = year_1.getText().toString();
+                                } else if (checkedId == R.id.year_1to3) {
+                                    career[i] = year_1to3.getText().toString();
+                                } else if (checkedId == R.id.year_3) {
+                                    career[i] = year_3.getText().toString();
+                                }
+
+                            }
+
+                        }
+                        Log.d("careercareercareer", career[0] + career[1] + career[2]);
+                    }
+                });
+
+            }
+
+            @Override
+            public void onLongClick(View view, int position) {
+            }
+        }));
+
+
         okBtn = findViewById(R.id.okBtn);
         okBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(CareerActivity.this, AccountAddActivity.class);
+
+                intent.putExtra("worker_email", worker_email);
+                intent.putExtra("worker_pw", worker_pw);
+                intent.putExtra("worker_gender", worker_gender);
+                intent.putExtra("worker_name", worker_name);
+                intent.putExtra("worker_birth", worker_birth);
+                intent.putExtra("worker_phonenum", worker_phonenum);
+                intent.putExtra("worker_certicipate",worker_certicipate);
+                intent.putExtra("hope_local_sido", hope_local_sido);
+                intent.putExtra("hope_local_sigugun", hope_local_sigugun);
+                intent.putExtra("jobarray", jobarray);
+                intent.putExtra("job_code", job_code);
+                intent.putExtra("careerarray", career);
+                Log.d("careercccccc", career[0] + career[1] + career[2]);
+                //certicipate추가
+
                 startActivity(intent);
             }
         });
+
+
     }
+
+
+    //ClickListener 상속받아 RecyclerTouchListener 커스텀
+    public interface ClickListener {
+        void onClick(View view, int position);
+
+        void onLongClick(View view, int position);
+    }
+
+
+    //RecyclerTouchListener 커스텀
+    public static class RecyclerTouchListener implements RecyclerView.OnItemTouchListener {
+
+        private GestureDetector gestureDetector;
+        private CareerActivity.ClickListener clickListener;
+
+        public RecyclerTouchListener(Context context, final RecyclerView recyclerView, final CareerActivity.ClickListener clickListener) {
+            this.clickListener = clickListener;
+            gestureDetector = new GestureDetector(context, new GestureDetector.SimpleOnGestureListener() {
+                @Override
+                public boolean onSingleTapUp(MotionEvent e) {
+                    return true;
+                }
+
+                @Override
+                public void onLongPress(MotionEvent e) {
+                    View child = recyclerView.findChildViewUnder(e.getX(), e.getY());
+                    if (child != null && clickListener != null) {
+                        clickListener.onLongClick(child, recyclerView.getChildAdapterPosition(child));
+                    }
+                }
+            });
+        }
+
+        @Override
+        public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
+            View child = rv.findChildViewUnder(e.getX(), e.getY());
+            if (child != null && clickListener != null && gestureDetector.onTouchEvent(e)) {
+                clickListener.onClick(child, rv.getChildAdapterPosition(child));
+            }
+            return false;
+        }
+
+        @Override
+        public void onTouchEvent(RecyclerView rv, MotionEvent e) {
+        }
+
+        @Override
+        public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+        }
+    }
+
+
 }
