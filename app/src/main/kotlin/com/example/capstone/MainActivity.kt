@@ -33,10 +33,11 @@ class MainActivity : Activity() {
          val findPwBtn = findViewById<TextView>(R.id.findPwBtn)
          val signUpBtn = findViewById<TextView>(R.id.signUpBtn)
 
-         fun intent1(workeremail:String, workername:String,worker_gender:String, worker_birth:String, worker_phonenum:String, worker_bankaccount:String, worker_bankname:String, worker_introduce:String){
+         fun intent1(workeremail:String, workername:String, password:String , worker_gender:String, worker_birth:String, worker_phonenum:String, worker_bankaccount:String, worker_bankname:String, worker_introduce:String){
              var intent = Intent(this, MainActivity::class.java)
              intent.putExtra("email",workeremail)
              intent.putExtra("nickname",workername)
+             intent.putExtra("password",password)
              intent.putExtra("worker_gender",worker_gender)
              intent.putExtra("worker_birth",worker_birth)
              intent.putExtra("worker_phonenum",worker_phonenum)
@@ -167,13 +168,14 @@ class MainActivity : Activity() {
                          if (isExistWorker) {  // 회원이 존재하면
                              var worker_email1 = jResponse.getString("worker_email")
                              var worker_name = jResponse.getString("worker_name")
+                             var password = jResponse.getString("worker_pw")
                              var worker_gender = jResponse.getString("worker_gender")
                              var worker_birth = jResponse.getString("worker_birth")
                              var worker_phonenum = jResponse.getString("worker_phonenum")
                              var worker_bankaccount = jResponse.getString("worker_bankaccount")
                              var worker_bankname = jResponse.getString("worker_bankname")
                              var worker_introduce = jResponse.getString("worker_introduce")
-                             intent1(worker_email1,worker_name, worker_gender, worker_birth, worker_phonenum, worker_bankaccount, worker_bankname, worker_introduce)
+                             intent1(worker_email1,worker_name, password, worker_gender, worker_birth, worker_phonenum, worker_bankaccount, worker_bankname, worker_introduce)
                              //Toast.makeText(FindPasswordInfoActivity.this, "등록된 "+worker_pw, Toast.LENGTH_SHORT).show();
                          } else {  // 회원이 존재하지 않는다면
                              Toast.makeText(this@MainActivity,"없는 이메일입니다.",Toast.LENGTH_SHORT).show()

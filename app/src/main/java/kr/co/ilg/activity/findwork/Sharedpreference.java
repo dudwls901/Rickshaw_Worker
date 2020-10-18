@@ -22,7 +22,7 @@ public class Sharedpreference {
         SharedPreferences prefs = getPreferences(context);
         String value = prefs.getString(key, "memberinfo");
         return value;
-    } // 일반회원 이메일 저장
+    } // 회원번호 이메일 저장
 
     public static void set_email(Context context, String key, String value) {
         SharedPreferences prefs = getPreferences(context);
@@ -34,7 +34,7 @@ public class Sharedpreference {
         SharedPreferences prefs = getPreferences(context);
         String value = prefs.getString(key, "memberinfo");
         return value;
-    } // 카카오이메일 저장
+    } // 일반이메일 저장
 
     public static void set_Nickname(Context context, String key, String value) {
         SharedPreferences prefs = getPreferences(context);

@@ -89,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
                     if(typeof_email){
                         String memberid = intent1.getStringExtra("memberid");
                         String nickname = intent1.getStringExtra("nickname");
+                        String password = intent1.getStringExtra("password");
                         String worker_gender = intent1.getStringExtra("worker_gender");
                         String worker_birth = intent1.getStringExtra("worker_birth");
                         String worker_phonenum = intent1.getStringExtra("worker_phonenum");
@@ -98,6 +99,7 @@ public class MainActivity extends AppCompatActivity {
 
                         Sharedpreference.setNone_email(mContext,"memberid",memberid);
                         Sharedpreference.set_Nickname(mContext,"nickname",nickname);
+                        Sharedpreference.set_Nickname(mContext,"password",password);
                         Sharedpreference.set_Gender(mContext,"worker_gender",worker_gender);
                         Sharedpreference.set_Birth(mContext,"worker_birth",worker_birth);
                         Sharedpreference.set_Phonenum(mContext,"worker_phonenum",worker_phonenum);
@@ -111,6 +113,7 @@ public class MainActivity extends AppCompatActivity {
                     else{
                         String email = intent1.getStringExtra("email");
                         String nickname = intent1.getStringExtra("nickname");
+                        String password = intent1.getStringExtra("password");
                         String worker_gender = intent1.getStringExtra("worker_gender");
                         String worker_birth = intent1.getStringExtra("worker_birth");
                         String worker_phonenum = intent1.getStringExtra("worker_phonenum");
@@ -120,6 +123,7 @@ public class MainActivity extends AppCompatActivity {
 
                         Sharedpreference.set_email(mContext,"email",email);
                         Sharedpreference.set_Nickname(mContext,"nickname",nickname);
+                        Sharedpreference.set_Nickname(mContext,"password",password);
                         Sharedpreference.set_Gender(mContext,"worker_gender",worker_gender);
                         Sharedpreference.set_Birth(mContext,"worker_birth",worker_birth);
                         Sharedpreference.set_Phonenum(mContext,"worker_phonenum",worker_phonenum);
