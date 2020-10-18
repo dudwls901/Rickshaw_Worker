@@ -55,6 +55,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="은행명"
+            android:id="@+id/bankname"
             android:textSize="20dp"
             />
         <TextView
@@ -63,6 +64,7 @@
             android:text="9428 **** **** 8137"
             android:textSize="17dp"
             android:textAlignment="center"
+            android:id="@+id/bankaccount"
             android:textColor="@android:color/white"/>
     </LinearLayout>
     <LinearLayout
