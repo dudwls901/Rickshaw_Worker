@@ -122,15 +122,15 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="거주지 : "
+            android:text="ID : "
             android:textSize="17dp"
             />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="서울시 금암동 우림아파트"
+            android:text=""
             android:textSize="17dp"
-            android:id="@+id/address"
+            android:id="@+id/email"
             />
     </LinearLayout>
     <LinearLayout
