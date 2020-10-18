@@ -61,7 +61,7 @@ public class PasswordChangeActivity extends AppCompatActivity {
                             boolean isExistPw = jResponse.getBoolean("isExistPw");
                             boolean pwChangeSuccess = jResponse.getBoolean("pwChangeSuccess");
 
-                            if(isExistPw) {  // 비밀번호 존재
+                            if(isExistPw && !(worker_check_new_pw.equals("")) && !(worker_new_pw.equals("")) ){  // 비밀번호 존재
                                 if(pwChangeSuccess) {
                                     Toast.makeText(PasswordChangeActivity.this, "변경되었습니다", Toast.LENGTH_SHORT).show();
 
@@ -70,8 +70,10 @@ public class PasswordChangeActivity extends AppCompatActivity {
                                 } else {
                                     Toast.makeText(PasswordChangeActivity.this, "새 비밀번호와 새 비밀번호 확인이 다릅니다.", Toast.LENGTH_SHORT).show();
                                 }
-                            } else {  // 비밀번호 없음
+                            } else if(isExistPw==false){  // 비밀번호 없음
                                 Toast.makeText(PasswordChangeActivity.this, "현재 비밀번호가 틀립니다.", Toast.LENGTH_SHORT).show();
+                            } else{
+                                Toast.makeText(PasswordChangeActivity.this, "모든 값을 입력해 주세요.", Toast.LENGTH_SHORT).show();
                             }
 
                         } catch (Exception e) {

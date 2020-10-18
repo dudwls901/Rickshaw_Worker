@@ -6,23 +6,35 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.Volley;
 import com.example.capstone.R;
 
+import org.json.JSONObject;
 import org.w3c.dom.Text;
 
 import kr.co.ilg.activity.findwork.Sharedpreference;
+import kr.co.ilg.activity.login.FindPasswordInfoActivity;
+import kr.co.ilg.activity.login.FindPasswordShowActivity;
+import kr.co.ilg.activity.login.FindPwRequest;
 
 public class MyInfomanageActivity extends Activity {
 
     private Context mContext;
     boolean modify = true;
     View dialogview;
+    EditText edit_phonenum, edit_introduce;
+    String worker_introduce,worker_phonenum;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,19 +49,51 @@ public class MyInfomanageActivity extends Activity {
         TextView email = findViewById(R.id.email);
         TextView introduce = findViewById(R.id.introduce);
 
+
+
         LinearLayout modifyprofile = findViewById(R.id.modifyprofile);
         LinearLayout modifywanna = findViewById(R.id.modifywanna);
 
         modifyprofile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String email = Sharedpreference.get_email(mContext,"email");
+
                 AlertDialog.Builder dlg = new AlertDialog.Builder(MyInfomanageActivity.this);
                 dlg.setTitle("프로필 수정");
                 dialogview = (View)View.inflate(MyInfomanageActivity.this,R.layout.updateprofile,null);
+
                 dlg.setView(dialogview);
                 dlg.setPositiveButton("확인", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        edit_phonenum = dialogview.findViewById(R.id.edit_phonenum);
+                        edit_introduce = dialogview.findViewById(R.id.edit_introduce);
+                        worker_introduce = edit_introduce.getText().toString();
+                        worker_phonenum = edit_phonenum.getText().toString();
+                        Response.Listener rListener = new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+
+                                try {
+                                    JSONObject jResponse = new JSONObject(response.substring(response.indexOf("{"), response.lastIndexOf("}") + 1));
+                                    boolean reponse = jResponse.getBoolean("a");
+                                    if(reponse){
+                                        Sharedpreference.set_Phonenum(mContext,"worker_phonenum",worker_phonenum);
+                                        Sharedpreference.set_introduce(mContext,"worker_introduce",worker_introduce);
+                                        phonenum.setText(worker_phonenum);
+                                        introduce.setText(worker_introduce);
+                                        Toast.makeText(MyInfomanageActivity.this, "수정 완료되었습니다", Toast.LENGTH_SHORT).show();
+                                    }
+                                } catch (Exception e) {
+                                    Log.d("mytest", e.toString());
+                                }
+                            }
+                        };
+                        UpdateinfoRequest updateinfoRequest = new UpdateinfoRequest(email,worker_phonenum, worker_introduce, rListener);  // Request 처리 클래스
+
+                        RequestQueue queue = Volley.newRequestQueue(MyInfomanageActivity.this);  // 데이터 전송에 사용할 Volley의 큐 객체 생성
+                        queue.add(updateinfoRequest);  // Volley로 구현된 큐에 ValidateRequest 객체를 넣어둠으로써 실제로 서버 연동 발생
                         //서버DB UPDATE
                     }
                 });
