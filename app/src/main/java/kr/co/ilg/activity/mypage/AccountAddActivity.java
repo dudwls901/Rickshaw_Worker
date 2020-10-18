@@ -27,9 +27,9 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import kr.co.ilg.activity.findwork.MainActivity;
-import kr.co.ilg.activity.login.LoginActivity;
-
+//import kr.co.ilg.activity.findwork.MainActivity;
+//import kr.co.ilg.activity.login.LoginActivity;
+import com.example.capstone.MainActivity;
 public class AccountAddActivity extends AppCompatActivity {
     AlertDialog dialogg;
     Button addBtn;
@@ -97,7 +97,7 @@ public class AccountAddActivity extends AppCompatActivity {
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AccountAddActivity.this, LoginActivity.class);
+                Intent intent = new Intent(AccountAddActivity.this,  com.example.capstone.MainActivity.class);
                 //TODO DB 넣어주기 (1.사진 테스트,2.db삽입)
                 worker_bankaccount = accountNumET.getText().toString();
                 worker_bankname = nameET.getText().toString();
@@ -153,7 +153,7 @@ public class AccountAddActivity extends AppCompatActivity {
         nextTimeTV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AccountAddActivity.this, LoginActivity.class);
+                Intent intent = new Intent(AccountAddActivity.this, MainActivity.class);
                 //TODO DB 넣어주기
                 startActivity(intent);
             }
