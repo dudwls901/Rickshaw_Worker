@@ -1,6 +1,7 @@
 package kr.co.ilg.activity.mypage;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -9,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,6 +24,7 @@ import java.util.List;
 
 import kr.co.ilg.activity.findwork.MainActivity;
 import kr.co.ilg.activity.findwork.MyFieldActivity;
+import kr.co.ilg.activity.findwork.Sharedpreference;
 
 public class MypageMainActivity extends AppCompatActivity implements View.OnClickListener {
     Intent intent;
@@ -29,27 +32,29 @@ public class MypageMainActivity extends AppCompatActivity implements View.OnClic
     Button myinform, accountmanage, reviewmanage;
     Button[] buttons = {myinform, accountmanage, reviewmanage};
     int[] buttonsid = {R.id.myinform, R.id.accountmanage, R.id.reviewmanage};
+    TextView membernickname;
+    private Context mContext;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.mypage_main);
 
+        mContext = this;
+
         for(int i=0; i<3; i++){
             buttons[i] = (Button) findViewById(buttonsid[i]);
             buttons[i].setOnClickListener(this);
         }
+        membernickname = findViewById(R.id.membernickname);
+
+        membernickname.setText(Sharedpreference.get_Nickname(mContext, "nickname")); // 상단의 이름 설정
 
 
         final ListView listview = (ListView) findViewById(R.id.listview);
-
-
         List<String> list = new ArrayList<>();
-
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, list);
-
         listview.setAdapter(adapter);
-
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
