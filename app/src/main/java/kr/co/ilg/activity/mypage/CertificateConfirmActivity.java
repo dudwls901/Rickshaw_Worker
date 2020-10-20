@@ -90,30 +90,12 @@ public class CertificateConfirmActivity extends AppCompatActivity implements Vie
                 intent.putExtra("worker_phonenum", worker_phonenum);
                 intent.putExtra("worker_certicipate", worker_certicipate);
 
-          //TODO 이미지 업로드 하기
+          //이미지 업로드 하기
             //이미지 총 경로(서버에 쓸 거)    mCurrentPhotoPath
             //이미지 이름(db에 넘어갈 것)      certicipate
             atask at = new atask();
             at.execute(mCurrentPhotoPath);
 
-          /*      Response.Listener responseListener = new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-
-                        try {
-                            //   JSONObject jsonResponse = new JSONObject(response);
-                            Log.d("mytesstt", response);
-                            JSONObject jsonResponse = new JSONObject(response.substring(response.indexOf("{"),response.lastIndexOf("}")+1));
-                            String result = jsonResponse.getString("result");
-                            Log.d("mytest4", jsonResponse.toString());
-                            Log.d("mytest5", result);
-
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-                };
-*/
 
                 startActivity(intent);
             }
@@ -130,7 +112,8 @@ public class CertificateConfirmActivity extends AppCompatActivity implements Vie
                 intent.putExtra("worker_name", worker_name);
                 intent.putExtra("worker_birth",worker_birth);
                 intent.putExtra("worker_phonenum", worker_phonenum);
-                //certicipate추가
+                intent.putExtra("worker_certicipate", "noImage");
+                //사진 건너뛰기 시 worker_certicipate에는 "noImage"가 들어감;
                 startActivity(intent);
             }
         });

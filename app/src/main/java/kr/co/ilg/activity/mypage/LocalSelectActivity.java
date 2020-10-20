@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -52,18 +53,23 @@ public class LocalSelectActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(LocalSelectActivity.this, JobSelectActivity.class);
-                intent.putExtra("worker_email", worker_email);
-                intent.putExtra("worker_pw", worker_pw);
-                intent.putExtra("worker_gender", worker_gender);
-                intent.putExtra("worker_name", worker_name);
-                intent.putExtra("worker_birth", worker_birth);
-                intent.putExtra("worker_phonenum", worker_phonenum);
-                intent.putExtra("worker_certicipate",worker_certicipate);
-                intent.putExtra("hope_local_sido",local_sido );
-                intent.putExtra("hope_local_sigugun",local_sigugun);
+               if(local_sido.equals("")||local_sigugun.equals(""))
+                   Toast.makeText(LocalSelectActivity.this, "희망 근무 지역을 선택해주세요.",Toast.LENGTH_SHORT).show();
+               else {
+                   intent.putExtra("worker_email", worker_email);
+                   intent.putExtra("worker_pw", worker_pw);
+                   intent.putExtra("worker_gender", worker_gender);
+                   intent.putExtra("worker_name", worker_name);
+                   intent.putExtra("worker_birth", worker_birth);
+                   intent.putExtra("worker_phonenum", worker_phonenum);
+                   intent.putExtra("worker_certicipate", worker_certicipate);
+                   intent.putExtra("hope_local_sido", local_sido);
+                   intent.putExtra("hope_local_sigugun", local_sigugun);
 
-                //certicipate추가
-                startActivity(intent);
+
+                   startActivity(intent);
+               }
+
             }
         }); // 확인버튼 눌렀을 때 화면넘김
 
