@@ -21,19 +21,12 @@
             android:src="@drawable/man"
             app:layout_constraintLeft_toRightOf="@id/guideline"
             app:layout_constraintTop_toTopOf="parent" />
-        <ImageButton
-            android:id="@+id/changeprofil"
-            android:layout_width="30dp"
-            android:layout_height="20dp"
-            android:layout_gravity="bottom"
-            android:src="@drawable/abc_vector_test"
-            app:layout_constraintBottom_toTopOf="@id/guideline4"
-            app:layout_constraintLeft_toRightOf="@id/profil" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="수정"
-            app:layout_constraintLeft_toRightOf="@id/changeprofil"
+            app:layout_constraintLeft_toRightOf="@id/profil"
             app:layout_constraintBottom_toTopOf="@id/guideline4"/>
 
         <androidx.constraintlayout.widget.Guideline
@@ -155,15 +148,11 @@
 
     </LinearLayout>
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="right">
-        <ImageButton
-            android:layout_width="30dp"
-            android:layout_height="20dp"
-            android:layout_gravity="bottom"
-            android:src="@drawable/abc_vector_test" />
+        android:id="@+id/modifyprofile"
+        android:layout_gravity="right">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -224,15 +213,11 @@
 
     </LinearLayout>
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="right">
-        <ImageButton
-            android:layout_width="30dp"
-            android:layout_height="20dp"
-            android:layout_gravity="bottom"
-            android:src="@drawable/abc_vector_test" />
+        android:layout_gravity="right"
+        android:id="@+id/modifywanna">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
