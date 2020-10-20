@@ -18,6 +18,7 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
@@ -30,6 +31,8 @@ import java.util.ArrayList;
 //import kr.co.ilg.activity.findwork.MainActivity;
 //import kr.co.ilg.activity.login.LoginActivity;
 import com.example.capstone.MainActivity;
+import com.kakao.auth.network.response.JSONArrayResponse;
+
 public class AccountAddActivity extends AppCompatActivity {
     AlertDialog dialogg;
     Button addBtn;
@@ -41,6 +44,7 @@ public class AccountAddActivity extends AppCompatActivity {
     String[] jobarray,careerarray;
     int[] job_code;
     EditText accountNumET,nameET;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -60,7 +64,7 @@ public class AccountAddActivity extends AppCompatActivity {
         jobarray = receiver.getStringArrayExtra("jobarray");
         careerarray = receiver.getStringArrayExtra("careerarray");
         job_code = receiver.getIntArrayExtra("job_code");
-        Log.d("receiver", worker_email+worker_pw + worker_name+ worker_gender + worker_birth + worker_phonenum+ hope_local_sido + hope_local_sigugun + jobarray[0]+jobarray[1]+jobarray[2] + careerarray[0]+careerarray[1]+careerarray[2] +job_code[2]+job_code[1]+job_code[0]);
+        Log.d("receiver", worker_email+worker_pw + worker_name+ worker_gender + worker_birth + worker_phonenum+ hope_local_sido + hope_local_sigugun + jobarray[0]+ careerarray[0] +job_code[careerarray.length-1]);
         //certicipate 추가
 
         addBtn = findViewById(R.id.addBtn);
@@ -98,26 +102,10 @@ public class AccountAddActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(AccountAddActivity.this,  com.example.capstone.MainActivity.class);
-                //TODO DB 넣어주기 (1.사진 테스트,2.db삽입)
+                //DB 넣어주기 (1.사진 테스트,2.db삽입)
                 worker_bankaccount = accountNumET.getText().toString();
                 worker_bankname = nameET.getText().toString();
                 Log.d("kkkkk",worker_bankaccount + worker_bankname);
-//                worker_email
-//                worker_pw
-//                worker_name
-//                worker_gender
-//                worker_birth
-//                worker_phonenum
-//                 worker_bankaccount
-//                  worker_bankname
-//                 worker_certicipate//null
-//                 worker_profileimage//null
-//                worker_introduce//null
-//                hope_local_sido  //select local
-//                hope_local_sigugun  //select local
-//                jobarray//
-//                job_code
-//                careerarray
         Log.d("tttt", worker_email +"\n"+ worker_pw +"\n"+ worker_name+"\n"+ worker_gender+"\n"+ worker_birth+"\n"+ worker_phonenum+"\n"+ worker_certicipate+"\n"+ worker_bankaccount+"\n"+ worker_bankname);
 
                 Response.Listener responseListener = new Response.Listener<String>() {
@@ -126,23 +114,42 @@ public class AccountAddActivity extends AppCompatActivity {
 
                         try {
 
-                            //   JSONObject jsonResponse = new JSONObject(response);
-                            Log.d("mytesstt", response);
+                    //           JSONObject jsonResponse = new JSONObject(response);
                             JSONObject jsonResponse = new JSONObject(response.substring(response.indexOf("{"),response.lastIndexOf("}")+1));
-                            boolean success = jsonResponse.getBoolean("success");
-                            Log.d("mytest4", jsonResponse.toString());
-
+                            Log.d("mytesstt", response);
+                              Log.d("mytestlocal_code", jsonResponse.getString("local_code"));
+//                                Log.d("mytestjobcoderesponse",jsonResponse.getString("job_codest"));
+//                                Log.d("mytesthjcareerresponse",jsonResponse.getString("hj_career"));
                         } catch (Exception e) {
                             e.printStackTrace();
+                            Log.d("mytest3",e.toString());
                         }
                     }
                 };
-                WorkerDBInsert validateReq = new WorkerDBInsert(worker_email,worker_pw,worker_name,worker_gender,worker_birth,worker_phonenum,worker_certicipate,worker_bankaccount,worker_bankname, responseListener);
+                MemberDBRequest workerInsert = new MemberDBRequest("WorkerInsert",worker_email,worker_pw,worker_name,worker_gender,worker_birth,worker_phonenum,worker_certicipate,worker_bankaccount,worker_bankname, responseListener);
                 RequestQueue queue = Volley.newRequestQueue(AccountAddActivity.this);
-                queue.add(validateReq);
+                //queue.add(workerInsert);
+                //php쿼리 호출 순서를 정해줌 queue.add(workerInsert)실행되면 다음 거 실행하게
+                Request<String> a=queue.add(workerInsert);
+                if(a !=null) {
+                    MemberDBRequest hopelocalInsert = new MemberDBRequest("HopeLocalInsert", worker_email, hope_local_sido, hope_local_sigugun, responseListener);
+                    RequestQueue queue1 = Volley.newRequestQueue(AccountAddActivity.this);
+                    queue1.add(hopelocalInsert);
+                }
+                HopeJobDBRequest hopeJobInsert = null;
+                RequestQueue queue2;
+                for(int i=careerarray.length-1 ,j=0; i>=0;i--) {
 
-//TODO 시도,구군 SELECT LOCAL 해서 CODE가져와서 그 코드를 HOPELOCAL에 넣기
-                //TODO job_name SELECT JOB 해서 CODE가져와서 그 코드를 HOPEJOB에
+                    Log.d("mytestjobcode",""+job_code[i]+","+careerarray[j]);
+                    hopeJobInsert = new HopeJobDBRequest("HopeJobInsert", String.valueOf(job_code.length), worker_email, String.valueOf(job_code[i]), careerarray[j],responseListener);
+                     queue2 = Volley.newRequestQueue(AccountAddActivity.this);
+                    queue2.add(hopeJobInsert);
+                    j++;
+                }
+                //시도,구군 SELECT LOCAL 해서 CODE가져와서 그 코드를 HOPELOCAL에 넣기
+
+
+                //hopejobinsert
 
 
                 startActivity(intent);
