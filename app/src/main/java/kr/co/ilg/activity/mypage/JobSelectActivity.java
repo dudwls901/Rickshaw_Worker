@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
@@ -61,6 +62,9 @@ public class JobSelectActivity extends AppCompatActivity implements View.OnClick
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(JobSelectActivity.this, CareerActivity.class);
+
+                if(!jobs.equals(""))
+                {
                 intent.putExtra("worker_email", worker_email);
                 intent.putExtra("worker_pw", worker_pw);
                 intent.putExtra("worker_gender", worker_gender);
@@ -75,6 +79,12 @@ public class JobSelectActivity extends AppCompatActivity implements View.OnClick
                 intent.putExtra("job_code",job_code);
                 Log.d("kkkkkkkkkkkkk=", String.valueOf(job_code[0]) + job_code[1] + job_code[2]);
                 startActivity(intent);
+                }
+                else
+                {
+                    Toast.makeText(JobSelectActivity.this, "직종을 한 개 이상 선택해주세요.",Toast.LENGTH_SHORT).show();
+                }
+
             }
         }); // 확인버튼 인플레이션 및 intent 구현
 
