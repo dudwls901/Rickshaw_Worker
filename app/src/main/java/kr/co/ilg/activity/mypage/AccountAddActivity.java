@@ -160,10 +160,68 @@ public class AccountAddActivity extends AppCompatActivity {
         nextTimeTV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AccountAddActivity.this, MainActivity.class);
-                //TODO DB 넣어주기
+                Intent intent = new Intent(AccountAddActivity.this,  com.example.capstone.MainActivity.class);
+                //DB 넣어주기 (1.사진 테스트,2.db삽입)
+         //       worker_bankaccount = accountNumET.getText().toString();
+           //     worker_bankname = nameET.getText().toString();
+                Log.d("kkkkk",worker_bankaccount + worker_bankname);
+                Log.d("tttt", worker_email +"\n"+ worker_pw +"\n"+ worker_name+"\n"+ worker_gender+"\n"+ worker_birth+"\n"+ worker_phonenum+"\n"+ worker_certicipate+"\n"+ worker_bankaccount+"\n"+ worker_bankname);
+
+                Response.Listener responseListener = new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        try {
+
+                            //           JSONObject jsonResponse = new JSONObject(response);
+                            JSONObject jsonResponse = new JSONObject(response.substring(response.indexOf("{"),response.lastIndexOf("}")+1));
+                            Log.d("mytesstt", response);
+                            Log.d("mytestlocal_code", jsonResponse.getString("local_code"));
+//                                Log.d("mytestjobcoderesponse",jsonResponse.getString("job_codest"));
+//                                Log.d("mytesthjcareerresponse",jsonResponse.getString("hj_career"));
+                        } catch (Exception e) {
+ //                           e.printStackTrace();
+ //                           Log.d("mytest3",e.toString());
+                        }
+                    }
+                };
+                MemberDBRequest workerInsert = new MemberDBRequest("WorkerInsert",worker_email,worker_pw,worker_name,worker_gender,worker_birth,worker_phonenum,worker_certicipate,"","", responseListener);
+                RequestQueue queue = Volley.newRequestQueue(AccountAddActivity.this);
+                //queue.add(workerInsert);
+                //php쿼리 호출 순서를 정해줌 queue.add(workerInsert)실행되면 다음 거 실행하게
+                Request<String> a=queue.add(workerInsert);
+                if(a !=null) {
+                    MemberDBRequest hopelocalInsert = new MemberDBRequest("HopeLocalInsert", worker_email, hope_local_sido, hope_local_sigugun, responseListener);
+                    RequestQueue queue1 = Volley.newRequestQueue(AccountAddActivity.this);
+                    queue1.add(hopelocalInsert);
+                }
+                HopeJobDBRequest hopeJobInsert = null;
+                RequestQueue queue2;
+                for(int i=careerarray.length-1 ,j=0; i>=0;i--) {
+
+                    Log.d("mytestjobcode",""+job_code[i]+","+careerarray[j]);
+                    hopeJobInsert = new HopeJobDBRequest("HopeJobInsert", String.valueOf(job_code.length), worker_email, String.valueOf(job_code[i]), careerarray[j],responseListener);
+                    queue2 = Volley.newRequestQueue(AccountAddActivity.this);
+                    queue2.add(hopeJobInsert);
+                    j++;
+                }
+                //시도,구군 SELECT LOCAL 해서 CODE가져와서 그 코드를 HOPELOCAL에 넣기
+
+
+                //hopejobinsert
+
+
                 startActivity(intent);
             }
         });
     }
 }
+
+//TODO 뱅크 입력할때 건너뛰기 누르면
+//디비에 worker_bankaccount랑 worker_bankname
+//NULL이 아닌 ""로 집어넣어놨음
+//사진 건너뛰기 하면
+//NULL이 아닌 noImage로 넣어놨고
+//요거는 NULL로 하면 좋은데 그러면 또 PHP건드려야돼서ㅎㅎㅎㅎ
+//일단 이렇게 해놓고 나중에 필요하면 NULL로 바꾸든가 해야함
+//TODO 회원가입에 비밀번호, 개인정보입력은 예외처리 아직 안 해놈
