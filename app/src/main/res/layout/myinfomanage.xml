@@ -252,6 +252,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/career"
             android:textSize="17dp"
             android:text="전기 1년 "/>
 

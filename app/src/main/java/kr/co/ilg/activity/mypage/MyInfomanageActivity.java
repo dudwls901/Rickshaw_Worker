@@ -48,6 +48,7 @@ public class MyInfomanageActivity extends Activity {
         TextView phonenum = findViewById(R.id.phonenum);
         TextView email = findViewById(R.id.email);
         TextView introduce = findViewById(R.id.introduce);
+        TextView career = findViewById(R.id.career);
 
 
 
@@ -57,7 +58,7 @@ public class MyInfomanageActivity extends Activity {
         modifyprofile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String email = Sharedpreference.get_email(mContext,"email");
+                String email = Sharedpreference.get_email(mContext,"worker_email");
 
                 AlertDialog.Builder dlg = new AlertDialog.Builder(MyInfomanageActivity.this);
                 dlg.setTitle("프로필 수정");
@@ -116,11 +117,11 @@ public class MyInfomanageActivity extends Activity {
             }
         });
 
-        myname.setText(Sharedpreference.get_Nickname(mContext, "nickname"));
+        myname.setText(Sharedpreference.get_Nickname(mContext, "worker_name"));
         age.setText(Sharedpreference.get_Birth(mContext, "worker_birth"));
         phonenum.setText(Sharedpreference.get_Phonenum(mContext, "worker_phonenum"));
-        email.setText(Sharedpreference.get_email(mContext, "email"));
+        email.setText(Sharedpreference.get_email(mContext, "worker_email"));
         introduce.setText(Sharedpreference.get_introduce(mContext,"worker_introduce"));
-
+        career.setText(Sharedpreference.get_Jobname(mContext,"jobname1") + " " + Sharedpreference.get_Jobcareer(mContext,"jobcareer1"));
     }
 }
