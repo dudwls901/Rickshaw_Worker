@@ -190,6 +190,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:textSize="17dp"
+        android:id="@+id/hope_jobname"
         android:text="전기 외 3분야 "/>
 
 </LinearLayout>
@@ -208,6 +209,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
+            android:id="@+id/hope_local"
             android:textSize="17dp"
             android:text="홍은 2동 외 5구역 "/>
 

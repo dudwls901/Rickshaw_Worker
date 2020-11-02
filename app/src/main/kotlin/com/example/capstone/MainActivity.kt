@@ -327,23 +327,19 @@ class MainActivity : Activity() {
                             var worker_bankaccount = a.getString("worker_bankaccount")
                             var worker_bankname = a.getString("worker_bankname")
                             var worker_introduce = a.getString("worker_introduce") ///////  여기까지 값들어
-                           /* Log.d("ttttttttttt", worker_email + " " + worker_name + " " + password)
-                            Log.d("ttttt123", a.toString())
-                            var v = a.getJSONObject("0")
-                            Log.d("=====================", v.toString());
-                            jobname[0] = v.getString("jobname")
-                            Log.d("aaaaaaaaaa",jobname[0])
-                            //var hope_local_sido = jResponse.getString("hope_local_sido")
-                            //var hope_local_sigugun = jResponse.getString("hope_local_sigugun")
+                            var local_sido = a.getString("local_sido")
+                            var local_sigugun = a.getString("local_sigugun")
 
-                            *//*var k: Array<String> = arrayOf("0", "1", "2")
-                            for (i in 0 until 2) {
+
+                            var k = arrayOf("0", "1", "2")
+                            for (i in 0 until a.length()-12) {
                                 var s = a.getJSONObject(k[i])
-                                var jobname1 = s.getString("jobname")
-                                var jobcareer1 = s.getString("jobcareer")
-                                jobname[i] = jobname1
-                                jobcareer[i] = jobcareer1
-                            } ///실행되다가*//*
+                                jobname[i] = s.getString("jobname")
+                                jobcareer[i] = s.getString("jobcareer")
+                            } ///실행되다가
+
+
+
 
 
                             Sharedpreference.set_Jobcareer(applicationContext(), "jobname1", jobname[0])
@@ -353,7 +349,7 @@ class MainActivity : Activity() {
                             Sharedpreference.set_Jobname(applicationContext(), "jobcareer1", jobcareer[0])
                             Sharedpreference.set_Jobname(applicationContext(), "jobcareer2", jobcareer[1])
                             Sharedpreference.set_Jobname(applicationContext(), "jobcareer3", jobcareer[2])
-*/
+
 
                             Sharedpreference.set_email(applicationContext(), "worker_email", worker_email)
                             Sharedpreference.set_Nickname(applicationContext(), "worker_name", worker_name)
@@ -365,8 +361,8 @@ class MainActivity : Activity() {
                             Sharedpreference.set_Bankname(applicationContext(), "worker_bankname", worker_bankname)
                             Sharedpreference.set_introduce(applicationContext(), "worker_introduce", worker_introduce)
 
-                            //Sharedpreference.set_Hope_local_sido(applicationContext(), "hope_local_sido", hope_local_sido)
-                            //Sharedpreference.set_Hope_local_sigugun(applicationContext(), "hope_local_sigugun", hope_local_sigugun)// 파일에 맵핑형식으로 저장
+                            Sharedpreference.set_Hope_local_sido(applicationContext(), "local_sido", local_sido)
+                            Sharedpreference.set_Hope_local_sigugun(applicationContext(), "local_sigugun", local_sigugun)// 파일에 맵핑형식으로 저장
 
                             intent() //
                             //Toast.makeText(FindPasswordInfoActivity.this, "등록된 "+worker_pw, Toast.LENGTH_SHORT).show();
@@ -383,7 +379,6 @@ class MainActivity : Activity() {
             val queue = Volley.newRequestQueue(this) // 데이터 전송에 사용할 Volley의 큐 객체 생성
 
             queue.add(lRequest) // Volley로 구현된 큐에 ValidateRequest 객체를 넣어둠으로써 실제로 서버 연동 발생
-            intent()
         }
         findPwBtn.setOnClickListener {
             val intent = Intent(this, FindPasswordInfoActivity::class.java)
