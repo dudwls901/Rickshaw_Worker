@@ -104,7 +104,7 @@ public class AccountAddActivity extends AppCompatActivity {
                 Intent intent = new Intent(AccountAddActivity.this,  com.example.capstone.MainActivity.class);
                 //DB 넣어주기 (1.사진 테스트,2.db삽입)
                 worker_bankaccount = accountNumET.getText().toString();
-                worker_bankname = nameET.getText().toString();
+                //worker_bankname = nameET.getText().toString();
                 Log.d("kkkkk",worker_bankaccount + worker_bankname);
         Log.d("tttt", worker_email +"\n"+ worker_pw +"\n"+ worker_name+"\n"+ worker_gender+"\n"+ worker_birth+"\n"+ worker_phonenum+"\n"+ worker_certicipate+"\n"+ worker_bankaccount+"\n"+ worker_bankname);
 
