@@ -49,6 +49,8 @@ public class MyInfomanageActivity extends Activity {
         TextView email = findViewById(R.id.email);
         TextView introduce = findViewById(R.id.introduce);
         TextView career = findViewById(R.id.career);
+        TextView hope_jobname = findViewById(R.id.hope_jobname);
+        TextView hope_local = findViewById(R.id.hope_local);
 
 
 
@@ -123,5 +125,6 @@ public class MyInfomanageActivity extends Activity {
         email.setText(Sharedpreference.get_email(mContext, "worker_email"));
         introduce.setText(Sharedpreference.get_introduce(mContext,"worker_introduce"));
         career.setText(Sharedpreference.get_Jobname(mContext,"jobname1") + " " + Sharedpreference.get_Jobcareer(mContext,"jobcareer1"));
+        hope_jobname.setText(Sharedpreference.get_Jobname(mContext, "jobname1")+" "+ Sharedpreference.get_Jobname(mContext, "jobname2") + " "+Sharedpreference.get_Jobname(mContext, "jobname3"));
     }
 }
