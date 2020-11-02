@@ -48,7 +48,7 @@ public class MypageMainActivity extends AppCompatActivity implements View.OnClic
         }
         membernickname = findViewById(R.id.membernickname);
 
-        membernickname.setText(Sharedpreference.get_Nickname(mContext, "nickname")); // 상단의 이름 설정
+        membernickname.setText(Sharedpreference.get_Nickname(mContext, "worker_name")); // 상단의 이름 설정
 
 
         final ListView listview = (ListView) findViewById(R.id.listview);

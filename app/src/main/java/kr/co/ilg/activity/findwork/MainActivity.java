@@ -18,17 +18,12 @@ import android.widget.ArrayAdapter;
 import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.Toast;
-
 import com.example.capstone.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.kakao.sdk.user.UserApiClient;
-
 import java.util.ArrayList;
-
 //import kr.co.ilg.activity.mypage.MypageMainActivity;
-
 import kr.co.ilg.activity.mypage.MypageMainActivity;
-
 import static com.kakao.auth.StringSet.error;
 
 public class MainActivity extends AppCompatActivity {
@@ -80,59 +75,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mContext = this;
-
-        Intent intent1 = getIntent();
-
-        Boolean typeof_email = intent1.getBooleanExtra("typeof_email", false);
-        if (typeof_email) {
-            String memberid = intent1.getStringExtra("memberid");
-            String nickname = intent1.getStringExtra("nickname");
-            String password = intent1.getStringExtra("password");
-            String worker_gender = intent1.getStringExtra("worker_gender");
-            String worker_birth = intent1.getStringExtra("worker_birth");
-            String worker_phonenum = intent1.getStringExtra("worker_phonenum");
-            String worker_bankaccount = intent1.getStringExtra("worker_bankaccount");
-            String worker_bankname = intent1.getStringExtra("worker_bankname");
-            String worker_introduce = intent1.getStringExtra("worker_introduce"); // 값갖고오기
-
-            Sharedpreference.setNone_email(mContext, "memberid", memberid);
-            Sharedpreference.set_Nickname(mContext, "nickname", nickname);
-            Sharedpreference.set_Nickname(mContext, "password", password);
-            Sharedpreference.set_Gender(mContext, "worker_gender", worker_gender);
-            Sharedpreference.set_Birth(mContext, "worker_birth", worker_birth);
-            Sharedpreference.set_Phonenum(mContext, "worker_phonenum", worker_phonenum);
-            Sharedpreference.set_Bankaccount(mContext, "worker_bankaccount", worker_bankaccount);
-            Sharedpreference.set_Bankname(mContext, "worker_bankname", worker_bankname);
-            Sharedpreference.set_introduce(mContext, "worker_introduce", worker_introduce);   // 파일에 맵핑형식으로 저장
-
-            Log.v("member id : ", memberid);
-            Log.v("nickname", nickname);
-        } // 카카오 회원중 이메일이 없을 떄 -- 굳이 나눌필요가 없으면 합칠 수 있음.
-        else {
-            String email = intent1.getStringExtra("email");
-            String nickname = intent1.getStringExtra("nickname");
-            String password = intent1.getStringExtra("password");
-            String worker_gender = intent1.getStringExtra("worker_gender");
-            String worker_birth = intent1.getStringExtra("worker_birth");
-            String worker_phonenum = intent1.getStringExtra("worker_phonenum");
-            String worker_bankaccount = intent1.getStringExtra("worker_bankaccount");
-            String worker_bankname = intent1.getStringExtra("worker_bankname");
-            String worker_introduce = intent1.getStringExtra("worker_introduce"); // 값갖고오기
-
-            Sharedpreference.set_email(mContext, "email", email);
-            Sharedpreference.set_Nickname(mContext, "nickname", nickname);
-            Sharedpreference.set_Nickname(mContext, "password", password);
-            Sharedpreference.set_Gender(mContext, "worker_gender", worker_gender);
-            Sharedpreference.set_Birth(mContext, "worker_birth", worker_birth);
-            Sharedpreference.set_Phonenum(mContext, "worker_phonenum", worker_phonenum);
-            Sharedpreference.set_Bankaccount(mContext, "worker_bankaccount", worker_bankaccount);
-            Sharedpreference.set_Bankname(mContext, "worker_bankname", worker_bankname);
-            Sharedpreference.set_introduce(mContext, "worker_introduce", worker_introduce);   // 파일에 맵핑형식으로 저장
-
-            Log.v("email : ", email);
-            Log.v("nickname", nickname);
-        }// 이메일을 기본 아이디로 하였을 때
 
 //        item1 = (MenuItem) findViewById(R.id.tab1);
 //        item2 = (MenuItem)findViewById(R.id.tab2);

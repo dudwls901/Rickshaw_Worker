@@ -11,6 +11,13 @@ public class Sharedpreference {
         return context.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
 
     }
+    public static void clear(Context context) {
+        SharedPreferences prefs = getPreferences(context);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.clear();
+        editor.commit();
+
+    }
     public static void setNone_email(Context context, String key, String value) {
         SharedPreferences prefs = getPreferences(context);
         SharedPreferences.Editor editor = prefs.edit();
@@ -35,6 +42,18 @@ public class Sharedpreference {
         String value = prefs.getString(key, "memberinfo");
         return value;
     } // 일반이메일 저장
+    public static void set_Password(Context context, String key, String value) {
+        SharedPreferences prefs = getPreferences(context);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString(key, value);
+        editor.commit();
+
+    }
+    public static String get_Password(Context context, String key) {
+        SharedPreferences prefs = getPreferences(context);
+        String value = prefs.getString(key, "memberinfo");
+        return value;
+    } // 비밀번호 이메일 저장
 
     public static void set_Nickname(Context context, String key, String value) {
         SharedPreferences prefs = getPreferences(context);
@@ -115,6 +134,50 @@ public class Sharedpreference {
         editor.commit();
 
     }public static String get_introduce(Context context, String key) {
+        SharedPreferences prefs = getPreferences(context);
+        String value = prefs.getString(key, "memberinfo");
+        return value;
+    } // 한줄소개 저장
+    public static void set_Jobname(Context context, String key, String value) {
+        SharedPreferences prefs = getPreferences(context);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString(key, value);
+        editor.commit();
+
+    }public static String get_Jobname(Context context, String key) {
+        SharedPreferences prefs = getPreferences(context);
+        String value = prefs.getString(key, "memberinfo");
+        return value;
+    } // 한줄소개 저장
+    public static void set_Jobcareer(Context context, String key, String value) {
+        SharedPreferences prefs = getPreferences(context);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString(key, value);
+        editor.commit();
+
+    }public static String get_Jobcareer(Context context, String key) {
+        SharedPreferences prefs = getPreferences(context);
+        String value = prefs.getString(key, "memberinfo");
+        return value;
+    } // 한줄소개 저장
+    public static void set_Hope_local_sido(Context context, String key, String value) {
+        SharedPreferences prefs = getPreferences(context);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString(key, value);
+        editor.commit();
+
+    }public static String get_Hope_local_sido(Context context, String key) {
+        SharedPreferences prefs = getPreferences(context);
+        String value = prefs.getString(key, "memberinfo");
+        return value;
+    } // 한줄소개 저장
+    public static void set_Hope_local_sigugun(Context context, String key, String value) {
+        SharedPreferences prefs = getPreferences(context);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString(key, value);
+        editor.commit();
+
+    }public static String get_Hope_local_sigugun(Context context, String key) {
         SharedPreferences prefs = getPreferences(context);
         String value = prefs.getString(key, "memberinfo");
         return value;
