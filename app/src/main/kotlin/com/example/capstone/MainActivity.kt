@@ -154,7 +154,7 @@ class MainActivity : Activity() {
             }
         }
 
-         loginBtn.setOnClickListener {
+    /*     loginBtn.setOnClickListener {
              val worker_email: String = idET.getText().toString()
              val worker_pw: String = pwET.getText().toString()
 
@@ -188,6 +188,11 @@ class MainActivity : Activity() {
              val queue = Volley.newRequestQueue(this) // 데이터 전송에 사용할 Volley의 큐 객체 생성
 
              queue.add(lRequest) // Volley로 구현된 큐에 ValidateRequest 객체를 넣어둠으로써 실제로 서버 연동 발생
+
+         }*/
+         loginBtn.setOnClickListener{
+             var intent = Intent(this, MainActivity::class.java);
+             startActivity(intent);
 
          }
          findPwBtn.setOnClickListener {

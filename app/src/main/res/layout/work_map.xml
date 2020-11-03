@@ -58,16 +58,28 @@
                 ></CheckBox>
         </LinearLayout>
     </LinearLayout>
+    <!--
     <fragment
         android:id="@+id/map"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        map:cameraTargetLat="37.584"
-        map:cameraTargetLng="126.925"
-        map:cameraZoom="15"
-        class="com.google.android.gms.maps.MapFragment"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/checkbox_layout"
         ></fragment>
+        -->
+
+    <!--   <net.daum.mf.map.api.MapView
+       android:id="@+id/map_view"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+           app:layout_constraintLeft_toLeftOf="parent"
+           app:layout_constraintTop_toBottomOf="@id/checkbox_layout"
+           />
+
+   -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/map_view"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
