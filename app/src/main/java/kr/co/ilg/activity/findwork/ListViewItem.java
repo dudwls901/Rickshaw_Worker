@@ -2,7 +2,7 @@ package kr.co.ilg.activity.findwork;
 
 public class ListViewItem {
 
-    public String title,date,pay,job,place,office,current_people,total_people,paid;
+    public String title,date,pay,job,place,office,paid,current_people, total_people;
     public boolean urgency ;
     public ListViewItem(String title,String date,String pay,String job,String place,String office,String current_people,String total_people){
         this.title=title;
