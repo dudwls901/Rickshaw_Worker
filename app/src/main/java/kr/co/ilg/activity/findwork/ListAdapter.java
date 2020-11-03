@@ -56,22 +56,22 @@ public class ListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         if (workInfo.get(position).urgency == false) {
             myViewHolder.title.setText(workInfo.get(position).title);
             myViewHolder.date.setText(workInfo.get(position).date);
-            myViewHolder.pay.setText(workInfo.get(position).pay);
+            myViewHolder.pay.setText(String.valueOf(workInfo.get(position).pay));
             myViewHolder.job.setText(workInfo.get(position).job);
             myViewHolder.place.setText(workInfo.get(position).place);
             myViewHolder.office.setText(workInfo.get(position).office);
-            myViewHolder.current_people.setText(workInfo.get(position).current_people);
-            myViewHolder.total_people.setText(workInfo.get(position).total_people);
+            myViewHolder.current_people.setText(String.valueOf(workInfo.get(position).current_people));
+            myViewHolder.total_people.setText(String.valueOf(workInfo.get(position).total_people));
         }
         else if (workInfo.get(position).urgency == true) {
             myViewHolder.title.setText(workInfo.get(position).title);
             myViewHolder.date.setText(workInfo.get(position).date);
-            myViewHolder.pay.setText(workInfo.get(position).pay);
+            myViewHolder.pay.setText(String.valueOf(workInfo.get(position).pay));
             myViewHolder.job.setText(workInfo.get(position).job);
             myViewHolder.place.setText(workInfo.get(position).place);
             myViewHolder.office.setText(workInfo.get(position).office);
-            myViewHolder.current_people.setText(workInfo.get(position).current_people);
-            myViewHolder.total_people.setText(workInfo.get(position).total_people);
+            myViewHolder.current_people.setText(String.valueOf(workInfo.get(position).current_people));
+            myViewHolder.total_people.setText(String.valueOf(workInfo.get(position).total_people));
             myViewHolder.linear1.setBackgroundColor(context.getResources().getColor(R.color.UrgencyColor));
 
         }

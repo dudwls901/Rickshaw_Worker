@@ -2,9 +2,10 @@ package kr.co.ilg.activity.findwork;
 
 public class ListViewItem {
 
-    public String title,date,pay,job,place,office,paid,current_people, total_people;
+    public String title,date,job,place,office,paid;
+    public int pay, current_people, total_people;
     public boolean urgency ;
-    public ListViewItem(String title,String date,String pay,String job,String place,String office,String current_people,String total_people){
+    public ListViewItem(String title,String date,int pay,String job,String place,String office,int current_people,int total_people){
         this.title=title;
         this.date=date;
         this.pay=pay;
@@ -14,7 +15,7 @@ public class ListViewItem {
         this.current_people=current_people;
         this.total_people=total_people;
     }
-    public ListViewItem(String title,String date,String pay,String job,String place,String office,String current_people,String total_people, boolean urgency){
+    public ListViewItem(String title,String date,int pay,String job,String place,String office,int current_people,int total_people, boolean urgency){
         this.title=title;
         this.date=date;
         this.pay=pay;
@@ -25,7 +26,7 @@ public class ListViewItem {
         this.total_people=total_people;
         this.urgency =urgency;
     }
-    public ListViewItem(String title,String date,String pay,String job,String place,String office, String paid, boolean urgency){
+    public ListViewItem(String title,String date,int pay,String job,String place,String office, String paid, boolean urgency){
         this.title=title;
         this.date=date;
         this.pay=pay;
@@ -35,7 +36,7 @@ public class ListViewItem {
         this.paid=paid;
         this.urgency=urgency;
     }
-    public ListViewItem(String title,String date,String pay,String job,String place,String office, boolean urgency){
+    public ListViewItem(String title,String date,int pay,String job,String place,String office, boolean urgency){
         this.title=title;
         this.date=date;
         this.pay=pay;
