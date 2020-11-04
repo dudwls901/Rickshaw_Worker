@@ -18,12 +18,20 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.Volley;
 import com.example.capstone.R;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import kr.co.ilg.activity.findwork.Sharedpreference;
+
 public class CareerActivity extends AppCompatActivity {
 
+    private Context mContext;
     Button okBtn;
     ArrayList<CareerRVItem> cList;
     CareerRVAdapter myAdapter;
@@ -37,13 +45,16 @@ public class CareerActivity extends AppCompatActivity {
     String[] jobarray;
     int[] job_code;
     int job_code_length = 0;
+    int isUpdate;  // 1 > 수정  0 > 회원가입
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.career);
 
+        mContext = this;
         Intent receiver = getIntent();
+        isUpdate = receiver.getIntExtra("isUpdate", 0);
         worker_email = receiver.getExtras().getString("worker_email");
         worker_pw = receiver.getExtras().getString("worker_pw");
         worker_name = receiver.getExtras().getString("worker_name");
@@ -61,11 +72,9 @@ public class CareerActivity extends AppCompatActivity {
         }
         career = new String[job_code_length];
 
+        Toast.makeText(getApplicationContext(), "어디서 왔나~ " + isUpdate, Toast.LENGTH_SHORT).show();
         Log.d("rrrrrrrrrr", String.valueOf(job_code[0]) + job_code[1] + job_code[2]);
         Log.d("rrrrrreceiver", worker_email + worker_pw + worker_name + worker_gender + worker_birth + worker_phonenum + hope_local_sido + hope_local_sigugun + jobs);
-
-
-
 
         jobarray = jobs.split("  ");
 
@@ -129,91 +138,136 @@ public class CareerActivity extends AppCompatActivity {
             }
         }));
 
-
         okBtn = findViewById(R.id.okBtn);
+        if (isUpdate == 1)
+            okBtn.setText("수정");
+        else
+            okBtn.setText("확인");
         okBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String email = Sharedpreference.get_email(mContext, "worker_email");
                 Intent intent = new Intent(CareerActivity.this, AccountAddActivity.class);
+/*
 
-                switch (career.length) {
-                    case 1:
-                        if (career[0] != null) {
-                            intent.putExtra("worker_email", worker_email);
-                            intent.putExtra("worker_pw", worker_pw);
-                            intent.putExtra("worker_gender", worker_gender);
-                            intent.putExtra("worker_name", worker_name);
-                            intent.putExtra("worker_birth", worker_birth);
-                            intent.putExtra("worker_phonenum", worker_phonenum);
-                            intent.putExtra("worker_certicipate", worker_certicipate);
-                            intent.putExtra("hope_local_sido", hope_local_sido);
-                            intent.putExtra("hope_local_sigugun", hope_local_sigugun);
-                            intent.putExtra("jobarray", jobarray);
-                            intent.putExtra("job_code", job_code);
-                            intent.putExtra("careerarray", career);
-                            //   Log.d("careercccccc", career[0] + career[1] + career[2]);
+                if (isUpdate == 1) {  // 수정
+                    Response.Listener rListener = new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+
+                            try {
+                                JSONObject jResponse = new JSONObject(response.substring(response.indexOf("{"), response.lastIndexOf("}") + 1));
+                                boolean updateSuccess2 = jResponse.getBoolean("updateSuccess2");
+                                Intent updateIntent = new Intent(CareerActivity.this, MyInfomanageActivity.class);
+                                if (updateSuccess2) {
+                                    for(int i=career.length-1 ,j=0; i>=0;i--) {
+                                        Log.d("========success========",""+job_code[i]+","+career[j] + i + j);
+
+                                        Sharedpreference.set_Jobname(mContext, "jobname" + (j+1), String.valueOf(job_code[i]));
+                                        Sharedpreference.set_Jobcareer(mContext, "jobcareer" + (j+1), career[j]);
+
+                                        j++;
+                                    }
 
 
-                            startActivity(intent);
-                        } else {
-                            Toast.makeText(CareerActivity.this, "경력을 다시 눌러주세요.", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(CareerActivity.this, "수정 완료되었습니다", Toast.LENGTH_SHORT).show();
+                                } else
+                                    Toast.makeText(CareerActivity.this, "수정 실패", Toast.LENGTH_SHORT).show();
+                                startActivity(updateIntent);
 
+                            } catch (Exception e) {
+                                Log.d("mytest", e.toString());
+                            }
                         }
-                        break;
-                    case 2:
-                        if (career[0] != null && career[1] != null) {
-                            intent.putExtra("worker_email", worker_email);
-                            intent.putExtra("worker_pw", worker_pw);
-                            intent.putExtra("worker_gender", worker_gender);
-                            intent.putExtra("worker_name", worker_name);
-                            intent.putExtra("worker_birth", worker_birth);
-                            intent.putExtra("worker_phonenum", worker_phonenum);
-                            intent.putExtra("worker_certicipate", worker_certicipate);
-                            intent.putExtra("hope_local_sido", hope_local_sido);
-                            intent.putExtra("hope_local_sigugun", hope_local_sigugun);
-                            intent.putExtra("jobarray", jobarray);
-                            intent.putExtra("job_code", job_code);
-                            intent.putExtra("careerarray", career);
-                            //   Log.d("careercccccc", career[0] + career[1] + career[2]);
-                            //certicipate추가
+                    };
+                    UpdateinfoRequest updateinfoRequest = null;
+                    RequestQueue queue;
+                    for(int i=career.length-1 ,j=0; i>=0;i--) {
+                        Log.d("mytestjobcode",""+job_code[i]+","+career[j]);
+                        updateinfoRequest = new UpdateinfoRequest("hopeJobCareer", email, String.valueOf(job_code.length), String.valueOf(job_code[i]), career[j], rListener);
+                        queue = Volley.newRequestQueue(CareerActivity.this);
+                        queue.add(updateinfoRequest);
+                        j++;
+                    }
 
-                            startActivity(intent);
-                        } else {
-                            Toast.makeText(CareerActivity.this, "경력을 다시 눌러주세요.", Toast.LENGTH_SHORT).show();
+                } else {
 
-                        }
-                        break;
+*/
+                    switch (career.length) {
+                        case 1:
+                            if (career[0] != null) {
+                                intent.putExtra("worker_email", worker_email);
+                                intent.putExtra("worker_pw", worker_pw);
+                                intent.putExtra("worker_gender", worker_gender);
+                                intent.putExtra("worker_name", worker_name);
+                                intent.putExtra("worker_birth", worker_birth);
+                                intent.putExtra("worker_phonenum", worker_phonenum);
+                                intent.putExtra("worker_certicipate", worker_certicipate);
+                                intent.putExtra("hope_local_sido", hope_local_sido);
+                                intent.putExtra("hope_local_sigugun", hope_local_sigugun);
+                                intent.putExtra("jobarray", jobarray);
+                                intent.putExtra("job_code", job_code);
+                                intent.putExtra("careerarray", career);
+                                //   Log.d("careercccccc", career[0] + career[1] + career[2]);
 
-                    case 3:
-                        if (career[0] != null && career[1] != null && career[2] != null) {
-                            intent.putExtra("worker_email", worker_email);
-                            intent.putExtra("worker_pw", worker_pw);
-                            intent.putExtra("worker_gender", worker_gender);
-                            intent.putExtra("worker_name", worker_name);
-                            intent.putExtra("worker_birth", worker_birth);
-                            intent.putExtra("worker_phonenum", worker_phonenum);
-                            intent.putExtra("worker_certicipate", worker_certicipate);
-                            intent.putExtra("hope_local_sido", hope_local_sido);
-                            intent.putExtra("hope_local_sigugun", hope_local_sigugun);
-                            intent.putExtra("jobarray", jobarray);
-                            intent.putExtra("job_code", job_code);
-                            intent.putExtra("careerarray", career);
-                            //   Log.d("careercccccc", career[0] + career[1] + career[2]);
-                            //certicipate추가
-                            startActivity(intent);
-                        } else {
-                            Toast.makeText(CareerActivity.this, "경력을 다시 눌러주세요.", Toast.LENGTH_SHORT).show();
 
-                        }
-                        break;
-                }
+                                startActivity(intent);
+                            } else {
+                                Toast.makeText(CareerActivity.this, "경력을 다시 눌러주세요.", Toast.LENGTH_SHORT).show();
 
+                            }
+                            break;
+                        case 2:
+                            if (career[0] != null && career[1] != null) {
+                                intent.putExtra("worker_email", worker_email);
+                                intent.putExtra("worker_pw", worker_pw);
+                                intent.putExtra("worker_gender", worker_gender);
+                                intent.putExtra("worker_name", worker_name);
+                                intent.putExtra("worker_birth", worker_birth);
+                                intent.putExtra("worker_phonenum", worker_phonenum);
+                                intent.putExtra("worker_certicipate", worker_certicipate);
+                                intent.putExtra("hope_local_sido", hope_local_sido);
+                                intent.putExtra("hope_local_sigugun", hope_local_sigugun);
+                                intent.putExtra("jobarray", jobarray);
+                                intent.putExtra("job_code", job_code);
+                                intent.putExtra("careerarray", career);
+                                //   Log.d("careercccccc", career[0] + career[1] + career[2]);
+                                //certicipate추가
+
+                                startActivity(intent);
+                            } else {
+                                Toast.makeText(CareerActivity.this, "경력을 다시 눌러주세요.", Toast.LENGTH_SHORT).show();
+
+                            }
+                            break;
+
+                        case 3:
+                            if (career[0] != null && career[1] != null && career[2] != null) {
+                                intent.putExtra("worker_email", worker_email);
+                                intent.putExtra("worker_pw", worker_pw);
+                                intent.putExtra("worker_gender", worker_gender);
+                                intent.putExtra("worker_name", worker_name);
+                                intent.putExtra("worker_birth", worker_birth);
+                                intent.putExtra("worker_phonenum", worker_phonenum);
+                                intent.putExtra("worker_certicipate", worker_certicipate);
+                                intent.putExtra("hope_local_sido", hope_local_sido);
+                                intent.putExtra("hope_local_sigugun", hope_local_sigugun);
+                                intent.putExtra("jobarray", jobarray);
+                                intent.putExtra("job_code", job_code);
+                                intent.putExtra("careerarray", career);
+                                //   Log.d("careercccccc", career[0] + career[1] + career[2]);
+                                //certicipate추가
+                                startActivity(intent);
+                            } else {
+                                Toast.makeText(CareerActivity.this, "경력을 다시 눌러주세요.", Toast.LENGTH_SHORT).show();
+
+                            }
+                            break;
+                    }
+                //}
             }
         });
-
-
     }
-
 
     //ClickListener 상속받아 RecyclerTouchListener 커스텀
     public interface ClickListener {

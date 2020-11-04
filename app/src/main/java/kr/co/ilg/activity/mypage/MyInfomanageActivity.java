@@ -31,7 +31,6 @@ import kr.co.ilg.activity.login.FindPwRequest;
 public class MyInfomanageActivity extends Activity {
 
     private Context mContext;
-    boolean modify = true;
     View dialogview;
     EditText edit_phonenum, edit_introduce;
     String worker_introduce,worker_phonenum;
@@ -48,14 +47,12 @@ public class MyInfomanageActivity extends Activity {
         TextView phonenum = findViewById(R.id.phonenum);
         TextView email = findViewById(R.id.email);
         TextView introduce = findViewById(R.id.introduce);
-        TextView career = findViewById(R.id.career);
-        TextView hope_jobname = findViewById(R.id.hope_jobname);
+        TextView hope_job_career = findViewById(R.id.hope_job_career);
         TextView hope_local = findViewById(R.id.hope_local);
 
-
-
-        LinearLayout modifyprofile = findViewById(R.id.modifyprofile);
-        LinearLayout modifywanna = findViewById(R.id.modifywanna);
+        TextView modifyprofile = findViewById(R.id.modifyprofile);
+        TextView modifyHL = findViewById(R.id.modifyHL);
+        TextView modifyHJC = findViewById(R.id.modifyHJC);
 
         modifyprofile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,15 +103,25 @@ public class MyInfomanageActivity extends Activity {
             }
         });
 
-
-        modifywanna.setOnClickListener(new View.OnClickListener() {
+        modifyHL.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                modify = false;
                 Intent intent = new Intent(getApplicationContext(),kr.co.ilg.activity.mypage.LocalSelectActivity.class);
-                intent.putExtra("update",modify);
-                startActivity(intent); // 수정 필요할시 false 값과 함께 intent
-                                        // 희망 직종까지 선택 후 원래 activity(MyinformanageActivity)로 돌아와야함.
+                intent.putExtra("isUpdate", 1);
+                startActivity(intent);
+                //TODO
+                // 수정 필요할시 false 값과 함께 intent
+                // 희망 직종까지 선택 후 원래 activity(MyinformanageActivity)로 돌아와야함.
+
+            }
+        });
+
+        modifyHJC.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),kr.co.ilg.activity.mypage.JobSelectActivity.class);
+                intent.putExtra("isUpdate", 1);
+                startActivity(intent);
 
             }
         });
@@ -124,7 +131,9 @@ public class MyInfomanageActivity extends Activity {
         phonenum.setText(Sharedpreference.get_Phonenum(mContext, "worker_phonenum"));
         email.setText(Sharedpreference.get_email(mContext, "worker_email"));
         introduce.setText(Sharedpreference.get_introduce(mContext,"worker_introduce"));
-        career.setText(Sharedpreference.get_Jobname(mContext,"jobname1") + " " + Sharedpreference.get_Jobcareer(mContext,"jobcareer1"));
-        hope_jobname.setText(Sharedpreference.get_Jobname(mContext, "jobname1")+" "+ Sharedpreference.get_Jobname(mContext, "jobname2") + " "+Sharedpreference.get_Jobname(mContext, "jobname3"));
+        hope_job_career.setText(Sharedpreference.get_Jobname(mContext,"jobname1") + " " + Sharedpreference.get_Jobcareer(mContext,"jobcareer1")+"\n"
+                +Sharedpreference.get_Jobname(mContext,"jobname2") + " " + Sharedpreference.get_Jobcareer(mContext,"jobcareer2")+"\n"
+                +Sharedpreference.get_Jobname(mContext,"jobname3") + " " + Sharedpreference.get_Jobcareer(mContext,"jobcareer3"));
+        hope_local.setText(Sharedpreference.get_Hope_local_sido(mContext,"local_sido") + " " + Sharedpreference.get_Hope_local_sigugun(mContext,"local_sigugun"));
     }
 }
