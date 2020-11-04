@@ -330,17 +330,12 @@ class MainActivity : Activity() {
                             var local_sido = a.getString("local_sido")
                             var local_sigugun = a.getString("local_sigugun")
 
-
                             var k = arrayOf("0", "1", "2")
                             for (i in 0 until a.length()-12) {
                                 var s = a.getJSONObject(k[i])
                                 jobname[i] = s.getString("jobname")
                                 jobcareer[i] = s.getString("jobcareer")
                             } ///실행되다가
-
-
-
-
 
                             Sharedpreference.set_Jobcareer(applicationContext(), "jobname1", jobname[0])
                             Sharedpreference.set_Jobcareer(applicationContext(), "jobname2", jobname[1])
@@ -349,7 +344,6 @@ class MainActivity : Activity() {
                             Sharedpreference.set_Jobname(applicationContext(), "jobcareer1", jobcareer[0])
                             Sharedpreference.set_Jobname(applicationContext(), "jobcareer2", jobcareer[1])
                             Sharedpreference.set_Jobname(applicationContext(), "jobcareer3", jobcareer[2])
-
 
                             Sharedpreference.set_email(applicationContext(), "worker_email", worker_email)
                             Sharedpreference.set_Nickname(applicationContext(), "worker_name", worker_name)

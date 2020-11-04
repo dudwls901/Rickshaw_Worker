@@ -30,20 +30,42 @@
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="지역"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="8dp"/>
 
-        <androidx.appcompat.widget.AppCompatSpinner
-            android:id="@+id/spinner1"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:gravity="center"></androidx.appcompat.widget.AppCompatSpinner>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="5dp"
+            android:gravity="center"
+            android:text="a"
+            android:textAlignment="center"
+            android:id="@+id/localsetting"
+            android:background="@drawable/mainbutton"
+            android:textColor="@color/mainColor"
+            android:layout_gravity="center"/>
 
-        <androidx.appcompat.widget.AppCompatSpinner
-            android:id="@+id/spinner2"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:gravity="center"></androidx.appcompat.widget.AppCompatSpinner>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="       직종"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="8dp"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="a"
+            android:layout_marginVertical="5dp"
+            android:textAlignment="center"
+            android:id="@+id/jobsetting"
+            android:background="@drawable/mainbutton"
+            android:layout_gravity="center"/>
     </LinearLayout>
 
     <LinearLayout
@@ -59,8 +81,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/list_urgency"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="5dp" />
+            android:layout_height="match_parent"/>
     </LinearLayout>
 
 
