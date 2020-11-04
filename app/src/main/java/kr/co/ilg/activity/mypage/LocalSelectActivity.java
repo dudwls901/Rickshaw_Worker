@@ -1,5 +1,6 @@
 package kr.co.ilg.activity.mypage;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,16 +15,25 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.Volley;
 import com.example.capstone.R;
+
+import org.json.JSONObject;
+
+import kr.co.ilg.activity.findwork.Sharedpreference;
 
 public class LocalSelectActivity extends AppCompatActivity {
 
+    private Context mContext;
     Button okBtn, SDMG;
     TextView sltTV;
     ListView listview, listview1;
     String local_sido = "", local_sigugun = "";
     String worker_email, worker_pw, worker_name, worker_gender, worker_birth, worker_phonenum, worker_certicipate;
 
+    int isUpdate;  // 1 > 수정  0 > 회원가입
     int btnFlag = 0;
     int k;
 
@@ -32,6 +42,7 @@ public class LocalSelectActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.local_select);
 
+        mContext = this;
         Intent receiver = getIntent();
         worker_email = receiver.getExtras().getString("worker_email");
         worker_pw = receiver.getExtras().getString("worker_pw");
@@ -40,8 +51,12 @@ public class LocalSelectActivity extends AppCompatActivity {
         worker_birth = receiver.getExtras().getString("worker_birth");
         worker_phonenum = receiver.getExtras().getString("worker_phonenum");
         worker_certicipate = receiver.getExtras().getString("worker_certicipate");
-        Log.d("receiver", worker_email+worker_pw + worker_name+ worker_gender + worker_birth + worker_phonenum+ worker_certicipate);
+        Log.d("receiver", worker_email + worker_pw + worker_name + worker_gender + worker_birth + worker_phonenum + worker_certicipate);
 
+        Intent modifyIntent = getIntent();
+        isUpdate = modifyIntent.getIntExtra("isUpdate", 0);  // modify
+
+        Toast.makeText(getApplicationContext(), "어디서 왔나~ " + isUpdate, Toast.LENGTH_SHORT).show();
 
         listview = findViewById(R.id.listview);
         listview1 = findViewById(R.id.listview1); // 지역 선택 리스트뷰
@@ -49,27 +64,65 @@ public class LocalSelectActivity extends AppCompatActivity {
         sltTV = findViewById(R.id.sltTV); // 상단 텍스트
 
         okBtn = findViewById(R.id.okBtn); // 확인버튼
+
+        if (isUpdate == 1)
+            okBtn.setText("수정");
+        else
+            okBtn.setText("확인");
+
         okBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                String email = Sharedpreference.get_email(mContext, "worker_email");
                 Intent intent = new Intent(LocalSelectActivity.this, JobSelectActivity.class);
-               if(local_sido.equals("")||local_sigugun.equals(""))
-                   Toast.makeText(LocalSelectActivity.this, "희망 근무 지역을 선택해주세요.",Toast.LENGTH_SHORT).show();
-               else {
-                   intent.putExtra("worker_email", worker_email);
-                   intent.putExtra("worker_pw", worker_pw);
-                   intent.putExtra("worker_gender", worker_gender);
-                   intent.putExtra("worker_name", worker_name);
-                   intent.putExtra("worker_birth", worker_birth);
-                   intent.putExtra("worker_phonenum", worker_phonenum);
-                   intent.putExtra("worker_certicipate", worker_certicipate);
-                   intent.putExtra("hope_local_sido", local_sido);
-                   intent.putExtra("hope_local_sigugun", local_sigugun);
+                if (local_sido.equals("") || local_sigugun.equals(""))
+                    Toast.makeText(LocalSelectActivity.this, "희망 근무 지역을 선택해주세요.", Toast.LENGTH_SHORT).show();
+                else {
 
+                    if (isUpdate == 1) {  // 수정
+                        Response.Listener rListener = new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
 
-                   startActivity(intent);
-               }
+                                try {
+                                    JSONObject jResponse = new JSONObject(response.substring(response.indexOf("{"), response.lastIndexOf("}") + 1));
+                                    boolean updateSuccess = jResponse.getBoolean("updateSuccess");
+                                    Intent updateIntent = new Intent(LocalSelectActivity.this, MyInfomanageActivity.class);
+                                    if (updateSuccess) {
+                                        String local_sido = jResponse.getString("local_sido");
+                                        String local_sigugun = jResponse.getString("local_sigugun");
 
+                                        Sharedpreference.set_Hope_local_sido(mContext, "local_sido", local_sido);
+                                        Sharedpreference.set_Hope_local_sigugun(mContext, "local_sigugun", local_sigugun);
+
+                                        Toast.makeText(LocalSelectActivity.this, "수정 완료되었습니다", Toast.LENGTH_SHORT).show();
+                                    } else
+                                        Toast.makeText(LocalSelectActivity.this, "수정 실패", Toast.LENGTH_SHORT).show();
+                                    startActivity(updateIntent);
+                                } catch (Exception e) {
+                                    Log.d("mytest", e.toString());
+                                }
+                            }
+                        };
+                        UpdateinfoRequest updateinfoRequest = new UpdateinfoRequest("hopeLocal", email, local_sido, local_sigugun, rListener);  // Request 처리 클래스
+
+                        RequestQueue queue = Volley.newRequestQueue(LocalSelectActivity.this);  // 데이터 전송에 사용할 Volley의 큐 객체 생성
+                        queue.add(updateinfoRequest);  // Volley로 구현된 큐에 ValidateRequest 객체를 넣어둠으로써 실제로 서버 연동 발생
+                        //서버DB UPDATE
+                    } else {  // 회원가입
+                        intent.putExtra("worker_email", worker_email);
+                        intent.putExtra("worker_pw", worker_pw);
+                        intent.putExtra("worker_gender", worker_gender);
+                        intent.putExtra("worker_name", worker_name);
+                        intent.putExtra("worker_birth", worker_birth);
+                        intent.putExtra("worker_phonenum", worker_phonenum);
+                        intent.putExtra("worker_certicipate", worker_certicipate);
+                        intent.putExtra("hope_local_sido", local_sido);
+                        intent.putExtra("hope_local_sigugun", local_sigugun);
+                        startActivity(intent);
+                    }
+                }
             }
         }); // 확인버튼 눌렀을 때 화면넘김
 
@@ -102,7 +155,7 @@ public class LocalSelectActivity extends AppCompatActivity {
                         , {"목포시", "여수시", "순천시", "나주시", "광양시", "담양군", "곡성군", "구례군", "고흥군", "보성군", "화순군", "장흥군", "강진군", "해남군", "영암군", "무안군", "함평군", "영광군", "장성군", "완도군", "진도군", "신안군"}
                         , {"포항시", "경주시", "김천시", "안동시", "구미시", "영주시", "영천시", "상주시", "문경시", "경산시", "군위군", "의성군", "청송군", "영양군", "영덕군", "청도군", "고령군", "성주군", "칠곡군", "예천군", "봉화군", "울진군", "울릉군"}
                         , {"창원시", "마산시", "진해시", "통영시", "사천시", "김해시", "밀양시", "거제시", "양산시", "의령군", "함안군", "창녕군", "고성군", "남해군", "하동군", "산청군", "함양군", "거창군", "합천군"}
-                        , {"제주시","서귀포시"}
+                        , {"제주시", "서귀포시"}
                 };
                 ArrayAdapter adapter2 = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, arrayList1[position]); // Adapter 생성
                 listview1.setAdapter(adapter2); //Adapter 연결
