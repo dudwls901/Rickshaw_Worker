@@ -39,13 +39,14 @@ public class UpdateinfoRequest extends StringRequest {
     }
 
     // 희망 직종과 경력 수정
-    public UpdateinfoRequest(String key, String worker_email, String num, String job_code, String hj_career, Response.Listener<String> listener) {
+    public UpdateinfoRequest(String key, String worker_email, int num, int job_code, String hj_career, Response.Listener<String> listener) {
         super(Method.POST, URL, listener, null);
 
         parameters = new HashMap<>();
         parameters.put("key", key);
+        parameters.put("num", String.valueOf(num));
         parameters.put("worker_email", worker_email); //데이터 넣기  ≒ putextra
-        parameters.put("job_code", job_code);
+        parameters.put("job_code", String.valueOf(job_code));
         parameters.put("hj_career",hj_career);
 
     }

@@ -48,15 +48,13 @@ import static com.kakao.auth.StringSet.error;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
-    Spinner spinner1, spinner2;
-    ArrayList spinner1_array, spinner2_array;
-    ArrayAdapter spinner1_Adapter, spinner2_Adapter;
     RecyclerView urgency_RecyclerView;
     RecyclerView.LayoutManager layoutManager;
     BottomNavigationView bottomNavigationView;
     Intent intent;
     Toolbar toolbar;
     private Context mContext;
+
     View dialogview, dialogview1;
     String local_sido = "", local_sigugun = "";
     int k;
@@ -69,17 +67,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     int[] jobid = {0, R.id.btn1, R.id.btn2, R.id.btn3, R.id.btn4, R.id.btn5, R.id.btn6, R.id.btn7, R.id.btn8, R.id.btn9, R.id.btn10, R.id.btn11,
             R.id.btn12, R.id.btn13, R.id.btn14, R.id.btn15, R.id.btn16};
     int check[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0};
-    int[] job_code;
-    TextView sltTV;
-    String jobcheck = "", jobs = "";
-    int btnFlag = 0;
-    int btnFlag2 = 0;
-    int i, j = 0;
+    int[] job_code= new int[]{0, 0, 0};;
+    String jobs = "";
+    int i, j=0 ,n= 0, a, p=0;
+    int q=0, w=0;
     TextView sltTV1;
-    Intent intent1;
-    String phpjobname="";
     Button resetjobpost;
     Response.Listener rListener;
+    final String[][] arrayList1 = {{},{"종로구", "중구", "용산구", "성동구", "광진구", "동대문구", "중랑구", "성북구", "강북구", "도봉구", "노원구", "은평구", "서대문구", "마포구", "양천구", "강서구", "구로구", "금천구", "영등포구", "동작구", "관악구", "서초구", "강남구", "송파구", "강동구"}
+            , {"중구", "서구", "동구", "영도구", "부산진구", "동래구", "남구", "북구", "해운대구", "사하구", "금정구", "강서구", "연제구", "수영구", "사상구", "기장군"}
+            , {"중구", "서구", "동구", "남구", "북구", "수성구", "달서구", "달성군"}
+            , {"중구", "동구", "남구", "연수구", "남동구", "부평구", "계양구", "서구", "미추홀구", "강화군", "옹진군"}
+            , {"중구", "서구", "동구", "유성구", "대덕구"}
+            , {"동구", "서구", "남구", "북구", "광산구"}
+            , {"중구", "남구", "동구", "북구", "울주군"}
+            , {"세종시"}
+            , {"수원시", "성남시", "의정부시", "안양시", "부천시", "광명시", "평택시", "동두천시", "안산시", "고양시", "과천시", "구리시", "남양주시", "오산시", "시흥시", "군포시", "의왕시", "하남시", "용인시", "파주시", "이천시", "안성시", "김포시", "화성시", "광주시", "양주시", "포천시", "여주시", "경기 여주군", "연천군", "가평군", "양평군"}
+            , {"춘천시", "원주시", "강릉시", "동해시", "태백시", "속초시", "삼척시", "홍천군", "횡성군", "영월군", "평창군", "정선군", "철원군", "화천군", "양구군", "인제군", "고성군", "양양군"}
+            , {"청주시", "충주시", "제천시", "청주시", "청원군", "보은군", "옥천군", "영동군", "진천군", "괴산군", "음성군", "단양군", "증평군"}
+            , {"천안시", "공주시", "보령시", "아산시", "서산시", "논산시", "계룡시", "당진시", "금산군", "연기군", "부여군", "서천군", "청양군", "홍성군", "예산군", "태안군", "당진군"}
+            , {"전주시", "군산시", "익산시", "정읍시", "남원시", "김제시", "완주군", "진안군", "무주군", "장수군", "임실군", "순창군", "고창군", "부안군"}
+            , {"목포시", "여수시", "순천시", "나주시", "광양시", "담양군", "곡성군", "구례군", "고흥군", "보성군", "화순군", "장흥군", "강진군", "해남군", "영암군", "무안군", "함평군", "영광군", "장성군", "완도군", "진도군", "신안군"}
+            , {"포항시", "경주시", "김천시", "안동시", "구미시", "영주시", "영천시", "상주시", "문경시", "경산시", "군위군", "의성군", "청송군", "영양군", "영덕군", "청도군", "고령군", "성주군", "칠곡군", "예천군", "봉화군", "울진군", "울릉군"}
+            , {"창원시", "마산시", "진해시", "통영시", "사천시", "김해시", "밀양시", "거제시", "양산시", "의령군", "함안군", "창녕군", "고성군", "남해군", "하동군", "산청군", "함양군", "거창군", "합천군"}
+            , {"제주시", "서귀포시"}
+    };
 
 //    Fragment1 fragment1;
 //    Fragment2 fragment2;
@@ -119,6 +131,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mContext = this;
+        local_sido = Sharedpreference.get_Hope_local_sido(mContext,"local_sido");
+        local_sigugun = Sharedpreference.get_Hope_local_sigugun(mContext,"local_sigugun");
+
 //        item1 = (MenuItem) findViewById(R.id.tab1);
 //        item2 = (MenuItem)findViewById(R.id.tab2);
 //        item3 = (MenuItem)findViewById(R.id.tab3);
@@ -132,6 +147,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Intent intent1 = getIntent();
         int numofjob = intent1.getExtras().getInt("numofjob");
         resetjobpost = findViewById(R.id.resetjobpost);
+
+        for(int i=numofjob-1; i>=0; i--){
+            job_code[i] = Integer.parseInt(Sharedpreference.get_Jobcode(mContext,"jobcode"+i));
+        }
 
 
 
@@ -151,12 +170,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         TextView jobsetting = findViewById(R.id.jobsetting);
         localsetting.setText(Sharedpreference.get_Hope_local_sido(mContext,"local_sido")+" "+Sharedpreference.get_Hope_local_sigugun(mContext,"local_sigugun"));
         TextView sltTV = dialogview.findViewById(R.id.sltTV);
-        final String[] arrayList = {"서울", "부산", "대구", "인천", "대전", "광주", "울산", "세종", "경기",
+        final String[] arrayList = {"전체","서울", "부산", "대구", "인천", "대전", "광주", "울산", "세종", "경기",
                 "강원", "충북", "충남", "전북", "전남", "경북", "경남", "제주"}; // 첫번째 지역선택에 들어갈 배열
 
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, arrayList); // Adapter 생성
         listview.setAdapter(adapter); //Adapter 연결
         listview.setSelection(0); // 첫 인덱스 설정
+
+
 
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -164,24 +185,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 local_sido = arrayList[position];
                 sltTV.setText(arrayList[position]); // 선택한 지역 상단에 띄우기
                 k = position;
-                final String[][] arrayList1 = {{"종로구", "중구", "용산구", "성동구", "광진구", "동대문구", "중랑구", "성북구", "강북구", "도봉구", "노원구", "은평구", "서대문구", "마포구", "양천구", "강서구", "구로구", "금천구", "영등포구", "동작구", "관악구", "서초구", "강남구", "송파구", "강동구"}
-                        , {"중구", "서구", "동구", "영도구", "부산진구", "동래구", "남구", "북구", "해운대구", "사하구", "금정구", "강서구", "연제구", "수영구", "사상구", "기장군"}
-                        , {"중구", "서구", "동구", "남구", "북구", "수성구", "달서구", "달성군"}
-                        , {"중구", "동구", "남구", "연수구", "남동구", "부평구", "계양구", "서구", "미추홀구", "강화군", "옹진군"}
-                        , {"중구", "서구", "동구", "유성구", "대덕구"}
-                        , {"동구", "서구", "남구", "북구", "광산구"}
-                        , {"중구", "남구", "동구", "북구", "울주군"}
-                        , {"세종시"}
-                        , {"수원시", "성남시", "의정부시", "안양시", "부천시", "광명시", "평택시", "동두천시", "안산시", "고양시", "과천시", "구리시", "남양주시", "오산시", "시흥시", "군포시", "의왕시", "하남시", "용인시", "파주시", "이천시", "안성시", "김포시", "화성시", "광주시", "양주시", "포천시", "여주시", "경기 여주군", "연천군", "가평군", "양평군"}
-                        , {"춘천시", "원주시", "강릉시", "동해시", "태백시", "속초시", "삼척시", "홍천군", "횡성군", "영월군", "평창군", "정선군", "철원군", "화천군", "양구군", "인제군", "고성군", "양양군"}
-                        , {"청주시", "충주시", "제천시", "청주시", "청원군", "보은군", "옥천군", "영동군", "진천군", "괴산군", "음성군", "단양군", "증평군"}
-                        , {"천안시", "공주시", "보령시", "아산시", "서산시", "논산시", "계룡시", "당진시", "금산군", "연기군", "부여군", "서천군", "청양군", "홍성군", "예산군", "태안군", "당진군"}
-                        , {"전주시", "군산시", "익산시", "정읍시", "남원시", "김제시", "완주군", "진안군", "무주군", "장수군", "임실군", "순창군", "고창군", "부안군"}
-                        , {"목포시", "여수시", "순천시", "나주시", "광양시", "담양군", "곡성군", "구례군", "고흥군", "보성군", "화순군", "장흥군", "강진군", "해남군", "영암군", "무안군", "함평군", "영광군", "장성군", "완도군", "진도군", "신안군"}
-                        , {"포항시", "경주시", "김천시", "안동시", "구미시", "영주시", "영천시", "상주시", "문경시", "경산시", "군위군", "의성군", "청송군", "영양군", "영덕군", "청도군", "고령군", "성주군", "칠곡군", "예천군", "봉화군", "울진군", "울릉군"}
-                        , {"창원시", "마산시", "진해시", "통영시", "사천시", "김해시", "밀양시", "거제시", "양산시", "의령군", "함안군", "창녕군", "고성군", "남해군", "하동군", "산청군", "함양군", "거창군", "합천군"}
-                        , {"제주시", "서귀포시"}
-                };
+                n++;
+                q=1; w=0; // local_sido만 선택했을시 제어할 변수
+
                 ArrayAdapter adapter2 = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, arrayList1[position]); // Adapter 생성
                 listview1.setAdapter(adapter2); //Adapter 연결
                 listview1.setSelection(0); // 첫 인덱스 설정
@@ -189,8 +195,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 listview1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        local_sigugun = arrayList1[k][position];
-                        sltTV.setText(local_sido + " " + local_sigugun);
+                        w=1;
+                        if(local_sido != "전체") {
+                            local_sigugun = arrayList1[k][position];
+                            sltTV.setText(local_sido + " " + local_sigugun);
+                        }
+                        else local_sigugun="";
+
                     }
                 });
 
@@ -212,7 +223,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 dlg.setPositiveButton("확인", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        localsetting.setText(local_sido + " " + local_sigugun);
+                        if(q==1 && w==1) {
+                           localsetting.setText(local_sido + " " + local_sigugun);
+                        }
+                        else if(q==1 && w==0){
+                            localsetting.setText(local_sido);
+                        }
                         // 메인에 jobpost띄우기
 
                     }
@@ -231,6 +247,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         jobsetting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                job_code[0] = 0;   job_code[1] = 0;   job_code[2] = 0;
                 AlertDialog.Builder dlg = new AlertDialog.Builder(MainActivity.this);
                 dlg.setTitle("직종 설정");
                 if(dialogview1.getParent() != null) {
@@ -248,11 +265,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             if(check[i]==1)
                                 j++;
                         }
-                        String jobs1[] = jobs.split(" ");
-                        for (int i=0; i<jobs1.length; i++){
-                            text2 = jobs1[i]+" "+text2;
+                        if(j>0) {
+                            String jobs1[] = jobs.split(" ");
+                            for (int i = 0; i < jobs1.length; i++) {
+                                text2 = jobs1[i] + " " + text2;
+                            }
                         }
-                        jobsetting.setText(text2);
+                        if(a==0){
+                            jobsetting.setText("선택안함");
+                        }
+                        else jobsetting.setText(text2);
                     }
                 });
                 dlg.setNegativeButton("취소", null);
@@ -354,7 +376,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onClick(View v) {
                 MainRequest mainRequest = new MainRequest("0",local_sido,local_sigugun,job_code[0],job_code[1],job_code[2], rListener);  // Request 처리 클래스
-                Log.d("asdfasdfasdfasdf",local_sido+" "+local_sigugun+" "+job_code);
+                Log.d("asdfasdfasdfasdf",local_sido+" "+local_sigugun+" "+job_code[0]+" "+job_code[1]+" "+job_code[2]);
                 mainRequest.setRetryPolicy(new DefaultRetryPolicy(
                         DefaultRetryPolicy.DEFAULT_TIMEOUT_MS,
                         0,
@@ -399,8 +421,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         jobs = "";
-        int a=0;
-        job_code = new int[]{0, 0, 0};
+        a=0;
+
         for (int k = 1; k < 17; k++) {
 
             if (jobid[k] == v.getId()) {

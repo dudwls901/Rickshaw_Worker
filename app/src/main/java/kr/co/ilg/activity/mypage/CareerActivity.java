@@ -46,6 +46,10 @@ public class CareerActivity extends AppCompatActivity {
     int[] job_code;
     int job_code_length = 0;
     int isUpdate;  // 1 > 수정  0 > 회원가입
+    int w=0;
+    String[] jobname = new String[]{"","",""};
+    String[] jobcareer = new String[]{"","",""};
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -148,7 +152,7 @@ public class CareerActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String email = Sharedpreference.get_email(mContext, "worker_email");
                 Intent intent = new Intent(CareerActivity.this, AccountAddActivity.class);
-/*
+                Intent updateIntent = new Intent(CareerActivity.this, MyInfomanageActivity.class);
 
                 if (isUpdate == 1) {  // 수정
                     Response.Listener rListener = new Response.Listener<String>() {
@@ -158,22 +162,25 @@ public class CareerActivity extends AppCompatActivity {
                             try {
                                 JSONObject jResponse = new JSONObject(response.substring(response.indexOf("{"), response.lastIndexOf("}") + 1));
                                 boolean updateSuccess2 = jResponse.getBoolean("updateSuccess2");
-                                Intent updateIntent = new Intent(CareerActivity.this, MyInfomanageActivity.class);
+                                Log.d("mmmmmmmmmmmmmmmmmmmmm", String.valueOf(updateSuccess2));
+
                                 if (updateSuccess2) {
-                                    for(int i=career.length-1 ,j=0; i>=0;i--) {
-                                        Log.d("========success========",""+job_code[i]+","+career[j] + i + j);
 
-                                        Sharedpreference.set_Jobname(mContext, "jobname" + (j+1), String.valueOf(job_code[i]));
-                                        Sharedpreference.set_Jobcareer(mContext, "jobcareer" + (j+1), career[j]);
+                                    Log.d("========success========", "" + job_code[w] + "," + career[w]);
+/*
 
-                                        j++;
-                                    }
+                                    Sharedpreference.set_Jobname(mContext, "jobname" + w, String.valueOf(job_code[w]));
+                                    Sharedpreference.set_Jobcareer(mContext, "jobcareer" + w, career[w]);
+                                    값저장하기 해야됨
+
+*/
 
 
                                     Toast.makeText(CareerActivity.this, "수정 완료되었습니다", Toast.LENGTH_SHORT).show();
-                                } else
+                                } else {
                                     Toast.makeText(CareerActivity.this, "수정 실패", Toast.LENGTH_SHORT).show();
-                                startActivity(updateIntent);
+                                }
+
 
                             } catch (Exception e) {
                                 Log.d("mytest", e.toString());
@@ -182,17 +189,18 @@ public class CareerActivity extends AppCompatActivity {
                     };
                     UpdateinfoRequest updateinfoRequest = null;
                     RequestQueue queue;
-                    for(int i=career.length-1 ,j=0; i>=0;i--) {
-                        Log.d("mytestjobcode",""+job_code[i]+","+career[j]);
-                        updateinfoRequest = new UpdateinfoRequest("hopeJobCareer", email, String.valueOf(job_code.length), String.valueOf(job_code[i]), career[j], rListener);
+                    for (int i = career.length - 1, j = 0; i >= 0; i--) {
+                        Log.d("mytestjobcode", "" + job_code[i] + "," + career[j]);
+                        updateinfoRequest = new UpdateinfoRequest("hopeJobCareer", email, j, job_code[i], career[j], rListener);
                         queue = Volley.newRequestQueue(CareerActivity.this);
                         queue.add(updateinfoRequest);
                         j++;
                     }
+                    startActivity(updateIntent);
 
                 } else {
 
-*/
+
                     switch (career.length) {
                         case 1:
                             if (career[0] != null) {
@@ -264,7 +272,8 @@ public class CareerActivity extends AppCompatActivity {
                             }
                             break;
                     }
-                //}
+                    //}
+                }
             }
         });
     }
