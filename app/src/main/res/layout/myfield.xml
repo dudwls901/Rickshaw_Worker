@@ -1,10 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     tools:context="kr.co.ilg.activity.findwork.MyFieldActivity">
+
+    <FrameLayout
+        android:id="@+id/myfieldcontainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tabs" />
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -21,23 +29,6 @@
             android:textSize="20sp" />
 
     </androidx.appcompat.widget.Toolbar>
-    <com.google.android.material.tabs.TabLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/toolbar"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:id="@+id/tabs"
-        />
-
-<FrameLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-app:layout_constraintTop_toBottomOf="@id/tabs"
-    app:layout_constraintLeft_toLeftOf="parent"
-android:id="@+id/myfieldcontainer"
-     />
-
-
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
@@ -46,13 +37,20 @@ android:id="@+id/myfieldcontainer"
         android:layout_gravity="bottom"
         android:layout_marginStart="0dp"
         android:layout_marginEnd="0dp"
+        android:background="@color/WhiteColor"
         app:itemIconSize="30dp"
         app:itemIconTint="#000000"
-        android:background="@color/WhiteColor"
         app:itemTextColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:menu="@menu/menu_bottom"
 
         />
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar" />
 </androidx.constraintlayout.widget.ConstraintLayout>

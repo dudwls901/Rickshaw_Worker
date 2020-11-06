@@ -43,6 +43,7 @@ public class Fragment3 extends Fragment {
         workInfoArrayList.add(new ListViewItem("제일아파트 건축", "2020-06-17", 130000, "페인트", "서울 영등포구 당산로 219", "베짱이인력소", "지급예정", false));
         workInfoArrayList.add(new ListViewItem("자이아파트 신축", "2020-06-20", 160000, "건축", "서울 영등포구 양평로24길 9", "사람인력소", "지급예정", false));
         workInfoArrayList.add(new ListViewItem("신송센터빌딩 철거", "2020-06-23", 160000, "철거", "서울 영등포구 양평로24길 10", "돈돈인력소", "지급예정", false));
+        workInfoArrayList.add(new ListViewItem("신송센터빌딩 철거", "2020-06-23", 160000, "철거", "서울 영등포구 양평로24길 10", "돈돈인력소", "지급예정", false));
 
         ListWorkGoneAdapter myworkAdapter = new ListWorkGoneAdapter(context.getApplicationContext(), workInfoArrayList);
         recyclerView.setAdapter(myworkAdapter);
