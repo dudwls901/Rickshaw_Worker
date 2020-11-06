@@ -64,28 +64,28 @@ public class WorkInfoActivity extends AppCompatActivity {
         office_info_tv.setPaintFlags(place_tv.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
 
         //TODO ListAdapter에서 intent로 값만 넘기면 됨
-//        Intent receiver = getIntent();
-//        jp_title = receiver.getExtras().getString("jp_title");
-//        field_address = receiver.getExtras().getString("field_address");
-//        manager_office_name = receiver.getExtras().getString("manager_office_name");
-//        job_name = receiver.getExtras().getString("job_name");
-//        jp_job_cost = receiver.getExtras().getString("jp_job_cost");
-//        jp_job_date = receiver.getExtras().getString("jp_job_date");
-//        jp_job_start_time = receiver.getExtras().getString("jp_job_start_time").substring(0,5);
-//        jp_job_finish_time = receiver.getExtras().getString("jp_job_finish_time").substring(0,5);
-//        jp_job_tot_people = receiver.getExtras().getString("jp_job_tot_people");
-//        jp_contents = receiver.getExtras().getString("jp_contents");
-//
-//        title_tv.setText(jp_title);
-//        place_tv.setText(field_address);
-//        office_info_tv.setText(manager_office_name);
-//        title_name_tv.setText(jp_title);
-//        job_tv.setText(job_name);
-//        pay_tv.setText(jp_job_cost+"원");
-//        date_tv.setText(jp_job_date);
-//        time_tv.setText(jp_job_start_time+"~"+jp_job_finish_time);
-//        people_tv.setText(jp_job_tot_people+"명");
-//        contents_tv.setText(jp_contents);
+        Intent receiver = getIntent();
+        jp_title = receiver.getExtras().getString("jp_title");
+        field_address = receiver.getExtras().getString("field_address");
+        manager_office_name = receiver.getExtras().getString("manager_office_name");
+        job_name = receiver.getExtras().getString("job_name");
+        jp_job_cost = receiver.getExtras().getString("jp_job_cost");
+        jp_job_date = receiver.getExtras().getString("jp_job_date");
+        jp_job_start_time = receiver.getExtras().getString("jp_job_start_time").substring(0,5);
+        jp_job_finish_time = receiver.getExtras().getString("jp_job_finish_time").substring(0,5);
+        jp_job_tot_people = receiver.getExtras().getString("jp_job_tot_people");
+        jp_contents = receiver.getExtras().getString("jp_contents");
+
+        title_tv.setText(jp_title);
+        place_tv.setText(field_address);
+        office_info_tv.setText(manager_office_name);
+        title_name_tv.setText(jp_title);
+        job_tv.setText(job_name);
+        pay_tv.setText(jp_job_cost+"원");
+        date_tv.setText(jp_job_date);
+        time_tv.setText(jp_job_start_time+"~"+jp_job_finish_time);
+        people_tv.setText(jp_job_tot_people+"명");
+        contents_tv.setText(jp_contents);
 
         map_btn.setOnClickListener(new View.OnClickListener() {
             @Override
