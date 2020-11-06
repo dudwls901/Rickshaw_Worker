@@ -24,49 +24,87 @@
 
     </androidx.appcompat.widget.Toolbar>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/linear_spinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
         <TextView
+            android:id="@+id/localTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             android:text="지역"
             android:layout_gravity="center"
             android:layout_marginHorizontal="8dp"/>
 
-        <Button
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/localTv"
             android:layout_marginVertical="5dp"
             android:gravity="center"
             android:text="a"
             android:textAlignment="center"
+            android:textSize="12sp"
+            android:padding="10dp"
             android:id="@+id/localsetting"
             android:background="@drawable/mainbutton"
             android:textColor="@color/mainColor"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp"/>
+
+        <TextView
+            android:id="@+id/jobTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/localsetting"
+            android:text="직종"
+            android:textSize="15sp"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="8dp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="       직종"
-            android:layout_gravity="center"
-            android:layout_marginHorizontal="8dp"/>
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/jobTV"
             android:gravity="center"
             android:text="a"
+            android:textSize="12sp"
+            android:padding="10dp"
             android:layout_marginVertical="5dp"
             android:textAlignment="center"
             android:id="@+id/jobsetting"
             android:background="@drawable/mainbutton"
-            android:layout_gravity="center"/>
-    </LinearLayout>
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:text="선택"
+            android:id="@+id/resetjobpost"
+            android:background="@drawable/mainbutton"
+            android:textSize="12sp"
+            android:padding="10dp"
+            android:layout_marginVertical="5dp"
+            android:layout_gravity="right"
+            android:layout_marginHorizontal="8dp"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
         android:id="@+id/linear_urgency"

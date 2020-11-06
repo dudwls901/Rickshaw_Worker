@@ -88,20 +88,21 @@ public class JobSelectActivity extends AppCompatActivity implements View.OnClick
                     if (isUpdate == 1) {  // 수정
                         intent.putExtra("isUpdate", isUpdate);  // 1
                     }
-                    intent.putExtra("worker_email", worker_email);
-                    intent.putExtra("worker_pw", worker_pw);
-                    intent.putExtra("worker_gender", worker_gender);
-                    intent.putExtra("worker_name", worker_name);
-                    intent.putExtra("worker_birth", worker_birth);
-                    intent.putExtra("worker_phonenum", worker_phonenum);
-                    intent.putExtra("worker_certicipate", worker_certicipate);
-                    intent.putExtra("hope_local_sido", hope_local_sido);
-                    intent.putExtra("hope_local_sigugun", hope_local_sigugun);
-                    intent.putExtra("jobs", jobs);
-                    //certicipate추가
-                    intent.putExtra("job_code", job_code);
-                    Log.d("kkkkkkkkkkkkk=", String.valueOf(job_code[0]) + job_code[1] + job_code[2]);
-                    startActivity(intent);
+                        intent.putExtra("worker_email", worker_email);
+                        intent.putExtra("worker_pw", worker_pw);
+                        intent.putExtra("worker_gender", worker_gender);
+                        intent.putExtra("worker_name", worker_name);
+                        intent.putExtra("worker_birth", worker_birth);
+                        intent.putExtra("worker_phonenum", worker_phonenum);
+                        intent.putExtra("worker_certicipate", worker_certicipate);
+                        intent.putExtra("hope_local_sido", hope_local_sido);
+                        intent.putExtra("hope_local_sigugun", hope_local_sigugun);
+                        intent.putExtra("jobs", jobs);
+                        //certicipate추가
+                        intent.putExtra("job_code", job_code);
+                        Log.d("kkkkkkkkkkkkk=", String.valueOf(job_code[0]) + job_code[1] + job_code[2]);
+                        startActivity(intent);
+
 
                 }
             }

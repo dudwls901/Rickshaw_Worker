@@ -131,9 +131,9 @@ public class MyInfomanageActivity extends Activity {
         phonenum.setText(Sharedpreference.get_Phonenum(mContext, "worker_phonenum"));
         email.setText(Sharedpreference.get_email(mContext, "worker_email"));
         introduce.setText(Sharedpreference.get_introduce(mContext,"worker_introduce"));
-        hope_job_career.setText(Sharedpreference.get_Jobname(mContext,"jobname1") + " " + Sharedpreference.get_Jobcareer(mContext,"jobcareer1")+"\n"
-                +Sharedpreference.get_Jobname(mContext,"jobname2") + " " + Sharedpreference.get_Jobcareer(mContext,"jobcareer2")+"\n"
-                +Sharedpreference.get_Jobname(mContext,"jobname3") + " " + Sharedpreference.get_Jobcareer(mContext,"jobcareer3"));
+        hope_job_career.setText(Sharedpreference.get_Jobname(mContext,"jobname0") + " " + Sharedpreference.get_Jobcareer(mContext,"jobcareer0")+"\n"
+                +Sharedpreference.get_Jobname(mContext,"jobname1") + " " + Sharedpreference.get_Jobcareer(mContext,"jobcareer1")+"\n"
+                +Sharedpreference.get_Jobname(mContext,"jobname2") + " " + Sharedpreference.get_Jobcareer(mContext,"jobcareer2"));
         hope_local.setText(Sharedpreference.get_Hope_local_sido(mContext,"local_sido") + " " + Sharedpreference.get_Hope_local_sigugun(mContext,"local_sigugun"));
     }
 }

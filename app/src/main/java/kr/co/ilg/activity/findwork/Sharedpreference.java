@@ -17,6 +17,14 @@ public class Sharedpreference {
         editor.clear();
         editor.commit();
 
+    }public static void remove(Context context) {
+        SharedPreferences prefs = getPreferences(context);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.remove("jobname1");
+        editor.remove("jobname2");
+        editor.remove("jobname3");
+        editor.commit();
+
     }
     public static void setNone_email(Context context, String key, String value) {
         SharedPreferences prefs = getPreferences(context);
@@ -156,6 +164,17 @@ public class Sharedpreference {
         editor.commit();
 
     }public static String get_Jobcareer(Context context, String key) {
+        SharedPreferences prefs = getPreferences(context);
+        String value = prefs.getString(key, "memberinfo");
+        return value;
+    } // 한줄소개 저장
+    public static void set_Jobcode(Context context, String key, String value) {
+        SharedPreferences prefs = getPreferences(context);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString(key, value);
+        editor.commit();
+
+    }public static String get_Jobcode(Context context, String key) {
         SharedPreferences prefs = getPreferences(context);
         String value = prefs.getString(key, "memberinfo");
         return value;
