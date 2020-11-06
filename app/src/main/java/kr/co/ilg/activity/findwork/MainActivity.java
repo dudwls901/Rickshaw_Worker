@@ -321,12 +321,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         jp_job_start_time[i] = MainRequest.getString("jp_job_start_time");
                         jp_job_finish_time[i] = MainRequest.getString("jp_job_finish_time");
                         jp_is_urgency[i] = MainRequest.getString("jp_is_urgency");
-                        if(jp_is_urgency[i]=="0") is_urgency[i]=false;
+                        if(jp_is_urgency[i].equals("0")) is_urgency[i]=false;
                         else is_urgency[i] = true;
                         jp_datetime[i] = MainRequest.getString("jp_datetime");
                         Log.d("===================", jp_title[i] + " " + jp_job_finish_time[i]);
 
-                        workInfoArrayList.add(new ListViewItem(jp_title[i], jp_job_date[i], jp_job_cost[i], job_name[i], field_address[i], business_reg_num[i], jp_job_current_people[i], jp_job_tot_people[i], is_urgency[i]));
+                        workInfoArrayList.add(new ListViewItem(jp_title[i], jp_job_date[i], jp_job_cost[i], job_name[i], field_address[i], business_reg_num[i], jp_job_current_people[i], jp_job_tot_people[i], is_urgency[i],jp_job_start_time[i],jp_job_finish_time[i],jp_contents[i]));
                     }
 
                     ListAdapter urgencyAdapter = new ListAdapter(getApplicationContext(), workInfoArrayList);
