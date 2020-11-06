@@ -5,100 +5,111 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginTop="?attr/actionBarSize"
+    android:paddingBottom="57dp"
     tools:context="kr.co.ilg.fragment.Fragment3">
 
-    <RadioGroup
-        android:id="@+id/radiogroup"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="60dp"
-        android:layout_marginTop="50dp"
-        android:orientation="horizontal"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/cl">
 
-        <RadioButton
-            android:layout_width="100dp"
+        <RadioGroup
+            android:id="@+id/radiogroup"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="1주일"
+            android:layout_marginLeft="60dp"
+            android:layout_marginTop="50dp"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toTopOf="parent">
 
-            />
+            <RadioButton
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="1주일"
 
-        <RadioButton
-            android:layout_width="100dp"
+                />
+
+            <RadioButton
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="1개월" />
+
+            <RadioButton
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:text="3개월"
+
+                />
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/search"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="1개월" />
+            android:layout_marginLeft="10dp"
+            android:text="조건검색"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/radiogroup" />
 
-        <RadioButton
-            android:layout_width="130dp"
+        <EditText
+            android:id="@+id/edt1"
+            android:layout_width="140dp"
             android:layout_height="wrap_content"
-            android:text="3개월"
+            android:layout_marginLeft="10dp"
+            android:text="2020-04-30"
+            app:layout_constraintLeft_toRightOf="@+id/search"
+            app:layout_constraintTop_toBottomOf="@+id/radiogroup" />
 
-            />
-    </RadioGroup>
+        <ImageView
+            android:id="@+id/cal1"
+            android:layout_width="23dp"
+            android:layout_height="23dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="13dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/calendar"
+            app:layout_constraintBottom_toBottomOf="@+id/edt1"
+            app:layout_constraintRight_toRightOf="@+id/edt1" />
 
-    <Button
-        android:id="@+id/search"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:text="조건검색"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radiogroup" />
+        <TextView
+            android:id="@+id/txt1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_marginTop="12dp"
+            android:text="~"
+            app:layout_constraintLeft_toRightOf="@+id/edt1"
+            app:layout_constraintTop_toBottomOf="@+id/radiogroup" />
 
-    <EditText
-        android:id="@+id/edt1"
-        android:layout_width="140dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:text="2020-04-30"
-        app:layout_constraintLeft_toRightOf="@+id/search"
-        app:layout_constraintTop_toBottomOf="@+id/radiogroup" />
+        <EditText
+            android:id="@+id/edt2"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="2020-04-30"
+            app:layout_constraintLeft_toRightOf="@id/txt1"
+            app:layout_constraintTop_toBottomOf="@+id/radiogroup" />
 
-    <ImageView
-        android:id="@+id/cal1"
-        android:layout_width="23dp"
-        android:layout_height="23dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="13dp"
-        android:scaleType="fitCenter"
-        android:src="@drawable/calendar"
-        app:layout_constraintBottom_toBottomOf="@+id/edt1"
-        app:layout_constraintRight_toRightOf="@+id/edt1" />
+        <ImageView
+            android:id="@+id/cal2"
+            android:layout_width="23dp"
+            android:layout_height="23dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="13dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/calendar"
+            app:layout_constraintBottom_toBottomOf="@+id/edt2"
+            app:layout_constraintRight_toRightOf="@+id/edt2" />
 
-    <TextView
-        android:id="@+id/txt1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="4dp"
-        android:layout_marginTop="12dp"
-        android:text="~"
-        app:layout_constraintLeft_toRightOf="@+id/edt1"
-        app:layout_constraintTop_toBottomOf="@+id/radiogroup" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <EditText
-        android:id="@+id/edt2"
-        android:layout_width="140dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:text="2020-04-30"
-        app:layout_constraintLeft_toRightOf="@id/txt1"
-        app:layout_constraintTop_toBottomOf="@+id/radiogroup" />
-
-    <ImageView
-        android:id="@+id/cal2"
-        android:layout_width="23dp"
-        android:layout_height="23dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="13dp"
-        android:scaleType="fitCenter"
-        android:src="@drawable/calendar"
-        app:layout_constraintBottom_toBottomOf="@+id/edt2"
-        app:layout_constraintRight_toRightOf="@+id/edt2" />
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview"
         android:layout_width="match_parent"
-        android:layout_height="533dp"
-        app:layout_constraintTop_toBottomOf="@+id/search"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@+id/cl"
+        app:layout_constraintBottom_toBottomOf="parent"
         android:background="@drawable/layoutborder"
         />
 </androidx.constraintlayout.widget.ConstraintLayout>

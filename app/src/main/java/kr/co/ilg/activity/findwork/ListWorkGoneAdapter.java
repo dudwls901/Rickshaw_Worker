@@ -77,7 +77,7 @@ public class ListWorkGoneAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         if (workInfo.get(position).urgency == false) {
             myViewHolder.title.setText(workInfo.get(position).title);
             myViewHolder.date.setText(workInfo.get(position).date);
-            myViewHolder.pay.setText(workInfo.get(position).pay);
+            myViewHolder.pay.setText(String.valueOf(workInfo.get(position).pay));
             myViewHolder.job.setText(workInfo.get(position).job);
             myViewHolder.place.setText(workInfo.get(position).place);
             myViewHolder.office.setText(workInfo.get(position).office);
@@ -86,7 +86,7 @@ public class ListWorkGoneAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         else if (workInfo.get(position).urgency == true) {
             myViewHolder.title.setText(workInfo.get(position).title);
             myViewHolder.date.setText(workInfo.get(position).date);
-            myViewHolder.pay.setText(workInfo.get(position).pay);
+            myViewHolder.pay.setText(String.valueOf(workInfo.get(position).pay));
             myViewHolder.job.setText(workInfo.get(position).job);
             myViewHolder.place.setText(workInfo.get(position).place);
             myViewHolder.office.setText(workInfo.get(position).office);
