@@ -168,6 +168,17 @@ public class Sharedpreference {
         String value = prefs.getString(key, "memberinfo");
         return value;
     } // 한줄소개 저장
+    public static void set_Jobcode(Context context, String key, String value) {
+        SharedPreferences prefs = getPreferences(context);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString(key, value);
+        editor.commit();
+
+    }public static String get_Jobcode(Context context, String key) {
+        SharedPreferences prefs = getPreferences(context);
+        String value = prefs.getString(key, "memberinfo");
+        return value;
+    } // 한줄소개 저장
     public static void set_Hope_local_sido(Context context, String key, String value) {
         SharedPreferences prefs = getPreferences(context);
         SharedPreferences.Editor editor = prefs.edit();

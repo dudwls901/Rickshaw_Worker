@@ -315,6 +315,7 @@ class MainActivity : Activity() {
                         val jResponse = JSONObject(response!!.substring(response!!.indexOf("{"), response!!.lastIndexOf("}") + 1))
                         var jobname = Array<String>(3) { "" }
                         var jobcareer = Array<String>(3) { "" }
+                        var jobcode = Array<String>(3) { "" }
                         var a = jResponse.getJSONObject("response")
                         val isExistWorker = a.getBoolean("tryLogin")
                         println(isExistWorker)
@@ -337,8 +338,10 @@ class MainActivity : Activity() {
                                 var s = a.getJSONObject(k[i])
                                 jobname[i] = s.getString("jobname")
                                 jobcareer[i] = s.getString("jobcareer")
+                                jobcode[i]=s.getString("job_code")
                                 Sharedpreference.set_Jobcareer(applicationContext(), "jobname"+i, jobname[i])
                                 Sharedpreference.set_Jobname(applicationContext(), "jobcareer"+i, jobcareer[i])
+                                Sharedpreference.set_Jobcode(applicationContext(), "jobcode"+i, jobcode[i])
                                 j++;
                             } ///실행되다가
 
