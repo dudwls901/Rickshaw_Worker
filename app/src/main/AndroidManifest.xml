@@ -90,7 +90,7 @@
         <activity android:name="kr.co.ilg.activity.mypage.MemberRemoveActivity" android:label="회원탈퇴"/>
         <activity android:name="kr.co.ilg.activity.login.FindPasswordInfoActivity" android:label="비밀번호 찾기"/>
         <activity android:name="kr.co.ilg.activity.login.FindPasswordShowActivity" android:label="비밀번호 확인"/>
-
+        <activity android:name="kr.co.ilg.activity.findwork.UserReviewWriteActivity" android:label=""/>
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.example.capstone.fileprovider"

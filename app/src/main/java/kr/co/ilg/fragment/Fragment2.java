@@ -59,9 +59,9 @@ public class Fragment2 extends Fragment {
         layoutManager2 = new LinearLayoutManager(context);
         recyclerView2.setLayoutManager(layoutManager2);
 
-        workInfoArrayList.add(new ListViewItem("마포 체육관 보수공사", "2020-07-03", 110000, "보수", "마포구민체육관", "당근인력소", 1, 3));
-        workInfoArrayList.add(new ListViewItem("명지전문대학 운동장 공사", "2020-07-04", 120000, "보통인부", "명지전문대학", "당근인력소", 2, 3));
-        workInfoArrayList.add(new ListViewItem("명지대학교 기숙사 철거", "2020-07-05", 130000, "보통인부", "명지대학교", "사람인력소", 2, 3));
+        workInfoArrayList.add(new ListViewItem("마포 체육관 보수공사", "2020-07-03", 110000, "보수", "마포구민체육관", "당근인력소", 1, 3,false,"2222222","22222222","3"));
+        workInfoArrayList.add(new ListViewItem("명지전문대학 운동장 공사", "2020-07-04", 120000, "보통인부", "명지전문대학", "당근인력소", 2, 3,false,"2222222","22222222","3"));
+        workInfoArrayList.add(new ListViewItem("명지대학교 기숙사 철거", "2020-07-05", 130000, "보통인부", "명지대학교", "사람인력소", 2, 3,false,"2222222","22222222","3"));
 
         ListAdapter myworkAdapter2 = new ListAdapter(context.getApplicationContext(), workInfoArrayList);
         recyclerView2.setAdapter(myworkAdapter2);
