@@ -7,22 +7,33 @@ import androidx.appcompat.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.Volley;
 import com.example.capstone.R;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import kr.co.ilg.activity.login.FindPasswordInfoActivity;
+import kr.co.ilg.activity.login.FindPwRequest;
+
 public class ListWorkPickOutAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     LinearLayout gotoworkCheck, gotohomeCheck;
+    TextView checkStart, checkFinish;
     Intent intent;
     View dialogView;
 
@@ -100,6 +111,11 @@ public class ListWorkPickOutAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                 dlg.setView(dialogView);
                 gotoworkCheck = dialogView.findViewById(R.id.gotoworkCheck);
                 gotohomeCheck = dialogView.findViewById(R.id.gotohomeCheck);
+                checkStart = dialogView.findViewById(R.id.checkStart);
+                checkFinish = dialogView.findViewById(R.id.checkFinish);
+
+                checkStart.setText("출근 인증\n" + workInfo.get(position).jp_job_start_time);
+                checkFinish.setText("퇴근 인증\n" + workInfo.get(position).jp_job_finish_time);
 
                 dlg.setNegativeButton("닫기", new DialogInterface.OnClickListener() {
                     @Override
@@ -107,16 +123,47 @@ public class ListWorkPickOutAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
                     }
                 });
+
+                Response.Listener rListener = new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jResponse = new JSONObject(response.substring(response.indexOf("{"), response.lastIndexOf("}") + 1));
+                            boolean select_CT = jResponse.getBoolean("select_CT");
+                            if(select_CT) {
+                                String mf_is_choolgeun =  jResponse.getString("mf_is_choolgeun");
+                                String mf_is_toigeun =  jResponse.getString("mf_is_toigeun");
+
+                                if(mf_is_choolgeun.equals("1"))
+                                    gotoworkCheck.setBackgroundColor(context.getResources().getColor(R.color.checkColor));
+                                else ;
+                                if(mf_is_toigeun.equals("1"))
+                                    gotohomeCheck.setBackgroundColor(context.getResources().getColor(R.color.checkColor));
+                                else ;
+
+                            } else {
+                                Toast.makeText(context, "출퇴근 여부 로드 실패", Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (Exception e) {
+                            Log.d("mytest", e.toString());
+                        }
+                    }
+                };
+                MyFieldSelectRequest mfsRequest = new MyFieldSelectRequest(Sharedpreference.get_email(context, "worker_email"), workInfo.get(position).jp_num, rListener);
+
+                RequestQueue queue = Volley.newRequestQueue(context);
+                queue.add(mfsRequest);
+
                 gotoworkCheck.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        gotoworkCheck.setBackgroundColor(context.getResources().getColor(R.color.UrgencyColor));
+                        gotoworkCheck.setBackgroundColor(context.getResources().getColor(R.color.checkColor));
                     }
                 });
                 gotohomeCheck.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        gotohomeCheck.setBackgroundColor(context.getResources().getColor(R.color.UrgencyColor));
+                        gotohomeCheck.setBackgroundColor(context.getResources().getColor(R.color.checkColor));
                     }
                 });
                 dlg.show();
