@@ -123,54 +123,37 @@ public class ListWorkGoneAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     }
                 });
 
-                fieldReview.setOnClickListener(new View.OnClickListener() {
+                fieldReview.setOnClickListener(new View.OnClickListener() {//현장후기작성
                     @Override
                     public void onClick(View v) {
 
                         dcontext =v.getContext();
-                        final AlertDialog.Builder dlg1 = new AlertDialog.Builder(dcontext);
-                        dialogView = View.inflate(dcontext, R.layout.write_review, null);
-                        tvtitle = dialogView.findViewById(R.id.tvtitle);
-                        tvtitle.setText("여의나루로 행복빌라");
-                        dlg1.setView(dialogView);
+                        intent=new Intent(context, UserReviewWriteActivity.class);
 
-                        dlg1.setPositiveButton("확인", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
+                        // TODO: 2020-11-01  현장 이름 삽입 + DB 처리 필요
+                        String field_name="현장 이름";
+                        intent.putExtra("key",0);
+                        intent.putExtra("현장 후기", field_name);
 
-                            }
-                        });
-                        dlg1.setNegativeButton("취소", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
+                        context.startActivity(intent);
 
-                            }
-                        });dlg1.show();
                     }
                 });
-                supervisorReview.setOnClickListener(new View.OnClickListener() {
+                supervisorReview.setOnClickListener(new View.OnClickListener() {//인력사무소(구인자)후기작성
                     @Override
                     public void onClick(View v) {
 
                         dcontext =v.getContext();
-                        final AlertDialog.Builder dlg2 = new AlertDialog.Builder(dcontext);
-                        dialogView = View.inflate(dcontext, R.layout.write_review, null);
-                        tvtitle = dialogView.findViewById(R.id.tvtitle);
-                        tvtitle.setText("개미인력소");
-                        dlg2.setView(dialogView);
+                        intent=new Intent(context, UserReviewWriteActivity.class);
 
-                        dlg2.setPositiveButton("확인", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
+                        // TODO: 2020-11-01 인력사무소 이름 삽입 + DB 처리 필요
+                        String manager_name="인력사무소 이름";
+                        intent.putExtra("key",1);
+                        intent.putExtra("인력사무소 후기", manager_name);
 
-                            }
-                        });
-                        dlg2.setNegativeButton("취소", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
+                        context.startActivity(intent);
 
-                            }
-                        });dlg2.show();
+
                     }
                 });
                 dlg.show();

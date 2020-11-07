@@ -52,9 +52,8 @@ class MainActivity : Activity() {
         val signUpBtn = findViewById<TextView>(R.id.signUpBtn)
 
 
-        fun intent(k:Int) {
+        fun intent() {
             var intent = Intent(this, MainActivity::class.java)
-            intent.putExtra("numofjob",k)
             startActivity(intent) // 일반로그인 정보갖고오기
 
         }
@@ -144,7 +143,7 @@ class MainActivity : Activity() {
                                             Sharedpreference.set_Hope_local_sigugun(applicationContext(), "hope_local_sigugun", hope_local_sigugun)// 파일에 맵핑형식으로 저장
 
                                             Toast.makeText(this@MainActivity, "로그인에 성공하였습니다.", Toast.LENGTH_SHORT).show()
-                                            intent(1) //
+                                            intent() //
                                             //Toast.makeText(FindPasswordInfoActivity.this, "등록된 "+worker_pw, Toast.LENGTH_SHORT).show();
                                         } else {  // 회원이 존재하지 않는다면
                                             Sharedpreference.set_email(applicationContext(), "email", user.kakaoAccount?.email) // 이메일만 갖고온 후 나머지 정보는 회원가입 절차에서 입력
@@ -200,7 +199,7 @@ class MainActivity : Activity() {
                                             Sharedpreference.set_Hope_local_sido(applicationContext(), "hope_local_sido", hope_local_sido)
                                             Sharedpreference.set_Hope_local_sigugun(applicationContext(), "hope_local_sigugun", hope_local_sigugun)// 파일에 맵핑형식으로 저장
 
-                                            intent(1) //
+                                            intent() //
                                             //Toast.makeText(FindPasswordInfoActivity.this, "등록된 "+worker_pw, Toast.LENGTH_SHORT).show();
                                         } else {  // 회원이 존재하지 않는다면
                                             Sharedpreference.set_email(applicationContext(), "worker_email", user.id.toString())
@@ -271,7 +270,7 @@ class MainActivity : Activity() {
                                                             Sharedpreference.set_Hope_local_sido(applicationContext(), "hope_local_sido", hope_local_sido)
                                                             Sharedpreference.set_Hope_local_sigugun(applicationContext(), "hope_local_sigugun", hope_local_sigugun)// 파일에 맵핑형식으로 저장
 
-                                                            intent(1) //
+                                                            intent() //
                                                             //Toast.makeText(FindPasswordInfoActivity.this, "등록된 "+worker_pw, Toast.LENGTH_SHORT).show();
                                                         } else {  // 회원이 존재하지 않는다면
                                                             Sharedpreference.set_email(applicationContext(), "worker_email", user.kakaoAccount?.email) // 이메일만 갖고온 후 나머지 정보는 회원가입 절차에서 입력
@@ -345,6 +344,8 @@ class MainActivity : Activity() {
                                 j++;
                             } ///실행되다가
 
+                            Sharedpreference.set_numofjob(applicationContext(), "numofjob", j.toString())
+
                             Sharedpreference.set_email(applicationContext(), "worker_email", worker_email)
                             Sharedpreference.set_Nickname(applicationContext(), "worker_name", worker_name)
                             Sharedpreference.set_Password(applicationContext(), "worker_pw", password)
@@ -358,7 +359,7 @@ class MainActivity : Activity() {
                             Sharedpreference.set_Hope_local_sido(applicationContext(), "local_sido", local_sido)
                             Sharedpreference.set_Hope_local_sigugun(applicationContext(), "local_sigugun", local_sigugun)// 파일에 맵핑형식으로 저장
 
-                            intent(j) //
+                            intent() //
                             //Toast.makeText(FindPasswordInfoActivity.this, "등록된 "+worker_pw, Toast.LENGTH_SHORT).show();
                         } else {  // 회원이 존재하지 않는다면
                             Toast.makeText(this@MainActivity, "로그인실패", Toast.LENGTH_SHORT).show();

@@ -144,8 +144,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         //     getSupportActionBar().setHomeAsUpIndicator(R.drawable.search_white_24dp);
 
-        Intent intent1 = getIntent();
-        int numofjob = intent1.getExtras().getInt("numofjob");
+        String r = Sharedpreference.get_numofjob(mContext,"numofjob");
+        int numofjob = Integer.parseInt(r);
         resetjobpost = findViewById(R.id.resetjobpost);
 
         for(int i=numofjob-1; i>=0; i--){

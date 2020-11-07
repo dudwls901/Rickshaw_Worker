@@ -29,7 +29,8 @@ public class ListViewItem {
         this.jp_job_finish_time = jp_job_finish_time;
         this.jp_contents = jp_contents;
     }
-    public ListViewItem(String title,String date,int pay,String job,String place,String office, String paid, boolean urgency){
+    //나의현장탭 지난현장 +paid
+    public ListViewItem(String title,String date,int pay,String job,String place,String office, String paid, boolean urgency,String jp_job_start_time, String jp_job_finish_time, String jp_contents){
         this.title=title;
         this.date=date;
         this.pay=pay;
@@ -38,6 +39,9 @@ public class ListViewItem {
         this.office=office;
         this.paid=paid;
         this.urgency=urgency;
+        this.jp_job_start_time = jp_job_start_time;
+        this.jp_job_finish_time = jp_job_finish_time;
+        this.jp_contents = jp_contents;
     }
     public ListViewItem(String title,String date,int pay,String job,String place,String office, boolean urgency){
         this.title=title;
