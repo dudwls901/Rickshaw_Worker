@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ApplyStateRequest extends StringRequest {
-    final static private String URL = "http://rickshaw.dothome.co.kr/ApplyStateRequest.php";
+    final static private String URL = "http://rickshaw.dothome.co.kr/ApplyStateOfMyField.php";
 
     private Map<String, String> parameters;  // 전송 데이터 넣을 Map 객체 선언
 
