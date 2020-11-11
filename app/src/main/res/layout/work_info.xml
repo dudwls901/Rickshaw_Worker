@@ -15,7 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="일자리 정보"
+            android:text="구인글 상세"
             android:textColor="@color/WhiteColor"
             android:textSize="20sp" />
 
@@ -258,6 +258,31 @@
                 android:text="3명"
                 android:textSize="17sp" />
         </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="현장주소"
+                android:textSize="17sp" />
+
+            <TextView
+                android:id="@+id/address_tv"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:gravity="left|center"
+                android:text=""
+                android:textSize="17sp" />
+        </TableRow>
+
 
         <TableRow
             android:layout_width="match_parent"

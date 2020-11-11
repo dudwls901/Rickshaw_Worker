@@ -26,19 +26,21 @@
             <RadioButton
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:text="1주일"
-
+                android:text="1개월"
+                android:id="@+id/btn1"
                 />
 
             <RadioButton
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:text="1개월" />
+                android:text="3개월"
+                android:id="@+id/btn2"/>
 
             <RadioButton
                 android:layout_width="130dp"
                 android:layout_height="wrap_content"
-                android:text="3개월"
+                android:id="@+id/btn3"
+                android:text="6개월"
 
                 />
         </RadioGroup>
