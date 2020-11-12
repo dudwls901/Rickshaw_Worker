@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     int jp_job_cost[];
     int jp_job_tot_people[], jp_job_current_people[];
     boolean is_urgency[];
-    String jp_num[],field_address[], job_name[], business_reg_num[], local_sido1[],local_sigugun1[], jp_title[], jp_contents[], jp_job_date[], jp_job_start_time[], jp_job_finish_time[], jp_is_urgency[], jp_datetime[];
+    String jp_num[],field_address[], job_name[], business_reg_num[], local_sido1[],local_sigugun1[], jp_title[], jp_contents[], jp_job_date[], jp_job_start_time[], jp_job_finish_time[], jp_is_urgency[], jp_datetime[], field_name[];
     Button btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9, btn10, btn11, btn12, btn13, btn14, btn15, btn16;
     Button[] job = {null,btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9, btn10, btn11, btn12, btn13, btn14, btn15, btn16};
     int[] jobid = {0, R.id.btn1, R.id.btn2, R.id.btn3, R.id.btn4, R.id.btn5, R.id.btn6, R.id.btn7, R.id.btn8, R.id.btn9, R.id.btn10, R.id.btn11,
@@ -309,6 +309,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                     JSONObject jResponse = new JSONObject(response.substring(response.indexOf("{"), response.lastIndexOf("}") + 1));
                     JSONArray array = jResponse.getJSONArray("response");
+                    Log.d("mytest1",response);
+                    Log.d("mytest2",array.toString());
                     numofpost[0] = array.length();
                     jp_num = new String[numofpost[0]];
                     job_name = new String[numofpost[0]];
@@ -325,6 +327,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     jp_job_current_people = new int[numofpost[0]];
                     jp_datetime = new String[numofpost[0]];
                     is_urgency = new boolean[numofpost[0]];
+                    field_name = new String[numofpost[0]];
                     //Log.d("==========", String.valueOf(numofpost[0]));
                     final ArrayList<ListViewItem> workInfoArrayList = new ArrayList<>();
 
@@ -343,6 +346,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         jp_job_start_time[i] = MainRequest.getString("jp_job_start_time");
                         jp_job_finish_time[i] = MainRequest.getString("jp_job_finish_time");
                         jp_is_urgency[i] = MainRequest.getString("jp_is_urgency");
+                     //   field_name[i] = MainRequest.getString("field_name");
                         if(jp_is_urgency[i].equals("0")) is_urgency[i]=false;
                         else is_urgency[i] = true;
                         jp_datetime[i] = MainRequest.getString("jp_datetime");

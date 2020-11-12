@@ -20,9 +20,9 @@ import com.example.capstone.R;
 public class WorkInfoActivity extends AppCompatActivity {
 
     Toolbar toolbar;
-    TextView title_tv,place_tv,office_info_tv,title_name_tv,job_tv,pay_tv,date_tv,time_tv,people_tv,contents_tv;
+    TextView title_tv,place_tv,office_info_tv,title_name_tv,job_tv,pay_tv,date_tv,time_tv,people_tv,contents_tv,address_tv;
     Button map_btn,applay_btn,call_btn,message_btn;
-    String jp_title, field_address, manager_office_name, job_name, jp_job_cost, jp_job_date, jp_job_start_time, jp_job_finish_time, jp_job_tot_people, jp_contents;
+    String jp_title, field_address, manager_office_name, job_name, jp_job_cost, jp_job_date, jp_job_start_time, jp_job_finish_time, jp_job_tot_people, jp_contents, field_name;
 
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -45,6 +45,7 @@ public class WorkInfoActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        address_tv = findViewById(R.id.address_tv);
         title_tv = findViewById(R.id.title_tv);
         place_tv = findViewById(R.id.place_tv);
         office_info_tv = findViewById(R.id.office_info_tv);
@@ -75,9 +76,11 @@ public class WorkInfoActivity extends AppCompatActivity {
         jp_job_finish_time = receiver.getExtras().getString("jp_job_finish_time").substring(0,5);
         jp_job_tot_people = receiver.getExtras().getString("jp_job_tot_people");
         jp_contents = receiver.getExtras().getString("jp_contents");
+        field_name = receiver.getExtras().getString("field_name");
 
+        address_tv.setText(field_address);
         title_tv.setText(jp_title);
-        place_tv.setText(field_address);
+        place_tv.setText(field_name);
         office_info_tv.setText(manager_office_name);
         title_name_tv.setText(jp_title);
         job_tv.setText(job_name);
