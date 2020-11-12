@@ -95,6 +95,8 @@ public class ListWorkGoneAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         }
 
         myViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+
+
             @Override
             public void onClick(View view) {
                 context =view.getContext();

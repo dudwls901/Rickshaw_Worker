@@ -40,7 +40,7 @@ public class MyFieldActivity extends AppCompatActivity {
         tabs = findViewById(R.id.tabs);
         tabs.addTab(tabs.newTab(),true);
         tabs.addTab(tabs.newTab());
-        tabs.getTabAt(0).setText("지원 현황");
+       tabs.getTabAt(0).setText("지원 현황");
         tabs.getTabAt(1).setText("지난 현장");
         callFragment(FRAGMENT2);
         tabs.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {

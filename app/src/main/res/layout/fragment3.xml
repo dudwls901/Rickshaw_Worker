@@ -59,7 +59,7 @@
             android:layout_width="140dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:focusable="false"
+            android:text="2020-04-30"
             app:layout_constraintLeft_toRightOf="@+id/search"
             app:layout_constraintTop_toBottomOf="@+id/radiogroup" />
 
@@ -89,7 +89,7 @@
             android:layout_width="140dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
-            android:focusable="false"
+            android:text="2020-04-30"
             app:layout_constraintLeft_toRightOf="@id/txt1"
             app:layout_constraintTop_toBottomOf="@+id/radiogroup" />
 
