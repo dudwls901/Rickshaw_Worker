@@ -31,14 +31,18 @@ public class AccountManageActivity extends Activity {
         Button accountmodify = (Button) findViewById(R.id.accountmodify);
         TextView bankaccount = findViewById(R.id.bankaccount);
         TextView bankname = findViewById(R.id.bankname);
+        TextView membernickname = findViewById(R.id.membernickname);
 
+        membernickname.setText(Sharedpreference.get_Nickname(mContext, "worker_name"));
         bankaccount.setText(Sharedpreference.get_bankaccount(mContext,"worker_bankaccount"));
         bankname.setText(Sharedpreference.get_bankname(mContext,"worker_bankname"));
 
         accountmodify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),AccountAddActivity.class); startActivity(intent);
+                Intent intent = new Intent(getApplicationContext(), AccountAddActivity.class);
+                intent.putExtra("isUpdate", 1);
+                startActivity(intent);
             }
         });
     }

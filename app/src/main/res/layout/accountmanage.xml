@@ -29,6 +29,7 @@
         android:layout_marginTop="7dp"
         android:layout_marginBottom="7dp">
         <TextView
+            android:id="@+id/membernickname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="사용자"
