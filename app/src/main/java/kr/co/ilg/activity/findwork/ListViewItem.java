@@ -2,7 +2,7 @@ package kr.co.ilg.activity.findwork;
 
 public class ListViewItem {
 
-    public String title,date,job,place,office,paid,jp_job_start_time, jp_job_finish_time, jp_contents, jp_num;
+    public String title,date,job,place,business_reg_num,office,paid,jp_job_start_time, jp_job_finish_time, jp_contents, jp_num,fieldname;
     public int pay, current_people, total_people;
     public boolean urgency ;
     public ListViewItem(String title,String date,int pay,String job,String place,String office,int current_people,int total_people){
@@ -45,14 +45,17 @@ public class ListViewItem {
         this.jp_num = jp_num;
     }
     //나의현장탭 지난현장 +paid
-    public ListViewItem(String title,String date,int pay,String job,String place,String office, String paid, boolean urgency,String jp_job_start_time, String jp_job_finish_time, String jp_contents){
+    public ListViewItem(String business_reg_num,String jp_num, String fieldname,String title,String date,int pay,String job,String place,String office, String paid, boolean urgency,String jp_job_start_time, String jp_job_finish_time, String jp_contents){
         this.title=title;
         this.date=date;
+        this.business_reg_num = business_reg_num;
         this.pay=pay;
         this.job=job;
+        this.fieldname = fieldname;
         this.place=place;
         this.office=office;
         this.paid=paid;
+        this.jp_num = jp_num;
         this.urgency=urgency;
         this.jp_job_start_time = jp_job_start_time;
         this.jp_job_finish_time = jp_job_finish_time;

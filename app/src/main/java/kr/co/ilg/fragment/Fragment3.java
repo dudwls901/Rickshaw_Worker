@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -62,9 +63,10 @@ public class Fragment3 extends Fragment{
     String jp_is_urgency[];
     int jp_job_cost[];
     boolean k[];
-    String date;
+    String date, phpdate, phpdate1;
+    Button search;
     EditText edit1, edit2;
-    String field_address[],jp_contents[],paid[], job_name[], jp_title[], fieldname[], jp_job_date[], officename[],mf_is_paid[],jp_job_start_time[],jp_job_finish_time[];
+    String field_address[],business_reg_num[],jp_num[],jp_contents[],paid[], job_name[], jp_title[], fieldname[], jp_job_date[], officename[],mf_is_paid[],jp_job_start_time[],jp_job_finish_time[];
 
 
     @Nullable
@@ -92,13 +94,15 @@ public class Fragment3 extends Fragment{
         int m = cal.get(Calendar.MONTH);
         int y = cal.get(Calendar.YEAR);
         int d = cal.get(Calendar.DAY_OF_MONTH);
+        search = viewGroup.findViewById(R.id.search);
 
 
         edit1.setText(y + "년 "+m + "월 "+ d + "일");
+        phpdate = y+"-"+m+"-"+d;
         edit2.setText(y + "년 "+(m+1) + "월 "+ d + "일");
+        phpdate1 = y+"-"+(m+1)+"-"+d;
 
         dialog1 = (View) View.inflate(context, R.layout.calendar, null);
-        DatePicker datePicker = dialog1.findViewById(R.id.datepicker);
 
         Calendar1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,6 +112,7 @@ public class Fragment3 extends Fragment{
                     public void onDateSet(DatePicker datePicker, int year, int month, int date) {
 
                         String msg = String.format("%d 년 %d 월 %d 일", year, month+1, date);
+                        phpdate = year+"-"+month+1+"-"+date;
                         edit1.setText(msg);
                         btnfalse();
                     }
@@ -119,6 +124,7 @@ public class Fragment3 extends Fragment{
 
             }
         });
+
         Calendar2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -128,6 +134,7 @@ public class Fragment3 extends Fragment{
 
                         String msg = String.format("%d 년 %d 월 %d 일", year, month+1, date);
                         edit2.setText(msg);
+                        phpdate1 = year+"-"+month+1+"-"+date;
                         btnfalse();
                     }
                 }, cal1.get(Calendar.YEAR), cal1.get(Calendar.MONTH), cal1.get(Calendar.DATE));
@@ -144,7 +151,7 @@ public class Fragment3 extends Fragment{
 
 
 
-        final ArrayList<ListViewItem> workInfoArrayList = new ArrayList<>();
+
         /*workInfoArrayList.add(new ListViewItem("빌라 건축", "2020-06-14", 150000, "전기", "서울 영등포구 여의나루로57", "개미인력소", "지급완료", true,"2222222","22222222","3"));
         workInfoArrayList.add(new ListViewItem("제일아파트 건축", "2020-06-17", 130000, "페인트", "서울 영등포구 당산로 219", "베짱이인력소", "지급예정", false,"2222222","22222222","3"));
         workInfoArrayList.add(new ListViewItem("자이아파트 신축", "2020-06-20", 160000, "건축", "서울 영등포구 양평로24길 9", "사람인력소", "지급예정", false,"2222222","22222222","3"));
@@ -178,6 +185,11 @@ public class Fragment3 extends Fragment{
                     paid= new String[ numofarray];
                     jp_contents= new String[ numofarray];
                     k = new boolean[numofarray];
+                    jp_num = new String[numofarray];
+                    business_reg_num = new String[numofarray];
+
+                    final ArrayList<ListViewItem> workInfoArrayList = new ArrayList<>();
+
                     for (int i = 0; i < array.length(); i++) {
                         JSONObject MainRequest = array.getJSONObject(i);
                         job_name[i] = MainRequest.getString("job_name");
@@ -192,6 +204,8 @@ public class Fragment3 extends Fragment{
                         jp_job_start_time[i] = MainRequest.getString("jp_job_start_time");
                         jp_job_finish_time[i] = MainRequest.getString("jp_job_finish_time");
                         jp_contents[i] = MainRequest.getString("jp_contents");
+                        jp_num[i]=MainRequest.getString("jp_num");
+                        business_reg_num[i]=MainRequest.getString("business_reg_num");
                         if(mf_is_paid[i]=="0"){
                             paid[i] = "지급안됨";
                         }
@@ -203,7 +217,7 @@ public class Fragment3 extends Fragment{
 
 
 
-                       workInfoArrayList.add(new ListViewItem(jp_title[i],jp_job_date[i],jp_job_cost[i],job_name[i],field_address[i],officename[i],paid[i],k[i],jp_job_start_time[i],jp_job_finish_time[i],jp_contents[i]));
+                       workInfoArrayList.add(new ListViewItem(business_reg_num[i],jp_num[i],fieldname[i],jp_title[i],jp_job_date[i],jp_job_cost[i],job_name[i],field_address[i],officename[i],paid[i],k[i],jp_job_start_time[i],jp_job_finish_time[i],jp_contents[i]));
                     } // 값넣기*/
                     ListAdapter1 myworkAdapter = new ListAdapter1(context.getApplicationContext(), workInfoArrayList);
                     recyclerView.setAdapter(myworkAdapter);
@@ -215,18 +229,16 @@ public class Fragment3 extends Fragment{
             }
         };
 
-        GoneFieldRequest mainRequest = new GoneFieldRequest(worker_email, rListener);  // Request 처리 클래스
+        search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                GoneFieldRequest mainRequest = new GoneFieldRequest(worker_email,phpdate, phpdate1, rListener);  // Request 처리 클래스
 
-        RequestQueue queue = Volley.newRequestQueue(context);  // 데이터 전송에 사용할 Volley의 큐 객체 생성
-        queue.add(mainRequest);
-
-
-        /*Calendar1.setOnClickListener(this);
-        Calendar2.setOnClickListener(this);*/
-        final Calendar c = Calendar.getInstance();
-        int mYear = c.get(Calendar.YEAR);
-        int mMonth = c.get(Calendar.MONTH);
-        int mDay = c.get(Calendar.DAY_OF_MONTH);
+                RequestQueue queue = Volley.newRequestQueue(context);  // 데이터 전송에 사용할 Volley의 큐 객체 생성
+                queue.add(mainRequest);
+                Log.d("qqqqqqqqqqqqqqqq",phpdate+" "+phpdate1);
+            }
+        });
 
 
 
@@ -245,6 +257,7 @@ public class Fragment3 extends Fragment{
                     cal4.add(Calendar.MONTH,+5);
                 }
                 date = cal2.get(Calendar.YEAR) + "년 "+cal2.get(Calendar.MONTH) + "월 "+ cal2.get(Calendar.DAY_OF_MONTH) + "일";
+                phpdate = cal2.get(Calendar.YEAR)+"-"+cal2.get(Calendar.MONTH)+"-"+cal2.get(Calendar.DAY_OF_MONTH);
                 edit1.setText(date);
 
             }
@@ -259,6 +272,7 @@ public class Fragment3 extends Fragment{
                     cal4.add(Calendar.MONTH,+5);
                 }
                 date = cal3.get(Calendar.YEAR) + "년 "+cal3.get(Calendar.MONTH) + "월 "+ cal3.get(Calendar.DAY_OF_MONTH) + "일";
+                phpdate = cal3.get(Calendar.YEAR)+"-"+cal3.get(Calendar.MONTH)+"-"+cal3.get(Calendar.DAY_OF_MONTH);
                 edit1.setText(date);
             }
             else if(i == R.id.btn3 && u==0){
@@ -272,6 +286,7 @@ public class Fragment3 extends Fragment{
                     cal3.add(Calendar.MONTH,+2);
                 }
                 date = cal4.get(Calendar.YEAR) + "년 "+cal4.get(Calendar.MONTH) + "월 "+ cal4.get(Calendar.DAY_OF_MONTH) + "일";
+                phpdate = cal4.get(Calendar.YEAR)+"-"+cal4.get(Calendar.MONTH)+"-"+cal4.get(Calendar.DAY_OF_MONTH);
                 edit1.setText(date);
             }
 
