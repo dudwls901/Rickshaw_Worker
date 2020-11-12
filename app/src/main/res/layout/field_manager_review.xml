@@ -64,6 +64,7 @@
         android:layout_width="95dp"
         android:layout_height="43dp"
         android:layout_marginTop="13dp"
+        android:id="@+id/register"
         android:layout_marginRight="20dp"
         android:background="@drawable/mainbutton"
         android:text="등록"

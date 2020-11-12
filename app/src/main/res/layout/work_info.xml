@@ -15,7 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="일자리 정보"
+            android:text="구인글 상세"
             android:textColor="@color/WhiteColor"
             android:textSize="20sp" />
 
@@ -282,6 +282,7 @@
                 android:text=""
                 android:textSize="17sp" />
         </TableRow>
+
 
         <TableRow
             android:layout_width="match_parent"

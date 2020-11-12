@@ -26,7 +26,9 @@ import com.example.capstone.R;
 
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import kr.co.ilg.activity.login.FindPasswordInfoActivity;
 import kr.co.ilg.activity.login.FindPwRequest;
@@ -34,8 +36,12 @@ import kr.co.ilg.activity.login.FindPwRequest;
 public class ListWorkPickOutAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     LinearLayout gotoworkCheck, gotohomeCheck;
     TextView checkStart, checkFinish;
+    TextView startTime, finishTime, work_date;
     Intent intent;
     View dialogView;
+    long startDiff = 1111111111, finishDiff = 1111111111;
+    long startcheckterm1, startcheckterm2, finishCheckterm1, finishCheckterm2;
+    String key, mf_is_choolgeun, mf_is_toigeun;
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
 
@@ -58,7 +64,6 @@ public class ListWorkPickOutAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         }
     }
 
-
     private Context context;
     private ArrayList<ListViewItem> workInfo;
 
@@ -79,9 +84,6 @@ public class ListWorkPickOutAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
 
         final MyViewHolder myViewHolder = (MyViewHolder) holder;
-
-//Log.d("booltest",workInfo.get(position).urgency);
-//        Log.d("booltest",workInfo.get(position).title);
         if (workInfo.get(position).urgency == false) {
             myViewHolder.title.setText(workInfo.get(position).title);
             myViewHolder.date.setText(workInfo.get(position).date);
@@ -101,21 +103,62 @@ public class ListWorkPickOutAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         }
 
         myViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
-
-
             @Override
             public void onClick(View view) {
+                long mNow = System.currentTimeMillis();
+                Date mReDate = new Date(mNow);
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
+                String sDate = dateFormat.format(mReDate);
+                String sTime = timeFormat.format(mReDate);
+                String startcheck1 = "", startcheck2 = "", finishcheck1 = "", finishcheck2 = "";
+
+                try {
+                    Date nowTime = timeFormat.parse(sTime);
+                    Date startTime = timeFormat.parse(workInfo.get(position).jp_job_start_time);
+                    Date finishTime = timeFormat.parse(workInfo.get(position).jp_job_finish_time);
+                    startDiff = (nowTime.getTime() - startTime.getTime()) / 1000;
+                    finishDiff = (nowTime.getTime() - finishTime.getTime()) / 1000;
+
+                    startcheckterm1 = startTime.getTime() - 1800000;
+                    startcheckterm2 = startTime.getTime() + 1800000;
+                    finishCheckterm1 = finishTime.getTime() - 1800000;
+                    finishCheckterm2 = finishTime.getTime() + 1800000;
+
+                    Date start1 = new Date(startcheckterm1);
+                    Date start2 = new Date(startcheckterm2);
+                    Date finish1 = new Date(finishCheckterm1);
+                    Date finish2 = new Date(finishCheckterm2);
+                    startcheck1 = timeFormat.format(start1);
+                    startcheck2 = timeFormat.format(start2);
+                    finishcheck1 = timeFormat.format(finish1);
+                    finishcheck2 = timeFormat.format(finish2);
+                } catch (java.text.ParseException pe) {
+                    Log.d("mytest", pe.toString());
+                }
+
+                String[] splitNowDate = sDate.split("-");
+                String[] splitNowTime = sTime.split(":");
+
+                Toast.makeText(context, "현재시각 : " + splitNowDate[0] + "년 " + splitNowDate[1] + "월 " + splitNowDate[2] + "일 "
+                        + splitNowTime[0] + "시 " + splitNowTime[1] + "분 " + splitNowTime[2] + "초", Toast.LENGTH_SHORT).show();
                 context = view.getContext();
                 final AlertDialog.Builder dlg = new AlertDialog.Builder(context);
                 dialogView = View.inflate(context, R.layout.work_check, null);
                 dlg.setView(dialogView);
                 gotoworkCheck = dialogView.findViewById(R.id.gotoworkCheck);
                 gotohomeCheck = dialogView.findViewById(R.id.gotohomeCheck);
+                work_date = dialogView.findViewById(R.id.work_date);
                 checkStart = dialogView.findViewById(R.id.checkStart);
                 checkFinish = dialogView.findViewById(R.id.checkFinish);
+                startTime = dialogView.findViewById(R.id.startTime);
+                finishTime = dialogView.findViewById(R.id.finishTime);
 
-                checkStart.setText("출근 인증\n" + workInfo.get(position).jp_job_start_time);
-                checkFinish.setText("퇴근 인증\n" + workInfo.get(position).jp_job_finish_time);
+                work_date.setText("출퇴근 일자 : " + workInfo.get(position).date);
+                startTime.setText("출근 시간\n" + workInfo.get(position).jp_job_start_time);
+                finishTime.setText("퇴근 시간\n" + workInfo.get(position).jp_job_finish_time);
+                checkStart.setText(startcheck1 + " ~ " + startcheck2);
+                checkFinish.setText(finishcheck1 + " ~ " + finishcheck2);
 
                 dlg.setNegativeButton("닫기", new DialogInterface.OnClickListener() {
                     @Override
@@ -130,17 +173,18 @@ public class ListWorkPickOutAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                         try {
                             JSONObject jResponse = new JSONObject(response.substring(response.indexOf("{"), response.lastIndexOf("}") + 1));
                             boolean select_CT = jResponse.getBoolean("select_CT");
-                            if(select_CT) {
-                                String mf_is_choolgeun =  jResponse.getString("mf_is_choolgeun");
-                                String mf_is_toigeun =  jResponse.getString("mf_is_toigeun");
+                            if (select_CT) {
+                                mf_is_choolgeun = jResponse.getString("mf_is_choolgeun");
+                                mf_is_toigeun = jResponse.getString("mf_is_toigeun");
 
-                                if(mf_is_choolgeun.equals("1"))
+                                if (mf_is_choolgeun.equals("1"))
                                     gotoworkCheck.setBackgroundColor(context.getResources().getColor(R.color.checkColor));
                                 else ;
-                                if(mf_is_toigeun.equals("1"))
+                                if (mf_is_toigeun.equals("1"))
                                     gotohomeCheck.setBackgroundColor(context.getResources().getColor(R.color.checkColor));
                                 else ;
 
+                                Log.d("======출퇴근=======", mf_is_choolgeun + mf_is_toigeun);
                             } else {
                                 Toast.makeText(context, "출퇴근 여부 로드 실패", Toast.LENGTH_SHORT).show();
                             }
@@ -149,29 +193,123 @@ public class ListWorkPickOutAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                         }
                     }
                 };
-                MyFieldSelectRequest mfsRequest = new MyFieldSelectRequest(Sharedpreference.get_email(context, "worker_email"), workInfo.get(position).jp_num, rListener);
+                TimeCheckRequest tcRequest = new TimeCheckRequest("LoadChoolToi", Sharedpreference.get_email(context, "worker_email"), workInfo.get(position).jp_num, rListener);
 
                 RequestQueue queue = Volley.newRequestQueue(context);
-                queue.add(mfsRequest);
+                queue.add(tcRequest);
 
                 gotoworkCheck.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        gotoworkCheck.setBackgroundColor(context.getResources().getColor(R.color.checkColor));
+                        TimeCheck();
+                        //if(gotoworkCheck.getBackgroundColor)
+                        if (mf_is_choolgeun.equals("0")) {  // 출근 인증 안 돼있을 때
+                            if (sDate.equals(workInfo.get(position).date)) {  // 날짜 비교
+                                if (startDiff > -1800 && startDiff < 1800) {  // 30분 전후 이내인가
+                                    key = "checkStart";
+                                    Response.Listener rListener = new Response.Listener<String>() {
+                                        @Override
+                                        public void onResponse(String response) {
+                                            try {
+                                                JSONObject jResponse = new JSONObject(response.substring(response.indexOf("{"), response.lastIndexOf("}") + 1));
+                                                boolean checkStartSuccess = jResponse.getBoolean("checkStartSuccess");
+                                                if (checkStartSuccess) {
+                                                    gotoworkCheck.setBackgroundColor(context.getResources().getColor(R.color.checkColor));
+                                                    Toast.makeText(context, "출근 인증 완료", Toast.LENGTH_SHORT).show();
+                                                } else {
+                                                    Toast.makeText(context, "출근 인증 실패 : DB Error", Toast.LENGTH_SHORT).show();
+                                                }
+                                            } catch (Exception e) {
+                                                Log.d("mytest", e.toString());
+                                            }
+                                        }
+                                    };
+                                    TimeCheckRequest tcRequest = new TimeCheckRequest(key, Sharedpreference.get_email(context, "worker_email"), workInfo.get(position).jp_num, rListener);
+
+                                    RequestQueue queue = Volley.newRequestQueue(context);
+                                    queue.add(tcRequest);
+                                } else if (startDiff == 1111111111) {  // 시간 비교 위한 클래스 오류
+                                    Toast.makeText(context, "서비스 오류 : 현장 관리자에게 문의 바람", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(context, "출근인증 시간이 아닙니다.", Toast.LENGTH_SHORT).show();
+                                }
+                            } else {
+                                Toast.makeText(context, "출근 날짜가 아닙니다.", Toast.LENGTH_SHORT).show();
+                            }
+                        } else {
+                            Toast.makeText(context, "출근 인증이 이미 완료되었습니다.", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 });
                 gotohomeCheck.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        gotohomeCheck.setBackgroundColor(context.getResources().getColor(R.color.checkColor));
+                        TimeCheck();
+                        if (mf_is_toigeun.equals("0")) {  // 퇴근 인증 안 돼있을 때
+                            if (sDate.equals(workInfo.get(position).date)) {  // 날짜 비교
+                                if (finishDiff > -1800 && finishDiff < 1800) {  // 30분 전후 이내인가
+                                    key = "checkFinish";
+                                    Response.Listener rListener = new Response.Listener<String>() {
+                                        @Override
+                                        public void onResponse(String response) {
+                                            try {
+                                                JSONObject jResponse = new JSONObject(response.substring(response.indexOf("{"), response.lastIndexOf("}") + 1));
+                                                boolean checkFinishSuccess = jResponse.getBoolean("checkFinishSuccess");
+                                                if (checkFinishSuccess) {
+                                                    gotohomeCheck.setBackgroundColor(context.getResources().getColor(R.color.checkColor));
+                                                    Toast.makeText(context, "퇴근 인증 완료", Toast.LENGTH_SHORT).show();
+                                                } else {
+                                                    Toast.makeText(context, "퇴근 인증 실패 : DB Error", Toast.LENGTH_SHORT).show();
+                                                }
+                                            } catch (Exception e) {
+                                                Log.d("mytest", e.toString());
+                                            }
+                                        }
+                                    };
+                                    TimeCheckRequest tcRequest = new TimeCheckRequest(key, Sharedpreference.get_email(context, "worker_email"), workInfo.get(position).jp_num, rListener);
+
+                                    RequestQueue queue = Volley.newRequestQueue(context);
+                                    queue.add(tcRequest);
+                                } else if (finishDiff == 1111111111) {  // 시간 비교 위한 클래스 오류
+                                    Toast.makeText(context, "서비스 오류 : 현장 관리자에게 문의 바람", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(context, "퇴근 인증 시간이 아닙니다.", Toast.LENGTH_SHORT).show();
+                                }
+                            } else {
+                                Toast.makeText(context, "퇴근 날짜가 아닙니다.", Toast.LENGTH_SHORT).show();
+                            }
+                        } else {
+                            Toast.makeText(context, "퇴근 인증이 이미 완료되었습니다.", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 });
                 dlg.show();
             }
 
+            public void TimeCheck() {
+                long mNow = System.currentTimeMillis();
+                Date mReDate = new Date(mNow);
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
+                String sTime = timeFormat.format(mReDate);
+
+                try {
+                    Date nowTime = timeFormat.parse(sTime);
+                    Date startTime = timeFormat.parse(workInfo.get(position).jp_job_start_time);
+                    Date finishTime = timeFormat.parse(workInfo.get(position).jp_job_finish_time);
+                    startDiff = (nowTime.getTime() - startTime.getTime()) / 1000;
+                    finishDiff = (nowTime.getTime() - finishTime.getTime()) / 1000;
+
+                    Log.d("=====현재시간 ", String.valueOf(nowTime.getTime()));
+                    Log.d("=====출근시간 ", String.valueOf(startTime.getTime()));
+                    Log.d("=====퇴근시간 ", String.valueOf(finishTime.getTime()));
+
+
+                } catch (java.text.ParseException pe) {
+                    Log.d("mytest", pe.toString());
+                }
+            }
         });
-
-
     }
 
     @Override

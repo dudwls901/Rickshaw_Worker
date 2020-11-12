@@ -83,6 +83,8 @@ public class ListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             public void onClick(View view) {
                 Context context=view.getContext();
                 Intent intent=new Intent(context,WorkInfoActivity.class);
+                intent.putExtra("business_reg_num", workInfo.get(position).business_reg_num);
+                intent.putExtra("jp_num", workInfo.get(position).jp_num);
                 intent.putExtra("jp_title",workInfo.get(position).title);
                 intent.putExtra("field_address",workInfo.get(position).place);
                 intent.putExtra("manager_office_name",workInfo.get(position).office);
