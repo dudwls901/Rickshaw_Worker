@@ -7,16 +7,17 @@ import com.android.volley.toolbox.StringRequest;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MyFieldSelectRequest extends StringRequest {
-    final static private String URL = "http://rickshaw.dothome.co.kr/MyFieldSelect.php";
+public class TimeCheckRequest extends StringRequest {
+    final static private String URL = "http://rickshaw.dothome.co.kr/TimeCheck.php";
 
     private Map<String, String> parameters;
 
     // 출퇴근 인증 여부 확인
-    public MyFieldSelectRequest(String worker_email, String jp_num, Response.Listener<String> listener) {
+    public TimeCheckRequest(String key, String worker_email, String jp_num, Response.Listener<String> listener) {
         super(Method.POST, URL, listener, null);
 
         parameters = new HashMap<>();
+        parameters.put("key", key);
         parameters.put("worker_email", worker_email);
         parameters.put("jp_num", jp_num);
     }

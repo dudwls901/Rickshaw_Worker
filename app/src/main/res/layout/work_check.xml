@@ -5,17 +5,21 @@
     android:orientation="vertical">
 
     <TextView
+        android:id="@+id/work_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="※ 출퇴근 인증은 출퇴근 시간 30분 전후 1시간 동안만 가능합니다."
-        android:layout_marginBottom="15dp"
+        android:text="출근일자 : 2020-11-09"
         android:layout_gravity="center"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
         />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="5dp"
         android:layout_gravity="center">
 
         <LinearLayout
@@ -24,6 +28,16 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/startTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:layout_marginBottom="10dp"
+                android:text="출근 시간\n08:30" />
 
             <ImageView
                 android:layout_width="50dp"
@@ -38,7 +52,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="출근 인증\n08:30~09:30" />
+                android:textSize="16sp"
+                android:text="08:30:00 ~ 09:30:00" />
         </LinearLayout>
 
         <LinearLayout
@@ -47,6 +62,16 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/finishTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:layout_marginBottom="10dp"
+                android:text="퇴근 시간\n09:30" />
 
             <ImageView
                 android:layout_width="50dp"
@@ -61,10 +86,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="퇴근 인증\n17:00~18:30" />
+                android:textSize="16sp"
+                android:text="17:00:00 ~ 18:30:00" />
 
         </LinearLayout>
 
     </LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="※ 출퇴근 인증은 출퇴근 시간 30분 전후 1시간 동안만 가능합니다."
+        android:layout_marginTop="15dp"
+        android:layout_gravity="center"
+        />
 
 </LinearLayout>
