@@ -6,23 +6,30 @@ import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.text.Html;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.Volley;
 import com.example.capstone.R;
+
+import org.json.JSONObject;
 
 public class WorkInfoActivity extends AppCompatActivity {
 
     Toolbar toolbar;
-    TextView title_tv,place_tv,office_info_tv,title_name_tv,job_tv,pay_tv,date_tv,time_tv,people_tv,contents_tv;
-    Button map_btn,applay_btn,call_btn,message_btn;
-    String jp_title, field_address, manager_office_name, job_name, jp_job_cost, jp_job_date, jp_job_start_time, jp_job_finish_time, jp_job_tot_people, jp_contents;
+    TextView title_tv,place_tv,office_info_tv,title_name_tv,job_tv,pay_tv,date_tv,time_tv,people_tv,contents_tv,address_tv;
+    Button map_btn,apply_btn,call_btn,message_btn;
+    String jp_title, field_address, manager_office_name, job_name, jp_job_cost, jp_job_date, jp_job_start_time, jp_job_finish_time, jp_job_tot_people, jp_contents, business_reg_num,jp_num;
 
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -56,15 +63,18 @@ public class WorkInfoActivity extends AppCompatActivity {
         people_tv = findViewById(R.id.people_tv);
         contents_tv = findViewById(R.id.contents_tv);
         map_btn = findViewById(R.id.map_btn);
-        applay_btn = findViewById(R.id.apply_btn);
+        apply_btn = findViewById(R.id.apply_btn);
         call_btn = findViewById(R.id.call_btn);
         message_btn = findViewById(R.id.message_btn);
+        address_tv = findViewById(R.id.address_tv);
 
         place_tv.setPaintFlags(place_tv.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         office_info_tv.setPaintFlags(place_tv.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
 
         //TODO ListAdapter에서 intent로 값만 넘기면 됨
         Intent receiver = getIntent();
+        business_reg_num = receiver.getExtras().getString("bnum");
+        jp_num = receiver.getExtras().getString("jp_num");
         jp_title = receiver.getExtras().getString("jp_title");
         field_address = receiver.getExtras().getString("field_address");
         manager_office_name = receiver.getExtras().getString("manager_office_name");
@@ -86,6 +96,7 @@ public class WorkInfoActivity extends AppCompatActivity {
         time_tv.setText(jp_job_start_time+"~"+jp_job_finish_time);
         people_tv.setText(jp_job_tot_people+"명");
         contents_tv.setText(jp_contents);
+        address_tv.setText(field_address);
 
         map_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,11 +118,40 @@ public class WorkInfoActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent(WorkInfoActivity.this,OfficeInfoActivity.class);
+                intent.putExtra("business_reg_num", business_reg_num);
                 startActivity(intent);
             }
         });
 
+        apply_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Response.Listener rListener = new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jResponse = new JSONObject(response.substring(response.indexOf("{"), response.lastIndexOf("}") + 1));
+                            boolean AlreadyApply = jResponse.getBoolean("AlreadyApply");
+                            boolean InsertApplySuccess = jResponse.getBoolean("InsertApplySuccess");
+                            if (!(AlreadyApply)) {
+                                if(InsertApplySuccess) {
+                                    Toast.makeText(getApplicationContext(), "지원이 완료되었습니다.", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(getApplicationContext(), "지원 실패 : DB Error", Toast.LENGTH_SHORT).show();
+                                }
+                            } else {
+                                Toast.makeText(getApplicationContext(), "이미 지원한 구인글입니다.", Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (Exception e) {
+                            Log.d("mytest", e.toString());
+                        }
+                    }
+                };
+                ApplyRequest aRequest = new ApplyRequest(Sharedpreference.get_email(WorkInfoActivity.this, "worker_email"), jp_num, rListener);
 
-
+                RequestQueue queue = Volley.newRequestQueue(WorkInfoActivity.this);
+                queue.add(aRequest);
+            }
+        });
     }
 }

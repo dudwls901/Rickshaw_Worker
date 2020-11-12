@@ -134,7 +134,7 @@ public class Fragment2 extends Fragment {
                             pickworkInfoArrayList.add(new ListViewItem(jp_num[i], jp_title[i], jp_job_date[i], jp_job_cost[i], job_name[i], field_address[i], manager_office_name[i], jp_job_current_people[i],
                                     jp_job_tot_people[i], is_urgency[i], jp_job_start_time[i], jp_job_finish_time[i], jp_contents[i]));
                         else
-                            workInfoArrayList.add(new ListViewItem(jp_title[i], jp_job_date[i], jp_job_cost[i], job_name[i], field_address[i], manager_office_name[i], jp_job_current_people[i],
+                            workInfoArrayList.add(new ListViewItem(business_reg_num[i], jp_num[i], jp_title[i], jp_job_date[i], jp_job_cost[i], job_name[i], field_address[i], manager_office_name[i], jp_job_current_people[i],
                                     jp_job_tot_people[i], is_urgency[i], jp_job_start_time[i], jp_job_finish_time[i], jp_contents[i]));
                     }
                     ListWorkPickOutAdapter myworkAdapter1 = new ListWorkPickOutAdapter(context.getApplicationContext(), pickworkInfoArrayList);
