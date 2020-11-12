@@ -40,14 +40,14 @@ public class MyFieldActivity extends AppCompatActivity {
         tabs = findViewById(R.id.tabs);
         tabs.addTab(tabs.newTab(),true);
         tabs.addTab(tabs.newTab());
-       tabs.getTabAt(0).setText("지원 현황");
+        tabs.getTabAt(0).setText("지원 현황");
         tabs.getTabAt(1).setText("지난 현장");
         callFragment(FRAGMENT2);
         tabs.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 if (tab.getPosition() == 0) {
-                callFragment(FRAGMENT2);
+                    callFragment(FRAGMENT2);
 
                 }
                 else if(tab.getPosition()==1)
@@ -78,17 +78,17 @@ public class MyFieldActivity extends AppCompatActivity {
                     case R.id.tab1: {
 //                        getSupportFragmentManager().beginTransaction().replace(R.id.main_layout, fragment1).commitAllowingStateLoss();
 //                        return true;
-                         intent = new Intent(MyFieldActivity.this, MainActivity.class);
+                        intent = new Intent(MyFieldActivity.this, MainActivity.class);
                         startActivity(intent);
                         return false;
                     }
                     case R.id.tab2: {
-                         intent = new Intent(MyFieldActivity.this, MyFieldActivity.class);
+                        intent = new Intent(MyFieldActivity.this, MyFieldActivity.class);
                         startActivity(intent);
                         return false;
                     }
                     case R.id.tab3: {
-                         intent = new Intent(MyFieldActivity.this, MypageMainActivity.class);
+                        intent = new Intent(MyFieldActivity.this, MypageMainActivity.class);
                         startActivity(intent);
                         return false;
                     }
