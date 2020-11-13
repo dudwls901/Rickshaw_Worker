@@ -14,14 +14,19 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
 import com.example.capstone.R;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.w3c.dom.Text;
+
+import java.util.ArrayList;
 
 import kr.co.ilg.activity.findwork.Sharedpreference;
 import kr.co.ilg.activity.login.FindPasswordInfoActivity;
@@ -34,6 +39,7 @@ public class MyInfomanageActivity extends Activity {
     View dialogview;
     EditText edit_phonenum, edit_introduce;
     String worker_introduce,worker_phonenum;
+    RecyclerView.LayoutManager mLayoutManager;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -38,7 +38,11 @@ import com.kakao.sdk.user.UserApiClient;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 //import kr.co.ilg.activity.mypage.MypageMainActivity;
 import kr.co.ilg.activity.mypage.MyInfomanageActivity;
 import kr.co.ilg.activity.mypage.MypageMainActivity;
@@ -62,7 +66,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     int jp_job_tot_people[], jp_job_current_people[];
     boolean is_urgency[];
     String jp_num[], field_address[], field_name[], job_name[], business_reg_num[], manager_office_name[], jp_title[], jp_contents[], jp_job_date[], jp_job_start_time[], jp_job_finish_time[], jp_is_urgency[], jp_datetime[];
-    Button btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9, btn10, btn11, btn12, btn13, btn14, btn15, btn16;
+    Button btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9, btn10, btn11, btn12, btn13, btn14, btn15, btn16, selectall;
     Button[] job = {null, btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9, btn10, btn11, btn12, btn13, btn14, btn15, btn16};
     int[] jobid = {0, R.id.btn1, R.id.btn2, R.id.btn3, R.id.btn4, R.id.btn5, R.id.btn6, R.id.btn7, R.id.btn8, R.id.btn9, R.id.btn10, R.id.btn11,
             R.id.btn12, R.id.btn13, R.id.btn14, R.id.btn15, R.id.btn16};
@@ -75,6 +79,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     TextView sltTV1;
     Button resetjobpost;
     Response.Listener rListener;
+    int y, m , d;
     final String[][] arrayList1 = {{}, {"종로구", "중구", "용산구", "성동구", "광진구", "동대문구", "중랑구", "성북구", "강북구", "도봉구", "노원구", "은평구", "서대문구", "마포구", "양천구", "강서구", "구로구", "금천구", "영등포구", "동작구", "관악구", "서초구", "강남구", "송파구", "강동구"}
             , {"중구", "서구", "동구", "영도구", "부산진구", "동래구", "남구", "북구", "해운대구", "사하구", "금정구", "강서구", "연제구", "수영구", "사상구", "기장군"}
             , {"중구", "서구", "동구", "남구", "북구", "수성구", "달서구", "달성군"}
@@ -93,7 +98,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             , {"창원시", "마산시", "진해시", "통영시", "사천시", "김해시", "밀양시", "거제시", "양산시", "의령군", "함안군", "창녕군", "고성군", "남해군", "하동군", "산청군", "함양군", "거창군", "합천군"}
             , {"제주시", "서귀포시"}
     };
-
+    Date date=null,getdate=null;
 //    Fragment1 fragment1;
 //    Fragment2 fragment2;
 //    Fragment3 fragment3;
@@ -134,6 +139,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mContext = this;
         local_sido = Sharedpreference.get_Hope_local_sido(mContext, "local_sido");
         local_sigugun = Sharedpreference.get_Hope_local_sigugun(mContext, "local_sigugun");
+        Calendar cal = Calendar.getInstance();
+        y = cal.get(Calendar.YEAR);
+        m = cal.get(Calendar.MONTH);
+        d = cal.get(Calendar.DAY_OF_MONTH);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
 
 //        item1 = (MenuItem) findViewById(R.id.tab1);
 //        item2 = (MenuItem)findViewById(R.id.tab2);
@@ -231,6 +242,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                     }
                 });
+
                 dlg.setNegativeButton("취소", null);
 
                 dlg.show();
@@ -245,9 +257,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         jobsetting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                job_code[0] = 0;
-                job_code[1] = 0;
-                job_code[2] = 0;
                 AlertDialog.Builder dlg = new AlertDialog.Builder(MainActivity.this);
                 dlg.setTitle("직종 설정");
                 if (dialogview1.getParent() != null) {
@@ -271,9 +280,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 text2 = jobs1[i] + " " + text2;
                             }
                         }
-                        if (a == 0) {
-                            jobsetting.setText("선택안함");
-                        } else jobsetting.setText(text2);
+                        if (j == 0) {
+                            jobsetting.setText("전체선택");
+                        }
+                        else jobsetting.setText(text2);
+                    }
+                });
+                dlg.setNeutralButton("전체", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        jobsetting.setText("전체");
+                        job_code[0] = 0;
+                        job_code[1] = 0;
+                        job_code[2] = 0;
                     }
                 });
                 dlg.setNegativeButton("취소", null);
@@ -344,10 +363,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         else is_urgency[i] = true;
                         jp_datetime[i] = MainRequest.getString("jp_datetime");
                         manager_office_name[i] = MainRequest.getString("manager_office_name");
+                        try {
+                            date = dateFormat.parse(String.format("%d",y)+"-"+String.format("%02d",(m+1))+"-"+String.format("%02d",d));
+                            getdate = dateFormat.parse(jp_job_date[i]);
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                        int compare = date.compareTo(getdate);
+                        if(compare <=0){
+                            workInfoArrayList.add(new ListViewItem(business_reg_num[i], jp_num[i], jp_title[i], jp_job_date[i], jp_job_cost[i], job_name[i], field_address[i], manager_office_name[i], jp_job_current_people[i], jp_job_tot_people[i], is_urgency[i], jp_job_start_time[i], jp_job_finish_time[i], jp_contents[i], field_name[i]));
+                        }
 
-                        Log.d("===================", jp_title[i] + " " + jp_job_finish_time[i] + " " + manager_office_name[i]);
-
-                        workInfoArrayList.add(new ListViewItem(business_reg_num[i], jp_num[i], jp_title[i], jp_job_date[i], jp_job_cost[i], job_name[i], field_address[i], manager_office_name[i], jp_job_current_people[i], jp_job_tot_people[i], is_urgency[i], jp_job_start_time[i], jp_job_finish_time[i], jp_contents[i], field_name[i]));
                     }
                     ListAdapter urgencyAdapter = new ListAdapter(getApplicationContext(), workInfoArrayList);
                     //urgencyAdapter.notifyDataSetChanged();
@@ -421,29 +447,40 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             if (jobid[k] == v.getId()) {
                 if (check[k] == 0) {
-                    j += 1;
+
                     job[k].setBackground(getDrawable(R.drawable.custom_btn_mainclr));
                     check[k] = 1;
+                    j += 1;/*
 
-                } else {
+                    if(j==1){
+                        Sharedpreference.removejobcode12(mContext);
+                    }
+                    else if(j==2){
+                        Sharedpreference.removejobcode2(mContext);
+                    }*/
+
+                } else if (check[k] == 1){
                     j -= 1;
-                    job[k].setBackground(getDrawable(R.drawable.custom_btn_lightclr)); // wrap 텍스트뷰 3개 만들어서 상단바 제어
+                    job[k].setBackground(getDrawable(R.drawable.custom_btn_lightclr));
                     check[k] = 0;
                 }
             }
 
-            if (check[k] == 1) {
+            if(check[k]==1){
+
                 jobs = job[k].getText().toString() + "  " + jobs;
-
                 job_code[a] = k;
+                /*Sharedpreference.set_Jobcode(mContext,"jobcode"+a,String.valueOf(job_code[a]));
+                if(a==0){
+                    Sharedpreference.removejobcode12(mContext);
+                }else if (a==1){
+                    Sharedpreference.removejobcode2(mContext);
+                }*/
                 a++;
-
-                Log.d("kkkkkkk=", String.valueOf(job_code[0]) + job_code[1] + job_code[2]);
-                //경력코드는 반대로 되어있음
             }
-
         }
         sltTV1.setText(jobs);
+
         if (j == 3) {
             for (int i = 1; i < 17; i++) {
                 if (check[i] == 0) job[i].setEnabled(false);

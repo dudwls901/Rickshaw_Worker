@@ -16,13 +16,24 @@ import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
 import com.example.capstone.R;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import kr.co.ilg.activity.mypage.ReviewManageActivity;
+import kr.co.ilg.activity.mypage.getReviewRequest;
+import kr.co.ilg.activity.mypage.mypagereviewAdapter;
+import kr.co.ilg.activity.mypage.mypagereviewitem;
+
 public class OfficeInfoActivity extends AppCompatActivity {
     TextView office_name, office_address, office_manager_name, office_manager_tel, office_tel, office_introduce;
     RecyclerView review_RecyclerView;
+    ReviewAdapter myAdapter;
+    Response.Listener aListener;
+    String officename;
+    int k;
+    String name[], contents[],datetime[],key[];
     RecyclerView.LayoutManager layoutManager;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -39,6 +50,7 @@ public class OfficeInfoActivity extends AppCompatActivity {
         office_manager_name=findViewById(R.id.office_manager_name);
         office_manager_tel=findViewById(R.id.office_manager_tel);
         office_tel=findViewById(R.id.office_tel);
+        review_RecyclerView = findViewById(R.id.review_list);
 
         Response.Listener rListener = new Response.Listener<String>() {
             @Override
@@ -47,6 +59,7 @@ public class OfficeInfoActivity extends AppCompatActivity {
                     JSONObject jResponse = new JSONObject(response.substring(response.indexOf("{"), response.lastIndexOf("}") + 1));
                     boolean select_Mng = jResponse.getBoolean("select_Mng");
                     if (select_Mng) {
+                        officename=jResponse.getString("manager_office_name");
                         office_name.setText(jResponse.getString("manager_office_name"));
                         office_tel.setText(jResponse.getString("manager_office_telnum"));
                         office_address.setText(jResponse.getString("manager_office_address"));
@@ -67,16 +80,47 @@ public class OfficeInfoActivity extends AppCompatActivity {
         RequestQueue queue = Volley.newRequestQueue(OfficeInfoActivity.this);
         queue.add(oisRequest);
 
+        aListener = new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+                try {
+                    Log.d("ttttttttttttttt","true");
+
+                    JSONObject jResponse = new JSONObject(response.substring(response.indexOf("{"), response.lastIndexOf("}") + 1));
+                    JSONArray array = jResponse.getJSONArray("response");
+                    k = array.length();
+                    name = new String[k];
+                    contents = new String[k];
+                    datetime = new String[k];
+
+                    final ArrayList<ReviewItem> reviewList=new ArrayList<>();
+
+                    for (int i = 0; i < array.length(); i++) {
+                        JSONObject MainRequest = array.getJSONObject(i);
+                        name[i] = MainRequest.getString("name");
+                        contents[i] = MainRequest.getString("contents");
+                        datetime[i] = MainRequest.getString("datetime");
+                        reviewList.add(new ReviewItem(name[i], contents[i], datetime[i]));
+                    } // 값넣기*/
+                    myAdapter = new ReviewAdapter(reviewList);
+                    review_RecyclerView.setAdapter(myAdapter);
+
+
+                } catch (Exception e) {
+                    Log.d("mytest", e.toString());
+                }
+            }
+        };
+        getReviewRequest mainRequest = new getReviewRequest(business_reg_num, 1 , aListener);  // Request 처리 클래스
+
+        RequestQueue queue1 = Volley.newRequestQueue(OfficeInfoActivity.this);  // 데이터 전송에 사용할 Volley의 큐 객체 생성
+        queue1.add(mainRequest);
+
         review_RecyclerView = findViewById(R.id.review_list);
         review_RecyclerView.setHasFixedSize(true);
         layoutManager=new LinearLayoutManager(this);
         review_RecyclerView.setLayoutManager(layoutManager);
 
-        ArrayList<ReviewItem> reviewList=new ArrayList<>();
-        reviewList.add(new ReviewItem("김영진","2020-06-14","초보인데도 불구하고 일 많이 보내주셔서 감사합니다 ㅎㅎ\n 이번에 철거하고 술 한잔 살게용"));
-        reviewList.add(new ReviewItem("전소연","2020-06-17","레미안 아파트는 연락 안오나요?"));
-
-        ReviewAdapter reviewAdapter=new ReviewAdapter(reviewList);
-        review_RecyclerView.setAdapter(reviewAdapter);
     }
 }

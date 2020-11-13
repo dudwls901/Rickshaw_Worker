@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class PasswordChangeRequest extends StringRequest {
 
-    final static private String URL = "http://rickshaw.dothome.co.kr/ChangePw.php";
+    final static private String URL = "http://14.63.162.160/ChangePw.php";
 
     private Map<String, String> parameters;
 
