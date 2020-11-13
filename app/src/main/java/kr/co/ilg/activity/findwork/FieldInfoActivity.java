@@ -48,7 +48,6 @@ public class FieldInfoActivity extends AppCompatActivity {
         work_info_RecyclerView.setHasFixedSize(true);
         layoutManager=new LinearLayoutManager(this);
         work_info_RecyclerView.setLayoutManager(layoutManager);
-
         ArrayList<ListViewItem> workInfoArrayList=new ArrayList<>();
         workInfoArrayList.add(new ListViewItem("레미안 건축","2020-06-14",150000,"상수 레미안 아파트","건축","개미인력소",1,3));
 

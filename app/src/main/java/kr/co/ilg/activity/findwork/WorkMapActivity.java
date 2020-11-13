@@ -54,8 +54,9 @@ public class WorkMapActivity extends AppCompatActivity implements MapView.Curren
         mapView = new MapView(this);
         setContentView(R.layout.work_map);
          mapViewContainer = (ViewGroup) findViewById(R.id.map_view);
-        mapViewContainer.addView(checkbox_layout);
+     //    mapViewContainer.addView(checkbox_layout);
          mapViewContainer.addView(mapView);
+
 
         mapView.setCurrentLocationEventListener(this);
         /*
