@@ -45,7 +45,6 @@ public class MyInfomanageActivity extends Activity {
     ArrayList<HopeJobCareerLVItem> hopeJobCareerLVItems;
     HopeJobCareerLVAdapter hopeJobCareerLVAdapter;
 
-    String worker_introduce,worker_phonenum;
     RecyclerView.LayoutManager mLayoutManager;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
