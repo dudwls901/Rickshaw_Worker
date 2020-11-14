@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    >
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -45,43 +44,65 @@
             />
 
     </LinearLayout>
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="150dp"
         android:layout_marginHorizontal="10dp"
         android:orientation="vertical"
         android:padding="5dp"
+        android:layout_marginTop="5dp"
         android:background="@drawable/cardstroke">
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:paddingTop="3dp"
+            android:paddingLeft="3dp"
             android:text="은행명"
             android:id="@+id/bankname"
-            android:textSize="20dp"
+            android:textSize="20sp"
             />
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             android:text="9428 **** **** 8137"
-            android:textSize="17dp"
-            android:textAlignment="center"
+            android:textSize="20sp"
             android:id="@+id/bankaccount"
-            android:textColor="@android:color/white"/>
-    </LinearLayout>
+            android:textColor="@color/DarkColor"/>
+        <ImageButton
+            android:id="@+id/accountDelete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:src="@drawable/accnt_dlt"
+            android:backgroundTint="@color/LightColor"
+            android:padding="0px"
+            android:scaleX="0.7"
+            android:scaleY="0.7"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:layout_marginTop="40dp">
+        android:orientation="vertical"
+        android:layout_marginTop="10dp"
+        android:padding="10dp"
+        android:gravity="right">
         <Button
             android:layout_width="120dp"
-            android:layout_height="35dp"
-            android:text="계좌 수정"
+            android:layout_height="45dp"
+            android:text="계좌 변경"
             android:id="@+id/accountmodify"
-            android:background="@drawable/accountmanage_stroke"
-            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:background="@drawable/custom_btn_mainclr"
+            android:textColor="@color/WhiteColor"
             />
-
     </LinearLayout>
 </LinearLayout>

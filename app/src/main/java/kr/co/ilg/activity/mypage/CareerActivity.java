@@ -129,19 +129,14 @@ public class CareerActivity extends AppCompatActivity {
 
                             }
                             Log.d("careercc123", "i=" + i + "position=" + position + "checkedId=" + checkedId + "R.id.year_3" + R.id.year_3);
-
                         }
-
                     }
                 });
-
             }
-
             @Override
             public void onLongClick(View view, int position) {
             }
         }));
-
         okBtn = findViewById(R.id.okBtn);
         if (isUpdate == 1)
             okBtn.setText("수정");
@@ -158,30 +153,24 @@ public class CareerActivity extends AppCompatActivity {
                     Response.Listener rListener = new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
-
                             try {
                                 JSONObject jResponse = new JSONObject(response.substring(response.indexOf("{"), response.lastIndexOf("}") + 1));
                                 boolean updateSuccess2 = jResponse.getBoolean("updateSuccess2");
                                 Log.d("mmmmmmmmmmmmmmmmmmmmm", String.valueOf(updateSuccess2));
 
                                 if (updateSuccess2) {
+                                    for (int i =0; i < career.length; i++){
+                                        Log.d("========success========", "" + job_code[i] + "," + career[i]);
 
-                                    Log.d("========success========", "" + job_code[w] + "," + career[w]);
-/*
-
-                                    Sharedpreference.set_Jobname(mContext, "jobname" + w, String.valueOf(job_code[w]));
-                                    Sharedpreference.set_Jobcareer(mContext, "jobcareer" + w, career[w]);
-                                    값저장하기 해야됨
-
-*/
-
+                                        Sharedpreference.set_Jobcode(mContext, "jobcode" + i, String.valueOf(job_code[i]));
+                                        Sharedpreference.set_Jobcareer(mContext, "jobcareer" + i, career[i]);
+                                    }
+                                    // 값저장하기 해야됨
 
                                     Toast.makeText(CareerActivity.this, "수정 완료되었습니다", Toast.LENGTH_SHORT).show();
                                 } else {
                                     Toast.makeText(CareerActivity.this, "수정 실패", Toast.LENGTH_SHORT).show();
                                 }
-
-
                             } catch (Exception e) {
                                 Log.d("mytest", e.toString());
                             }

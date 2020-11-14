@@ -229,11 +229,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp">
-        <TextView
+<!--        <TextView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:id="@+id/hope_job_career"-->
+<!--            android:textSize="17dp"/>-->
+        <ListView
+            android:id="@+id/listview_hope_job_career"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/hope_job_career"
-            android:textSize="17dp"/>
+            android:dividerHeight="4dp"
+            android:divider="#ffffff"/>
 
     </LinearLayout>
 

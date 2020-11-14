@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class UpdateinfoRequest extends StringRequest {
-    final static private String URL = "http://rickshaw.dothome.co.kr/Updateinfo.php";
+    final static private String URL = "http://14.63.162.160/Updateinfo.php";
 
     private Map<String, String> parameters;  // 전송 데이터 넣을 Map 객체 선언
 
@@ -54,7 +54,15 @@ public class UpdateinfoRequest extends StringRequest {
         parameters.put("worker_email", worker_email); //데이터 넣기  ≒ putextra
         parameters.put("job_code", String.valueOf(job_code));
         parameters.put("hj_career",hj_career);
+    }
 
+    // 희망 경력 로드, 계좌 삭제
+    public UpdateinfoRequest(String key, String worker_email, Response.Listener<String> listener) {
+        super(Method.POST, URL, listener, null);
+
+        parameters = new HashMap<>();
+        parameters.put("key", key);
+        parameters.put("worker_email", worker_email);
     }
 
     // getParams 재정의
