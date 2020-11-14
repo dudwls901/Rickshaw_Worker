@@ -1,8 +1,10 @@
 package kr.co.ilg.activity.mypage;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,12 +16,15 @@ import java.util.ArrayList;
 
 public class mypagereviewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
+
     public static class MyViewHolder extends RecyclerView.ViewHolder{
+
 
         TextView mypagereviewname, mypagereview, mypagereviewdate;
 
         MyViewHolder(View view){
             super(view);
+
             mypagereviewname = view.findViewById(R.id.reviewfield);
             mypagereview = view.findViewById(R.id.mypagereview);
             mypagereviewdate = view.findViewById(R.id.mypagereviewdate);
@@ -27,7 +32,7 @@ public class mypagereviewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     }
 
     public ArrayList<mypagereviewitem> List;
-    mypagereviewAdapter(ArrayList<mypagereviewitem> List){
+    public mypagereviewAdapter(ArrayList<mypagereviewitem> List){
         this.List = List;
     }
     @NonNull

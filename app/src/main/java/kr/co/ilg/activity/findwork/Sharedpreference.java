@@ -20,11 +20,32 @@ public class Sharedpreference {
     }public static void remove(Context context) {
         SharedPreferences prefs = getPreferences(context);
         SharedPreferences.Editor editor = prefs.edit();
+        editor.remove("jobname0");
         editor.remove("jobname1");
         editor.remove("jobname2");
-        editor.remove("jobname3");
         editor.commit();
 
+    }
+    public static void removejobcode12(Context context) {
+        SharedPreferences prefs = getPreferences(context);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.remove("jobcode1");
+        editor.remove("jobcode2");
+        editor.commit();
+
+    }
+    public static void removejobcode2(Context context) {
+        SharedPreferences prefs = getPreferences(context);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.remove("jobcode2");
+        editor.commit();
+    }
+    public static void removejobcode(Context context) {
+        SharedPreferences prefs = getPreferences(context);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.remove("jobcode0");
+        editor.remove("jobcode1");editor.remove("jobcode2");
+        editor.commit();
     }
     public static void setNone_email(Context context, String key, String value) {
         SharedPreferences prefs = getPreferences(context);
