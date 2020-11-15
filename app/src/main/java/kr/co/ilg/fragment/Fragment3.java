@@ -61,7 +61,7 @@ public class Fragment3 extends Fragment{
     View dialog1;
     int numofarray;
     String jp_is_urgency[];
-    int jp_job_cost[];
+    int jp_job_cost[], jp_job_tot_people[];
     boolean k[];
     String date, phpdate, phpdate1;
     Button search;
@@ -187,6 +187,7 @@ public class Fragment3 extends Fragment{
                     k = new boolean[numofarray];
                     jp_num = new String[numofarray];
                     business_reg_num = new String[numofarray];
+                    jp_job_tot_people = new int[numofarray];
 
                     final ArrayList<ListViewItem> workInfoArrayList = new ArrayList<>();
 
@@ -206,6 +207,7 @@ public class Fragment3 extends Fragment{
                         jp_contents[i] = MainRequest.getString("jp_contents");
                         jp_num[i]=MainRequest.getString("jp_num");
                         business_reg_num[i]=MainRequest.getString("business_reg_num");
+                        jp_job_tot_people[i] = MainRequest.getInt("jp_job_tot_people");
                         if(mf_is_paid[i]=="0"){
                             paid[i] = "지급안됨";
                         }
@@ -215,9 +217,8 @@ public class Fragment3 extends Fragment{
                         }
                         else k[i]=true;
 
-
-
-                        workInfoArrayList.add(new ListViewItem(business_reg_num[i],jp_num[i],fieldname[i],jp_title[i],jp_job_date[i],jp_job_cost[i],job_name[i],field_address[i],officename[i],paid[i],k[i],jp_job_start_time[i],jp_job_finish_time[i],jp_contents[i]));
+                        workInfoArrayList.add(new ListViewItem(business_reg_num[i],jp_num[i],fieldname[i],jp_title[i],jp_job_date[i],jp_job_cost[i],job_name[i],field_address[i],
+                                officename[i],paid[i],k[i],jp_job_start_time[i],jp_job_finish_time[i],jp_contents[i], jp_job_tot_people[i]));
                     } // 값넣기*/
                     ListAdapter1 myworkAdapter = new ListAdapter1(context.getApplicationContext(), workInfoArrayList);
                     recyclerView.setAdapter(myworkAdapter);

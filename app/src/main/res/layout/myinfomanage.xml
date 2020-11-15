@@ -229,44 +229,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp">
-        <TextView
+<!--        <TextView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:id="@+id/hope_job_career"-->
+<!--            android:textSize="17dp"/>-->
+        <ListView
+            android:id="@+id/listview_hope_job_career"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/hope_job_career"
-            android:textSize="17dp"/>
+            android:dividerHeight="4dp"
+            android:divider="#ffffff"/>
 
     </LinearLayout>
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:layout_marginVertical="5dp"
-        android:src="@drawable/line"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="근무이력[2]"
-        android:textSize="20dp"
-        android:textColor="@android:color/black"
-        />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:text="홍은동 복숭아건물 (2020.05.03) - 전기"
-        android:textSize="17dp"
-        />
-    <Button
-        android:layout_width="70dp"
-        android:layout_height="35dp"
-        android:text="더보기"
-        android:background="@drawable/line"
-        android:layout_gravity="right"/>
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:layout_marginVertical="5dp"
-        android:src="@drawable/line"/>
+
 
 
 

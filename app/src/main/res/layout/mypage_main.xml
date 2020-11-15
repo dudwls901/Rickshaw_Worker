@@ -37,14 +37,16 @@
             android:layout_height="50dp"
             android:src="@drawable/man"
             />
+
         <TextView
+            android:id="@+id/membernickname"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginLeft="15dp"
+            android:gravity="center"
             android:text="정선우"
-            android:textSize="25dp"
-            android:id="@+id/membernickname"
-            android:gravity="center"/>
+            android:textSize="25dp" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"

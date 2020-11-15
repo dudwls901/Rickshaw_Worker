@@ -42,7 +42,7 @@ public class Fragment2 extends Fragment {
     int jp_job_cost[];
     int jp_job_tot_people[], jp_job_current_people[];
     boolean is_urgency[], is_picked[];
-    String jp_num[], field_address[], job_name[], business_reg_num[], local_sido1[],local_sigugun1[], jp_title[], jp_contents[],
+    String jp_num[], field_address[], field_name[], job_name[], business_reg_num[], local_sido1[],local_sigugun1[], jp_title[], jp_contents[],
             jp_job_date[], jp_job_start_time[], jp_job_finish_time[], jp_is_urgency[], jp_datetime[], apply_is_picked[], manager_office_name[];
 
 
@@ -92,6 +92,7 @@ public class Fragment2 extends Fragment {
                     jp_datetime = new String[numofpost[0]];
                     job_name = new String[numofpost[0]];
                     field_address = new String[numofpost[0]];
+                    field_name = new String[numofpost[0]];
                     jp_job_current_people = new int[numofpost[0]];
                     manager_office_name = new String[numofpost[0]];
 
@@ -121,6 +122,7 @@ public class Fragment2 extends Fragment {
                         jp_datetime[i] = JPInfo.getString("jp_datetime");
                         job_name[i] = JPInfo.getString("job_name");
                         field_address[i] = JPInfo.getString("field_address");
+                        field_name[i] = JPInfo.getString("field_name");
                         jp_job_current_people[i]= JPInfo.getInt("jp_job_current_people");
                         manager_office_name[i] = JPInfo.getString("manager_office_name");
 
@@ -131,11 +133,11 @@ public class Fragment2 extends Fragment {
                         Log.d("=====================", jp_title[i] + " | " + jp_num[i] + " | " + jp_job_cost[i] + " | " + jp_job_tot_people[i] + " | " + jp_job_current_people[i]);
 
                         if (is_picked[i])
-                            pickworkInfoArrayList.add(new ListViewItem(jp_num[i], jp_title[i], jp_job_date[i], jp_job_cost[i], job_name[i], field_address[i], manager_office_name[i], jp_job_current_people[i],
-                                    jp_job_tot_people[i], is_urgency[i], jp_job_start_time[i], jp_job_finish_time[i], jp_contents[i]));
+                            pickworkInfoArrayList.add(new ListViewItem(jp_num[i], jp_title[i], jp_job_date[i], jp_job_cost[i], job_name[i], field_address[i], manager_office_name[i],
+                                    jp_job_current_people[i], jp_job_tot_people[i], is_urgency[i], jp_job_start_time[i], jp_job_finish_time[i], jp_contents[i]));
                         else
-                            workInfoArrayList.add(new ListViewItem(business_reg_num[i], jp_num[i], jp_title[i], jp_job_date[i], jp_job_cost[i], job_name[i], field_address[i], manager_office_name[i], jp_job_current_people[i],
-                                    jp_job_tot_people[i], is_urgency[i], jp_job_start_time[i], jp_job_finish_time[i], jp_contents[i]));
+                            workInfoArrayList.add(new ListViewItem(business_reg_num[i], jp_num[i], jp_title[i], jp_job_date[i], jp_job_cost[i], job_name[i], field_address[i],
+                                    manager_office_name[i], jp_job_current_people[i], jp_job_tot_people[i], is_urgency[i], jp_job_start_time[i], jp_job_finish_time[i], jp_contents[i], field_name[i]));
                     }
                     ListWorkPickOutAdapter myworkAdapter1 = new ListWorkPickOutAdapter(context.getApplicationContext(), pickworkInfoArrayList);
                     recyclerView1.setAdapter(myworkAdapter1);

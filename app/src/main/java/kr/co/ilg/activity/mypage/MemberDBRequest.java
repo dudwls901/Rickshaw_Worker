@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MemberDBRequest extends StringRequest {
-    final static private String URL = "http://rickshaw.dothome.co.kr/Insert2.php";
+    final static private String URL = "http://14.63.162.160/Insert2.php";
     private Map<String, String> parameters;
 
     //요청                클라이언트로 전송할 데이터(userID)

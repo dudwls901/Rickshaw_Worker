@@ -7,19 +7,17 @@ import com.android.volley.toolbox.StringRequest;
 import java.util.HashMap;
 import java.util.Map;
 
-public class TimeCheckRequest extends StringRequest {
-    final static private String URL = "http://14.63.162.160/TimeCheck.php";
+public class SelectTelNumRequest extends StringRequest {
+    final static private String URL = "http://14.63.162.160/SelectTelNum.php";
 
     private Map<String, String> parameters;
 
     // 출퇴근 인증 여부 확인
-    public TimeCheckRequest(String key, String worker_email, String jp_num, Response.Listener<String> listener) {
+    public SelectTelNumRequest(String business_reg_num, Response.Listener<String> listener) {
         super(Method.POST, URL, listener, null);
 
         parameters = new HashMap<>();
-        parameters.put("key", key);
-        parameters.put("worker_email", worker_email);
-        parameters.put("jp_num", jp_num);
+        parameters.put("business_reg_num", business_reg_num);
     }
     protected Map<String, String> getParams() throws AuthFailureError {
         return parameters;

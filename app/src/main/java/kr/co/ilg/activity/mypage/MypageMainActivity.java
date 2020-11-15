@@ -67,7 +67,7 @@ public class MypageMainActivity extends AppCompatActivity implements View.OnClic
                         startActivity(intent); break;
                     case 2 : intent = new Intent(MypageMainActivity.this, ilgIntrodutionActivity.class);
                         startActivity(intent); break;
-                    case 3 : intent = new Intent(MypageMainActivity.this, MainActivity.class);
+                    case 3 : intent = new Intent(MypageMainActivity.this, com.example.capstone.MainActivity.class);
                         startActivity(intent); break;
                 }
             }

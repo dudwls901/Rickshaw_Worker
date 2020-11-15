@@ -38,7 +38,11 @@ import com.kakao.sdk.user.UserApiClient;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 //import kr.co.ilg.activity.mypage.MypageMainActivity;
 import kr.co.ilg.activity.mypage.MyInfomanageActivity;
 import kr.co.ilg.activity.mypage.MypageMainActivity;
@@ -46,7 +50,7 @@ import kr.co.ilg.activity.mypage.UpdateinfoRequest;
 
 import static com.kakao.auth.StringSet.error;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     RecyclerView urgency_RecyclerView;
     RecyclerView.LayoutManager layoutManager;
@@ -61,20 +65,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     int jp_job_cost[];
     int jp_job_tot_people[], jp_job_current_people[];
     boolean is_urgency[];
-    String jp_num[],field_address[], job_name[], business_reg_num[], local_sido1[],local_sigugun1[], jp_title[], jp_contents[], jp_job_date[], jp_job_start_time[], jp_job_finish_time[], jp_is_urgency[], jp_datetime[], field_name[];
-    Button btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9, btn10, btn11, btn12, btn13, btn14, btn15, btn16;
-    Button[] job = {null,btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9, btn10, btn11, btn12, btn13, btn14, btn15, btn16};
+    String jp_num[], field_address[], field_name[], job_name[], business_reg_num[], manager_office_name[], jp_title[], jp_contents[], jp_job_date[], jp_job_start_time[], jp_job_finish_time[], jp_is_urgency[], jp_datetime[];
+    Button btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9, btn10, btn11, btn12, btn13, btn14, btn15, btn16, selectall;
+    Button[] job = {null, btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9, btn10, btn11, btn12, btn13, btn14, btn15, btn16};
     int[] jobid = {0, R.id.btn1, R.id.btn2, R.id.btn3, R.id.btn4, R.id.btn5, R.id.btn6, R.id.btn7, R.id.btn8, R.id.btn9, R.id.btn10, R.id.btn11,
             R.id.btn12, R.id.btn13, R.id.btn14, R.id.btn15, R.id.btn16};
-    int check[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0};
-    int[] job_code= new int[]{0, 0, 0};;
+    int check[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    int[] job_code = new int[]{0, 0, 0};
+    ;
     String jobs = "";
-    int i, j=0 ,n= 0, a, p=0;
-    int q=0, w=0;
+    int i, j = 0, n = 0, a, p = 0;
+    int q = 0, w = 0;
     TextView sltTV1;
     Button resetjobpost;
     Response.Listener rListener;
-    final String[][] arrayList1 = {{},{"종로구", "중구", "용산구", "성동구", "광진구", "동대문구", "중랑구", "성북구", "강북구", "도봉구", "노원구", "은평구", "서대문구", "마포구", "양천구", "강서구", "구로구", "금천구", "영등포구", "동작구", "관악구", "서초구", "강남구", "송파구", "강동구"}
+    int y, m , d;
+    final String[][] arrayList1 = {{}, {"종로구", "중구", "용산구", "성동구", "광진구", "동대문구", "중랑구", "성북구", "강북구", "도봉구", "노원구", "은평구", "서대문구", "마포구", "양천구", "강서구", "구로구", "금천구", "영등포구", "동작구", "관악구", "서초구", "강남구", "송파구", "강동구"}
             , {"중구", "서구", "동구", "영도구", "부산진구", "동래구", "남구", "북구", "해운대구", "사하구", "금정구", "강서구", "연제구", "수영구", "사상구", "기장군"}
             , {"중구", "서구", "동구", "남구", "북구", "수성구", "달서구", "달성군"}
             , {"중구", "동구", "남구", "연수구", "남동구", "부평구", "계양구", "서구", "미추홀구", "강화군", "옹진군"}
@@ -92,7 +98,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             , {"창원시", "마산시", "진해시", "통영시", "사천시", "김해시", "밀양시", "거제시", "양산시", "의령군", "함안군", "창녕군", "고성군", "남해군", "하동군", "산청군", "함양군", "거창군", "합천군"}
             , {"제주시", "서귀포시"}
     };
-
+    Date date=null,getdate=null;
 //    Fragment1 fragment1;
 //    Fragment2 fragment2;
 //    Fragment3 fragment3;
@@ -131,8 +137,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mContext = this;
-        local_sido = Sharedpreference.get_Hope_local_sido(mContext,"local_sido");
-        local_sigugun = Sharedpreference.get_Hope_local_sigugun(mContext,"local_sigugun");
+        local_sido = Sharedpreference.get_Hope_local_sido(mContext, "local_sido");
+        local_sigugun = Sharedpreference.get_Hope_local_sigugun(mContext, "local_sigugun");
+        Calendar cal = Calendar.getInstance();
+        y = cal.get(Calendar.YEAR);
+        m = cal.get(Calendar.MONTH);
+        d = cal.get(Calendar.DAY_OF_MONTH);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
 
 //        item1 = (MenuItem) findViewById(R.id.tab1);
 //        item2 = (MenuItem)findViewById(R.id.tab2);
@@ -144,21 +156,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         //     getSupportActionBar().setHomeAsUpIndicator(R.drawable.search_white_24dp);
 
-        String r = Sharedpreference.get_numofjob(mContext,"numofjob");
+        String r = Sharedpreference.get_numofjob(mContext, "numofjob");
         int numofjob = Integer.parseInt(r);
         resetjobpost = findViewById(R.id.resetjobpost);
 
-        for(int i=numofjob-1; i>=0; i--){
-            job_code[i] = Integer.parseInt(Sharedpreference.get_Jobcode(mContext,"jobcode"+i));
+        for (int i = numofjob - 1; i >= 0; i--) {
+            job_code[i] = Integer.parseInt(Sharedpreference.get_Jobcode(mContext, "jobcode" + i));
         }
-
 
 
         dialogview = (View) View.inflate(MainActivity.this, R.layout.localdialog, null);
 
         dialogview1 = (View) View.inflate(MainActivity.this, R.layout.jobdialog, null);
         for (i = 1; i < 17; i++) {
-            job[i] =  dialogview1.findViewById(jobid[i]);
+            job[i] = dialogview1.findViewById(jobid[i]);
             job[i].setOnClickListener(this);  // 직업버튼 인플레이션
         }
 
@@ -168,15 +179,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ListView listview1 = dialogview.findViewById(R.id.listview1);
         TextView localsetting = findViewById(R.id.localsetting);
         TextView jobsetting = findViewById(R.id.jobsetting);
-        localsetting.setText(Sharedpreference.get_Hope_local_sido(mContext,"local_sido")+" "+Sharedpreference.get_Hope_local_sigugun(mContext,"local_sigugun"));
+        localsetting.setText(Sharedpreference.get_Hope_local_sido(mContext, "local_sido") + " " + Sharedpreference.get_Hope_local_sigugun(mContext, "local_sigugun"));
         TextView sltTV = dialogview.findViewById(R.id.sltTV);
-        final String[] arrayList = {"전체","서울", "부산", "대구", "인천", "대전", "광주", "울산", "세종", "경기",
+        final String[] arrayList = {"전체", "서울", "부산", "대구", "인천", "대전", "광주", "울산", "세종", "경기",
                 "강원", "충북", "충남", "전북", "전남", "경북", "경남", "제주"}; // 첫번째 지역선택에 들어갈 배열
 
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, arrayList); // Adapter 생성
         listview.setAdapter(adapter); //Adapter 연결
         listview.setSelection(0); // 첫 인덱스 설정
-
 
 
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -186,7 +196,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 sltTV.setText(arrayList[position]); // 선택한 지역 상단에 띄우기
                 k = position;
                 n++;
-                q=1; w=0; // local_sido만 선택했을시 제어할 변수
+                q = 1;
+                w = 0; // local_sido만 선택했을시 제어할 변수
 
                 ArrayAdapter adapter2 = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, arrayList1[position]); // Adapter 생성
                 listview1.setAdapter(adapter2); //Adapter 연결
@@ -195,12 +206,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 listview1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        w=1;
-                        if(local_sido != "전체") {
+                        w = 1;
+                        if (local_sido != "전체") {
                             local_sigugun = arrayList1[k][position];
                             sltTV.setText(local_sido + " " + local_sigugun);
-                        }
-                        else local_sigugun="";
+                        } else local_sigugun = "";
 
                     }
                 });
@@ -215,66 +225,74 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 AlertDialog.Builder dlg = new AlertDialog.Builder(MainActivity.this);
                 dlg.setTitle("지역 설정");
-                if(dialogview.getParent() != null) {
-                    ((ViewGroup)dialogview.getParent()).removeView(dialogview); // <- fix
+                if (dialogview.getParent() != null) {
+                    ((ViewGroup) dialogview.getParent()).removeView(dialogview); // <- fix
                 }
                 dlg.setView(dialogview);
 
                 dlg.setPositiveButton("확인", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        if(q==1 && w==1) {
-                           localsetting.setText(local_sido + " " + local_sigugun);
-                        }
-                        else if(q==1 && w==0){
+                        if (q == 1 && w == 1) {
+                            localsetting.setText(local_sido + " " + local_sigugun);
+                        } else if (q == 1 && w == 0) {
                             localsetting.setText(local_sido);
                         }
                         // 메인에 jobpost띄우기
 
                     }
                 });
+
                 dlg.setNegativeButton("취소", null);
 
                 dlg.show();
             }
         });
-        String text1="";
-        for (int i=0; i<numofjob; i++){
-            text1 = text1+ " "+ Sharedpreference.get_Jobname(mContext,"jobname"+i);
+        String text1 = "";
+        for (int i = 0; i < numofjob; i++) {
+            text1 = text1 + " " + Sharedpreference.get_Jobname(mContext, "jobname" + i);
         }
-       // sltTV1.setText(Sharedpreference.get_Jobname(mContext,"jobname0")+" "+ Sharedpreference.get_Jobname(mContext,"jobname1")+" "+Sharedpreference.get_Jobname(mContext,"jobname2"));
+        // sltTV1.setText(Sharedpreference.get_Jobname(mContext,"jobname0")+" "+ Sharedpreference.get_Jobname(mContext,"jobname1")+" "+Sharedpreference.get_Jobname(mContext,"jobname2"));
         jobsetting.setText(text1);
         jobsetting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                job_code[0] = 0;   job_code[1] = 0;   job_code[2] = 0;
                 AlertDialog.Builder dlg = new AlertDialog.Builder(MainActivity.this);
                 dlg.setTitle("직종 설정");
-                if(dialogview1.getParent() != null) {
-                    ((ViewGroup)dialogview1.getParent()).removeView(dialogview1); // <- fix
+                if (dialogview1.getParent() != null) {
+                    ((ViewGroup) dialogview1.getParent()).removeView(dialogview1); // <- fix
                 }
                 dlg.setView(dialogview1);
 
                 dlg.setPositiveButton("확인", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        int j=0;
-                        String text2="";
-                        String text3="";
-                        for(int i=1; i<17; i++){
-                            if(check[i]==1)
+                        int j = 0;
+                        String text2 = "";
+                        String text3 = "";
+                        for (int i = 1; i < 17; i++) {
+                            if (check[i] == 1)
                                 j++;
                         }
-                        if(j>0) {
+                        if (j > 0) {
                             String jobs1[] = jobs.split(" ");
                             for (int i = 0; i < jobs1.length; i++) {
                                 text2 = jobs1[i] + " " + text2;
                             }
                         }
-                        if(a==0){
-                            jobsetting.setText("선택안함");
+                        if (j == 0) {
+                            jobsetting.setText("전체선택");
                         }
                         else jobsetting.setText(text2);
+                    }
+                });
+                dlg.setNeutralButton("전체", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        jobsetting.setText("전체");
+                        job_code[0] = 0;
+                        job_code[1] = 0;
+                        job_code[2] = 0;
                     }
                 });
                 dlg.setNegativeButton("취소", null);
@@ -283,9 +301,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             }
         });
-
-
-
 
 
         urgency_RecyclerView = findViewById(R.id.list_urgency);
@@ -299,8 +314,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Log.d("asdfasdfasdf", worker_email);
 
 
-
-
         rListener = new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -309,8 +322,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                     JSONObject jResponse = new JSONObject(response.substring(response.indexOf("{"), response.lastIndexOf("}") + 1));
                     JSONArray array = jResponse.getJSONArray("response");
-                    Log.d("mytest1",response);
-                    Log.d("mytest2",array.toString());
                     numofpost[0] = array.length();
                     jp_num = new String[numofpost[0]];
                     job_name = new String[numofpost[0]];
@@ -318,6 +329,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     jp_job_tot_people = new int[numofpost[0]];
                     business_reg_num = new String[numofpost[0]];
                     field_address = new String[numofpost[0]];
+                    field_name = new String[numofpost[0]];
                     jp_title = new String[numofpost[0]];
                     jp_contents = new String[numofpost[0]];
                     jp_job_date = new String[numofpost[0]];
@@ -327,7 +339,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     jp_job_current_people = new int[numofpost[0]];
                     jp_datetime = new String[numofpost[0]];
                     is_urgency = new boolean[numofpost[0]];
-                    field_name = new String[numofpost[0]];
+                    manager_office_name = new String[numofpost[0]];
                     //Log.d("==========", String.valueOf(numofpost[0]));
                     final ArrayList<ListViewItem> workInfoArrayList = new ArrayList<>();
 
@@ -338,30 +350,34 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         jp_job_cost[i] = MainRequest.getInt("jp_job_cost");
                         jp_job_tot_people[i] = MainRequest.getInt("jp_job_tot_people");
                         field_address[i] = MainRequest.getString("field_address");
+                        field_name[i] = MainRequest.getString("field_name");
                         business_reg_num[i] = MainRequest.getString("business_reg_num");
                         jp_title[i] = MainRequest.getString("jp_title");
-                        jp_job_current_people[i]= MainRequest.getInt("current_people");
+                        jp_job_current_people[i] = MainRequest.getInt("current_people");
                         jp_contents[i] = MainRequest.getString("jp_contents");
                         jp_job_date[i] = MainRequest.getString("jp_job_date");
                         jp_job_start_time[i] = MainRequest.getString("jp_job_start_time");
                         jp_job_finish_time[i] = MainRequest.getString("jp_job_finish_time");
                         jp_is_urgency[i] = MainRequest.getString("jp_is_urgency");
-                     //   field_name[i] = MainRequest.getString("field_name");
-                        if(jp_is_urgency[i].equals("0")) is_urgency[i]=false;
+                        if (jp_is_urgency[i].equals("0")) is_urgency[i] = false;
                         else is_urgency[i] = true;
                         jp_datetime[i] = MainRequest.getString("jp_datetime");
-                        Log.d("===================", jp_title[i] + " " + jp_job_finish_time[i]);
+                        manager_office_name[i] = MainRequest.getString("manager_office_name");
+                        try {
+                            date = dateFormat.parse(String.format("%d",y)+"-"+String.format("%02d",(m+1))+"-"+String.format("%02d",d));
+                            getdate = dateFormat.parse(jp_job_date[i]);
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                        int compare = date.compareTo(getdate);
+                        if(compare <=0){
+                            workInfoArrayList.add(new ListViewItem(business_reg_num[i], jp_num[i], jp_title[i], jp_job_date[i], jp_job_cost[i], job_name[i], field_address[i], manager_office_name[i], jp_job_current_people[i], jp_job_tot_people[i], is_urgency[i], jp_job_start_time[i], jp_job_finish_time[i], jp_contents[i], field_name[i]));
+                        }
 
-                        workInfoArrayList.add(new ListViewItem(jp_title[i], jp_job_date[i], jp_job_cost[i], job_name[i], field_address[i], business_reg_num[i], jp_job_current_people[i], jp_job_tot_people[i], is_urgency[i],jp_job_start_time[i],jp_job_finish_time[i],jp_contents[i]));
                     }
-
                     ListAdapter urgencyAdapter = new ListAdapter(getApplicationContext(), workInfoArrayList);
                     //urgencyAdapter.notifyDataSetChanged();
-
                     urgency_RecyclerView.setAdapter(urgencyAdapter);
-
-
-
 
                 } catch (Exception e) {
                     Log.d("mytest", e.toString());
@@ -369,8 +385,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         };
 
-        int[] k = new int[]{0,0,0};
-        MainRequest mainRequest = new MainRequest(worker_email,"1","1",k[0],k[0],k[0], rListener);  // Request 처리 클래스
+        int[] k = new int[]{0, 0, 0};
+        MainRequest mainRequest = new MainRequest(worker_email, "1", "1", k[0], k[0], k[0], rListener);  // Request 처리 클래스
 
         RequestQueue queue = Volley.newRequestQueue(MainActivity.this);  // 데이터 전송에 사용할 Volley의 큐 객체 생성
         queue.add(mainRequest);  // Volley로 구현된 큐에 ValidateRequest 객체를 넣어둠으로써 실제로 서버 연동 발생
@@ -379,8 +395,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         resetjobpost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MainRequest mainRequest = new MainRequest("0",local_sido,local_sigugun,job_code[0],job_code[1],job_code[2], rListener);  // Request 처리 클래스
-                Log.d("asdfasdfasdfasdf",local_sido+" "+local_sigugun+" "+job_code[0]+" "+job_code[1]+" "+job_code[2]);
+                MainRequest mainRequest = new MainRequest("0", local_sido, local_sigugun, job_code[0], job_code[1], job_code[2], rListener);  // Request 처리 클래스
+                Log.d("asdfasdfasdfasdf", local_sido + " " + local_sigugun + " " + job_code[0] + " " + job_code[1] + " " + job_code[2]);
                 mainRequest.setRetryPolicy(new DefaultRetryPolicy(
                         DefaultRetryPolicy.DEFAULT_TIMEOUT_MS,
                         0,
@@ -425,35 +441,46 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         jobs = "";
-        a=0;
+        a = 0;
 
         for (int k = 1; k < 17; k++) {
 
             if (jobid[k] == v.getId()) {
                 if (check[k] == 0) {
-                    j += 1;
+
                     job[k].setBackground(getDrawable(R.drawable.custom_btn_mainclr));
                     check[k] = 1;
+                    j += 1;/*
 
-                } else {
+                    if(j==1){
+                        Sharedpreference.removejobcode12(mContext);
+                    }
+                    else if(j==2){
+                        Sharedpreference.removejobcode2(mContext);
+                    }*/
+
+                } else if (check[k] == 1){
                     j -= 1;
-                    job[k].setBackground(getDrawable(R.drawable.custom_btn_lightclr)); // wrap 텍스트뷰 3개 만들어서 상단바 제어
+                    job[k].setBackground(getDrawable(R.drawable.custom_btn_lightclr));
                     check[k] = 0;
                 }
             }
 
-            if (check[k] == 1) {
+            if(check[k]==1){
+
                 jobs = job[k].getText().toString() + "  " + jobs;
-
                 job_code[a] = k;
+                /*Sharedpreference.set_Jobcode(mContext,"jobcode"+a,String.valueOf(job_code[a]));
+                if(a==0){
+                    Sharedpreference.removejobcode12(mContext);
+                }else if (a==1){
+                    Sharedpreference.removejobcode2(mContext);
+                }*/
                 a++;
-
-                Log.d("kkkkkkk=", String.valueOf(job_code[0])+job_code[1]+job_code[2]);
-                //경력코드는 반대로 되어있음
             }
-
         }
         sltTV1.setText(jobs);
+
         if (j == 3) {
             for (int i = 1; i < 17; i++) {
                 if (check[i] == 0) job[i].setEnabled(false);
