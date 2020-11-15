@@ -25,10 +25,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import kr.co.ilg.activity.mypage.ReviewManageActivity;
 import kr.co.ilg.activity.mypage.getReviewRequest;
-import kr.co.ilg.activity.mypage.mypagereviewAdapter;
-import kr.co.ilg.activity.mypage.mypagereviewitem;
 
 public class OfficeInfoActivity extends AppCompatActivity {
 

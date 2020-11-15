@@ -1,18 +1,11 @@
 package kr.co.ilg.activity.findwork;
 
-import android.app.ActionBar;
-import android.app.Activity;
 import android.content.Intent;
-import android.drm.DrmStore;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import kr.co.ilg.activity.findwork.ListAdapter;
-import kr.co.ilg.activity.findwork.ListViewItem;
 import kr.co.ilg.activity.mypage.getReviewRequest;
 
 import androidx.annotation.Nullable;
