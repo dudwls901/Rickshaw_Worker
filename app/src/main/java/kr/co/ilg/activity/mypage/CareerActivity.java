@@ -46,7 +46,9 @@ public class CareerActivity extends AppCompatActivity {
     int[] job_code;
     int job_code_length = 0;
     int isUpdate;  // 1 > 수정  0 > 회원가입
-    int w=0;
+    int w=0,a=0;
+    int g=0,j;
+    int jobnum;
     String[] jobname = new String[]{"","",""};
     String[] jobcareer = new String[]{"","",""};
 
@@ -59,6 +61,7 @@ public class CareerActivity extends AppCompatActivity {
         mContext = this;
         Intent receiver = getIntent();
         isUpdate = receiver.getIntExtra("isUpdate", 0);
+        jobnum = receiver.getIntExtra("jobnum", 0);
         worker_email = receiver.getExtras().getString("worker_email");
         worker_pw = receiver.getExtras().getString("worker_pw");
         worker_name = receiver.getExtras().getString("worker_name");
@@ -80,7 +83,7 @@ public class CareerActivity extends AppCompatActivity {
         Log.d("rrrrrrrrrr", String.valueOf(job_code[0]) + job_code[1] + job_code[2]);
         Log.d("rrrrrreceiver", worker_email + worker_pw + worker_name + worker_gender + worker_birth + worker_phonenum + hope_local_sido + hope_local_sigugun + jobs);
 
-        jobarray = jobs.split("  ");
+        jobarray = jobs.split(" ");
 
         mRecyclerView = findViewById(R.id.rcV);
 
@@ -147,45 +150,47 @@ public class CareerActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String email = Sharedpreference.get_email(mContext, "worker_email");
                 Intent intent = new Intent(CareerActivity.this, AccountAddActivity.class);
-                Intent updateIntent = new Intent(CareerActivity.this, MyInfomanageActivity.class);
+
 
                 if (isUpdate == 1) {  // 수정
-                    Response.Listener rListener = new Response.Listener<String>() {
+                    Sharedpreference.removeinfo(mContext, jobnum);
+                    Sharedpreference.set_numofjob(mContext,"numofjob",String.valueOf(career.length));
+
+
+
+                    Response.Listener kListener = new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
                             try {
                                 JSONObject jResponse = new JSONObject(response.substring(response.indexOf("{"), response.lastIndexOf("}") + 1));
-                                boolean updateSuccess2 = jResponse.getBoolean("updateSuccess2");
-                                Log.d("mmmmmmmmmmmmmmmmmmmmm", String.valueOf(updateSuccess2));
 
-                                if (updateSuccess2) {
-                                    for (int i =0; i < career.length; i++){
-                                        Log.d("========success========", "" + job_code[i] + "," + career[i]);
-
-                                        Sharedpreference.set_Jobcode(mContext, "jobcode" + i, String.valueOf(job_code[i]));
-                                        Sharedpreference.set_Jobcareer(mContext, "jobcareer" + i, career[i]);
-                                    }
-                                    // 값저장하기 해야됨
+                                    Sharedpreference.set_Jobcode(mContext, "jobcode" + a, jResponse.getString("job_code"));
+                                    Sharedpreference.set_Jobname(mContext, "jobname" + a, jResponse.getString("job_name"));
+                                    Sharedpreference.set_Jobcareer(mContext, "jobcareer" + a, jResponse.getString("hj_career"));
+                                    Log.d("check",a + "   " +Sharedpreference.get_Jobcode(mContext, "jobcode" + a)+ " "+ Sharedpreference.get_Jobname(mContext, "jobname" + a) + " " +Sharedpreference.get_Jobcareer(mContext,"jobcareer"+a));
+                                    a++;
 
                                     Toast.makeText(CareerActivity.this, "수정 완료되었습니다", Toast.LENGTH_SHORT).show();
-                                } else {
-                                    Toast.makeText(CareerActivity.this, "수정 실패", Toast.LENGTH_SHORT).show();
-                                }
+                                    if(a==(career.length)){
+                                        Intent updateIntent = new Intent(CareerActivity.this, MyInfomanageActivity.class);
+                                        startActivity(updateIntent);
+                                    }
+
+
                             } catch (Exception e) {
-                                Log.d("mytest", e.toString());
+                                Log.d("mytest123123", e.toString());
                             }
                         }
                     };
-                    UpdateinfoRequest updateinfoRequest = null;
                     RequestQueue queue;
-                    for (int i = career.length - 1, j = 0; i >= 0; i--) {
-                        Log.d("mytestjobcode", "" + job_code[i] + "," + career[j]);
-                        updateinfoRequest = new UpdateinfoRequest("hopeJobCareer", email, j, job_code[i], career[j], rListener);
-                        queue = Volley.newRequestQueue(CareerActivity.this);
+                    queue = Volley.newRequestQueue(CareerActivity.this);
+                    for (g = career.length - 1, j=0; g >= 0; g--,j++){
+                        Log.d("carrer.length        ",String.valueOf(career.length-1));
+                        UpdateinfoRequest updateinfoRequest = new UpdateinfoRequest("hopeJobCareer", email, j, job_code[g], career[j], kListener);
                         queue.add(updateinfoRequest);
-                        j++;
                     }
-                    startActivity(updateIntent);
+
+
 
                 } else {
 

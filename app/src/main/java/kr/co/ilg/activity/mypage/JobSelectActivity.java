@@ -39,6 +39,7 @@ public class JobSelectActivity extends AppCompatActivity implements View.OnClick
     int btnFlag2 = 0;
     int isUpdate;  // 1 > 수정  0 > 회원가입
     int i, j = 0;
+    int jobnum;
 
     String worker_email, worker_pw, worker_name, worker_gender, worker_birth, worker_phonenum, hope_local_sido, hope_local_sigugun, worker_certicipate;
 
@@ -60,6 +61,7 @@ public class JobSelectActivity extends AppCompatActivity implements View.OnClick
 
         Intent modifyIntent = getIntent();
         isUpdate = modifyIntent.getIntExtra("isUpdate", 0);  // modify
+        jobnum =modifyIntent.getIntExtra("exjobnum", 0);
 
         Toast.makeText(getApplicationContext(), "어디서 왔나~ " + isUpdate, Toast.LENGTH_SHORT).show();
 
@@ -87,6 +89,7 @@ public class JobSelectActivity extends AppCompatActivity implements View.OnClick
                 } else {
                     if (isUpdate == 1) {  // 수정
                         intent.putExtra("isUpdate", isUpdate);  // 1
+                        intent.putExtra("jobnum", jobnum);
                     }
                         intent.putExtra("worker_email", worker_email);
                         intent.putExtra("worker_pw", worker_pw);

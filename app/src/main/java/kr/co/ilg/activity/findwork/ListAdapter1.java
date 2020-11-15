@@ -103,6 +103,8 @@ public class ListAdapter1 extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
                         intent.putExtra("jp_job_finish_time",workInfo.get(position).jp_job_finish_time);
                         intent.putExtra("jp_job_tot_people",String.valueOf(workInfo.get(position).total_people));
                         intent.putExtra("jp_contents",workInfo.get(position).jp_contents);
+                        intent.putExtra("field_name",workInfo.get(position).fieldname);
+                        intent.putExtra("business_reg_num",workInfo.get(position).business_reg_num);
                         context.startActivity(intent);
                     }
                 });
