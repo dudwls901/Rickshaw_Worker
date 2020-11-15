@@ -17,18 +17,14 @@ public class Sharedpreference {
         editor.clear();
         editor.commit();
 
-    }public static void removeinfo(Context context) {
+    }public static void removeinfo(Context context, int jobnum) {
         SharedPreferences prefs = getPreferences(context);
         SharedPreferences.Editor editor = prefs.edit();
-        editor.remove("jobname0");
-        editor.remove("jobname1");
-        editor.remove("jobname2");
-        editor.remove("jobcode0");
-        editor.remove("jobcode1");
-        editor.remove("jobcode2");
-        editor.remove("jobcareer0");
-        editor.remove("jobcareer1");
-        editor.remove("jobcareer2");
+        for(int i=0; i<jobnum; i++){
+            editor.remove("jobname"+i);
+            editor.remove("jobcode"+i);
+            editor.remove("jobcareer"+i);
+        }
 
         editor.commit();
 

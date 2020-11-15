@@ -81,10 +81,12 @@ public class AccountAddActivity extends AppCompatActivity {
         accountNumET = findViewById(R.id.accountNumET);
         //nameET = findViewById(R.id.nameET);
 
-        if (isUpdate == 1)
-            addBtn.setText("수정");
+        if (isUpdate == 1) {
+            addBtn.setText("수 정");
+            nextTimeTV.setVisibility(View.INVISIBLE);
+        }
         else
-            addBtn.setText("등록");
+            addBtn.setText("등 록");
 
         bSList = new ArrayList<>();
         bSList.add("은행");

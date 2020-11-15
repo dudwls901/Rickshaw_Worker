@@ -48,6 +48,7 @@ public class CareerActivity extends AppCompatActivity {
     int isUpdate;  // 1 > 수정  0 > 회원가입
     int w=0,a=0;
     int g=0,j;
+    int jobnum;
     String[] jobname = new String[]{"","",""};
     String[] jobcareer = new String[]{"","",""};
 
@@ -60,6 +61,7 @@ public class CareerActivity extends AppCompatActivity {
         mContext = this;
         Intent receiver = getIntent();
         isUpdate = receiver.getIntExtra("isUpdate", 0);
+        jobnum = receiver.getIntExtra("jobnum", 0);
         worker_email = receiver.getExtras().getString("worker_email");
         worker_pw = receiver.getExtras().getString("worker_pw");
         worker_name = receiver.getExtras().getString("worker_name");
@@ -81,7 +83,7 @@ public class CareerActivity extends AppCompatActivity {
         Log.d("rrrrrrrrrr", String.valueOf(job_code[0]) + job_code[1] + job_code[2]);
         Log.d("rrrrrreceiver", worker_email + worker_pw + worker_name + worker_gender + worker_birth + worker_phonenum + hope_local_sido + hope_local_sigugun + jobs);
 
-        jobarray = jobs.split("  ");
+        jobarray = jobs.split(" ");
 
         mRecyclerView = findViewById(R.id.rcV);
 
@@ -148,13 +150,15 @@ public class CareerActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String email = Sharedpreference.get_email(mContext, "worker_email");
                 Intent intent = new Intent(CareerActivity.this, AccountAddActivity.class);
-                Intent updateIntent = new Intent(CareerActivity.this, MyInfomanageActivity.class);
+
 
                 if (isUpdate == 1) {  // 수정
-                    Sharedpreference.removeinfo(mContext);
+                    Sharedpreference.removeinfo(mContext, jobnum);
                     Sharedpreference.set_numofjob(mContext,"numofjob",String.valueOf(career.length));
 
-                    Response.Listener rListener = new Response.Listener<String>() {
+
+
+                    Response.Listener kListener = new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
                             try {
@@ -163,26 +167,29 @@ public class CareerActivity extends AppCompatActivity {
                                     Sharedpreference.set_Jobcode(mContext, "jobcode" + a, jResponse.getString("job_code"));
                                     Sharedpreference.set_Jobname(mContext, "jobname" + a, jResponse.getString("job_name"));
                                     Sharedpreference.set_Jobcareer(mContext, "jobcareer" + a, jResponse.getString("hj_career"));
-                                    Log.d("check        ",Sharedpreference.get_Jobcode(mContext, "jobcode" + a)+ " "+ Sharedpreference.get_Jobname(mContext, "jobname" + a) + " " +Sharedpreference.get_Jobcareer(mContext,"jobcareer"+a));
+                                    Log.d("check",a + "   " +Sharedpreference.get_Jobcode(mContext, "jobcode" + a)+ " "+ Sharedpreference.get_Jobname(mContext, "jobname" + a) + " " +Sharedpreference.get_Jobcareer(mContext,"jobcareer"+a));
                                     a++;
 
                                     Toast.makeText(CareerActivity.this, "수정 완료되었습니다", Toast.LENGTH_SHORT).show();
+                                    if(a==(career.length)){
+                                        Intent updateIntent = new Intent(CareerActivity.this, MyInfomanageActivity.class);
+                                        startActivity(updateIntent);
+                                    }
 
 
                             } catch (Exception e) {
-                                Log.d("mytest", e.toString());
+                                Log.d("mytest123123", e.toString());
                             }
                         }
                     };
-
                     RequestQueue queue;
                     queue = Volley.newRequestQueue(CareerActivity.this);
-                    for (g = career.length - 1, j=0; g >= 0; g--){
-                        UpdateinfoRequest updateinfoRequest = new UpdateinfoRequest("hopeJobCareer", email, j, job_code[g], career[j], rListener);
+                    for (g = career.length - 1, j=0; g >= 0; g--,j++){
+                        Log.d("carrer.length        ",String.valueOf(career.length-1));
+                        UpdateinfoRequest updateinfoRequest = new UpdateinfoRequest("hopeJobCareer", email, j, job_code[g], career[j], kListener);
                         queue.add(updateinfoRequest);
-                        j++;
                     }
-                    startActivity(updateIntent);
+
 
 
                 } else {

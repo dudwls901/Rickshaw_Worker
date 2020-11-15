@@ -70,6 +70,8 @@ public class AccountManageActivity extends Activity {
                             if (deleteSuccess) {
                                 Sharedpreference.set_Bankaccount(getApplicationContext(), "worker_bankaccount", "");
                                 Sharedpreference.set_Bankname(getApplicationContext(), "worker_bankname", "");
+                                bankaccount.setText("");
+                                bankname.setText("");
                                 Toast.makeText(AccountManageActivity.this, "삭제되었습니다", Toast.LENGTH_SHORT).show();
                             } else {
                                 Toast.makeText(AccountManageActivity.this, "삭제 실패", Toast.LENGTH_SHORT).show();

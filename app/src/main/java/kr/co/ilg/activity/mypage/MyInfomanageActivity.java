@@ -42,6 +42,7 @@ public class MyInfomanageActivity extends Activity {
     EditText edit_phonenum, edit_introduce;
     String worker_introduce, worker_phonenum;
     ListView listview_hope_job_career;
+    int hopeJCNum;
 
 
     RecyclerView.LayoutManager mLayoutManager;
@@ -130,6 +131,7 @@ public class MyInfomanageActivity extends Activity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), kr.co.ilg.activity.mypage.JobSelectActivity.class);
                 intent.putExtra("isUpdate", 1);
+                intent.putExtra("exjobnum", hopeJCNum);
                 startActivity(intent);
 
             }
@@ -144,8 +146,9 @@ public class MyInfomanageActivity extends Activity {
                     final ArrayList<HopeJobCareerLVItem> hopeJobCareerLVItems = new ArrayList<>();
                     boolean select_hopeJCNum = jResponse.getBoolean("select_hopeJCNum");
                     if (select_hopeJCNum) {
-                        int hopeJCNum = jResponse.getInt("hopeJCNum");
+                        hopeJCNum = jResponse.getInt("hopeJCNum");
                         for (int i = 0; i < hopeJCNum; i++) {
+                            Log.d("check hopeasdfasdf",String.valueOf(hopeJCNum));
                             hopeJobCareerLVItems.add(new HopeJobCareerLVItem(Sharedpreference.get_Jobname(mContext, "jobname" + i), Sharedpreference.get_Jobcareer(mContext, "jobcareer" + i)));
                         }
                     }
@@ -153,7 +156,7 @@ public class MyInfomanageActivity extends Activity {
                     listview_hope_job_career.setAdapter(hopeJobCareerLVAdapter);
 
                 } catch (Exception e) {
-                    Log.d("mytest", e.toString());
+                    Log.d("mytest manage", e.toString());
                 }
             }
         };
