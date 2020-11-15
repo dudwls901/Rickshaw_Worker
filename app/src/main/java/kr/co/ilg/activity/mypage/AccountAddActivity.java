@@ -45,7 +45,7 @@ public class AccountAddActivity extends AppCompatActivity {
     String worker_email, worker_pw, worker_name, worker_gender, worker_birth, worker_phonenum, hope_local_sido, hope_local_sigugun, worker_bankname, worker_bankaccount, worker_certicipate;
     String[] jobarray, careerarray;
     int[] job_code;
-    EditText accountNumET, nameET;
+    EditText accountNumET;
     int isUpdate;  // 1 > 수정  0 > 회원가입
 
 

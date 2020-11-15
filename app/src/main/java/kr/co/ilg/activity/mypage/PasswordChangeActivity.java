@@ -28,7 +28,7 @@ public class PasswordChangeActivity extends AppCompatActivity {
 
     Button changeBtn;
     EditText passwdET, newPasswdET, checkNewPwET;
-    String worker_email, worker_pw, worker_new_pw, worker_check_new_pw;;
+    String worker_email, worker_pw, worker_new_pw, worker_check_new_pw;
     private Context mContext;
 
     @Override
@@ -46,45 +46,48 @@ public class PasswordChangeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                worker_email = Sharedpreference.get_Nickname(mContext, "email");
+                worker_email = Sharedpreference.get_email(mContext, "worker_email");
                 worker_pw = passwdET.getText().toString();
                 worker_new_pw = newPasswdET.getText().toString();
                 worker_check_new_pw = checkNewPwET.getText().toString();
 
-                Response.Listener rListener = new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
+                if ((worker_pw.equals("")) || (worker_check_new_pw.equals("")) || (worker_new_pw.equals(""))) {
+                    Toast.makeText(PasswordChangeActivity.this, "모든 값을 입력해 주세요.", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Response.Listener rListener = new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
 
-                        try {
-                            JSONObject jResponse = new JSONObject(response.substring(response.indexOf("{"), response.lastIndexOf("}") + 1));
+                            try {
+                                JSONObject jResponse = new JSONObject(response.substring(response.indexOf("{"), response.lastIndexOf("}") + 1));
 
-                            boolean isExistPw = jResponse.getBoolean("isExistPw");
-                            boolean pwChangeSuccess = jResponse.getBoolean("pwChangeSuccess");
+                                boolean isExistPw = jResponse.getBoolean("isExistPw");
+                                boolean pwChangeSuccess = jResponse.getBoolean("pwChangeSuccess");
 
-                            if(isExistPw && !(worker_check_new_pw.equals("")) && !(worker_new_pw.equals("")) ){  // 비밀번호 존재
-                                if(pwChangeSuccess) {
-                                    Toast.makeText(PasswordChangeActivity.this, "변경되었습니다", Toast.LENGTH_SHORT).show();
+                                if(isExistPw) {  // 비밀번호 존재
+                                    if(pwChangeSuccess) {
+                                        Toast.makeText(PasswordChangeActivity.this, "변경되었습니다", Toast.LENGTH_SHORT).show();
 
-                                    Intent intent = new Intent(PasswordChangeActivity.this, OptionActivity.class);
-                                    startActivity(intent);
-                                } else {
-                                    Toast.makeText(PasswordChangeActivity.this, "새 비밀번호와 새 비밀번호 확인이 다릅니다.", Toast.LENGTH_SHORT).show();
+                                        Intent intent = new Intent(PasswordChangeActivity.this, OptionActivity.class);
+                                        startActivity(intent);
+                                    } else {
+                                        Toast.makeText(PasswordChangeActivity.this, "새 비밀번호와 새 비밀번호 확인이 다릅니다.", Toast.LENGTH_SHORT).show();
+                                    }
+                                } else {  // 비밀번호 없음
+                                    Toast.makeText(PasswordChangeActivity.this, "현재 비밀번호가 틀립니다.", Toast.LENGTH_SHORT).show();
                                 }
-                            } else if(isExistPw==false){  // 비밀번호 없음
-                                Toast.makeText(PasswordChangeActivity.this, "현재 비밀번호가 틀립니다.", Toast.LENGTH_SHORT).show();
-                            } else{
-                                Toast.makeText(PasswordChangeActivity.this, "모든 값을 입력해 주세요.", Toast.LENGTH_SHORT).show();
+
+                            } catch (Exception e) {
+                                Log.d("mytest", e.toString());
                             }
-
-                        } catch (Exception e) {
-                            Log.d("mytest", e.toString());
                         }
-                    }
-                };
-                PasswordChangeRequest pcRequest = new PasswordChangeRequest(worker_email, worker_pw, worker_new_pw, worker_check_new_pw, rListener);
+                    };
+                    PasswordChangeRequest pcRequest = new PasswordChangeRequest("worker", worker_email, worker_pw, worker_new_pw, worker_check_new_pw, rListener);
 
-                RequestQueue queue = Volley.newRequestQueue(PasswordChangeActivity.this);
-                queue.add(pcRequest);
+                    RequestQueue queue = Volley.newRequestQueue(PasswordChangeActivity.this);
+                    queue.add(pcRequest);
+                }
             }
         });
     }}

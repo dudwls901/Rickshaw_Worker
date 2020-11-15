@@ -57,30 +57,11 @@
             android:inputType="number"
             android:paddingLeft="80dp" />
 
-        <TextView
-            android:id="@+id/nameTV"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="@+id/nameET"
-            app:layout_constraintBottom_toBottomOf="@+id/nameET"
-            app:layout_constraintLeft_toLeftOf="parent"
-            android:layout_weight="1.3"
-            android:text="이        름"
-            android:textSize="18sp" />
-
-        <EditText
-            android:id="@+id/nameET"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/accountNumET"
-            app:layout_constraintLeft_toLeftOf="parent"
-            android:paddingLeft="80dp" />
-
         <Button
             android:id="@+id/addBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/nameET"
+            app:layout_constraintTop_toBottomOf="@id/accountNumET"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             android:layout_marginTop="15dp"
