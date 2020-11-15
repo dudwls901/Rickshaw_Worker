@@ -42,8 +42,7 @@ public class MyInfomanageActivity extends Activity {
     EditText edit_phonenum, edit_introduce;
     String worker_introduce, worker_phonenum;
     ListView listview_hope_job_career;
-    ArrayList<HopeJobCareerLVItem> hopeJobCareerLVItems;
-    HopeJobCareerLVAdapter hopeJobCareerLVAdapter;
+
 
     RecyclerView.LayoutManager mLayoutManager;
     @Override
@@ -142,22 +141,15 @@ public class MyInfomanageActivity extends Activity {
 
                 try {
                     JSONObject jResponse = new JSONObject(response.substring(response.indexOf("{"), response.lastIndexOf("}") + 1));
-                    hopeJobCareerLVItems = new ArrayList<HopeJobCareerLVItem>();
+                    final ArrayList<HopeJobCareerLVItem> hopeJobCareerLVItems = new ArrayList<>();
                     boolean select_hopeJCNum = jResponse.getBoolean("select_hopeJCNum");
                     if (select_hopeJCNum) {
                         int hopeJCNum = jResponse.getInt("hopeJCNum");
                         for (int i = 0; i < hopeJCNum; i++) {
-                            String j = "jobname" + i;
-                            String c = "jobcareer" + i;
-                            hopeJobCareerLVItems.add(new HopeJobCareerLVItem(Sharedpreference.get_Jobname(mContext, j), Sharedpreference.get_Jobcareer(mContext, c)));
+                            hopeJobCareerLVItems.add(new HopeJobCareerLVItem(Sharedpreference.get_Jobname(mContext, "jobname" + i), Sharedpreference.get_Jobcareer(mContext, "jobcareer" + i)));
                         }
-                    } else {
-                        hopeJobCareerLVItems.add(new HopeJobCareerLVItem(Sharedpreference.get_Jobname(mContext, "jobname0"), Sharedpreference.get_Jobcareer(mContext, "jobcareer0")));
-                        hopeJobCareerLVItems.add(new HopeJobCareerLVItem(Sharedpreference.get_Jobname(mContext, "jobname1"), Sharedpreference.get_Jobcareer(mContext, "jobcareer1")));
-                        hopeJobCareerLVItems.add(new HopeJobCareerLVItem(Sharedpreference.get_Jobname(mContext, "jobname2"), Sharedpreference.get_Jobcareer(mContext, "jobcareer2")));
-                        Toast.makeText(MyInfomanageActivity.this, "희망 직종 및 경력 로드 실패", Toast.LENGTH_SHORT).show();
                     }
-                    hopeJobCareerLVAdapter = new HopeJobCareerLVAdapter(getApplicationContext(), hopeJobCareerLVItems);
+                    HopeJobCareerLVAdapter hopeJobCareerLVAdapter = new HopeJobCareerLVAdapter(getApplicationContext(), hopeJobCareerLVItems);
                     listview_hope_job_career.setAdapter(hopeJobCareerLVAdapter);
 
                 } catch (Exception e) {
@@ -176,11 +168,13 @@ public class MyInfomanageActivity extends Activity {
         phonenum.setText(Sharedpreference.get_Phonenum(mContext, "worker_phonenum"));
         email.setText(Sharedpreference.get_email(mContext, "worker_email"));
         introduce.setText(Sharedpreference.get_introduce(mContext, "worker_introduce"));
-/*
-        hope_job_career.setText(Sharedpreference.get_Jobname(mContext,"jobname0") + " " + Sharedpreference.get_Jobcareer(mContext,"jobcareer0")+"\n"
+
+
+
+        /*hope_job_career.setText(Sharedpreference.get_Jobname(mContext,"jobname0") + " " + Sharedpreference.get_Jobcareer(mContext,"jobcareer0")+"\n"
                 +Sharedpreference.get_Jobname(mContext,"jobname1") + " " + Sharedpreference.get_Jobcareer(mContext,"jobcareer1")+"\n"
-                +Sharedpreference.get_Jobname(mContext,"jobname2") + " " + Sharedpreference.get_Jobcareer(mContext,"jobcareer2"));
-*/
+                +Sharedpreference.get_Jobname(mContext,"jobname2") + " " + Sharedpreference.get_Jobcareer(mContext,"jobcareer2"));*/
+
         hope_local.setText(Sharedpreference.get_Hope_local_sido(mContext, "local_sido") + " " + Sharedpreference.get_Hope_local_sigugun(mContext, "local_sigugun"));
     }
 }

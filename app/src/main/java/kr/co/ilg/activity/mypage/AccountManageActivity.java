@@ -66,7 +66,7 @@ public class AccountManageActivity extends Activity {
 
                         try {
                             JSONObject jResponse = new JSONObject(response.substring(response.indexOf("{"), response.lastIndexOf("}") + 1));
-                            boolean deleteSuccess = jResponse.getBoolean("select_hopeJCNum");
+                            boolean deleteSuccess = jResponse.getBoolean("deleteSuccess");
                             if (deleteSuccess) {
                                 Sharedpreference.set_Bankaccount(getApplicationContext(), "worker_bankaccount", "");
                                 Sharedpreference.set_Bankname(getApplicationContext(), "worker_bankname", "");
