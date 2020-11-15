@@ -1,63 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:map="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent">
 
-    >
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
+        android:layout_height="match_parent"
         android:gravity="center"
-        android:id="@+id/checkbox_layout"
-        app:layout_constraintTop_toTopOf="parent"
+        android:orientation="vertical"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:background="@color/colorPrimary"
-        >
+        app:layout_constraintTop_toTopOf="parent">
+
         <LinearLayout
-            android:layout_width="400dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
+            android:layout_width="match_parent"
             android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:id="@+id/checkbox_layout"
+            android:background="@color/colorPrimary"
+            android:layout_height="?attr/actionBarSize"
+
             >
+
             <ImageButton
+                android:id="@+id/back"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/arrow_back_white"
-                android:background="@color/colorPrimary"
-                android:layout_marginTop="4dp"
-                android:layout_marginRight="50dp"
                 android:layout_marginLeft="15dp"
-                android:id="@+id/back"
-                ></ImageButton>
+                android:layout_marginTop="17dp"
+                android:layout_marginRight="50dp"
+                android:background="@color/colorPrimary"
+                android:src="@drawable/arrow_back_white"></ImageButton>
+
             <CheckBox
-                android:buttonTint="@color/WhiteColor"
-                android:text="현장"
-                android:layout_gravity="center"
+                android:id="@+id/field_checkbox"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/field_checkbox"
+                android:layout_gravity="center"
+                android:buttonTint="@color/WhiteColor"
+                android:text="현장"
                 android:textColor="@color/WhiteColor"
-                android:textStyle="bold"
                 android:textSize="20dp"
-
+                android:textStyle="bold"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="1dp"
                 ></CheckBox>
+
             <CheckBox
+                android:id="@+id/office_checkbox"
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:buttonTint="@color/WhiteColor"
                 android:text="인력사무소"
-                android:layout_width="130dp"
-                android:layout_gravity="center"
-                android:layout_height="wrap_content"
-                android:id="@+id/office_checkbox"
                 android:textColor="@color/WhiteColor"
-                android:textStyle="bold"
                 android:textSize="20dp"
+                android:textStyle="bold"
+                android:layout_marginTop="1dp"
                 ></CheckBox>
         </LinearLayout>
+        <LinearLayout
+            android:id="@+id/map_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"></LinearLayout>
     </LinearLayout>
+
     <!--
     <fragment
         android:id="@+id/map"
@@ -77,9 +87,7 @@
            />
 
    -->
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/map_view"/>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
