@@ -69,7 +69,7 @@ public class ListViewItem {
         this.jp_num = jp_num;
     }
     //나의현장탭 지난현장 +paid
-    public ListViewItem(String business_reg_num,String jp_num, String fieldname,String title,String date,int pay,String job,String place,String office, String paid, boolean urgency,String jp_job_start_time, String jp_job_finish_time, String jp_contents){
+    public ListViewItem(String business_reg_num,String jp_num, String fieldname,String title,String date,int pay,String job,String place,String office, String paid, boolean urgency,String jp_job_start_time, String jp_job_finish_time, String jp_contents, int total_people){
         this.title=title;
         this.date=date;
         this.business_reg_num = business_reg_num;
@@ -84,6 +84,7 @@ public class ListViewItem {
         this.jp_job_start_time = jp_job_start_time;
         this.jp_job_finish_time = jp_job_finish_time;
         this.jp_contents = jp_contents;
+        this.total_people=total_people;
     }
 
 /*

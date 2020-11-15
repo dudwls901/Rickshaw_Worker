@@ -3,12 +3,14 @@ package kr.co.ilg.activity.findwork;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -117,6 +119,19 @@ public class ListWorkGoneAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     public void onClick(View v) {
                         context =v.getContext();
                         intent = new Intent(context, WorkInfoActivity.class);
+                        intent.putExtra("business_reg_num", workInfo.get(position).business_reg_num);
+                        intent.putExtra("jp_num", workInfo.get(position).jp_num);
+                        intent.putExtra("jp_title",workInfo.get(position).title);
+                        intent.putExtra("field_address",workInfo.get(position).place);
+                        intent.putExtra("manager_office_name",workInfo.get(position).office);
+                        intent.putExtra("job_name",workInfo.get(position).job);
+                        intent.putExtra("jp_job_cost",String.valueOf(workInfo.get(position).pay));
+                        intent.putExtra("jp_job_date",workInfo.get(position).date);
+                        intent.putExtra("jp_job_start_time",workInfo.get(position).jp_job_start_time);
+                        intent.putExtra("jp_job_finish_time",workInfo.get(position).jp_job_finish_time);
+                        intent.putExtra("jp_job_tot_people",String.valueOf(workInfo.get(position).total_people));
+                        intent.putExtra("jp_contents",workInfo.get(position).jp_contents);
+                        intent.putExtra("field_name",workInfo.get(position).fieldname);
                         context.startActivity(intent);
                     }
                 });

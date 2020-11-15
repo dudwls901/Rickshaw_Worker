@@ -4,6 +4,7 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Paint;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
@@ -24,12 +25,16 @@ import com.example.capstone.R;
 
 import org.json.JSONObject;
 
+import static java.lang.Thread.sleep;
+
 public class WorkInfoActivity extends AppCompatActivity {
 
     Toolbar toolbar;
     TextView title_tv, place_tv, office_info_tv, title_name_tv, job_tv, pay_tv, date_tv, time_tv, people_tv, contents_tv, address_tv;
     Button map_btn, apply_btn, call_btn, message_btn;
-    String jp_title, field_address, manager_office_name, job_name, jp_job_cost, jp_job_date, jp_job_start_time, jp_job_finish_time, jp_job_tot_people, jp_contents, business_reg_num, jp_num, field_name;
+    String jp_title, field_address, manager_office_name, job_name, jp_job_cost, jp_job_date, jp_job_start_time, jp_job_finish_time, jp_job_tot_people, jp_contents,
+            business_reg_num, jp_num, field_name, manager_office_telnum, manager_phonenum;
+    Intent intent;
 
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -69,7 +74,7 @@ public class WorkInfoActivity extends AppCompatActivity {
         address_tv = findViewById(R.id.address_tv);
 
         place_tv.setPaintFlags(place_tv.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
-        office_info_tv.setPaintFlags(place_tv.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        office_info_tv.setPaintFlags(office_info_tv.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
 
         //TODO ListAdapter에서 intent로 값만 넘기면 됨
         Intent receiver = getIntent();
@@ -86,6 +91,8 @@ public class WorkInfoActivity extends AppCompatActivity {
         jp_job_tot_people = receiver.getExtras().getString("jp_job_tot_people");
         jp_contents = receiver.getExtras().getString("jp_contents");
         field_name = receiver.getExtras().getString("field_name");
+
+        Log.d("tqtqtqqtqtqtqtqtqtq", field_name + "   " + manager_office_name + " " + business_reg_num);
 
         title_tv.setText(jp_title);
         place_tv.setText(field_name);
@@ -161,6 +168,65 @@ public class WorkInfoActivity extends AppCompatActivity {
 
                 RequestQueue queue = Volley.newRequestQueue(WorkInfoActivity.this);
                 queue.add(aRequest);
+            }
+        });
+
+        call_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Response.Listener rListener = new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jResponse = new JSONObject(response.substring(response.indexOf("{"), response.lastIndexOf("}") + 1));
+                            boolean selectTelNum = jResponse.getBoolean("selectTelNum");
+                            if (selectTelNum) {
+                                manager_phonenum = jResponse.getString("manager_phonenum");
+                                Uri uri = Uri.parse("tel:" + manager_phonenum);
+                                intent = new Intent(Intent.ACTION_DIAL, uri);
+                                startActivity(intent);
+                            } else {
+                                Toast.makeText(WorkInfoActivity.this, "연락처 로드 실패", Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (Exception e) {
+                            Log.d("mytest", e.toString());
+                        }
+                    }
+                };
+                SelectTelNumRequest stnRequest = new SelectTelNumRequest(business_reg_num, rListener);
+
+                RequestQueue queue = Volley.newRequestQueue(WorkInfoActivity.this);
+                queue.add(stnRequest);
+            }
+        });
+
+        message_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Response.Listener rListener = new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jResponse = new JSONObject(response.substring(response.indexOf("{"), response.lastIndexOf("}") + 1));
+                            boolean selectTelNum = jResponse.getBoolean("selectTelNum");
+                            if (selectTelNum) {
+                                manager_phonenum = jResponse.getString("manager_phonenum");
+                                intent = new Intent(Intent.ACTION_SENDTO);
+                                intent.putExtra("sms_body", "인력거 보고 연락드립니다.");
+                                intent.setData(Uri.parse("smsto:" + Uri.encode(manager_phonenum)));
+                                startActivity(intent);
+                            } else {
+                                Toast.makeText(WorkInfoActivity.this, "연락처 로드 실패", Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (Exception e) {
+                            Log.d("mytest", e.toString());
+                        }
+                    }
+                };
+                SelectTelNumRequest stnRequest = new SelectTelNumRequest(business_reg_num, rListener);
+
+                RequestQueue queue = Volley.newRequestQueue(WorkInfoActivity.this);
+                queue.add(stnRequest);
             }
         });
     }
