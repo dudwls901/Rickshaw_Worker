@@ -342,11 +342,11 @@ class MainActivity : Activity() {
             }
         }
         kakaoLoginBtn.setOnClickListener {
-            if (LoginClient.instance.isKakaoTalkLoginAvailable(this)) {
+            /*if (LoginClient.instance.isKakaoTalkLoginAvailable(this)) {
                 LoginClient.instance.loginWithKakaoTalk(this, callback = callback)
-            } else {
+            } else {*/
                 LoginClient.instance.loginWithKakaoAccount(this, callback = callback)
-            }
+
         }
 
         loginBtn.setOnClickListener {
