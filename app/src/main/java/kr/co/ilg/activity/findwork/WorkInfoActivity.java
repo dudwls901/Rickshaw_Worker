@@ -127,6 +127,9 @@ public class WorkInfoActivity extends AppCompatActivity {
                 intent.putExtra("job_name", job_name);
                 intent.putExtra("manager_office_name", manager_office_name);
                 intent.putExtra("jp_job_tot_people", jp_job_tot_people);
+                intent.putExtra("jp_job_start_time", jp_job_start_time);
+                intent.putExtra("jp_job_finish_time", jp_job_finish_time);
+                intent.putExtra("jp_contents", jp_contents);
                 startActivity(intent);
             }
         });

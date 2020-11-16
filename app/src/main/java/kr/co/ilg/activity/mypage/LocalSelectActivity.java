@@ -66,9 +66,9 @@ public class LocalSelectActivity extends AppCompatActivity {
         okBtn = findViewById(R.id.okBtn); // 확인버튼
 
         if (isUpdate == 1)
-            okBtn.setText("수정");
+            okBtn.setText("수 정");
         else
-            okBtn.setText("확인");
+            okBtn.setText("확 인");
 
         okBtn.setOnClickListener(new View.OnClickListener() {
             @Override

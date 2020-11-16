@@ -26,6 +26,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="수정"
+            android:textSize="14sp"
             app:layout_constraintLeft_toRightOf="@id/profil"
             app:layout_constraintBottom_toTopOf="@id/guideline4"/>
 
@@ -76,7 +77,8 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             android:id="@+id/modifyprofile"
-            android:text="수정 >"/>
+            android:text="수정 >"
+            android:textSize="14sp"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
     <LinearLayout
@@ -181,6 +183,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             android:id="@+id/modifyHL"
+            android:textSize="14sp"
             android:text="수정 >"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -222,6 +225,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             android:id="@+id/modifyHJC"
+            android:textSize="14sp"
             android:text="수정 >"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

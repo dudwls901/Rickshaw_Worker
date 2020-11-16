@@ -33,7 +33,7 @@ public class FieldInfoActivity extends AppCompatActivity {
     int k;
     String name[], contents[],datetime[];
     TextView field_nameTv, field_addressTv;
-    String jp_num, field_name, field_address, jp_title, jp_job_date, jp_job_cost, job_name, manager_office_name, jp_job_tot_people;
+    String jp_num, field_name, field_address, jp_title, jp_job_date, jp_job_cost, job_name, manager_office_name, jp_job_tot_people, jp_job_start_time, jp_job_finish_time, jp_contents;
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -69,6 +69,9 @@ public class FieldInfoActivity extends AppCompatActivity {
         job_name = receiver.getExtras().getString("job_name");
         manager_office_name = receiver.getExtras().getString("manager_office_name");
         jp_job_tot_people = receiver.getExtras().getString("jp_job_tot_people");
+        jp_job_start_time = receiver.getExtras().getString("jp_job_start_time");
+        jp_job_finish_time = receiver.getExtras().getString("jp_job_finish_time");
+        jp_contents = receiver.getExtras().getString("jp_contents");
 
         field_nameTv.setText(field_name);
         field_addressTv.setText(field_address);
@@ -79,7 +82,8 @@ public class FieldInfoActivity extends AppCompatActivity {
         work_info_RecyclerView.setLayoutManager(layoutManager);
 
         ArrayList<ListViewItem> workInfoArrayList = new ArrayList<>();
-        workInfoArrayList.add(new ListViewItem(jp_title, jp_job_date, Integer.parseInt(jp_job_cost), job_name, field_address, manager_office_name, 1, Integer.parseInt(jp_job_tot_people)));
+        workInfoArrayList.add(new ListViewItem(jp_title, jp_job_date, Integer.parseInt(jp_job_cost), job_name, field_address, manager_office_name, 1,
+                Integer.parseInt(jp_job_tot_people), jp_job_start_time, jp_job_finish_time, jp_contents, field_name));
         //workInfoArrayList.add(new ListViewItem("레미안 건축","2020-06-14",150000,"상수 레미안 아파트","건축","개미인력소",1,3));
 
         ListAdapter workAdapter = new ListAdapter(getApplicationContext(), workInfoArrayList);

@@ -6,7 +6,8 @@ public class ListViewItem {
     public int pay, current_people, total_people;
     public boolean urgency ;
     // 현장 정보의 일자리 정보
-    public ListViewItem(String title,String date,int pay,String job,String place,String office,int current_people,int total_people){
+    public ListViewItem(String title,String date,int pay,String job,String place,String office,int current_people,int total_people,
+                        String jp_job_start_time, String jp_job_finish_time, String jp_contents, String field_name){
         this.title=title;
         this.date=date;
         this.pay=pay;
@@ -15,6 +16,10 @@ public class ListViewItem {
         this.office=office;
         this.current_people=current_people;
         this.total_people=total_people;
+        this.jp_job_start_time = jp_job_start_time;
+        this.jp_job_finish_time = jp_job_finish_time;
+        this.jp_contents = jp_contents;
+        this.fieldname = field_name;
     }
 /*
     // Main
