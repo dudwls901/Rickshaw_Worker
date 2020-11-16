@@ -75,7 +75,7 @@ public class SignupEmailActivity extends AppCompatActivity {
         sendCodeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                GmailSender sender = new GmailSender("sun83324@gmail.com", "wjdtjsdn3@");
+                GmailSender sender = new GmailSender("sun83324@gmail.com", "sun0811****");
                 Code = sender.getEmailCode();
 
                 if (android.os.Build.VERSION.SDK_INT > 9) {

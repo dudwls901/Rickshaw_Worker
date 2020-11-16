@@ -110,26 +110,41 @@ class MainActivity : Activity() {
                                 override fun onResponse(response: String?) {
                                     try {
                                         val jResponse = JSONObject(response!!.substring(response!!.indexOf("{"), response!!.lastIndexOf("}") + 1))
-                                        val isExistWorker = jResponse.getBoolean("tryLogin")
+
+                                        var jobname = Array<String>(3) { "" }
+                                        var jobcareer = Array<String>(3) { "" }
+                                        var jobcode = Array<String>(3) { "" }
+                                        var a = jResponse.getJSONObject("response")
+                                        val isExistWorker = a.getBoolean("tryLogin")
                                         if (isExistWorker) {  // 회원이 존재하면 로그인된 화면으로 넘어감
-                                            var worker_email1 = jResponse.getString("worker_email")
-                                            var worker_name = jResponse.getString("worker_name")
-                                            var password = jResponse.getString("worker_pw")
-                                            var worker_gender = jResponse.getString("worker_gender")
-                                            var worker_birth = jResponse.getString("worker_birth")
-                                            var worker_phonenum = jResponse.getString("worker_phonenum")
-                                            var worker_bankaccount = jResponse.getString("worker_bankaccount")
-                                            var worker_bankname = jResponse.getString("worker_bankname")
-                                            var worker_introduce = jResponse.getString("worker_introduce")
-                                            var jobcode = jResponse.getString("jobcode")
+                                            var worker_email = a.getString("worker_email")
+                                            var worker_name = a.getString("worker_name")
+                                            var password = a.getString("worker_pw")
+                                            var worker_gender = a.getString("worker_gender")
+                                            var worker_birth = a.getString("worker_birth")
+                                            var worker_phonenum = a.getString("worker_phonenum")
+                                            var worker_bankaccount = a.getString("worker_bankaccount")
+                                            var worker_bankname = a.getString("worker_bankname")
+                                            var worker_introduce = a.getString("worker_introduce") ///////  여기까지 값들어
+                                            var local_sido = a.getString("local_sido")
+                                            var local_sigugun = a.getString("local_sigugun")
+                                            var j=0
 
-                                            var hope_local_sido = jResponse.getString("hope_local_sido")
-                                            var hope_local_sigugun = jResponse.getString("hope_local_sigugun")
-                                            var jobcareer = jResponse.getString("jobcareer")
+                                            var k = arrayOf("0", "1", "2")
+                                            for (i in 0 until a.length()-12) {
+                                                var s = a.getJSONObject(k[i])
+                                                jobname[i] = s.getString("jobname")
+                                                jobcareer[i] = s.getString("jobcareer")
+                                                jobcode[i]=s.getString("job_code")
+                                                Sharedpreference.set_Jobcareer(applicationContext(), "jobname"+i, jobname[i])
+                                                Sharedpreference.set_Jobname(applicationContext(), "jobcareer"+i, jobcareer[i])
+                                                Sharedpreference.set_Jobcode(applicationContext(), "jobcode"+i, jobcode[i])
+                                                j++;
+                                            } ///실행되다가
 
+                                            Sharedpreference.set_numofjob(applicationContext(), "numofjob", j.toString())
 
-                                            Sharedpreference.set_Jobcareer(applicationContext(), "jobcareer", jobcareer)
-                                            Sharedpreference.set_email(applicationContext(), "worker_email", worker_email1)
+                                            Sharedpreference.set_email(applicationContext(), "worker_email", worker_email)
                                             Sharedpreference.set_Nickname(applicationContext(), "worker_name", worker_name)
                                             Sharedpreference.set_Password(applicationContext(), "worker_pw", password)
                                             Sharedpreference.set_Gender(applicationContext(), "worker_gender", worker_gender)
@@ -138,9 +153,9 @@ class MainActivity : Activity() {
                                             Sharedpreference.set_Bankaccount(applicationContext(), "worker_bankaccount", worker_bankaccount)
                                             Sharedpreference.set_Bankname(applicationContext(), "worker_bankname", worker_bankname)
                                             Sharedpreference.set_introduce(applicationContext(), "worker_introduce", worker_introduce)
-                                            Sharedpreference.set_Jobname(applicationContext(), "jobcode", jobcode)
-                                            Sharedpreference.set_Hope_local_sido(applicationContext(), "hope_local_sido", hope_local_sido)
-                                            Sharedpreference.set_Hope_local_sigugun(applicationContext(), "hope_local_sigugun", hope_local_sigugun)// 파일에 맵핑형식으로 저장
+
+                                            Sharedpreference.set_Hope_local_sido(applicationContext(), "local_sido", local_sido)
+                                            Sharedpreference.set_Hope_local_sigugun(applicationContext(), "local_sigugun", local_sigugun)// 파일에 맵핑형식으로 저장// 파일에 맵핑형식으로 저장
 
                                             Toast.makeText(this@MainActivity, "로그인에 성공하였습니다.", Toast.LENGTH_SHORT).show()
                                             intent() //
@@ -167,26 +182,41 @@ class MainActivity : Activity() {
                                 override fun onResponse(response: String?) {
                                     try {
                                         val jResponse = JSONObject(response!!.substring(response!!.indexOf("{"), response!!.lastIndexOf("}") + 1))
-                                        val isExistWorker = jResponse.getBoolean("tryLogin")
+
+                                        var jobname = Array<String>(3) { "" }
+                                        var jobcareer = Array<String>(3) { "" }
+                                        var jobcode = Array<String>(3) { "" }
+                                        var a = jResponse.getJSONObject("response")
+                                        val isExistWorker = a.getBoolean("tryLogin")
                                         if (isExistWorker) {  // 회원이 존재하면 로그인된 화면으로 넘어감
-                                            var worker_email1 = jResponse.getString("worker_email")
-                                            var worker_name = jResponse.getString("worker_name")
-                                            var password = jResponse.getString("worker_pw")
-                                            var worker_gender = jResponse.getString("worker_gender")
-                                            var worker_birth = jResponse.getString("worker_birth")
-                                            var worker_phonenum = jResponse.getString("worker_phonenum")
-                                            var worker_bankaccount = jResponse.getString("worker_bankaccount")
-                                            var worker_bankname = jResponse.getString("worker_bankname")
-                                            var worker_introduce = jResponse.getString("worker_introduce")
-                                            var jobcode = jResponse.getString("jobcode")
-                                            var hope_local_sido = jResponse.getString("hope_local_sido")
-                                            var hope_local_sigugun = jResponse.getString("hope_local_sigugun")
-                                            var jobcareer = jResponse.getString("jobcareer")
+                                            var worker_email = a.getString("worker_email")
+                                            var worker_name = a.getString("worker_name")
+                                            var password = a.getString("worker_pw")
+                                            var worker_gender = a.getString("worker_gender")
+                                            var worker_birth = a.getString("worker_birth")
+                                            var worker_phonenum = a.getString("worker_phonenum")
+                                            var worker_bankaccount = a.getString("worker_bankaccount")
+                                            var worker_bankname = a.getString("worker_bankname")
+                                            var worker_introduce = a.getString("worker_introduce") ///////  여기까지 값들어
+                                            var local_sido = a.getString("local_sido")
+                                            var local_sigugun = a.getString("local_sigugun")
+                                            var j=0
 
+                                            var k = arrayOf("0", "1", "2")
+                                            for (i in 0 until a.length()-12) {
+                                                var s = a.getJSONObject(k[i])
+                                                jobname[i] = s.getString("jobname")
+                                                jobcareer[i] = s.getString("jobcareer")
+                                                jobcode[i]=s.getString("job_code")
+                                                Sharedpreference.set_Jobcareer(applicationContext(), "jobname"+i, jobname[i])
+                                                Sharedpreference.set_Jobname(applicationContext(), "jobcareer"+i, jobcareer[i])
+                                                Sharedpreference.set_Jobcode(applicationContext(), "jobcode"+i, jobcode[i])
+                                                j++;
+                                            } ///실행되다가
 
-                                            Sharedpreference.set_Jobcareer(applicationContext(), "jobcareer", jobcareer)
+                                            Sharedpreference.set_numofjob(applicationContext(), "numofjob", j.toString())
 
-                                            Sharedpreference.set_email(applicationContext(), "worker_email", worker_email1)
+                                            Sharedpreference.set_email(applicationContext(), "worker_email", worker_email)
                                             Sharedpreference.set_Nickname(applicationContext(), "worker_name", worker_name)
                                             Sharedpreference.set_Password(applicationContext(), "worker_pw", password)
                                             Sharedpreference.set_Gender(applicationContext(), "worker_gender", worker_gender)
@@ -195,9 +225,9 @@ class MainActivity : Activity() {
                                             Sharedpreference.set_Bankaccount(applicationContext(), "worker_bankaccount", worker_bankaccount)
                                             Sharedpreference.set_Bankname(applicationContext(), "worker_bankname", worker_bankname)
                                             Sharedpreference.set_introduce(applicationContext(), "worker_introduce", worker_introduce)
-                                            Sharedpreference.set_Jobname(applicationContext(), "jobcode", jobcode)
-                                            Sharedpreference.set_Hope_local_sido(applicationContext(), "hope_local_sido", hope_local_sido)
-                                            Sharedpreference.set_Hope_local_sigugun(applicationContext(), "hope_local_sigugun", hope_local_sigugun)// 파일에 맵핑형식으로 저장
+
+                                            Sharedpreference.set_Hope_local_sido(applicationContext(), "local_sido", local_sido)
+                                            Sharedpreference.set_Hope_local_sigugun(applicationContext(), "local_sigugun", local_sigugun)// 파일에 맵핑형식으로 저장// 파일에 맵핑형식으로 저장
 
                                             intent() //
                                             //Toast.makeText(FindPasswordInfoActivity.this, "등록된 "+worker_pw, Toast.LENGTH_SHORT).show();
@@ -238,26 +268,41 @@ class MainActivity : Activity() {
                                                 override fun onResponse(response: String?) {
                                                     try {
                                                         val jResponse = JSONObject(response!!.substring(response!!.indexOf("{"), response!!.lastIndexOf("}") + 1))
-                                                        val isExistWorker = jResponse.getBoolean("tryLogin")
+
+                                                        var jobname = Array<String>(3) { "" }
+                                                        var jobcareer = Array<String>(3) { "" }
+                                                        var jobcode = Array<String>(3) { "" }
+                                                        var a = jResponse.getJSONObject("response")
+                                                        val isExistWorker = a.getBoolean("tryLogin")
                                                         if (isExistWorker) {  // 회원이 존재하면 로그인된 화면으로 넘어감
-                                                            var worker_email1 = jResponse.getString("worker_email")
-                                                            var worker_name = jResponse.getString("worker_name")
-                                                            var password = jResponse.getString("worker_pw")
-                                                            var worker_gender = jResponse.getString("worker_gender")
-                                                            var worker_birth = jResponse.getString("worker_birth")
-                                                            var worker_phonenum = jResponse.getString("worker_phonenum")
-                                                            var worker_bankaccount = jResponse.getString("worker_bankaccount")
-                                                            var worker_bankname = jResponse.getString("worker_bankname")
-                                                            var worker_introduce = jResponse.getString("worker_introduce")
-                                                            var jobcode = jResponse.getString("jobcode")
-                                                            var hope_local_sido = jResponse.getString("hope_local_sido")
-                                                            var hope_local_sigugun = jResponse.getString("hope_local_sigugun")
-                                                            var jobcareer = jResponse.getString("jobcareer")
+                                                            var worker_email = a.getString("worker_email")
+                                                            var worker_name = a.getString("worker_name")
+                                                            var password = a.getString("worker_pw")
+                                                            var worker_gender = a.getString("worker_gender")
+                                                            var worker_birth = a.getString("worker_birth")
+                                                            var worker_phonenum = a.getString("worker_phonenum")
+                                                            var worker_bankaccount = a.getString("worker_bankaccount")
+                                                            var worker_bankname = a.getString("worker_bankname")
+                                                            var worker_introduce = a.getString("worker_introduce") ///////  여기까지 값들어
+                                                            var local_sido = a.getString("local_sido")
+                                                            var local_sigugun = a.getString("local_sigugun")
+                                                            var j=0
 
+                                                            var k = arrayOf("0", "1", "2")
+                                                            for (i in 0 until a.length()-12) {
+                                                                var s = a.getJSONObject(k[i])
+                                                                jobname[i] = s.getString("jobname")
+                                                                jobcareer[i] = s.getString("jobcareer")
+                                                                jobcode[i]=s.getString("job_code")
+                                                                Sharedpreference.set_Jobcareer(applicationContext(), "jobname"+i, jobname[i])
+                                                                Sharedpreference.set_Jobname(applicationContext(), "jobcareer"+i, jobcareer[i])
+                                                                Sharedpreference.set_Jobcode(applicationContext(), "jobcode"+i, jobcode[i])
+                                                                j++;
+                                                            } ///실행되다가
 
-                                                            Sharedpreference.set_Jobcareer(applicationContext(), "jobcareer", jobcareer)
+                                                            Sharedpreference.set_numofjob(applicationContext(), "numofjob", j.toString())
 
-                                                            Sharedpreference.set_email(applicationContext(), "worker_email", worker_email1)
+                                                            Sharedpreference.set_email(applicationContext(), "worker_email", worker_email)
                                                             Sharedpreference.set_Nickname(applicationContext(), "worker_name", worker_name)
                                                             Sharedpreference.set_Password(applicationContext(), "worker_pw", password)
                                                             Sharedpreference.set_Gender(applicationContext(), "worker_gender", worker_gender)
@@ -266,9 +311,9 @@ class MainActivity : Activity() {
                                                             Sharedpreference.set_Bankaccount(applicationContext(), "worker_bankaccount", worker_bankaccount)
                                                             Sharedpreference.set_Bankname(applicationContext(), "worker_bankname", worker_bankname)
                                                             Sharedpreference.set_introduce(applicationContext(), "worker_introduce", worker_introduce)
-                                                            Sharedpreference.set_Jobname(applicationContext(), "jobcode", jobcode)
-                                                            Sharedpreference.set_Hope_local_sido(applicationContext(), "hope_local_sido", hope_local_sido)
-                                                            Sharedpreference.set_Hope_local_sigugun(applicationContext(), "hope_local_sigugun", hope_local_sigugun)// 파일에 맵핑형식으로 저장
+
+                                                            Sharedpreference.set_Hope_local_sido(applicationContext(), "local_sido", local_sido)
+                                                            Sharedpreference.set_Hope_local_sigugun(applicationContext(), "local_sigugun", local_sigugun)// 파일에 맵핑형식으로 저장파일에 맵핑형식으로 저장
 
                                                             intent() //
                                                             //Toast.makeText(FindPasswordInfoActivity.this, "등록된 "+worker_pw, Toast.LENGTH_SHORT).show();
