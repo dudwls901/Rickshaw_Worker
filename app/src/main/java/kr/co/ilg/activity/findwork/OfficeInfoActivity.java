@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -43,6 +44,19 @@ public class OfficeInfoActivity extends AppCompatActivity {
     int k;
     String name[], contents[], datetime[], key[];
     RecyclerView.LayoutManager layoutManager;
+    String mapAddress;
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch (id) {
+            case android.R.id.home: {
+                finish();
+
+            }
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -52,6 +66,7 @@ public class OfficeInfoActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
 
         Intent receiver = getIntent();
         String business_reg_num = receiver.getExtras().getString("business_reg_num");
@@ -83,6 +98,7 @@ public class OfficeInfoActivity extends AppCompatActivity {
                         office_name.setText(jResponse.getString("manager_office_name"));
                         office_tel.setText(officetel);
                         office_address.setText(jResponse.getString("manager_office_address"));
+                        mapAddress =jResponse.getString("manager_office_address");
                         office_manager_name.setText(jResponse.getString("manager_name"));
                         office_manager_tel.setText(officemanagertel);
                         office_introduce.setText(jResponse.getString("manager_office_info"));
@@ -183,7 +199,10 @@ public class OfficeInfoActivity extends AppCompatActivity {
         map_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Log.d("mappppp",mapAddress);
+                Intent intent = new Intent(OfficeInfoActivity.this, WorkMapActivity.class);
+                intent.putExtra("mapAddress",mapAddress);
+                startActivity(intent);
             }
         });
     }

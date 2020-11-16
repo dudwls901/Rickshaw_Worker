@@ -42,6 +42,7 @@ import org.json.JSONArray;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class WorkMapActivity extends AppCompatActivity implements MapView.CurrentLocationEventListener, MapView.MapViewEventListener, MapView.POIItemEventListener {
     ImageButton back;
@@ -51,25 +52,25 @@ public class WorkMapActivity extends AppCompatActivity implements MapView.Curren
     LinearLayout checkbox_layout;
     CheckBox field_checkbox, office_checkbox;
     //private net.daum.mf.map.api.MapView mMapView;
-    String school = "서울특별시서대문구가좌로134";
+
     String[] manager_office_address, field_address, field_name, manager_office_name;
+    int[] field_code;
     // String school = "태평로1가35";
     private static final int GPS_ENABLE_REQUEST_CODE = 2001;
     private static final int PERMISSIONS_REQUEST_CODE = 100;
     //String[] REQUIRED_PERMISSIONS  = {Manifest.permission.ACCESS_FINE_LOCATION};
     String[] REQUIRED_PERMISSIONS = {android.Manifest.permission.ACCESS_FINE_LOCATION}; //android
     Boolean fieldCheck, managerCheck;
-
-    //todo 주소 넣어서 마커 띄워보기
-    //화면별 지도 눌렀을 때 위치값,마커로이동
-    //마커 이벤트 연결
-    // 현장,인력사무소로 구분하기
+    String firstScreen =null;
+    private GpsTracker gpsTracker;
 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //지도 생성
+        Intent receiver = getIntent();
+         firstScreen = receiver.getExtras().getString("mapAddress");
         mapView = new MapView(this);
         setContentView(R.layout.work_map);
         back = findViewById(R.id.back);
@@ -92,6 +93,16 @@ public class WorkMapActivity extends AppCompatActivity implements MapView.Curren
                 Log.d("bbbbb", "field");
             }
         });
+        gpsTracker = new GpsTracker(WorkMapActivity.this);
+
+        double latitude = gpsTracker.getLatitude();
+        double longitude = gpsTracker.getLongitude();
+
+     //    firstScreen = getCurrentAddress(latitude, longitude);
+
+
+
+
         mapViewContainer = (ViewGroup) findViewById(R.id.map_view);
         mapViewContainer.addView(mapView);
 //        mapViewContainer.addView(checkbox_layout);
@@ -99,20 +110,51 @@ public class WorkMapActivity extends AppCompatActivity implements MapView.Curren
         mapView.setCurrentLocationEventListener(this);
           mapView.setPOIItemEventListener(this);
         mapView.setMapViewEventListener(this);
+
+//        mapView.setCalloutBalloonAdapter(new CustomCalloutBalloonAdapter(WorkMapActivity.this));
    //            mapView.setMapCenterPoint(MapPoint.mapPointWithGeoCoord(100.53737528, 127.00557633), true);
 //        mapView.setMapCenterPoint(MapPoint.mapPointWithGeoCoord(MapView.CurrentLocationTrackingMode.),true);
 //mapView.setCurrentLocationMarker();
         //setMapCenterPoint(MapPoint,true) 맵뷰 위치 설정해줌
-//        mapView.setCurrentLocationTrackingMode(MapView.CurrentLocationTrackingMode.TrackingModeOnWithoutHeading);
+        Log.d("ffffffffff",firstScreen);
+       if(firstScreen.equals("0"))
+       {
+           if (!checkLocationServicesStatus()) {
+
+               showDialogForLocationServiceSetting();
+           } else {
+               mapView.setMapCenterPoint(MapPoint.mapPointWithGeoCoord(latitude, longitude), true);
+               checkRunTimePermission();
+           }
+//            mapView.setCurrentLocationTrackingMode(MapView.CurrentLocationTrackingMode.TrackingModeOnWithoutHeading);
+       }
+       // mapView.setCurrentLocationTrackingMode(MapView.CurrentLocationTrackingMode.TrackingModeOnWithoutHeading);
+
+       else {
+           Geocoder geocoder = new Geocoder(this);
+
+           List<Address> list = null;
+           try {
+               list = geocoder.getFromLocationName(
+                       firstScreen, // 지역 이름
+                       10); // 읽을 개수
+           } catch (IOException e) {
+               e.printStackTrace();
+               Log.e("test", "입출력 오류 - 서버에서 주소변환시 에러발생");
+               Log.d("test", e.toString());
+           }
+
+           if (list != null) {
+               if (list.size() == 0) {
+                   Log.d("test", "해당되는 주소 정보는 없습니다");
+               } else {
+
+                   mapView.setMapCenterPointAndZoomLevel(MapPoint.mapPointWithGeoCoord(list.get(0).getLatitude(), list.get(0).getLongitude()),1 ,true);
+               }
+           }
+       }
 //        mapView.setShowCurrentLocationMarker(true);
         Log.d("ccccc", mapView.getCurrentLocationTrackingMode().toString());
-        if (!checkLocationServicesStatus()) {
-
-            showDialogForLocationServiceSetting();
-        } else {
-
-            checkRunTimePermission();
-        }
 
 
         Response.Listener responseListener = new Response.Listener<String>() {
@@ -139,6 +181,7 @@ public class WorkMapActivity extends AppCompatActivity implements MapView.Curren
                     manager_office_name = new String[jsonArray_Manager.length()];
                     field_address = new String[jsonArray_Field.length()];
                     field_name = new String[jsonArray_Field.length()];
+                    field_code = new int[jsonArray_Field.length()];
                     for (int i = 0; i < jsonArray_Manager.length(); i++) {
                         manager_office_address[i] = jsonArray_Manager.getJSONObject(i).getString("manager_office_address");
                         manager_office_name[i] = jsonArray_Manager.getJSONObject(i).getString("manager_office_name");
@@ -146,6 +189,7 @@ public class WorkMapActivity extends AppCompatActivity implements MapView.Curren
                     for (int i = 0; i < jsonArray_Field.length(); i++) {
                         field_address[i] = jsonArray_Field.getJSONObject(i).getString("field_address");
                         field_name[i] = jsonArray_Field.getJSONObject(i).getString("field_name");
+                        field_code[i] = jsonArray_Field.getJSONObject(i).getInt("field_code");
                     }
 
                     final MapPOIItem[] marker = new MapPOIItem[field_address.length];
@@ -234,13 +278,16 @@ public class WorkMapActivity extends AppCompatActivity implements MapView.Curren
                             //  MapPOIItem[] marker = new MapPOIItem[field_address.length];
 
                             marker[i].setItemName(field_name[i]);
-                            marker[i].setTag(i);
+                            marker[i].setTag(field_code[i]);
                             marker[i].setMapPoint(mapPoint);
                             marker[i].setMarkerType(MapPOIItem.MarkerType.CustomImage); // 기본으로 제공하는 BluePin 마커 모양.
                             marker[i].setCustomImageResourceId(R.drawable.building_mint1);
                             marker[i].setSelectedMarkerType(MapPOIItem.MarkerType.CustomImage); // 마커를 클릭했을때, 기본으로 제공하는 RedPin 마커 모양.
                             marker[i].setCustomSelectedImageResourceId(R.drawable.building_mint2);
+                            //onMapViewInitialized(mapView);
+//                            marker[i].setCustomCalloutBalloon(mapView);
                             mapView.addPOIItem(marker[i]);
+
 
 
                             Log.d("bbbbbcreate", marker[i].getItemName() + marker[i].getTag());
@@ -291,12 +338,13 @@ public class WorkMapActivity extends AppCompatActivity implements MapView.Curren
 
 
                             marker1[i].setItemName(manager_office_name[i]);
-                            marker1[i].setTag(i);
+                            marker1[i].setTag(0);
                             marker1[i].setMapPoint(mapPoint);
                             marker1[i].setMarkerType(MapPOIItem.MarkerType.CustomImage); // 기본으로 제공하는 BluePin 마커 모양.
                             marker1[i].setCustomImageResourceId(R.drawable.supervisor2);
                             marker1[i].setSelectedMarkerType(MapPOIItem.MarkerType.CustomImage); // 마커를 클릭했을때, 기본으로 제공하는 RedPin 마커 모양.
                             marker1[i].setCustomSelectedImageResourceId(R.drawable.supervisor1);
+               //             marker1[i].setCustomCalloutBalloon(mapView);
                             mapView.addPOIItem(marker1[i]);
                             Log.d("bbbbbcreate", marker1[i].getItemName() + marker1[i].getTag());
                         }
@@ -461,6 +509,7 @@ public class WorkMapActivity extends AppCompatActivity implements MapView.Curren
     @Override
     public void onMapViewInitialized(MapView mapView) {
 
+
     }
 
     @Override
@@ -505,21 +554,181 @@ public class WorkMapActivity extends AppCompatActivity implements MapView.Curren
 
     @Override
     public void onPOIItemSelected(MapView mapView, MapPOIItem mapPOIItem) {
-        Log.d("ccccc",mapPOIItem.getItemName());
+   //     Log.d("ccccc",mapPOIItem.getItemName());
     }
 
     @Override
     public void onCalloutBalloonOfPOIItemTouched(MapView mapView, MapPOIItem mapPOIItem) {
-            Log.d("ccccccccc",mapPOIItem.getItemName());
+
+            //매니저인포액티비티
+            if(mapPOIItem.getTag()==0) {
+                Log.d("cccccccccc", mapPOIItem.getItemName());
+
+                Response.Listener responseListener = new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        try {
+
+
+                            Log.d("mytesstt", response);
+
+                            JSONArray jsonArray_Manager = new JSONArray(response.substring(response.indexOf("["),response.indexOf("]")+1));
+
+
+                            String[] business_reg_num = new String[jsonArray_Manager.length()];
+
+                            for(int i =0; i<jsonArray_Manager.length();i++) {
+                                business_reg_num[i] = jsonArray_Manager.getJSONObject(i).getString("business_reg_num");
+                            }
+
+
+                            Intent intent = new Intent(WorkMapActivity.this, OfficeInfoActivity.class);
+                            intent.putExtra("business_reg_num", business_reg_num[0]);
+                            startActivity(intent);
+                            mapView.refreshMapTiles();
+                            finish();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            Log.d("mytest4", e.toString());
+
+                        }
+                    }
+                };
+
+                MapForOfficeRequest mapForOffice = new MapForOfficeRequest(mapPOIItem.getItemName(), responseListener);
+                RequestQueue queue1 = Volley.newRequestQueue(WorkMapActivity.this);
+                queue1.add(mapForOffice);
+            }
+            //현장인포액티비팇
+            else
+            {
+                Log.d("ccccctag",""+mapPOIItem.getTag());
+
+                Response.Listener responseListener = new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        try {
+
+
+                            Log.d("mytesstt", response);
+                            int index_search_start;
+                            int index_search_end;
+                            JSONArray jsonArray_Field = new JSONArray(response.substring(response.indexOf("["),response.indexOf("]")+1));
+                            index_search_start = response.indexOf("[")+1;
+                            index_search_end = response.indexOf("]")+1;
+                            JSONArray jsonArray_jp = new JSONArray(response.substring(response.indexOf("[",index_search_start),response.indexOf("]",index_search_end)+1));
+                            index_search_start = response.indexOf("[",index_search_start)+1;
+                            index_search_end = response.indexOf("]",index_search_end)+1;
+                            JSONArray jsonArray_job = new JSONArray(response.substring(response.indexOf("[",index_search_start),response.indexOf("]",index_search_end)+1));
+                            index_search_start = response.indexOf("[",index_search_start)+1;
+                            index_search_end = response.indexOf("]",index_search_end)+1;
+                            JSONArray jsonArray_Manager = new JSONArray(response.substring(response.indexOf("[",index_search_start),response.indexOf("]",index_search_end)+1));
+
+                            String[]  jp_num = new String[jsonArray_Field.length()];
+                            String[] field_name_MY = new String[jsonArray_Field.length()];
+                            String[] field_address_MY = new String[jsonArray_Field.length()];
+                            String[] jp_title = new String[jsonArray_jp.length()];
+                            String[] jp_job_date = new String[jsonArray_jp.length()];
+                            String[] jp_job_cost = new String[jsonArray_jp.length()];
+                            String[] job_name = new String[jsonArray_job.length()];
+                            String[] manager_office_name_MY = new String[jsonArray_Manager.length()];
+                            String[] jp_job_tot_people = new String[jsonArray_jp.length()];
+                            Log.d("mytessss",jsonArray_job.toString());
+                            for(int i =0; i<jsonArray_jp.length();i++) {
+                                jp_num[i] = jsonArray_jp.getJSONObject(i).getString("jp_num");
+                                jp_title[i] = jsonArray_jp.getJSONObject(i).getString("jp_title");
+                                jp_job_date[i] = jsonArray_jp.getJSONObject(i).getString("jp_job_date");
+                                jp_job_cost[i] = jsonArray_jp.getJSONObject(i).getString("jp_job_cost");
+                                jp_job_tot_people[i] = jsonArray_jp.getJSONObject(i).getString("jp_job_tot_people");
+
+                            }
+                            for(int i =0; i<jsonArray_job.length();i++) {
+                            job_name[i] = jsonArray_job.getJSONObject(i).getString("job_name");
+                            }
+                            for(int i =0; i<jsonArray_Manager.length();i++) {
+                                manager_office_name_MY[i] = jsonArray_Manager.getJSONObject(i).getString("manager_office_name");
+                            }
+                            for(int i =0; i<jsonArray_Field.length();i++) {
+                                field_name_MY[i] = jsonArray_Field.getJSONObject(i).getString("field_name");
+                                field_address_MY[i] = jsonArray_Field.getJSONObject(i).getString("field_address");
+
+                            }
+
+                            Intent intent = new Intent(WorkMapActivity.this, FieldInfoActivity.class);
+                            intent.putExtra("jp_num", jp_num[0]);
+                            intent.putExtra("field_name", field_name_MY[0]);
+                            intent.putExtra("field_address", field_address_MY[0]);
+                            intent.putExtra("jp_title", jp_title[0]);
+                            intent.putExtra("jp_job_date", jp_job_date[0]);
+                            intent.putExtra("jp_job_cost", jp_job_cost[0]);
+                            intent.putExtra("job_name", job_name[0]);
+                            intent.putExtra("manager_office_name", manager_office_name_MY[0]);
+                            intent.putExtra("jp_job_tot_people", jp_job_tot_people[0]);
+                            startActivity(intent);
+                            finish();
+                            mapView.refreshMapTiles();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            Log.d("mytest4", e.toString());
+
+                        }
+                    }
+                };
+
+                MapForFieldRequest mapForFieldRequest = new MapForFieldRequest(String.valueOf(mapPOIItem.getTag()), responseListener);
+                RequestQueue queue1 = Volley.newRequestQueue(WorkMapActivity.this);
+                queue1.add(mapForFieldRequest);
+
+
+            }
+
     }
 
     @Override
     public void onCalloutBalloonOfPOIItemTouched(MapView mapView, MapPOIItem mapPOIItem, MapPOIItem.CalloutBalloonButtonType calloutBalloonButtonType) {
-        Log.d("cccccccccccccc",mapPOIItem.getItemName());
+   //     Log.d("cccccccccccccc",mapPOIItem.getItemName());
     }
 
     @Override
     public void onDraggablePOIItemMoved(MapView mapView, MapPOIItem mapPOIItem, MapPoint mapPoint) {
 
     }
+    public String getCurrentAddress( double latitude, double longitude) {
+
+        //지오코더... GPS를 주소로 변환
+        Geocoder geocoder = new Geocoder(this, Locale.getDefault());
+
+        List<Address> addresses;
+
+        try {
+
+            addresses = geocoder.getFromLocation(
+                    latitude,
+                    longitude,
+                    7);
+        } catch (IOException ioException) {
+            //네트워크 문제
+            Toast.makeText(this, "지오코더 서비스 사용불가", Toast.LENGTH_LONG).show();
+            return "지오코더 서비스 사용불가";
+        } catch (IllegalArgumentException illegalArgumentException) {
+            Toast.makeText(this, "잘못된 GPS 좌표", Toast.LENGTH_LONG).show();
+            return "잘못된 GPS 좌표";
+
+        }
+
+
+
+        if (addresses == null || addresses.size() == 0) {
+            Toast.makeText(this, "주소 미발견", Toast.LENGTH_LONG).show();
+            return "주소 미발견";
+
+        }
+
+        Address address = addresses.get(0);
+        return address.getAddressLine(0).toString()+"\n";
+
+    }
+
 }

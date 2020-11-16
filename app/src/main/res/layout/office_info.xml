@@ -18,7 +18,9 @@
             android:gravity="center"
             android:text="사무소 상세"
             android:textColor="@color/WhiteColor"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:layout_marginRight="60dp"
+            />
 
     </androidx.appcompat.widget.Toolbar>
 

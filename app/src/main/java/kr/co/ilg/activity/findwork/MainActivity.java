@@ -123,6 +123,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             case R.id.map:
                 Intent intent = new Intent(MainActivity.this, WorkMapActivity.class);
+                intent.putExtra("mapAddress","0");
                 startActivity(intent);
                 return true;
 
