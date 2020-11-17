@@ -108,6 +108,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //return super.onCreateOptionsMenu(menu);
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.menu_maintop, menu);
+        SearchView searchView = (SearchView) menu.findItem(R.id.search).getActionView();
+        searchView.setMaxWidth(Integer.MAX_VALUE);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                Log.d("qqqqqqqqqqq",query);
+//                SelectJobPosting searchView_req = new SelectJobPosting("0",query, rListener);  // Request 처리 클래스
+//                searchView_req.setRetryPolicy(new DefaultRetryPolicy(
+//                        DefaultRetryPolicy.DEFAULT_TIMEOUT_MS,
+//                        0,
+//                        DefaultRetryPolicy.DEFAULT_BACKOFF_MULT)); ////////값띄울때 충돌방지용
+//
+//                RequestQueue queue = Volley.newRequestQueue(MainActivity.this);  // 데이터 전송에 사용할 Volley의 큐 객체 생성
+//                queue.add(searchView_req);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                Log.d("qqqqqqqqqnewtext", newText);
+                return false;
+            }
+        });
         return true;
     }
 
@@ -123,6 +146,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             case R.id.map:
                 Intent intent = new Intent(MainActivity.this, WorkMapActivity.class);
+                intent.putExtra("mapAddress","0");
                 startActivity(intent);
                 return true;
 

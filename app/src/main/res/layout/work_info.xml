@@ -9,7 +9,9 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/colorPrimary"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+
+        >
 
         <TextView
             android:layout_width="match_parent"
@@ -17,7 +19,9 @@
             android:gravity="center"
             android:text="구인글 상세"
             android:textColor="@color/WhiteColor"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:layout_marginRight="60dp"
+            />
 
     </androidx.appcompat.widget.Toolbar>
 

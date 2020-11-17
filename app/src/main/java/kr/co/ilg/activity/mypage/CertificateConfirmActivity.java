@@ -54,7 +54,7 @@ public class CertificateConfirmActivity extends AppCompatActivity implements Vie
     String worker_email, worker_pw, worker_name, worker_gender, worker_birth, worker_phonenum, worker_certicipate;
     final String TAG = getClass().getSimpleName();
     final static int TAKE_PICTURE = 1;
-    String phpUrl ="http://rickshaw.dothome.co.kr/ImageUpload.php";
+    String phpUrl ="http://14.63.162.160/ImageUpload.php";
     URL url;
     String mCurrentPhotoPath;
     static final int REQUEST_TAKE_PHOTO = 1;
