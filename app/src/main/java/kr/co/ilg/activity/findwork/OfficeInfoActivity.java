@@ -134,7 +134,7 @@ public class OfficeInfoActivity extends AppCompatActivity {
                         name[i] = MainRequest.getString("name");
                         contents[i] = MainRequest.getString("contents");
                         datetime[i] = MainRequest.getString("datetime");
-                        reviewList.add(new ReviewItem(name[i], contents[i], datetime[i]));
+                        reviewList.add(new ReviewItem(name[i], datetime[i],contents[i]));
                     } // 값넣기*/
                     myAdapter = new ReviewAdapter(reviewList);
                     review_RecyclerView.setAdapter(myAdapter);
