@@ -13,7 +13,6 @@ public class MapForOfficeRequest extends StringRequest {
 
 
     public MapForOfficeRequest(String manager_office_name, Response.Listener<String> listener){
-
         super(Method.POST, URL, listener, null); //super로 가독성을 업!
 
 
