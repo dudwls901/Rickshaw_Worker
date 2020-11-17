@@ -118,6 +118,7 @@ public class MyInfomanageActivity extends Activity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), kr.co.ilg.activity.mypage.LocalSelectActivity.class);
                 intent.putExtra("isUpdate", 1);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 //TODO
                 // 수정 필요할시 false 값과 함께 intent
@@ -132,6 +133,7 @@ public class MyInfomanageActivity extends Activity {
                 Intent intent = new Intent(getApplicationContext(), kr.co.ilg.activity.mypage.JobSelectActivity.class);
                 intent.putExtra("isUpdate", 1);
                 intent.putExtra("exjobnum", hopeJCNum);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
 
             }

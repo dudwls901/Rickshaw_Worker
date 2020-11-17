@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import kr.co.ilg.activity.findwork.MainActivity;
+import kr.co.ilg.activity.findwork.MainBackPressCloseHandler;
 import kr.co.ilg.activity.findwork.MyFieldActivity;
 import kr.co.ilg.activity.findwork.Sharedpreference;
 
@@ -34,6 +35,7 @@ public class MypageMainActivity extends AppCompatActivity implements View.OnClic
     int[] buttonsid = {R.id.myinform, R.id.accountmanage, R.id.reviewmanage};
     TextView membernickname;
     private Context mContext;
+    MainBackPressCloseHandler mainBackPressCloseHandler;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -41,6 +43,7 @@ public class MypageMainActivity extends AppCompatActivity implements View.OnClic
         setContentView(R.layout.mypage_main);
 
         mContext = this;
+        mainBackPressCloseHandler =  new MainBackPressCloseHandler(this);
 
         for(int i=0; i<3; i++){
             buttons[i] = (Button) findViewById(buttonsid[i]);
@@ -119,12 +122,19 @@ public class MypageMainActivity extends AppCompatActivity implements View.OnClic
 
         switch (v.getId()){
             case R.id.myinform : intent = new Intent(getApplicationContext(),MyInfomanageActivity.class);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                         startActivity(intent);break;
             case R.id.accountmanage : intent = new Intent(getApplicationContext(),AccountManageActivity.class);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                         startActivity(intent);break;
             case R.id.reviewmanage : intent = new Intent(getApplicationContext(),ReviewManageActivity.class);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                         startActivity(intent);break;
         }
 
+    }
+    @Override
+    public void onBackPressed() {
+        mainBackPressCloseHandler.onBackPressed();
     }
 }

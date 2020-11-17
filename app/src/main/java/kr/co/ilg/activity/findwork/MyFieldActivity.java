@@ -31,12 +31,15 @@ public class MyFieldActivity extends AppCompatActivity {
     private final int FRAGMENT2 = 2;
     private final int FRAGMENT3 = 3;
     private TabLayout tabs;
+    MainBackPressCloseHandler mainBackPressCloseHandler;
 
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.myfield);
+
+        mainBackPressCloseHandler =  new MainBackPressCloseHandler(this);
         tabs = findViewById(R.id.tabs);
         tabs.addTab(tabs.newTab(),true);
         tabs.addTab(tabs.newTab());
@@ -123,4 +126,9 @@ public class MyFieldActivity extends AppCompatActivity {
         }
 
     }
+    @Override
+    public void onBackPressed() {
+        mainBackPressCloseHandler.onBackPressed();
+    }
+
 }

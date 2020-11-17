@@ -178,6 +178,7 @@ public class AccountAddActivity extends AppCompatActivity {
                                 JSONObject jResponse = new JSONObject(response.substring(response.indexOf("{"), response.lastIndexOf("}") + 1));
                                 boolean updateSuccess3 = jResponse.getBoolean("updateSuccess3");
                                 Intent updateIntent = new Intent(AccountAddActivity.this, AccountManageActivity.class);
+                                updateIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 if (updateSuccess3) {
                                     Sharedpreference.set_Bankaccount(getApplicationContext(), "worker_bankaccount", worker_bankaccount);
                                     Sharedpreference.set_Bankname(getApplicationContext(), "worker_bankname", worker_bankname);

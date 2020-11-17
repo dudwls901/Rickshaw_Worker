@@ -70,12 +70,16 @@ public class LocalSelectActivity extends AppCompatActivity {
         else
             okBtn.setText("확 인");
 
+
+
         okBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 String email = Sharedpreference.get_email(mContext, "worker_email");
                 Intent intent = new Intent(LocalSelectActivity.this, JobSelectActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
                 if (local_sido.equals("") || local_sigugun.equals(""))
                     Toast.makeText(LocalSelectActivity.this, "희망 근무 지역을 선택해주세요.", Toast.LENGTH_SHORT).show();
                 else {
@@ -89,6 +93,7 @@ public class LocalSelectActivity extends AppCompatActivity {
                                     JSONObject jResponse = new JSONObject(response.substring(response.indexOf("{"), response.lastIndexOf("}") + 1));
                                     boolean updateSuccess = jResponse.getBoolean("updateSuccess");
                                     Intent updateIntent = new Intent(LocalSelectActivity.this, MyInfomanageActivity.class);
+                                    updateIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                     if (updateSuccess) {
                                         String local_sido = jResponse.getString("local_sido");
                                         String local_sigugun = jResponse.getString("local_sigugun");

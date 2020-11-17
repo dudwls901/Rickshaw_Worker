@@ -151,6 +151,8 @@ public class CareerActivity extends AppCompatActivity {
                 String email = Sharedpreference.get_email(mContext, "worker_email");
                 Intent intent = new Intent(CareerActivity.this, AccountAddActivity.class);
 
+                Intent updateIntent = new Intent(CareerActivity.this, MyInfomanageActivity.class);
+                updateIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
                 if (isUpdate == 1) {  // 수정
                     Sharedpreference.removeinfo(mContext, jobnum);
@@ -172,7 +174,7 @@ public class CareerActivity extends AppCompatActivity {
 
                                     Toast.makeText(CareerActivity.this, "수정 완료되었습니다", Toast.LENGTH_SHORT).show();
                                     if(a==(career.length)){
-                                        Intent updateIntent = new Intent(CareerActivity.this, MyInfomanageActivity.class);
+
                                         startActivity(updateIntent);
                                     }
 

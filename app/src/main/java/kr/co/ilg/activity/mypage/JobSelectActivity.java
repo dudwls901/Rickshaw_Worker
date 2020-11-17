@@ -84,6 +84,7 @@ public class JobSelectActivity extends AppCompatActivity implements View.OnClick
             public void onClick(View v) {
 
                 Intent intent = new Intent(JobSelectActivity.this, CareerActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 if (jobs.equals("")) {
                     Toast.makeText(JobSelectActivity.this, "직종을 한 개 이상 선택해주세요.", Toast.LENGTH_SHORT).show();
                 } else {

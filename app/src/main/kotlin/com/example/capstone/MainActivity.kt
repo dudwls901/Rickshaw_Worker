@@ -14,6 +14,7 @@ import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.model.AuthErrorCause.*
 import com.kakao.sdk.user.UserApiClient
 import kr.co.ilg.activity.findwork.MainActivity
+import kr.co.ilg.activity.findwork.MainBackPressCloseHandler
 import kr.co.ilg.activity.findwork.Sharedpreference
 import kr.co.ilg.activity.login.FindPasswordInfoActivity
 import kr.co.ilg.activity.login.SignupEmailActivity
@@ -27,6 +28,9 @@ class MainActivity : Activity() {
     init {
         instance = this
     }
+
+    lateinit var mainBackPressCloseHandler: MainBackPressCloseHandler
+
 
     companion object {
         private var instance: com.example.capstone.MainActivity? = null
@@ -43,6 +47,10 @@ class MainActivity : Activity() {
 
 
         Sharedpreference.clear(applicationContext)
+
+         mainBackPressCloseHandler =  MainBackPressCloseHandler(this)
+
+
         val idET = findViewById<EditText>(R.id.idET);
         val pwET = findViewById<EditText>(R.id.pwET);
         val kakaoLoginBtn = findViewById<ImageButton>(R.id.kakaoLoginBtn)
@@ -136,9 +144,9 @@ class MainActivity : Activity() {
                                                 jobname[i] = s.getString("jobname")
                                                 jobcareer[i] = s.getString("jobcareer")
                                                 jobcode[i]=s.getString("job_code")
-                                                Sharedpreference.set_Jobcareer(applicationContext(), "jobname"+i, jobname[i])
-                                                Sharedpreference.set_Jobname(applicationContext(), "jobcareer"+i, jobcareer[i])
-                                                Sharedpreference.set_Jobcode(applicationContext(), "jobcode"+i, jobcode[i])
+                                                Sharedpreference.set_Jobcareer(applicationContext(), "jobname" + i, jobname[i])
+                                                Sharedpreference.set_Jobname(applicationContext(), "jobcareer" + i, jobcareer[i])
+                                                Sharedpreference.set_Jobcode(applicationContext(), "jobcode" + i, jobcode[i])
                                                 j++;
                                             } ///실행되다가
 
@@ -208,9 +216,9 @@ class MainActivity : Activity() {
                                                 jobname[i] = s.getString("jobname")
                                                 jobcareer[i] = s.getString("jobcareer")
                                                 jobcode[i]=s.getString("job_code")
-                                                Sharedpreference.set_Jobcareer(applicationContext(), "jobname"+i, jobname[i])
-                                                Sharedpreference.set_Jobname(applicationContext(), "jobcareer"+i, jobcareer[i])
-                                                Sharedpreference.set_Jobcode(applicationContext(), "jobcode"+i, jobcode[i])
+                                                Sharedpreference.set_Jobcareer(applicationContext(), "jobname" + i, jobname[i])
+                                                Sharedpreference.set_Jobname(applicationContext(), "jobcareer" + i, jobcareer[i])
+                                                Sharedpreference.set_Jobcode(applicationContext(), "jobcode" + i, jobcode[i])
                                                 j++;
                                             } ///실행되다가
 
@@ -294,9 +302,9 @@ class MainActivity : Activity() {
                                                                 jobname[i] = s.getString("jobname")
                                                                 jobcareer[i] = s.getString("jobcareer")
                                                                 jobcode[i]=s.getString("job_code")
-                                                                Sharedpreference.set_Jobcareer(applicationContext(), "jobname"+i, jobname[i])
-                                                                Sharedpreference.set_Jobname(applicationContext(), "jobcareer"+i, jobcareer[i])
-                                                                Sharedpreference.set_Jobcode(applicationContext(), "jobcode"+i, jobcode[i])
+                                                                Sharedpreference.set_Jobcareer(applicationContext(), "jobname" + i, jobname[i])
+                                                                Sharedpreference.set_Jobname(applicationContext(), "jobcareer" + i, jobcareer[i])
+                                                                Sharedpreference.set_Jobcode(applicationContext(), "jobcode" + i, jobcode[i])
                                                                 j++;
                                                             } ///실행되다가
 
@@ -383,9 +391,9 @@ class MainActivity : Activity() {
                                 jobname[i] = s.getString("jobname")
                                 jobcareer[i] = s.getString("jobcareer")
                                 jobcode[i]=s.getString("job_code")
-                                Sharedpreference.set_Jobcareer(applicationContext(), "jobname"+i, jobname[i])
-                                Sharedpreference.set_Jobname(applicationContext(), "jobcareer"+i, jobcareer[i])
-                                Sharedpreference.set_Jobcode(applicationContext(), "jobcode"+i, jobcode[i])
+                                Sharedpreference.set_Jobcareer(applicationContext(), "jobname" + i, jobname[i])
+                                Sharedpreference.set_Jobname(applicationContext(), "jobcareer" + i, jobcareer[i])
+                                Sharedpreference.set_Jobcode(applicationContext(), "jobcode" + i, jobcode[i])
                                 j++;
                             } ///실행되다가
 
@@ -430,6 +438,12 @@ class MainActivity : Activity() {
             startActivity(intent)
         }
     }
+
+    override fun onBackPressed() {
+        mainBackPressCloseHandler.onBackPressed()
+    }
+
+
 
 
 }

@@ -99,6 +99,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             , {"제주시", "서귀포시"}
     };
     Date date=null,getdate=null;
+    MainBackPressCloseHandler mainBackPressCloseHandler;
 //    Fragment1 fragment1;
 //    Fragment2 fragment2;
 //    Fragment3 fragment3;
@@ -136,6 +137,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         m = cal.get(Calendar.MONTH);
         d = cal.get(Calendar.DAY_OF_MONTH);
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        mainBackPressCloseHandler =  new MainBackPressCloseHandler(this);
 
 
 //        item1 = (MenuItem) findViewById(R.id.tab1);
@@ -467,6 +469,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
         return true;
     }
+    @Override
+    public void onBackPressed() {
+        mainBackPressCloseHandler.onBackPressed();
+    }
+
 
     @Override
     public void onClick(View v) {
