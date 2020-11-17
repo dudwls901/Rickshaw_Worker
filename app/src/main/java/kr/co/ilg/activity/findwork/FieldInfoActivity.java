@@ -61,8 +61,6 @@ public class FieldInfoActivity extends AppCompatActivity {
         jp_num = receiver.getExtras().getString("jp_num");
         field_name = receiver.getExtras().getString("field_name");
         field_address = receiver.getExtras().getString("field_address");
-        field_name = receiver.getExtras().getString("field_name");
-        field_address = receiver.getExtras().getString("field_address");
         jp_title = receiver.getExtras().getString("jp_title");
         jp_job_date = receiver.getExtras().getString("jp_job_date");
         jp_job_cost = receiver.getExtras().getString("jp_job_cost");
@@ -94,6 +92,11 @@ public class FieldInfoActivity extends AppCompatActivity {
         review_RecyclerView.setHasFixedSize(true);
         review_layoutManager = new LinearLayoutManager(this);
         review_RecyclerView.setLayoutManager(review_layoutManager);
+
+
+
+
+
 
         aListener = new Response.Listener<String>() {
             @Override

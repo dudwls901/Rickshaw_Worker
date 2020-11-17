@@ -66,7 +66,6 @@
         <activity android:name="kr.co.ilg.activity.findwork.OfficeInfoActivity" android:label="인력사무소 정보"/>
         <activity android:name="kr.co.ilg.activity.findwork.WorkInfoActivity" android:label="일자리 정보"/>
         <activity android:name="kr.co.ilg.activity.findwork.WorkMapActivity" android:label="일자리 지도"/>
-        <activity android:name="kr.co.ilg.activity.findwork.WorkMapActivity1" android:label="일자리 지도"/>
         <activity android:name="kr.co.ilg.activity.findwork.MyFieldActivity" android:label="나의 현장"/>
         <activity android:name="kr.co.ilg.activity.login.SignupEmailActivity" android:label="이메일 인증"/>
         <activity android:name="kr.co.ilg.activity.login.SignupPasswordActivity" android:label="비밀번호 설정"/>

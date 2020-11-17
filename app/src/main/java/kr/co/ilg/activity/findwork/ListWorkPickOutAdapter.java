@@ -7,6 +7,8 @@ import androidx.appcompat.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,9 +28,11 @@ import com.example.capstone.R;
 
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import kr.co.ilg.activity.login.FindPasswordInfoActivity;
 import kr.co.ilg.activity.login.FindPwRequest;
@@ -42,7 +46,7 @@ public class ListWorkPickOutAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     long startDiff = 1111111111, finishDiff = 1111111111;
     long startcheckterm1, startcheckterm2, finishCheckterm1, finishCheckterm2;
     String key, mf_is_choolgeun, mf_is_toigeun;
-
+    private GpsTracker gpsTracker;
     public static class MyViewHolder extends RecyclerView.ViewHolder {
 
         TextView title, date, pay, job, place, office, current_people, total_people, paid;
@@ -197,6 +201,40 @@ public class ListWorkPickOutAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
                 RequestQueue queue = Volley.newRequestQueue(context);
                 queue.add(tcRequest);
+                final Geocoder geocoder = new Geocoder(context);
+                Log.d("pppppppppppp",workInfo.get(position).place);
+                gpsTracker = new GpsTracker(context);
+
+                double latitude = gpsTracker.getLatitude();
+                double longitude = gpsTracker.getLongitude();
+                Log.d("pppppgpss",latitude+"위도/경도"+longitude);
+                //현재위치 gps
+
+                List<Address> list = null;
+                try {
+                    list = geocoder.getFromLocationName(
+                            workInfo.get(position).place, // 지역 이름
+                            10); // 읽을 개수
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    Log.e("test","입출력 오류 - 서버에서 주소변환시 에러발생");
+                }
+
+                if (list != null) {
+                    if (list.size() == 0) {
+                        Log.d("test","해당되는 주소 정보는 없습니다");
+                    } else {
+                        Log.d("test",list.get(0).toString());
+                        //          list.get(0).getLatitude();        // 위도
+                        //          list.get(0).getLongitude();    // 경도
+                    }
+                }
+Log.d("ppppfieldgps",list.get(0).getLatitude()+"필드위도/필드경도"+list.get(0).getLongitude());
+                double distanceMeter =
+                        distance(latitude, longitude, list.get(0).getLatitude(), list.get(0).getLongitude(), "meter");
+Log.d("pppppdistance",String.valueOf(distanceMeter));
+
+
 
                 gotoworkCheck.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -205,33 +243,40 @@ public class ListWorkPickOutAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                         //if(gotoworkCheck.getBackgroundColor)
                         if (mf_is_choolgeun.equals("0")) {  // 출근 인증 안 돼있을 때
                             if (sDate.equals(workInfo.get(position).date)) {  // 날짜 비교
-                                if (startDiff > -1800 && startDiff < 1800) {  // 30분 전후 이내인가
-                                    key = "checkStart";
-                                    Response.Listener rListener = new Response.Listener<String>() {
-                                        @Override
-                                        public void onResponse(String response) {
-                                            try {
-                                                JSONObject jResponse = new JSONObject(response.substring(response.indexOf("{"), response.lastIndexOf("}") + 1));
-                                                boolean checkStartSuccess = jResponse.getBoolean("checkStartSuccess");
-                                                if (checkStartSuccess) {
-                                                    gotoworkCheck.setBackgroundColor(context.getResources().getColor(R.color.checkColor));
-                                                    Toast.makeText(context, "출근 인증 완료", Toast.LENGTH_SHORT).show();
-                                                } else {
-                                                    Toast.makeText(context, "출근 인증 실패 : DB Error", Toast.LENGTH_SHORT).show();
-                                                }
-                                            } catch (Exception e) {
-                                                Log.d("mytest", e.toString());
-                                            }
-                                        }
-                                    };
-                                    TimeCheckRequest tcRequest = new TimeCheckRequest(key, Sharedpreference.get_email(context, "worker_email"), workInfo.get(position).jp_num, rListener);
+                                if(distanceMeter<100.0) {
+                                    if (startDiff > -1800 && startDiff < 1800) {  // 30분 전후 이내인가
+                                        key = "checkStart";
+                                        Response.Listener rListener = new Response.Listener<String>() {
+                                            @Override
+                                            public void onResponse(String response) {
+                                                try {
 
-                                    RequestQueue queue = Volley.newRequestQueue(context);
-                                    queue.add(tcRequest);
-                                } else if (startDiff == 1111111111) {  // 시간 비교 위한 클래스 오류
-                                    Toast.makeText(context, "서비스 오류 : 현장 관리자에게 문의 바람", Toast.LENGTH_SHORT).show();
-                                } else {
-                                    Toast.makeText(context, "출근인증 시간이 아닙니다.", Toast.LENGTH_SHORT).show();
+                                                    JSONObject jResponse = new JSONObject(response.substring(response.indexOf("{"), response.lastIndexOf("}") + 1));
+                                                    boolean checkStartSuccess = jResponse.getBoolean("checkStartSuccess");
+                                                    if (checkStartSuccess) {
+                                                        gotoworkCheck.setBackgroundColor(context.getResources().getColor(R.color.checkColor));
+                                                        Toast.makeText(context, "출근 인증 완료", Toast.LENGTH_SHORT).show();
+                                                    } else {
+                                                        Toast.makeText(context, "출근 인증 실패 : DB Error", Toast.LENGTH_SHORT).show();
+                                                    }
+                                                } catch (Exception e) {
+                                                    Log.d("mytest", e.toString());
+                                                }
+                                            }
+                                        };
+                                        TimeCheckRequest tcRequest = new TimeCheckRequest(key, Sharedpreference.get_email(context, "worker_email"), workInfo.get(position).jp_num, rListener);
+
+                                        RequestQueue queue = Volley.newRequestQueue(context);
+                                        queue.add(tcRequest);
+                                    } else if (startDiff == 1111111111) {  // 시간 비교 위한 클래스 오류
+                                        Toast.makeText(context, "서비스 오류 : 현장 관리자에게 문의 바람", Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        Toast.makeText(context, "출근인증 시간이 아닙니다.", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                                else
+                                {
+                                    Toast.makeText(context,"현장주변 100m이내에서 인증해주세요.",Toast.LENGTH_SHORT).show();
                                 }
                             } else {
                                 Toast.makeText(context, "출근 날짜가 아닙니다.", Toast.LENGTH_SHORT).show();
@@ -247,33 +292,38 @@ public class ListWorkPickOutAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                         TimeCheck();
                         if (mf_is_toigeun.equals("0")) {  // 퇴근 인증 안 돼있을 때
                             if (sDate.equals(workInfo.get(position).date)) {  // 날짜 비교
-                                if (finishDiff > -1800 && finishDiff < 1800) {  // 30분 전후 이내인가
-                                    key = "checkFinish";
-                                    Response.Listener rListener = new Response.Listener<String>() {
-                                        @Override
-                                        public void onResponse(String response) {
-                                            try {
-                                                JSONObject jResponse = new JSONObject(response.substring(response.indexOf("{"), response.lastIndexOf("}") + 1));
-                                                boolean checkFinishSuccess = jResponse.getBoolean("checkFinishSuccess");
-                                                if (checkFinishSuccess) {
-                                                    gotohomeCheck.setBackgroundColor(context.getResources().getColor(R.color.checkColor));
-                                                    Toast.makeText(context, "퇴근 인증 완료", Toast.LENGTH_SHORT).show();
-                                                } else {
-                                                    Toast.makeText(context, "퇴근 인증 실패 : DB Error", Toast.LENGTH_SHORT).show();
+                                if(distanceMeter<100.0) {
+                                    if (finishDiff > -1800 && finishDiff < 1800) {  // 30분 전후 이내인가
+                                        key = "checkFinish";
+                                        Response.Listener rListener = new Response.Listener<String>() {
+                                            @Override
+                                            public void onResponse(String response) {
+                                                try {
+                                                    JSONObject jResponse = new JSONObject(response.substring(response.indexOf("{"), response.lastIndexOf("}") + 1));
+                                                    boolean checkFinishSuccess = jResponse.getBoolean("checkFinishSuccess");
+                                                    if (checkFinishSuccess) {
+                                                        gotohomeCheck.setBackgroundColor(context.getResources().getColor(R.color.checkColor));
+                                                        Toast.makeText(context, "퇴근 인증 완료", Toast.LENGTH_SHORT).show();
+                                                    } else {
+                                                        Toast.makeText(context, "퇴근 인증 실패 : DB Error", Toast.LENGTH_SHORT).show();
+                                                    }
+                                                } catch (Exception e) {
+                                                    Log.d("mytest", e.toString());
                                                 }
-                                            } catch (Exception e) {
-                                                Log.d("mytest", e.toString());
                                             }
-                                        }
-                                    };
-                                    TimeCheckRequest tcRequest = new TimeCheckRequest(key, Sharedpreference.get_email(context, "worker_email"), workInfo.get(position).jp_num, rListener);
+                                        };
+                                        TimeCheckRequest tcRequest = new TimeCheckRequest(key, Sharedpreference.get_email(context, "worker_email"), workInfo.get(position).jp_num, rListener);
 
-                                    RequestQueue queue = Volley.newRequestQueue(context);
-                                    queue.add(tcRequest);
-                                } else if (finishDiff == 1111111111) {  // 시간 비교 위한 클래스 오류
-                                    Toast.makeText(context, "서비스 오류 : 현장 관리자에게 문의 바람", Toast.LENGTH_SHORT).show();
-                                } else {
-                                    Toast.makeText(context, "퇴근 인증 시간이 아닙니다.", Toast.LENGTH_SHORT).show();
+                                        RequestQueue queue = Volley.newRequestQueue(context);
+                                        queue.add(tcRequest);
+                                    } else if (finishDiff == 1111111111) {  // 시간 비교 위한 클래스 오류
+                                        Toast.makeText(context, "서비스 오류 : 현장 관리자에게 문의 바람", Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        Toast.makeText(context, "퇴근 인증 시간이 아닙니다.", Toast.LENGTH_SHORT).show();
+                                    }
+                                }else
+                                {
+                                    Toast.makeText(context,"현장주변 100m이내에서 인증해주세요.",Toast.LENGTH_SHORT).show();
                                 }
                             } else {
                                 Toast.makeText(context, "퇴근 날짜가 아닙니다.", Toast.LENGTH_SHORT).show();
@@ -316,4 +366,35 @@ public class ListWorkPickOutAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     public int getItemCount() {
         return workInfo.size();
     }
+
+    private static double distance(double lat1, double lon1, double lat2, double lon2, String unit) {
+
+        double theta = lon1 - lon2;
+        double dist = Math.sin(deg2rad(lat1)) * Math.sin(deg2rad(lat2)) + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.cos(deg2rad(theta));
+
+        dist = Math.acos(dist);
+        dist = rad2deg(dist);
+        dist = dist * 60 * 1.1515;
+
+        if (unit == "kilometer") {
+            dist = dist * 1.609344;
+        } else if(unit == "meter"){
+            dist = dist * 1609.344;
+        }
+
+        return (dist);
+    }
+
+
+    // This function converts decimal degrees to radians
+    private static double deg2rad(double deg) {
+        return (deg * Math.PI / 180.0);
+    }
+
+    // This function converts radians to decimal degrees
+    private static double rad2deg(double rad) {
+        return (rad * 180 / Math.PI);
+    }
+
+
 }
