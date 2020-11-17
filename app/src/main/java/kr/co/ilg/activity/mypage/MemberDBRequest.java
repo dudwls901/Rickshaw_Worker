@@ -12,6 +12,7 @@ import java.util.Map;
 
 public class MemberDBRequest extends StringRequest {
     final static private String URL = "http://14.63.162.160/Insert2.php";
+    final static private String URL1 = "http://14.63.162.160/Insertsunwoo.php";
     private Map<String, String> parameters;
 
     //요청                클라이언트로 전송할 데이터(userID)
@@ -63,6 +64,34 @@ public class MemberDBRequest extends StringRequest {
         parameters.put("worker_email", worker_email); //데이터 넣기  ≒ putextra
         parameters.put("job_code", job_code);
         parameters.put("hj_career",hj_career);
+
+    }
+    public MemberDBRequest(String key, String worker_email, String worker_pw, String worker_name, String worker_gender, String worker_birth, String worker_phonenum, String worker_certicipate, String worker_bankaccount, String worker_bankname,String local_sido, String local_sigugun, String jobcode0, String career0,String jobcode1, String career1,String jobcode2, String career2,int k, Response.Listener<String> listener) { //생성자 부분이라 콜백메소드는 생략
+        // data            응답 처리 리스너
+        super(Method.POST, URL1, listener, null); //super로 가독성을 업!
+        Log.d("mytest","여기되니?");
+
+        //데이터들
+        parameters = new HashMap<>();
+        parameters.put("key", key);
+        parameters.put("worker_email", worker_email); //데이터 넣기  ≒ putextra
+        parameters.put("worker_pw", worker_pw);
+        parameters.put("worker_name", worker_name);
+        parameters.put("worker_gender", worker_gender);
+        parameters.put("worker_birth", worker_birth);
+        parameters.put("worker_phonenum", worker_phonenum);
+        parameters.put("worker_certicipate", worker_certicipate);
+        parameters.put("worker_bankaccount", worker_bankaccount);
+        parameters.put("worker_bankname", worker_bankname);
+        parameters.put("local_sido", local_sido);
+        parameters.put("local_sigugun", local_sigugun);
+        parameters.put("jobcode0", jobcode0);
+        parameters.put("jobcode1", jobcode1);
+        parameters.put("jobcode2", jobcode2);
+        parameters.put("career0", career0);
+        parameters.put("career1", career1);
+        parameters.put("career2", career2);
+        parameters.put("length", String.valueOf(k));
 
     }
 

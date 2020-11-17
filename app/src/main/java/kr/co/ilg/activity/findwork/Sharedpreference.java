@@ -179,7 +179,7 @@ public class Sharedpreference {
 
     }public static String get_Jobcode(Context context, String key) {
         SharedPreferences prefs = getPreferences(context);
-        String value = prefs.getString(key, "memberinfo");
+        String value = prefs.getString(key, "0");
         return value;
     } // 한줄소개 저장
     public static void set_Hope_local_sido(Context context, String key, String value) {

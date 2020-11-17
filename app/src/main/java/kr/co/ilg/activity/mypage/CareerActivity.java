@@ -216,7 +216,6 @@ public class CareerActivity extends AppCompatActivity {
                                 startActivity(intent);
                             } else {
                                 Toast.makeText(CareerActivity.this, "경력을 다시 눌러주세요.", Toast.LENGTH_SHORT).show();
-
                             }
                             break;
                         case 2:
@@ -262,7 +261,6 @@ public class CareerActivity extends AppCompatActivity {
                                 startActivity(intent);
                             } else {
                                 Toast.makeText(CareerActivity.this, "경력을 다시 눌러주세요.", Toast.LENGTH_SHORT).show();
-
                             }
                             break;
                     }

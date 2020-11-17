@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     int i, j = 0, n = 0, a, p = 0;
     int q = 0, w = 0;
     TextView sltTV1;
-    Button resetjobpost;
+    TextView resetjobpost;
     Response.Listener rListener;
     int y, m , d;
     final String[][] arrayList1 = {{}, {"종로구", "중구", "용산구", "성동구", "광진구", "동대문구", "중랑구", "성북구", "강북구", "도봉구", "노원구", "은평구", "서대문구", "마포구", "양천구", "강서구", "구로구", "금천구", "영등포구", "동작구", "관악구", "서초구", "강남구", "송파구", "강동구"}
@@ -102,14 +102,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //    Fragment1 fragment1;
 //    Fragment2 fragment2;
 //    Fragment3 fragment3;
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        //return super.onCreateOptionsMenu(menu);
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.menu_maintop, menu);
-        return true;
-    }
 
 
     @Override
@@ -386,7 +378,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         };
 
         int[] k = new int[]{0, 0, 0};
-        MainRequest mainRequest = new MainRequest(worker_email, "1", "1", k[0], k[0], k[0], rListener);  // Request 처리 클래스
+        MainRequest mainRequest = new MainRequest(worker_email, "1", "1", k[0], k[1], k[2],"0", rListener);  // Request 처리 클래스
 
         RequestQueue queue = Volley.newRequestQueue(MainActivity.this);  // 데이터 전송에 사용할 Volley의 큐 객체 생성
         queue.add(mainRequest);  // Volley로 구현된 큐에 ValidateRequest 객체를 넣어둠으로써 실제로 서버 연동 발생
@@ -395,7 +387,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         resetjobpost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MainRequest mainRequest = new MainRequest("0", local_sido, local_sigugun, job_code[0], job_code[1], job_code[2], rListener);  // Request 처리 클래스
+                MainRequest mainRequest = new MainRequest("0", local_sido, local_sigugun, job_code[0], job_code[1], job_code[2],"0", rListener);  // Request 처리 클래스
                 Log.d("asdfasdfasdfasdf", local_sido + " " + local_sigugun + " " + job_code[0] + " " + job_code[1] + " " + job_code[2]);
                 mainRequest.setRetryPolicy(new DefaultRetryPolicy(
                         DefaultRetryPolicy.DEFAULT_TIMEOUT_MS,
@@ -436,6 +428,44 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
 
 
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        //return super.onCreateOptionsMenu(menu);
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu_maintop, menu);
+        SearchView searchView = (SearchView) menu.findItem(R.id.search).getActionView();
+        searchView.setMaxWidth(Integer.MAX_VALUE);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                Log.d("qqqqqqqqqqq",query);
+                MainRequest searchView_req = new MainRequest("0", "0", "0",0,0,0,query, rListener);  // Request 처리 클래스
+                searchView_req.setRetryPolicy(new DefaultRetryPolicy(
+                        DefaultRetryPolicy.DEFAULT_TIMEOUT_MS,
+                        0,
+                        DefaultRetryPolicy.DEFAULT_BACKOFF_MULT)); ////////값띄울때 충돌방지용
+
+                RequestQueue queue = Volley.newRequestQueue(MainActivity.this);  // 데이터 전송에 사용할 Volley의 큐 객체 생성
+                queue.add(searchView_req);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                Log.d("qqqqqqqqqnewtext", newText);
+                MainRequest searchView_req = new MainRequest("0", "0", "0",0,0,0,newText, rListener);  // Request 처리 클래스
+                searchView_req.setRetryPolicy(new DefaultRetryPolicy(
+                        DefaultRetryPolicy.DEFAULT_TIMEOUT_MS,
+                        0,
+                        DefaultRetryPolicy.DEFAULT_BACKOFF_MULT)); ////////값띄울때 충돌방지용
+
+                RequestQueue queue = Volley.newRequestQueue(MainActivity.this);  // 데이터 전송에 사용할 Volley의 큐 객체 생성
+                queue.add(searchView_req);
+                return false;
+            }
+        });
+        return true;
     }
 
     @Override
