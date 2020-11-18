@@ -197,7 +197,7 @@ public class ListWorkPickOutAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                         }
                     }
                 };
-                TimeCheckRequest tcRequest = new TimeCheckRequest("LoadChoolToi", Sharedpreference.get_email(context, "worker_email"), workInfo.get(position).jp_num, rListener);
+                TimeCheckRequest tcRequest = new TimeCheckRequest("LoadChoolToi", Sharedpreference.get_email(context, "worker_email","memberinfo"), workInfo.get(position).jp_num, rListener);
 
                 RequestQueue queue = Volley.newRequestQueue(context);
                 queue.add(tcRequest);
@@ -264,7 +264,7 @@ Log.d("pppppdistance",String.valueOf(distanceMeter));
                                                 }
                                             }
                                         };
-                                        TimeCheckRequest tcRequest = new TimeCheckRequest(key, Sharedpreference.get_email(context, "worker_email"), workInfo.get(position).jp_num, rListener);
+                                        TimeCheckRequest tcRequest = new TimeCheckRequest(key, Sharedpreference.get_email(context, "worker_email","memberinfo"), workInfo.get(position).jp_num, rListener);
 
                                         RequestQueue queue = Volley.newRequestQueue(context);
                                         queue.add(tcRequest);
@@ -312,7 +312,7 @@ Log.d("pppppdistance",String.valueOf(distanceMeter));
                                                 }
                                             }
                                         };
-                                        TimeCheckRequest tcRequest = new TimeCheckRequest(key, Sharedpreference.get_email(context, "worker_email"), workInfo.get(position).jp_num, rListener);
+                                        TimeCheckRequest tcRequest = new TimeCheckRequest(key, Sharedpreference.get_email(context, "worker_email","memberinfo"), workInfo.get(position).jp_num, rListener);
 
                                         RequestQueue queue = Volley.newRequestQueue(context);
                                         queue.add(tcRequest);

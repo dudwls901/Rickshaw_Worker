@@ -40,7 +40,7 @@ public class UserReviewWriteActivity extends AppCompatActivity {
         review_object=findViewById(R.id.review_object);
         review_text=findViewById(R.id.review_text);
         back = findViewById(R.id.back);
-        worker_email = Sharedpreference.get_email(mContext, "worker_email");
+        worker_email = Sharedpreference.get_email(mContext, "worker_email","memberinfo");
         register = findViewById(R.id.register);
 
         back.setOnClickListener(new View.OnClickListener() {

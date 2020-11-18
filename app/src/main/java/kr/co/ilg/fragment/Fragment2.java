@@ -66,7 +66,7 @@ public class Fragment2 extends Fragment {
         recyclerView2.setLayoutManager(layoutManager2);
 
         final int[] numofpost = new int[1];
-        worker_email = Sharedpreference.get_email(context, "worker_email");
+        worker_email = Sharedpreference.get_email(context, "worker_email","memberinfo");
 
         // 선발 완료 리싸이클러뷰
         Response.Listener rListener = new Response.Listener<String>() {

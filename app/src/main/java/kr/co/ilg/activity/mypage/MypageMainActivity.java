@@ -51,7 +51,7 @@ public class MypageMainActivity extends AppCompatActivity implements View.OnClic
         }
         membernickname = findViewById(R.id.membernickname);
 
-        membernickname.setText(Sharedpreference.get_Nickname(mContext, "worker_name")); // 상단의 이름 설정
+        membernickname.setText(Sharedpreference.get_Nickname(mContext, "worker_name","memberinfo")); // 상단의 이름 설정
 
 
         final ListView listview = (ListView) findViewById(R.id.listview);
@@ -71,6 +71,7 @@ public class MypageMainActivity extends AppCompatActivity implements View.OnClic
                     case 2 : intent = new Intent(MypageMainActivity.this, ilgIntrodutionActivity.class);
                         startActivity(intent); break;
                     case 3 : intent = new Intent(MypageMainActivity.this, com.example.capstone.MainActivity.class);
+                        Sharedpreference.clear(mContext,"autologin");
                         startActivity(intent); break;
                 }
             }

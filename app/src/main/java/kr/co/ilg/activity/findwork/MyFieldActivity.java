@@ -38,7 +38,6 @@ public class MyFieldActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.myfield);
-
         mainBackPressCloseHandler =  new MainBackPressCloseHandler(this);
         tabs = findViewById(R.id.tabs);
         tabs.addTab(tabs.newTab(),true);

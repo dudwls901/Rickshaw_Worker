@@ -148,15 +148,15 @@ public class CareerActivity extends AppCompatActivity {
         okBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String email = Sharedpreference.get_email(mContext, "worker_email");
+                String email = Sharedpreference.get_email(mContext, "worker_email","memberinfo");
                 Intent intent = new Intent(CareerActivity.this, AccountAddActivity.class);
 
                 Intent updateIntent = new Intent(CareerActivity.this, MyInfomanageActivity.class);
                 updateIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
                 if (isUpdate == 1) {  // 수정
-                    Sharedpreference.removeinfo(mContext, jobnum);
-                    Sharedpreference.set_numofjob(mContext,"numofjob",String.valueOf(career.length));
+                    Sharedpreference.removeinfo(mContext, jobnum,"memberinfo");
+                    Sharedpreference.set_numofjob(mContext,"numofjob",String.valueOf(career.length),"memberinfo");
 
 
 
@@ -166,10 +166,10 @@ public class CareerActivity extends AppCompatActivity {
                             try {
                                 JSONObject jResponse = new JSONObject(response.substring(response.indexOf("{"), response.lastIndexOf("}") + 1));
 
-                                    Sharedpreference.set_Jobcode(mContext, "jobcode" + a, jResponse.getString("job_code"));
-                                    Sharedpreference.set_Jobname(mContext, "jobname" + a, jResponse.getString("job_name"));
-                                    Sharedpreference.set_Jobcareer(mContext, "jobcareer" + a, jResponse.getString("hj_career"));
-                                    Log.d("check",a + "   " +Sharedpreference.get_Jobcode(mContext, "jobcode" + a)+ " "+ Sharedpreference.get_Jobname(mContext, "jobname" + a) + " " +Sharedpreference.get_Jobcareer(mContext,"jobcareer"+a));
+                                    Sharedpreference.set_Jobcode(mContext, "jobcode" + a, jResponse.getString("job_code"),"memberinfo");
+                                    Sharedpreference.set_Jobname(mContext, "jobname" + a, jResponse.getString("job_name"),"memberinfo");
+                                    Sharedpreference.set_Jobcareer(mContext, "jobcareer" + a, jResponse.getString("hj_career"),"memberinfo");
+                                    Log.d("check",a + "   " +Sharedpreference.get_Jobcode(mContext, "jobcode" + a,"memberinfo")+ " "+ Sharedpreference.get_Jobname(mContext, "jobname" + a,"memberinfo") + " " +Sharedpreference.get_Jobcareer(mContext,"jobcareer"+a,"memberinfo"));
                                     a++;
 
                                     Toast.makeText(CareerActivity.this, "수정 완료되었습니다", Toast.LENGTH_SHORT).show();

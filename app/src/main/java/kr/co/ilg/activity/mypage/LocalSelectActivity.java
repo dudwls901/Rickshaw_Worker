@@ -76,7 +76,7 @@ public class LocalSelectActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                String email = Sharedpreference.get_email(mContext, "worker_email");
+                String email = Sharedpreference.get_email(mContext, "worker_email","memberinfo");
                 Intent intent = new Intent(LocalSelectActivity.this, JobSelectActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
@@ -98,8 +98,8 @@ public class LocalSelectActivity extends AppCompatActivity {
                                         String local_sido = jResponse.getString("local_sido");
                                         String local_sigugun = jResponse.getString("local_sigugun");
 
-                                        Sharedpreference.set_Hope_local_sido(mContext, "local_sido", local_sido);
-                                        Sharedpreference.set_Hope_local_sigugun(mContext, "local_sigugun", local_sigugun);
+                                        Sharedpreference.set_Hope_local_sido(mContext, "local_sido", local_sido,"memberinfo");
+                                        Sharedpreference.set_Hope_local_sigugun(mContext, "local_sigugun", local_sigugun,"memberinfo");
 
                                         Toast.makeText(LocalSelectActivity.this, "수정 완료되었습니다", Toast.LENGTH_SHORT).show();
                                     } else

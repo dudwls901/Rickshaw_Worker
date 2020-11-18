@@ -169,7 +169,7 @@ public class AccountAddActivity extends AppCompatActivity {
 
                     startActivity(intent);
                 } else {  // 계좌 수정
-                    String email = Sharedpreference.get_email(getApplicationContext(), "worker_email");
+                    String email = Sharedpreference.get_email(getApplicationContext(), "worker_email","memberinfo");
                     Response.Listener rListener = new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
@@ -180,8 +180,8 @@ public class AccountAddActivity extends AppCompatActivity {
                                 Intent updateIntent = new Intent(AccountAddActivity.this, AccountManageActivity.class);
                                 updateIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 if (updateSuccess3) {
-                                    Sharedpreference.set_Bankaccount(getApplicationContext(), "worker_bankaccount", worker_bankaccount);
-                                    Sharedpreference.set_Bankname(getApplicationContext(), "worker_bankname", worker_bankname);
+                                    Sharedpreference.set_Bankaccount(getApplicationContext(), "worker_bankaccount", worker_bankaccount,"memberinfo");
+                                    Sharedpreference.set_Bankname(getApplicationContext(), "worker_bankname", worker_bankname,"memberinfo");
                                     Toast.makeText(AccountAddActivity.this, "수정 완료되었습니다", Toast.LENGTH_SHORT).show();
                                 } else
                                     Toast.makeText(AccountAddActivity.this, "수정 실패", Toast.LENGTH_SHORT).show();

@@ -89,7 +89,7 @@ public class Fragment3 extends Fragment{
         btn3 = viewGroup.findViewById(R.id.btn3);
         edit1 = viewGroup.findViewById(R.id.edt1);
         edit2 = viewGroup.findViewById(R.id.edt2);
-        worker_email = Sharedpreference.get_email(context,"worker_email");
+        worker_email = Sharedpreference.get_email(context,"worker_email","memberinfo");
         rdgroup.setOnCheckedChangeListener(radioGroupButtonChangeListener);
         int m = cal.get(Calendar.MONTH);
         int y = cal.get(Calendar.YEAR);

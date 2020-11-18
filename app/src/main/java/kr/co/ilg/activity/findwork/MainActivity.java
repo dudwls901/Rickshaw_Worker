@@ -21,6 +21,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Spinner;
@@ -130,8 +131,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mContext = this;
-        local_sido = Sharedpreference.get_Hope_local_sido(mContext, "local_sido");
-        local_sigugun = Sharedpreference.get_Hope_local_sigugun(mContext, "local_sigugun");
+        local_sido = Sharedpreference.get_Hope_local_sido(mContext, "local_sido","memberinfo");
+        local_sigugun = Sharedpreference.get_Hope_local_sigugun(mContext, "local_sigugun","memberinfo");
         Calendar cal = Calendar.getInstance();
         y = cal.get(Calendar.YEAR);
         m = cal.get(Calendar.MONTH);
@@ -150,12 +151,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         //     getSupportActionBar().setHomeAsUpIndicator(R.drawable.search_white_24dp);
 
-        String r = Sharedpreference.get_numofjob(mContext, "numofjob");
+        String r = Sharedpreference.get_numofjob(mContext, "numofjob","memberinfo");
         int numofjob = Integer.parseInt(r);
         resetjobpost = findViewById(R.id.resetjobpost);
 
         for (int i = numofjob - 1; i >= 0; i--) {
-            job_code[i] = Integer.parseInt(Sharedpreference.get_Jobcode(mContext, "jobcode" + i));
+            job_code[i] = Integer.parseInt(Sharedpreference.get_Jobcode(mContext, "jobcode" + i,"memberinfo"));
         }
 
 
@@ -173,7 +174,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ListView listview1 = dialogview.findViewById(R.id.listview1);
         TextView localsetting = findViewById(R.id.localsetting);
         TextView jobsetting = findViewById(R.id.jobsetting);
-        localsetting.setText(Sharedpreference.get_Hope_local_sido(mContext, "local_sido") + " " + Sharedpreference.get_Hope_local_sigugun(mContext, "local_sigugun"));
+        localsetting.setText(Sharedpreference.get_Hope_local_sido(mContext, "local_sido","memberinfo") + " " + Sharedpreference.get_Hope_local_sigugun(mContext, "local_sigugun","memberinfo"));
         TextView sltTV = dialogview.findViewById(R.id.sltTV);
         final String[] arrayList = {"전체", "서울", "부산", "대구", "인천", "대전", "광주", "울산", "세종", "경기",
                 "강원", "충북", "충남", "전북", "전남", "경북", "경남", "제주"}; // 첫번째 지역선택에 들어갈 배열
@@ -244,7 +245,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
         String text1 = "";
         for (int i = 0; i < numofjob; i++) {
-            text1 = text1 + " " + Sharedpreference.get_Jobname(mContext, "jobname" + i);
+            text1 = text1 + " " + Sharedpreference.get_Jobname(mContext, "jobname" + i,"memberinfo");
         }
         // sltTV1.setText(Sharedpreference.get_Jobname(mContext,"jobname0")+" "+ Sharedpreference.get_Jobname(mContext,"jobname1")+" "+Sharedpreference.get_Jobname(mContext,"jobname2"));
         jobsetting.setText(text1);
@@ -304,7 +305,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         String worker_email;
         final int[] numofpost = new int[1];
-        worker_email = Sharedpreference.get_email(mContext, "worker_email");
+        worker_email = Sharedpreference.get_email(mContext, "worker_email","memberinfo");
         Log.d("asdfasdfasdf", worker_email);
 
 

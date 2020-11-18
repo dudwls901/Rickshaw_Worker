@@ -57,7 +57,7 @@ public class ReviewManageActivity extends Activity {
 
         mRecyclerView = findViewById(R.id.reviewrecycle3);
         spinner = findViewById(R.id.reviewspinner);
-        worker_email = Sharedpreference.get_email(mContext,"worker_email");
+        worker_email = Sharedpreference.get_email(mContext,"worker_email","memberinfo");
 
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);
