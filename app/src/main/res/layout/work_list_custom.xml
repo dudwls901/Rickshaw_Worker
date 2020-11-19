@@ -32,7 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="17dp"
-            android:text="날짜 :  "
+            android:text="           날짜 :  "
             ></TextView>
             <TextView
                 android:id="@+id/date"
@@ -50,7 +50,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="17dp"
-                android:text="단가 :  "
+                android:text="           단가 :  "
                 ></TextView>
             <TextView
                 android:id="@+id/pay"
@@ -68,7 +68,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="17dp"
-                android:text="구인 직종 :  "
+                android:text="   구인 직종 :  "
                 ></TextView>
             <TextView
                 android:id="@+id/job"
@@ -87,7 +87,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="17dp"
-                android:text="현장 위치 :  "
+                android:text="   현장 위치 :  "
                 ></TextView>
             <TextView
                 android:id="@+id/place"

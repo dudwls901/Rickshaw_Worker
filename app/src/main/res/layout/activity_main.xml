@@ -119,27 +119,27 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/list_urgency"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            />
     </LinearLayout>
 
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="62dp"
         android:layout_gravity="bottom"
         android:layout_marginStart="0dp"
         android:layout_marginEnd="0dp"
         android:background="@color/WhiteColor"
-        app:itemIconSize="30dp"
-        app:itemIconTint="#000000"
-        app:itemTextColor="#000000"
+        app:itemIconSize="27dp"
+        app:itemIconTint="@drawable/bottom_selector_color"
+        app:itemTextColor="@drawable/bottom_selector_color"
         app:layout_behavior="tech.thdev.app.view.BottomNavigationBehavior"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:menu="@menu/menu_bottom" />
-    <!--    tools:layout_behavior="tech.thdev.app.view.BottomNavigationBehavior"-->
-    <!--        app:layout_behavior="tech.thdev.app.view.BottomNavigationBehavior"-->
-    <!--바텀네비게이션뷰를 밑으로 스크롤시에는 사라지고 위로 스크롤할 때 다시 띄움-->
+        app:menu="@menu/menu_bottom"
+        />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

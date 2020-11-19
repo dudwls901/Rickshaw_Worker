@@ -86,9 +86,7 @@ public class MypageMainActivity extends AppCompatActivity implements View.OnClic
         list.add("인력거안내");
         list.add("로그아웃");
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
-//        bottomNavigationView.getMenu().getItem(0).setIcon(R.drawable.search_charcol);
-//        bottomNavigationView.getMenu().getItem(1).setIcon(R.drawable.building_charcol);
-//        bottomNavigationView.getMenu().getItem(2).setIcon(R.drawable.profile_mint);
+        bottomNavigationView.getMenu().findItem(R.id.tab3).setChecked(true);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {

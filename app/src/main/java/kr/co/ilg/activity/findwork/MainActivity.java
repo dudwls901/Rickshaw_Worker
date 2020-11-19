@@ -101,9 +101,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     };
     Date date=null,getdate=null;
     MainBackPressCloseHandler mainBackPressCloseHandler;
-//    Fragment1 fragment1;
-//    Fragment2 fragment2;
-//    Fragment3 fragment3;
+
 
 
     @Override
@@ -117,6 +115,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             case R.id.map:
                 Intent intent = new Intent(MainActivity.this, WorkMapActivity.class);
+                intent.putExtra("mapAddress","0");
                 startActivity(intent);
                 return true;
 
@@ -141,15 +140,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mainBackPressCloseHandler =  new MainBackPressCloseHandler(this);
 
 
-//        item1 = (MenuItem) findViewById(R.id.tab1);
-//        item2 = (MenuItem)findViewById(R.id.tab2);
-//        item3 = (MenuItem)findViewById(R.id.tab3);
-
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        //추가된 소스코드, Toolbar의 왼쪽에 버튼을 추가하고 버튼의 아이콘을 바꾼다.
-        //     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        //     getSupportActionBar().setHomeAsUpIndicator(R.drawable.search_white_24dp);
 
         String r = Sharedpreference.get_numofjob(mContext, "numofjob","memberinfo");
         Log.d("ttttttttt",r);
@@ -183,7 +175,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, arrayList); // Adapter 생성
         listview.setAdapter(adapter); //Adapter 연결
         listview.setSelection(0); // 첫 인덱스 설정
-
 
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

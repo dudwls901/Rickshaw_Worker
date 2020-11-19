@@ -57,11 +57,11 @@ public class UserReviewWriteActivity extends AppCompatActivity {
 
         if(key==0){//현장 후기작성 클릭
             review_object_name=intent.getStringExtra("현장 후기");
-            review_object.setText(review_object_name);
+            review_object.setText("To."+review_object_name);
         }
         else if(key==1){//인력사무소 후기작성 클릭
             review_object_name=intent.getStringExtra("인력사무소 후기");
-            review_object.setText(review_object_name);
+            review_object.setText("To."+review_object_name);
         }
         else{//예외처리!
 
