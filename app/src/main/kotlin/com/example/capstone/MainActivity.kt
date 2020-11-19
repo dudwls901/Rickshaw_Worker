@@ -30,6 +30,7 @@ class MainActivity : Activity() {
     init {
         instance = this
     }
+    var auto:Boolean = false;
 
     lateinit var mainBackPressCloseHandler: MainBackPressCloseHandler
 
@@ -63,8 +64,6 @@ class MainActivity : Activity() {
         val checkbox = findViewById<CheckBox>(R.id.cb)
 
 
-        val autoid = Sharedpreference.get_id(applicationContext(), "worker_email", "autologin")
-        val autopw = Sharedpreference.get_pw(applicationContext(), "worker_pw", "autologin")
 
         fun intent() {
             var intent = Intent(this, MainActivity::class.java)
@@ -75,6 +74,7 @@ class MainActivity : Activity() {
 
         fun signup(email: String, pw: String) {
             var intent1 = Intent(application, SignupUserInfoActivity::class.java)
+            intent1.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             intent1.putExtra("worker_email", email)
             intent1.putExtra("worker_pw", pw)
             startActivity(intent1)
@@ -363,7 +363,9 @@ class MainActivity : Activity() {
                 LoginClient.instance.loginWithKakaoAccount(this, callback = callback)
 
         }
-
+        checkbox.setOnCheckedChangeListener{ buttonView: CompoundButton?, isChecked: Boolean ->
+            auto = isChecked
+        }
         loginBtn.setOnClickListener {
             val worker_email: String = idET.getText().toString()
             val worker_pw: String = pwET.getText().toString()
@@ -404,8 +406,11 @@ class MainActivity : Activity() {
                                 Sharedpreference.set_Jobcode(applicationContext(), "jobcode" + i, jobcode[i], "memberinfo")
                                 j++;
                             }
-
-
+                            if(auto) {
+                                Sharedpreference.set_id(applicationContext(), "worker_email", worker_email, "autologin")
+                                Sharedpreference.set_pw(applicationContext(), "worker_pw", worker_pw, "autologin")
+                                Sharedpreference.set_state(applicationContext(), "switch1", true, "state");
+                            }
 
                             Sharedpreference.set_numofjob(applicationContext(), "numofjob", j.toString(), "memberinfo")
 
@@ -453,15 +458,5 @@ class MainActivity : Activity() {
         mainBackPressCloseHandler.onBackPressed()
     }
 
-    fun logout(){
-        UserApiClient.instance.logout { error ->
-            if (error != null) {
-                Toast.makeText(this, "로그아웃 실패 $error", Toast.LENGTH_SHORT).show()
-            }else {
-                Toast.makeText(this, "로그아웃 성공", Toast.LENGTH_SHORT).show()
-            }
-
-        }
-    }
 
 }

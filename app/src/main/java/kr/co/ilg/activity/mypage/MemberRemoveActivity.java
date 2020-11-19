@@ -67,6 +67,7 @@ public class MemberRemoveActivity extends Activity{
                                         Intent intent = new Intent(getApplicationContext(), com.example.capstone.MainActivity.class);
                                         startActivity(intent);
                                         Sharedpreference.clear(mContext,"autologin");
+                                        Sharedpreference.set_state(mContext, "switch1",false,"state");
                                     } else {
                                         Toast.makeText(mContext, "비밀번호와 비밀번호 확인이 다릅니다.", Toast.LENGTH_SHORT).show();
                                     }
