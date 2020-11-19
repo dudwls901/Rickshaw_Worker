@@ -108,13 +108,13 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="나이 : "
+            android:text="생년월일 : "
             android:textSize="17dp"
             />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="22"
+            android:text="19991111"
             android:textSize="17dp"
             android:id="@+id/age"
             />
@@ -133,7 +133,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="010-4816-6532"
+            android:text="01015623546"
             android:textSize="17dp"
             android:id="@+id/phonenum"
             />
