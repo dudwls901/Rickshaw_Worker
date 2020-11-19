@@ -46,7 +46,7 @@ public class PasswordChangeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                worker_email = Sharedpreference.get_email(mContext, "worker_email");
+                worker_email = Sharedpreference.get_email(mContext, "worker_email","memberinfo");
                 worker_pw = passwdET.getText().toString();
                 worker_new_pw = newPasswdET.getText().toString();
                 worker_check_new_pw = checkNewPwET.getText().toString();

@@ -43,14 +43,15 @@ public class AccountManageActivity extends Activity {
         TextView membernickname = findViewById(R.id.membernickname);
         ImageButton accountDelete = findViewById(R.id.accountDelete);
 
-        membernickname.setText(Sharedpreference.get_Nickname(mContext, "worker_name"));
-        bankaccount.setText(Sharedpreference.get_bankaccount(mContext,"worker_bankaccount"));
-        bankname.setText(Sharedpreference.get_bankname(mContext,"worker_bankname"));
+        membernickname.setText(Sharedpreference.get_Nickname(mContext, "worker_name","memberinfo"));
+        bankaccount.setText(Sharedpreference.get_bankaccount(mContext,"worker_bankaccount","memberinfo"));
+        bankname.setText(Sharedpreference.get_bankname(mContext,"worker_bankname","memberinfo"));
 
         accountmodify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), AccountAddActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.putExtra("isUpdate", 1);
                 startActivity(intent);
             }
@@ -59,7 +60,7 @@ public class AccountManageActivity extends Activity {
         accountDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String w_email = Sharedpreference.get_email(mContext, "worker_email");
+                String w_email = Sharedpreference.get_email(mContext, "worker_email","memberinfo");
                 Response.Listener rListener = new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -68,8 +69,8 @@ public class AccountManageActivity extends Activity {
                             JSONObject jResponse = new JSONObject(response.substring(response.indexOf("{"), response.lastIndexOf("}") + 1));
                             boolean deleteSuccess = jResponse.getBoolean("deleteSuccess");
                             if (deleteSuccess) {
-                                Sharedpreference.set_Bankaccount(getApplicationContext(), "worker_bankaccount", "");
-                                Sharedpreference.set_Bankname(getApplicationContext(), "worker_bankname", "");
+                                Sharedpreference.set_Bankaccount(getApplicationContext(), "worker_bankaccount", "","memberinfo");
+                                Sharedpreference.set_Bankname(getApplicationContext(), "worker_bankname", "","memberinfo");
                                 bankaccount.setText("");
                                 bankname.setText("");
                                 Toast.makeText(AccountManageActivity.this, "삭제되었습니다", Toast.LENGTH_SHORT).show();

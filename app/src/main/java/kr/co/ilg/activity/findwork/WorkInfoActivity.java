@@ -169,7 +169,7 @@ public class WorkInfoActivity extends AppCompatActivity {
                         }
                     }
                 };
-                ApplyRequest aRequest = new ApplyRequest(Sharedpreference.get_email(WorkInfoActivity.this, "worker_email"), jp_num, rListener);
+                ApplyRequest aRequest = new ApplyRequest(Sharedpreference.get_email(WorkInfoActivity.this, "worker_email","memberinfo"), jp_num, rListener);
 
                 RequestQueue queue = Volley.newRequestQueue(WorkInfoActivity.this);
                 queue.add(aRequest);

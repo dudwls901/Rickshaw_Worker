@@ -71,7 +71,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="보통인부"
                 android:textSize="18sp"
                 android:background="@drawable/custom_btn_lightclr"/>
 
@@ -80,7 +79,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="목공"
                 android:textSize="18sp"
                 android:background="@drawable/custom_btn_lightclr"/>
 
@@ -89,7 +87,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="콘크리트공"
                 android:textSize="18sp"
                 android:background="@drawable/custom_btn_lightclr"/>
 
@@ -98,7 +95,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="미장/조적공"
                 android:textSize="18sp"
                 android:background="@drawable/custom_btn_lightclr"/>
 
@@ -107,7 +103,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="용접공"
                 android:textSize="18sp"
                 android:background="@drawable/custom_btn_lightclr"/>
 
@@ -116,7 +111,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="관로공"
                 android:textSize="18sp"
                 android:background="@drawable/custom_btn_lightclr"/>
 
@@ -125,7 +119,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="설비공"
                 android:textSize="18sp"
                 android:background="@drawable/custom_btn_lightclr"/>
 
@@ -134,7 +127,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="전기공"
                 android:textSize="18sp"
                 android:background="@drawable/custom_btn_lightclr"/>
 
@@ -151,7 +143,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="작업팀장"
                 android:textSize="18sp"
                 android:background="@drawable/custom_btn_lightclr"/>
 
@@ -160,7 +151,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="철근공"
                 android:textSize="18sp"
                 android:background="@drawable/custom_btn_lightclr"/>
 
@@ -169,7 +159,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="비계공"
                 android:textSize="18sp"
                 android:background="@drawable/custom_btn_lightclr"/>
 
@@ -178,7 +167,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="철거/할석공"
                 android:textSize="18sp"
                 android:background="@drawable/custom_btn_lightclr"/>
 
@@ -187,7 +175,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="타일공"
                 android:textSize="18sp"
                 android:background="@drawable/custom_btn_lightclr"/>
 
@@ -196,7 +183,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="경계석공"
                 android:textSize="18sp"
                 android:background="@drawable/custom_btn_lightclr"/>
 
@@ -205,7 +191,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="청소"
                 android:textSize="18sp"
                 android:background="@drawable/custom_btn_lightclr"/>
 
@@ -214,7 +199,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="칸막이"
                 android:textSize="18sp"
                 android:background="@drawable/custom_btn_lightclr"/>
 

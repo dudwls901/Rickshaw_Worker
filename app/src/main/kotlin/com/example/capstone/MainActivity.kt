@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
+import android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP
 import android.os.Bundle
 import android.util.Log
 import android.widget.*
@@ -14,10 +15,12 @@ import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.model.AuthErrorCause.*
 import com.kakao.sdk.user.UserApiClient
 import kr.co.ilg.activity.findwork.MainActivity
+import kr.co.ilg.activity.findwork.MainBackPressCloseHandler
 import kr.co.ilg.activity.findwork.Sharedpreference
 import kr.co.ilg.activity.login.FindPasswordInfoActivity
 import kr.co.ilg.activity.login.SignupEmailActivity
 import kr.co.ilg.activity.login.SignupUserInfoActivity
+import kr.co.ilg.activity.login.SplashActivity
 import org.json.JSONObject
 
 
@@ -27,6 +30,9 @@ class MainActivity : Activity() {
     init {
         instance = this
     }
+
+    lateinit var mainBackPressCloseHandler: MainBackPressCloseHandler
+
 
     companion object {
         private var instance: com.example.capstone.MainActivity? = null
@@ -42,7 +48,11 @@ class MainActivity : Activity() {
         setContentView(R.layout.login);
 
 
-        Sharedpreference.clear(applicationContext)
+        Sharedpreference.clear(applicationContext, "memberinfo")
+
+         mainBackPressCloseHandler =  MainBackPressCloseHandler(this)
+
+
         val idET = findViewById<EditText>(R.id.idET);
         val pwET = findViewById<EditText>(R.id.pwET);
         val kakaoLoginBtn = findViewById<ImageButton>(R.id.kakaoLoginBtn)
@@ -50,10 +60,15 @@ class MainActivity : Activity() {
         val loginBtn = findViewById<Button>(R.id.loginBtn)
         val findPwBtn = findViewById<TextView>(R.id.findPwBtn)
         val signUpBtn = findViewById<TextView>(R.id.signUpBtn)
+        val checkbox = findViewById<CheckBox>(R.id.cb)
 
+
+        val autoid = Sharedpreference.get_id(applicationContext(), "worker_email", "autologin")
+        val autopw = Sharedpreference.get_pw(applicationContext(), "worker_pw", "autologin")
 
         fun intent() {
             var intent = Intent(this, MainActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             startActivity(intent) // 일반로그인 정보갖고오기
 
         }
@@ -136,34 +151,34 @@ class MainActivity : Activity() {
                                                 jobname[i] = s.getString("jobname")
                                                 jobcareer[i] = s.getString("jobcareer")
                                                 jobcode[i]=s.getString("job_code")
-                                                Sharedpreference.set_Jobcareer(applicationContext(), "jobname"+i, jobname[i])
-                                                Sharedpreference.set_Jobname(applicationContext(), "jobcareer"+i, jobcareer[i])
-                                                Sharedpreference.set_Jobcode(applicationContext(), "jobcode"+i, jobcode[i])
+                                                Sharedpreference.set_Jobcareer(applicationContext(), "jobname" + i, jobname[i], "memberinfo")
+                                                Sharedpreference.set_Jobname(applicationContext(), "jobcareer" + i, jobcareer[i], "memberinfo")
+                                                Sharedpreference.set_Jobcode(applicationContext(), "jobcode" + i, jobcode[i], "memberinfo")
                                                 j++;
                                             } ///실행되다가
 
-                                            Sharedpreference.set_numofjob(applicationContext(), "numofjob", j.toString())
+                                            Sharedpreference.set_numofjob(applicationContext(), "numofjob", j.toString(), "memberinfo")
 
-                                            Sharedpreference.set_email(applicationContext(), "worker_email", worker_email)
-                                            Sharedpreference.set_Nickname(applicationContext(), "worker_name", worker_name)
-                                            Sharedpreference.set_Password(applicationContext(), "worker_pw", password)
-                                            Sharedpreference.set_Gender(applicationContext(), "worker_gender", worker_gender)
-                                            Sharedpreference.set_Birth(applicationContext(), "worker_birth", worker_birth)
-                                            Sharedpreference.set_Phonenum(applicationContext(), "worker_phonenum", worker_phonenum)
-                                            Sharedpreference.set_Bankaccount(applicationContext(), "worker_bankaccount", worker_bankaccount)
-                                            Sharedpreference.set_Bankname(applicationContext(), "worker_bankname", worker_bankname)
-                                            Sharedpreference.set_introduce(applicationContext(), "worker_introduce", worker_introduce)
+                                            Sharedpreference.set_email(applicationContext(), "worker_email", worker_email, "memberinfo")
+                                            Sharedpreference.set_Nickname(applicationContext(), "worker_name", worker_name, "memberinfo")
+                                            Sharedpreference.set_Password(applicationContext(), "worker_pw", password, "memberinfo")
+                                            Sharedpreference.set_Gender(applicationContext(), "worker_gender", worker_gender, "memberinfo")
+                                            Sharedpreference.set_Birth(applicationContext(), "worker_birth", worker_birth, "memberinfo")
+                                            Sharedpreference.set_Phonenum(applicationContext(), "worker_phonenum", worker_phonenum, "memberinfo")
+                                            Sharedpreference.set_Bankaccount(applicationContext(), "worker_bankaccount", worker_bankaccount, "memberinfo")
+                                            Sharedpreference.set_Bankname(applicationContext(), "worker_bankname", worker_bankname, "memberinfo")
+                                            Sharedpreference.set_introduce(applicationContext(), "worker_introduce", worker_introduce, "memberinfo")
 
-                                            Sharedpreference.set_Hope_local_sido(applicationContext(), "local_sido", local_sido)
-                                            Sharedpreference.set_Hope_local_sigugun(applicationContext(), "local_sigugun", local_sigugun)// 파일에 맵핑형식으로 저장// 파일에 맵핑형식으로 저장
+                                            Sharedpreference.set_Hope_local_sido(applicationContext(), "local_sido", local_sido, "memberinfo")
+                                            Sharedpreference.set_Hope_local_sigugun(applicationContext(), "local_sigugun", local_sigugun, "memberinfo")// 파일에 맵핑형식으로 저장// 파일에 맵핑형식으로 저장
 
                                             Toast.makeText(this@MainActivity, "로그인에 성공하였습니다.", Toast.LENGTH_SHORT).show()
                                             intent() //
                                             //Toast.makeText(FindPasswordInfoActivity.this, "등록된 "+worker_pw, Toast.LENGTH_SHORT).show();
                                         } else {  // 회원이 존재하지 않는다면
-                                            Sharedpreference.set_email(applicationContext(), "email", user.kakaoAccount?.email) // 이메일만 갖고온 후 나머지 정보는 회원가입 절차에서 입력
+                                            Sharedpreference.set_email(applicationContext(), "email", user.kakaoAccount?.email, "memberinfo") // 이메일만 갖고온 후 나머지 정보는 회원가입 절차에서 입력
 
-                                            signup(Sharedpreference.get_email(applicationContext, "email"), "1") // 회원가입 진행
+                                            signup(Sharedpreference.get_email(applicationContext, "email", "memberinfo"), "1") // 회원가입 진행
                                         }
                                     } catch (e: Exception) {
                                         Log.d("mytest", e.toString())
@@ -208,33 +223,33 @@ class MainActivity : Activity() {
                                                 jobname[i] = s.getString("jobname")
                                                 jobcareer[i] = s.getString("jobcareer")
                                                 jobcode[i]=s.getString("job_code")
-                                                Sharedpreference.set_Jobcareer(applicationContext(), "jobname"+i, jobname[i])
-                                                Sharedpreference.set_Jobname(applicationContext(), "jobcareer"+i, jobcareer[i])
-                                                Sharedpreference.set_Jobcode(applicationContext(), "jobcode"+i, jobcode[i])
+                                                Sharedpreference.set_Jobcareer(applicationContext(), "jobname" + i, jobname[i], "memberinfo")
+                                                Sharedpreference.set_Jobname(applicationContext(), "jobcareer" + i, jobcareer[i], "memberinfo")
+                                                Sharedpreference.set_Jobcode(applicationContext(), "jobcode" + i, jobcode[i], "memberinfo")
                                                 j++;
                                             } ///실행되다가
 
-                                            Sharedpreference.set_numofjob(applicationContext(), "numofjob", j.toString())
+                                            Sharedpreference.set_numofjob(applicationContext(), "numofjob", j.toString(), "memberinfo")
 
-                                            Sharedpreference.set_email(applicationContext(), "worker_email", worker_email)
-                                            Sharedpreference.set_Nickname(applicationContext(), "worker_name", worker_name)
-                                            Sharedpreference.set_Password(applicationContext(), "worker_pw", password)
-                                            Sharedpreference.set_Gender(applicationContext(), "worker_gender", worker_gender)
-                                            Sharedpreference.set_Birth(applicationContext(), "worker_birth", worker_birth)
-                                            Sharedpreference.set_Phonenum(applicationContext(), "worker_phonenum", worker_phonenum)
-                                            Sharedpreference.set_Bankaccount(applicationContext(), "worker_bankaccount", worker_bankaccount)
-                                            Sharedpreference.set_Bankname(applicationContext(), "worker_bankname", worker_bankname)
-                                            Sharedpreference.set_introduce(applicationContext(), "worker_introduce", worker_introduce)
+                                            Sharedpreference.set_email(applicationContext(), "worker_email", worker_email, "memberinfo")
+                                            Sharedpreference.set_Nickname(applicationContext(), "worker_name", worker_name, "memberinfo")
+                                            Sharedpreference.set_Password(applicationContext(), "worker_pw", password, "memberinfo")
+                                            Sharedpreference.set_Gender(applicationContext(), "worker_gender", worker_gender, "memberinfo")
+                                            Sharedpreference.set_Birth(applicationContext(), "worker_birth", worker_birth, "memberinfo")
+                                            Sharedpreference.set_Phonenum(applicationContext(), "worker_phonenum", worker_phonenum, "memberinfo")
+                                            Sharedpreference.set_Bankaccount(applicationContext(), "worker_bankaccount", worker_bankaccount, "memberinfo")
+                                            Sharedpreference.set_Bankname(applicationContext(), "worker_bankname", worker_bankname, "memberinfo")
+                                            Sharedpreference.set_introduce(applicationContext(), "worker_introduce", worker_introduce, "memberinfo")
 
-                                            Sharedpreference.set_Hope_local_sido(applicationContext(), "local_sido", local_sido)
-                                            Sharedpreference.set_Hope_local_sigugun(applicationContext(), "local_sigugun", local_sigugun)// 파일에 맵핑형식으로 저장// 파일에 맵핑형식으로 저장
+                                            Sharedpreference.set_Hope_local_sido(applicationContext(), "local_sido", local_sido, "memberinfo")
+                                            Sharedpreference.set_Hope_local_sigugun(applicationContext(), "local_sigugun", local_sigugun, "memberinfo")// 파일에 맵핑형식으로 저장// 파일에 맵핑형식으로 저장
 
                                             intent() //
                                             //Toast.makeText(FindPasswordInfoActivity.this, "등록된 "+worker_pw, Toast.LENGTH_SHORT).show();
                                         } else {  // 회원이 존재하지 않는다면
-                                            Sharedpreference.set_email(applicationContext(), "worker_email", user.id.toString())
+                                            Sharedpreference.set_email(applicationContext(), "worker_email", user.id.toString(), "memberinfo")
 
-                                            signup(Sharedpreference.get_email(applicationContext, "worker_email"), "1") // 회원가입 진행
+                                            signup(Sharedpreference.get_email(applicationContext, "worker_email", "memberinfo"), "1") // 회원가입 진행
                                         }
                                     } catch (e: Exception) {
                                         Log.d("mytest", e.toString())
@@ -294,33 +309,33 @@ class MainActivity : Activity() {
                                                                 jobname[i] = s.getString("jobname")
                                                                 jobcareer[i] = s.getString("jobcareer")
                                                                 jobcode[i]=s.getString("job_code")
-                                                                Sharedpreference.set_Jobcareer(applicationContext(), "jobname"+i, jobname[i])
-                                                                Sharedpreference.set_Jobname(applicationContext(), "jobcareer"+i, jobcareer[i])
-                                                                Sharedpreference.set_Jobcode(applicationContext(), "jobcode"+i, jobcode[i])
+                                                                Sharedpreference.set_Jobcareer(applicationContext(), "jobname" + i, jobname[i], "memberinfo")
+                                                                Sharedpreference.set_Jobname(applicationContext(), "jobcareer" + i, jobcareer[i], "memberinfo")
+                                                                Sharedpreference.set_Jobcode(applicationContext(), "jobcode" + i, jobcode[i], "memberinfo")
                                                                 j++;
                                                             } ///실행되다가
 
-                                                            Sharedpreference.set_numofjob(applicationContext(), "numofjob", j.toString())
+                                                            Sharedpreference.set_numofjob(applicationContext(), "numofjob", j.toString(), "memberinfo")
 
-                                                            Sharedpreference.set_email(applicationContext(), "worker_email", worker_email)
-                                                            Sharedpreference.set_Nickname(applicationContext(), "worker_name", worker_name)
-                                                            Sharedpreference.set_Password(applicationContext(), "worker_pw", password)
-                                                            Sharedpreference.set_Gender(applicationContext(), "worker_gender", worker_gender)
-                                                            Sharedpreference.set_Birth(applicationContext(), "worker_birth", worker_birth)
-                                                            Sharedpreference.set_Phonenum(applicationContext(), "worker_phonenum", worker_phonenum)
-                                                            Sharedpreference.set_Bankaccount(applicationContext(), "worker_bankaccount", worker_bankaccount)
-                                                            Sharedpreference.set_Bankname(applicationContext(), "worker_bankname", worker_bankname)
-                                                            Sharedpreference.set_introduce(applicationContext(), "worker_introduce", worker_introduce)
+                                                            Sharedpreference.set_email(applicationContext(), "worker_email", worker_email, "memberinfo")
+                                                            Sharedpreference.set_Nickname(applicationContext(), "worker_name", worker_name, "memberinfo")
+                                                            Sharedpreference.set_Password(applicationContext(), "worker_pw", password, "memberinfo")
+                                                            Sharedpreference.set_Gender(applicationContext(), "worker_gender", worker_gender, "memberinfo")
+                                                            Sharedpreference.set_Birth(applicationContext(), "worker_birth", worker_birth, "memberinfo")
+                                                            Sharedpreference.set_Phonenum(applicationContext(), "worker_phonenum", worker_phonenum, "memberinfo")
+                                                            Sharedpreference.set_Bankaccount(applicationContext(), "worker_bankaccount", worker_bankaccount, "memberinfo")
+                                                            Sharedpreference.set_Bankname(applicationContext(), "worker_bankname", worker_bankname, "memberinfo")
+                                                            Sharedpreference.set_introduce(applicationContext(), "worker_introduce", worker_introduce, "memberinfo")
 
-                                                            Sharedpreference.set_Hope_local_sido(applicationContext(), "local_sido", local_sido)
-                                                            Sharedpreference.set_Hope_local_sigugun(applicationContext(), "local_sigugun", local_sigugun)// 파일에 맵핑형식으로 저장파일에 맵핑형식으로 저장
+                                                            Sharedpreference.set_Hope_local_sido(applicationContext(), "local_sido", local_sido, "memberinfo")
+                                                            Sharedpreference.set_Hope_local_sigugun(applicationContext(), "local_sigugun", local_sigugun, "memberinfo")// 파일에 맵핑형식으로 저장파일에 맵핑형식으로 저장
 
                                                             intent() //
                                                             //Toast.makeText(FindPasswordInfoActivity.this, "등록된 "+worker_pw, Toast.LENGTH_SHORT).show();
                                                         } else {  // 회원이 존재하지 않는다면
-                                                            Sharedpreference.set_email(applicationContext(), "worker_email", user.kakaoAccount?.email) // 이메일만 갖고온 후 나머지 정보는 회원가입 절차에서 입력
+                                                            Sharedpreference.set_email(applicationContext(), "worker_email", user.kakaoAccount?.email, "memberinfo") // 이메일만 갖고온 후 나머지 정보는 회원가입 절차에서 입력
 
-                                                            signup(Sharedpreference.get_email(applicationContext, "worker_email"), "1") // 회원가입 진행
+                                                            signup(Sharedpreference.get_email(applicationContext, "worker_email", "memberinfo"), "1") // 회원가입 진행
                                                         }
                                                     } catch (e: Exception) {
                                                         Log.d("mytest", e.toString())
@@ -352,6 +367,7 @@ class MainActivity : Activity() {
         loginBtn.setOnClickListener {
             val worker_email: String = idET.getText().toString()
             val worker_pw: String = pwET.getText().toString()
+
             val rListener: Response.Listener<String?> = object : Response.Listener<String?> {
 
                 override fun onResponse(response: String?) {
@@ -383,26 +399,28 @@ class MainActivity : Activity() {
                                 jobname[i] = s.getString("jobname")
                                 jobcareer[i] = s.getString("jobcareer")
                                 jobcode[i]=s.getString("job_code")
-                                Sharedpreference.set_Jobcareer(applicationContext(), "jobname"+i, jobname[i])
-                                Sharedpreference.set_Jobname(applicationContext(), "jobcareer"+i, jobcareer[i])
-                                Sharedpreference.set_Jobcode(applicationContext(), "jobcode"+i, jobcode[i])
+                                Sharedpreference.set_Jobcareer(applicationContext(), "jobname" + i, jobname[i], "memberinfo")
+                                Sharedpreference.set_Jobname(applicationContext(), "jobcareer" + i, jobcareer[i], "memberinfo")
+                                Sharedpreference.set_Jobcode(applicationContext(), "jobcode" + i, jobcode[i], "memberinfo")
                                 j++;
-                            } ///실행되다가
+                            }
 
-                            Sharedpreference.set_numofjob(applicationContext(), "numofjob", j.toString())
 
-                            Sharedpreference.set_email(applicationContext(), "worker_email", worker_email)
-                            Sharedpreference.set_Nickname(applicationContext(), "worker_name", worker_name)
-                            Sharedpreference.set_Password(applicationContext(), "worker_pw", password)
-                            Sharedpreference.set_Gender(applicationContext(), "worker_gender", worker_gender)
-                            Sharedpreference.set_Birth(applicationContext(), "worker_birth", worker_birth)
-                            Sharedpreference.set_Phonenum(applicationContext(), "worker_phonenum", worker_phonenum)
-                            Sharedpreference.set_Bankaccount(applicationContext(), "worker_bankaccount", worker_bankaccount)
-                            Sharedpreference.set_Bankname(applicationContext(), "worker_bankname", worker_bankname)
-                            Sharedpreference.set_introduce(applicationContext(), "worker_introduce", worker_introduce)
 
-                            Sharedpreference.set_Hope_local_sido(applicationContext(), "local_sido", local_sido)
-                            Sharedpreference.set_Hope_local_sigugun(applicationContext(), "local_sigugun", local_sigugun)// 파일에 맵핑형식으로 저장
+                            Sharedpreference.set_numofjob(applicationContext(), "numofjob", j.toString(), "memberinfo")
+
+                            Sharedpreference.set_email(applicationContext(), "worker_email", worker_email, "memberinfo")
+                            Sharedpreference.set_Nickname(applicationContext(), "worker_name", worker_name, "memberinfo")
+                            Sharedpreference.set_Password(applicationContext(), "worker_pw", password, "memberinfo")
+                            Sharedpreference.set_Gender(applicationContext(), "worker_gender", worker_gender, "memberinfo")
+                            Sharedpreference.set_Birth(applicationContext(), "worker_birth", worker_birth, "memberinfo")
+                            Sharedpreference.set_Phonenum(applicationContext(), "worker_phonenum", worker_phonenum, "memberinfo")
+                            Sharedpreference.set_Bankaccount(applicationContext(), "worker_bankaccount", worker_bankaccount, "memberinfo")
+                            Sharedpreference.set_Bankname(applicationContext(), "worker_bankname", worker_bankname, "memberinfo")
+                            Sharedpreference.set_introduce(applicationContext(), "worker_introduce", worker_introduce, "memberinfo")
+
+                            Sharedpreference.set_Hope_local_sido(applicationContext(), "local_sido", local_sido, "memberinfo")
+                            Sharedpreference.set_Hope_local_sigugun(applicationContext(), "local_sigugun", local_sigugun, "memberinfo")// 파일에 맵핑형식으로 저장
 
                             intent() //
                             //Toast.makeText(FindPasswordInfoActivity.this, "등록된 "+worker_pw, Toast.LENGTH_SHORT).show();
@@ -431,7 +449,19 @@ class MainActivity : Activity() {
         }
     }
 
+    override fun onBackPressed() {
+        mainBackPressCloseHandler.onBackPressed()
+    }
+
+    fun logout(){
+        UserApiClient.instance.logout { error ->
+            if (error != null) {
+                Toast.makeText(this, "로그아웃 실패 $error", Toast.LENGTH_SHORT).show()
+            }else {
+                Toast.makeText(this, "로그아웃 성공", Toast.LENGTH_SHORT).show()
+            }
+
+        }
+    }
 
 }
-
-

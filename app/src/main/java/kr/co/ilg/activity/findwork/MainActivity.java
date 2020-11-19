@@ -21,6 +21,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Spinner;
@@ -77,7 +78,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     int i, j = 0, n = 0, a, p = 0;
     int q = 0, w = 0;
     TextView sltTV1;
-    Button resetjobpost;
+    TextView resetjobpost;
     Response.Listener rListener;
     int y, m , d;
     final String[][] arrayList1 = {{}, {"종로구", "중구", "용산구", "성동구", "광진구", "동대문구", "중랑구", "성북구", "강북구", "도봉구", "노원구", "은평구", "서대문구", "마포구", "양천구", "강서구", "구로구", "금천구", "영등포구", "동작구", "관악구", "서초구", "강남구", "송파구", "강동구"}
@@ -99,40 +100,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             , {"제주시", "서귀포시"}
     };
     Date date=null,getdate=null;
+    MainBackPressCloseHandler mainBackPressCloseHandler;
 //    Fragment1 fragment1;
 //    Fragment2 fragment2;
 //    Fragment3 fragment3;
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        //return super.onCreateOptionsMenu(menu);
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.menu_maintop, menu);
-        SearchView searchView = (SearchView) menu.findItem(R.id.search).getActionView();
-        searchView.setMaxWidth(Integer.MAX_VALUE);
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                Log.d("qqqqqqqqqqq",query);
-//                SelectJobPosting searchView_req = new SelectJobPosting("0",query, rListener);  // Request 처리 클래스
-//                searchView_req.setRetryPolicy(new DefaultRetryPolicy(
-//                        DefaultRetryPolicy.DEFAULT_TIMEOUT_MS,
-//                        0,
-//                        DefaultRetryPolicy.DEFAULT_BACKOFF_MULT)); ////////값띄울때 충돌방지용
-//
-//                RequestQueue queue = Volley.newRequestQueue(MainActivity.this);  // 데이터 전송에 사용할 Volley의 큐 객체 생성
-//                queue.add(searchView_req);
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                Log.d("qqqqqqqqqnewtext", newText);
-                return false;
-            }
-        });
-        return true;
-    }
 
 
     @Override
@@ -146,7 +117,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             case R.id.map:
                 Intent intent = new Intent(MainActivity.this, WorkMapActivity.class);
-                intent.putExtra("mapAddress","0");
                 startActivity(intent);
                 return true;
 
@@ -161,13 +131,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mContext = this;
-        local_sido = Sharedpreference.get_Hope_local_sido(mContext, "local_sido");
-        local_sigugun = Sharedpreference.get_Hope_local_sigugun(mContext, "local_sigugun");
+        local_sido = Sharedpreference.get_Hope_local_sido(mContext, "local_sido","memberinfo");
+        local_sigugun = Sharedpreference.get_Hope_local_sigugun(mContext, "local_sigugun","memberinfo");
         Calendar cal = Calendar.getInstance();
         y = cal.get(Calendar.YEAR);
         m = cal.get(Calendar.MONTH);
         d = cal.get(Calendar.DAY_OF_MONTH);
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        mainBackPressCloseHandler =  new MainBackPressCloseHandler(this);
 
 
 //        item1 = (MenuItem) findViewById(R.id.tab1);
@@ -180,12 +151,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         //     getSupportActionBar().setHomeAsUpIndicator(R.drawable.search_white_24dp);
 
-        String r = Sharedpreference.get_numofjob(mContext, "numofjob");
+        String r = Sharedpreference.get_numofjob(mContext, "numofjob","memberinfo");
+        Log.d("ttttttttt",r);
         int numofjob = Integer.parseInt(r);
         resetjobpost = findViewById(R.id.resetjobpost);
 
         for (int i = numofjob - 1; i >= 0; i--) {
-            job_code[i] = Integer.parseInt(Sharedpreference.get_Jobcode(mContext, "jobcode" + i));
+            job_code[i] = Integer.parseInt(Sharedpreference.get_Jobcode(mContext, "jobcode" + i,"memberinfo"));
         }
 
 
@@ -203,7 +175,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ListView listview1 = dialogview.findViewById(R.id.listview1);
         TextView localsetting = findViewById(R.id.localsetting);
         TextView jobsetting = findViewById(R.id.jobsetting);
-        localsetting.setText(Sharedpreference.get_Hope_local_sido(mContext, "local_sido") + " " + Sharedpreference.get_Hope_local_sigugun(mContext, "local_sigugun"));
+        localsetting.setText(Sharedpreference.get_Hope_local_sido(mContext, "local_sido","memberinfo") + " " + Sharedpreference.get_Hope_local_sigugun(mContext, "local_sigugun","memberinfo"));
         TextView sltTV = dialogview.findViewById(R.id.sltTV);
         final String[] arrayList = {"전체", "서울", "부산", "대구", "인천", "대전", "광주", "울산", "세종", "경기",
                 "강원", "충북", "충남", "전북", "전남", "경북", "경남", "제주"}; // 첫번째 지역선택에 들어갈 배열
@@ -274,7 +246,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
         String text1 = "";
         for (int i = 0; i < numofjob; i++) {
-            text1 = text1 + " " + Sharedpreference.get_Jobname(mContext, "jobname" + i);
+            text1 = text1 + " " + Sharedpreference.get_Jobname(mContext, "jobname" + i,"memberinfo");
         }
         // sltTV1.setText(Sharedpreference.get_Jobname(mContext,"jobname0")+" "+ Sharedpreference.get_Jobname(mContext,"jobname1")+" "+Sharedpreference.get_Jobname(mContext,"jobname2"));
         jobsetting.setText(text1);
@@ -334,7 +306,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         String worker_email;
         final int[] numofpost = new int[1];
-        worker_email = Sharedpreference.get_email(mContext, "worker_email");
+        worker_email = Sharedpreference.get_email(mContext, "worker_email","memberinfo");
         Log.d("asdfasdfasdf", worker_email);
 
 
@@ -410,7 +382,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         };
 
         int[] k = new int[]{0, 0, 0};
-        MainRequest mainRequest = new MainRequest(worker_email, "1", "1", k[0], k[0], k[0], rListener);  // Request 처리 클래스
+        MainRequest mainRequest = new MainRequest(worker_email, "1", "1", k[0], k[1], k[2],"0", rListener);  // Request 처리 클래스
 
         RequestQueue queue = Volley.newRequestQueue(MainActivity.this);  // 데이터 전송에 사용할 Volley의 큐 객체 생성
         queue.add(mainRequest);  // Volley로 구현된 큐에 ValidateRequest 객체를 넣어둠으로써 실제로 서버 연동 발생
@@ -419,7 +391,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         resetjobpost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MainRequest mainRequest = new MainRequest("0", local_sido, local_sigugun, job_code[0], job_code[1], job_code[2], rListener);  // Request 처리 클래스
+                MainRequest mainRequest = new MainRequest("0", local_sido, local_sigugun, job_code[0], job_code[1], job_code[2],"0", rListener);  // Request 처리 클래스
                 Log.d("asdfasdfasdfasdf", local_sido + " " + local_sigugun + " " + job_code[0] + " " + job_code[1] + " " + job_code[2]);
                 mainRequest.setRetryPolicy(new DefaultRetryPolicy(
                         DefaultRetryPolicy.DEFAULT_TIMEOUT_MS,
@@ -461,6 +433,49 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        //return super.onCreateOptionsMenu(menu);
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu_maintop, menu);
+        SearchView searchView = (SearchView) menu.findItem(R.id.search).getActionView();
+        searchView.setMaxWidth(Integer.MAX_VALUE);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                Log.d("qqqqqqqqqqq",query);
+                MainRequest searchView_req = new MainRequest("0", "0", "0",0,0,0,query, rListener);  // Request 처리 클래스
+                searchView_req.setRetryPolicy(new DefaultRetryPolicy(
+                        DefaultRetryPolicy.DEFAULT_TIMEOUT_MS,
+                        0,
+                        DefaultRetryPolicy.DEFAULT_BACKOFF_MULT)); ////////값띄울때 충돌방지용
+
+                RequestQueue queue = Volley.newRequestQueue(MainActivity.this);  // 데이터 전송에 사용할 Volley의 큐 객체 생성
+                queue.add(searchView_req);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                Log.d("qqqqqqqqqnewtext", newText);
+                MainRequest searchView_req = new MainRequest("0", "0", "0",0,0,0,newText, rListener);  // Request 처리 클래스
+                searchView_req.setRetryPolicy(new DefaultRetryPolicy(
+                        DefaultRetryPolicy.DEFAULT_TIMEOUT_MS,
+                        0,
+                        DefaultRetryPolicy.DEFAULT_BACKOFF_MULT)); ////////값띄울때 충돌방지용
+
+                RequestQueue queue = Volley.newRequestQueue(MainActivity.this);  // 데이터 전송에 사용할 Volley의 큐 객체 생성
+                queue.add(searchView_req);
+                return false;
+            }
+        });
+        return true;
+    }
+    @Override
+    public void onBackPressed() {
+        mainBackPressCloseHandler.onBackPressed();
+    }
+
 
     @Override
     public void onClick(View v) {

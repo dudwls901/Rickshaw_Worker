@@ -155,13 +155,11 @@ public class AccountAddActivity extends AppCompatActivity {
                         RequestQueue queue1 = Volley.newRequestQueue(AccountAddActivity.this);
                         queue1.add(hopelocalInsert);
                     }
-                    HopeJobDBRequest hopeJobInsert = null;
-                    RequestQueue queue2;
                     for (int i = careerarray.length - 1, j = 0; i >= 0; i--) {
 
                         Log.d("mytestjobcode", "" + job_code[i] + "," + careerarray[j]);
-                        hopeJobInsert = new HopeJobDBRequest("HopeJobInsert", String.valueOf(job_code.length), worker_email, String.valueOf(job_code[i]), careerarray[j], responseListener);
-                        queue2 = Volley.newRequestQueue(AccountAddActivity.this);
+                        HopeJobDBRequest hopeJobInsert = new HopeJobDBRequest("HopeJobInsert",worker_email, String.valueOf(job_code[i]), careerarray[j], responseListener);
+                        RequestQueue queue2 = Volley.newRequestQueue(AccountAddActivity.this);
                         queue2.add(hopeJobInsert);
                         j++;
                     }
@@ -171,7 +169,7 @@ public class AccountAddActivity extends AppCompatActivity {
 
                     startActivity(intent);
                 } else {  // 계좌 수정
-                    String email = Sharedpreference.get_email(getApplicationContext(), "worker_email");
+                    String email = Sharedpreference.get_email(getApplicationContext(), "worker_email","memberinfo");
                     Response.Listener rListener = new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
@@ -180,9 +178,10 @@ public class AccountAddActivity extends AppCompatActivity {
                                 JSONObject jResponse = new JSONObject(response.substring(response.indexOf("{"), response.lastIndexOf("}") + 1));
                                 boolean updateSuccess3 = jResponse.getBoolean("updateSuccess3");
                                 Intent updateIntent = new Intent(AccountAddActivity.this, AccountManageActivity.class);
+                                updateIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 if (updateSuccess3) {
-                                    Sharedpreference.set_Bankaccount(getApplicationContext(), "worker_bankaccount", worker_bankaccount);
-                                    Sharedpreference.set_Bankname(getApplicationContext(), "worker_bankname", worker_bankname);
+                                    Sharedpreference.set_Bankaccount(getApplicationContext(), "worker_bankaccount", worker_bankaccount,"memberinfo");
+                                    Sharedpreference.set_Bankname(getApplicationContext(), "worker_bankname", worker_bankname,"memberinfo");
                                     Toast.makeText(AccountAddActivity.this, "수정 완료되었습니다", Toast.LENGTH_SHORT).show();
                                 } else
                                     Toast.makeText(AccountAddActivity.this, "수정 실패", Toast.LENGTH_SHORT).show();
@@ -218,9 +217,9 @@ public class AccountAddActivity extends AppCompatActivity {
                         try {
 
                             //           JSONObject jsonResponse = new JSONObject(response);
-                            JSONObject jsonResponse = new JSONObject(response.substring(response.indexOf("{"), response.lastIndexOf("}") + 1));
+                            //JSONObject jsonResponse = new JSONObject(response.substring(response.indexOf("{"), response.lastIndexOf("}") + 1));
                             Log.d("mytesstt", response);
-                            Log.d("mytestlocal_code", jsonResponse.getString("local_code"));
+                            //Log.d("mytestlocal_code", jsonResponse.getString("local_code"));
 //                                Log.d("mytestjobcoderesponse",jsonResponse.getString("job_codest"));
 //                                Log.d("mytesthjcareerresponse",jsonResponse.getString("hj_career"));
                         } catch (Exception e) {
@@ -229,31 +228,21 @@ public class AccountAddActivity extends AppCompatActivity {
                         }
                     }
                 };
-                MemberDBRequest workerInsert = new MemberDBRequest("WorkerInsert", worker_email, worker_pw, worker_name, worker_gender, worker_birth, worker_phonenum, worker_certicipate, "", "", responseListener);
-                RequestQueue queue = Volley.newRequestQueue(AccountAddActivity.this);
-                //queue.add(workerInsert);
-                //php쿼리 호출 순서를 정해줌 queue.add(workerInsert)실행되면 다음 거 실행하게
-                Request<String> a = queue.add(workerInsert);
-                if (a != null) {
-                    MemberDBRequest hopelocalInsert = new MemberDBRequest("HopeLocalInsert", worker_email, hope_local_sido, hope_local_sigugun, responseListener);
-                    RequestQueue queue1 = Volley.newRequestQueue(AccountAddActivity.this);
-                    queue1.add(hopelocalInsert);
+                if(careerarray.length == 3){
+                    MemberDBRequest workerInsert = new MemberDBRequest("WorkerInsert", worker_email, worker_pw, worker_name, worker_gender, worker_birth, worker_phonenum, worker_certicipate, "", "",hope_local_sido, hope_local_sigugun,String.valueOf(job_code[0]), careerarray[0],String.valueOf(job_code[1]), careerarray[1],String.valueOf(job_code[2]), careerarray[2], careerarray.length-1, responseListener);
+                    RequestQueue queue = Volley.newRequestQueue(AccountAddActivity.this);
+                    queue.add(workerInsert);
                 }
-                HopeJobDBRequest hopeJobInsert = null;
-                RequestQueue queue2;
-                for (int i = careerarray.length - 1, j = 0; i >= 0; i--) {
-
-                    Log.d("mytestjobcode", "" + job_code[i] + "," + careerarray[j]);
-                    hopeJobInsert = new HopeJobDBRequest("HopeJobInsert", String.valueOf(job_code.length), worker_email, String.valueOf(job_code[i]), careerarray[j], responseListener);
-                    queue2 = Volley.newRequestQueue(AccountAddActivity.this);
-                    queue2.add(hopeJobInsert);
-                    j++;
+                else if(careerarray.length == 2) {
+                    MemberDBRequest workerInsert = new MemberDBRequest("WorkerInsert", worker_email, worker_pw, worker_name, worker_gender, worker_birth, worker_phonenum, worker_certicipate, "", "",hope_local_sido, hope_local_sigugun,String.valueOf(job_code[0]), careerarray[0],String.valueOf(job_code[1]), careerarray[1],"", "",careerarray.length-1, responseListener);
+                    RequestQueue queue = Volley.newRequestQueue(AccountAddActivity.this);
+                    queue.add(workerInsert);
                 }
-                //시도,구군 SELECT LOCAL 해서 CODE가져와서 그 코드를 HOPELOCAL에 넣기
-
-
-                //hopejobinsert
-
+                if(careerarray.length == 1) {
+                    MemberDBRequest workerInsert = new MemberDBRequest("WorkerInsert", worker_email, worker_pw, worker_name, worker_gender, worker_birth, worker_phonenum, worker_certicipate, "", "",hope_local_sido, hope_local_sigugun,String.valueOf(job_code[0]), careerarray[0],"", "","", "",careerarray.length-1, responseListener);
+                    RequestQueue queue = Volley.newRequestQueue(AccountAddActivity.this);
+                    queue.add(workerInsert);
+                }
 
                 startActivity(intent);
             }

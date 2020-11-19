@@ -52,7 +52,7 @@ public class MyInfomanageActivity extends Activity {
         setContentView(R.layout.myinfomanage);
 
         mContext = this;
-        String w_email = Sharedpreference.get_email(mContext, "worker_email");
+        String w_email = Sharedpreference.get_email(mContext, "worker_email","memberinfo");
         TextView myname = findViewById(R.id.myname);
         TextView age = findViewById(R.id.age);
         TextView phonenum = findViewById(R.id.phonenum);
@@ -89,8 +89,8 @@ public class MyInfomanageActivity extends Activity {
                                     JSONObject jResponse = new JSONObject(response.substring(response.indexOf("{"), response.lastIndexOf("}") + 1));
                                     boolean reponse = jResponse.getBoolean("a");
                                     if (reponse) {
-                                        Sharedpreference.set_Phonenum(mContext, "worker_phonenum", worker_phonenum);
-                                        Sharedpreference.set_introduce(mContext, "worker_introduce", worker_introduce);
+                                        Sharedpreference.set_Phonenum(mContext, "worker_phonenum", worker_phonenum,"memberinfo");
+                                        Sharedpreference.set_introduce(mContext, "worker_introduce", worker_introduce,"memberinfo");
                                         phonenum.setText(worker_phonenum);
                                         introduce.setText(worker_introduce);
                                         Toast.makeText(MyInfomanageActivity.this, "수정 완료되었습니다", Toast.LENGTH_SHORT).show();
@@ -118,6 +118,7 @@ public class MyInfomanageActivity extends Activity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), kr.co.ilg.activity.mypage.LocalSelectActivity.class);
                 intent.putExtra("isUpdate", 1);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 //TODO
                 // 수정 필요할시 false 값과 함께 intent
@@ -132,6 +133,7 @@ public class MyInfomanageActivity extends Activity {
                 Intent intent = new Intent(getApplicationContext(), kr.co.ilg.activity.mypage.JobSelectActivity.class);
                 intent.putExtra("isUpdate", 1);
                 intent.putExtra("exjobnum", hopeJCNum);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
 
             }
@@ -149,7 +151,7 @@ public class MyInfomanageActivity extends Activity {
                         hopeJCNum = jResponse.getInt("hopeJCNum");
                         for (int i = 0; i < hopeJCNum; i++) {
                             Log.d("check hopeasdfasdf",String.valueOf(hopeJCNum));
-                            hopeJobCareerLVItems.add(new HopeJobCareerLVItem(Sharedpreference.get_Jobname(mContext, "jobname" + i), Sharedpreference.get_Jobcareer(mContext, "jobcareer" + i)));
+                            hopeJobCareerLVItems.add(new HopeJobCareerLVItem(Sharedpreference.get_Jobname(mContext, "jobname" + i,"memberinfo"), Sharedpreference.get_Jobcareer(mContext, "jobcareer" + i,"memberinfo")));
                         }
                     }
                     HopeJobCareerLVAdapter hopeJobCareerLVAdapter = new HopeJobCareerLVAdapter(getApplicationContext(), hopeJobCareerLVItems);
@@ -166,11 +168,11 @@ public class MyInfomanageActivity extends Activity {
         queue.add(updateinfoRequest);  // Volley로 구현된 큐에 ValidateRequest 객체를 넣어둠으로써 실제로 서버 연동 발생
 
 
-        myname.setText(Sharedpreference.get_Nickname(mContext, "worker_name"));
-        age.setText(Sharedpreference.get_Birth(mContext, "worker_birth"));
-        phonenum.setText(Sharedpreference.get_Phonenum(mContext, "worker_phonenum"));
-        email.setText(Sharedpreference.get_email(mContext, "worker_email"));
-        introduce.setText(Sharedpreference.get_introduce(mContext, "worker_introduce"));
+        myname.setText(Sharedpreference.get_Nickname(mContext, "worker_name","memberinfo"));
+        age.setText(Sharedpreference.get_Birth(mContext, "worker_birth","memberinfo"));
+        phonenum.setText(Sharedpreference.get_Phonenum(mContext, "worker_phonenum","memberinfo"));
+        email.setText(Sharedpreference.get_email(mContext, "worker_email","memberinfo"));
+        introduce.setText(Sharedpreference.get_introduce(mContext, "worker_introduce","memberinfo"));
 
 
 
@@ -178,6 +180,6 @@ public class MyInfomanageActivity extends Activity {
                 +Sharedpreference.get_Jobname(mContext,"jobname1") + " " + Sharedpreference.get_Jobcareer(mContext,"jobcareer1")+"\n"
                 +Sharedpreference.get_Jobname(mContext,"jobname2") + " " + Sharedpreference.get_Jobcareer(mContext,"jobcareer2"));*/
 
-        hope_local.setText(Sharedpreference.get_Hope_local_sido(mContext, "local_sido") + " " + Sharedpreference.get_Hope_local_sigugun(mContext, "local_sigugun"));
+        hope_local.setText(Sharedpreference.get_Hope_local_sido(mContext, "local_sido","memberinfo") + " " + Sharedpreference.get_Hope_local_sigugun(mContext, "local_sigugun","memberinfo"));
     }
 }

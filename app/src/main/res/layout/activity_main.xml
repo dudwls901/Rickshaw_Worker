@@ -52,7 +52,7 @@
             android:gravity="center"
             android:text="a"
             android:textAlignment="center"
-            android:textSize="12sp"
+            android:textSize="11sp"
             android:padding="10dp"
             android:id="@+id/localsetting"
             android:background="@drawable/mainbutton"
@@ -80,7 +80,7 @@
             app:layout_constraintLeft_toRightOf="@+id/jobTV"
             android:gravity="center"
             android:text="a"
-            android:textSize="12sp"
+            android:textSize="11sp"
             android:padding="10dp"
             android:layout_marginVertical="5dp"
             android:textAlignment="center"
@@ -89,7 +89,7 @@
             android:layout_gravity="center"
             android:layout_marginLeft="5dp"/>
 
-        <Button
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"

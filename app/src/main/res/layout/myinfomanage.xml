@@ -22,13 +22,6 @@
             app:layout_constraintLeft_toRightOf="@id/guideline"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="수정"
-            android:textSize="14sp"
-            app:layout_constraintLeft_toRightOf="@id/profil"
-            app:layout_constraintBottom_toTopOf="@id/guideline4"/>
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline"

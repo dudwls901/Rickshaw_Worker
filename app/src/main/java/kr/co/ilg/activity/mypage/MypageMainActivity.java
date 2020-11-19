@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import kr.co.ilg.activity.findwork.MainActivity;
+import kr.co.ilg.activity.findwork.MainBackPressCloseHandler;
 import kr.co.ilg.activity.findwork.MyFieldActivity;
 import kr.co.ilg.activity.findwork.Sharedpreference;
 
@@ -34,6 +35,7 @@ public class MypageMainActivity extends AppCompatActivity implements View.OnClic
     int[] buttonsid = {R.id.myinform, R.id.accountmanage, R.id.reviewmanage};
     TextView membernickname;
     private Context mContext;
+    MainBackPressCloseHandler mainBackPressCloseHandler;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -41,6 +43,7 @@ public class MypageMainActivity extends AppCompatActivity implements View.OnClic
         setContentView(R.layout.mypage_main);
 
         mContext = this;
+        mainBackPressCloseHandler =  new MainBackPressCloseHandler(this);
 
         for(int i=0; i<3; i++){
             buttons[i] = (Button) findViewById(buttonsid[i]);
@@ -48,13 +51,14 @@ public class MypageMainActivity extends AppCompatActivity implements View.OnClic
         }
         membernickname = findViewById(R.id.membernickname);
 
-        membernickname.setText(Sharedpreference.get_Nickname(mContext, "worker_name")); // 상단의 이름 설정
+        membernickname.setText(Sharedpreference.get_Nickname(mContext, "worker_name","memberinfo")); // 상단의 이름 설정
 
 
         final ListView listview = (ListView) findViewById(R.id.listview);
         List<String> list = new ArrayList<>();
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, list);
         listview.setAdapter(adapter);
+
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
@@ -67,8 +71,12 @@ public class MypageMainActivity extends AppCompatActivity implements View.OnClic
                         startActivity(intent); break;
                     case 2 : intent = new Intent(MypageMainActivity.this, ilgIntrodutionActivity.class);
                         startActivity(intent); break;
-                    case 3 : intent = new Intent(MypageMainActivity.this, com.example.capstone.MainActivity.class);
-                        startActivity(intent); break;
+                    case 3 :
+                            intent = new Intent(MypageMainActivity.this, com.example.capstone.MainActivity.class);
+                            Sharedpreference.clear(mContext,"autologin");
+                            Sharedpreference.set_state(mContext,"switch1",false,"state");
+                            startActivity(intent); break;
+
                 }
             }
         });
@@ -119,12 +127,19 @@ public class MypageMainActivity extends AppCompatActivity implements View.OnClic
 
         switch (v.getId()){
             case R.id.myinform : intent = new Intent(getApplicationContext(),MyInfomanageActivity.class);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                         startActivity(intent);break;
             case R.id.accountmanage : intent = new Intent(getApplicationContext(),AccountManageActivity.class);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                         startActivity(intent);break;
             case R.id.reviewmanage : intent = new Intent(getApplicationContext(),ReviewManageActivity.class);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                         startActivity(intent);break;
         }
 
+    }
+    @Override
+    public void onBackPressed() {
+        mainBackPressCloseHandler.onBackPressed();
     }
 }
