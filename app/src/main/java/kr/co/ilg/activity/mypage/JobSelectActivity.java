@@ -20,10 +20,13 @@ import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
 import com.example.capstone.R;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.w3c.dom.Text;
 
 import kr.co.ilg.activity.findwork.Sharedpreference;
+import kr.co.ilg.activity.login.LoginRequest;
+import kr.co.ilg.activity.login.SplashActivity;
 
 public class JobSelectActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -40,6 +43,8 @@ public class JobSelectActivity extends AppCompatActivity implements View.OnClick
     int isUpdate;  // 1 > 수정  0 > 회원가입
     int i, j = 0;
     int jobnum;
+    boolean k=false;
+    String[] jobnames = new String[16];
 
     String worker_email, worker_pw, worker_name, worker_gender, worker_birth, worker_phonenum, hope_local_sido, hope_local_sigugun, worker_certicipate;
 
@@ -65,11 +70,42 @@ public class JobSelectActivity extends AppCompatActivity implements View.OnClick
 
         Toast.makeText(getApplicationContext(), "어디서 왔나~ " + isUpdate, Toast.LENGTH_SHORT).show();
 
-        //certicipate 추가
         for (i = 1; i < 17; i++) {
+            Log.d("kkk", "왜 이것부터하니");
             job[i] = findViewById(jobid[i]);
             job[i].setOnClickListener(this);  // 직업버튼 인플레이션
         }
+
+        Response.Listener aListener = new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jResponse = new JSONObject(response.substring(response.indexOf("{"), response.lastIndexOf("}") + 1));
+
+                    JSONArray a = jResponse.getJSONArray("response");
+                    Log.d("ttttttttttttttt", String.valueOf(a.length()));
+                    for(int i=0; i<a.length(); i++){
+                        JSONObject item=  a.getJSONObject(i);
+                        jobnames[i] = item.getString("jobname");
+                        job[i+1].setText(jobnames[i]);
+                        Log.d("asdf",jobnames[i]);
+                        k=true;
+
+                    }
+                } catch (Exception e) {
+                    Log.d("mytest1111111", e.toString()); // 오류 출력
+                }
+
+            }
+        };
+
+
+
+        GetJobsRequest lRequest = new GetJobsRequest(aListener); // Request 처리 클래스
+        RequestQueue queue1 = Volley.newRequestQueue(JobSelectActivity.this); // 데이터 전송에 사용할 Volley의 큐 객체 생
+        queue1.add(lRequest);
+
+
         sltTV = (TextView) findViewById(R.id.sltTV);
 
         okBtn = findViewById(R.id.okBtn); // 확인버튼

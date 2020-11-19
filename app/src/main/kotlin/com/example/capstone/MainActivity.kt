@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
+import android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP
 import android.os.Bundle
 import android.util.Log
 import android.widget.*
@@ -19,6 +20,7 @@ import kr.co.ilg.activity.findwork.Sharedpreference
 import kr.co.ilg.activity.login.FindPasswordInfoActivity
 import kr.co.ilg.activity.login.SignupEmailActivity
 import kr.co.ilg.activity.login.SignupUserInfoActivity
+import kr.co.ilg.activity.login.SplashActivity
 import org.json.JSONObject
 
 
@@ -40,7 +42,6 @@ class MainActivity : Activity() {
     }
 
     lateinit var myJSON: String;
-    var auto:Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,77 +72,6 @@ class MainActivity : Activity() {
             startActivity(intent) // 일반로그인 정보갖고오기
 
         }
-
-        if(autoid != null){
-            val aListener: Response.Listener<String?> = object : Response.Listener<String?> {
-
-            override fun onResponse(response: String?) {
-                try {
-                    val jResponse = JSONObject(response!!.substring(response!!.indexOf("{"), response!!.lastIndexOf("}") + 1))
-                    var jobname = Array<String>(3) { "" }
-                    var jobcareer = Array<String>(3) { "" }
-                    var jobcode = Array<String>(3) { "" }
-                    var a = jResponse.getJSONObject("response")
-                    val isExistWorker = a.getBoolean("tryLogin")
-                    println(isExistWorker)
-                    if (isExistWorker) {  // 회원이 존재하면 로그인된 화면으로 넘어감
-                        var worker_email = a.getString("worker_email")
-                        var worker_name = a.getString("worker_name")
-                        var password = a.getString("worker_pw")
-                        var worker_gender = a.getString("worker_gender")
-                        var worker_birth = a.getString("worker_birth")
-                        var worker_phonenum = a.getString("worker_phonenum")
-                        var worker_bankaccount = a.getString("worker_bankaccount")
-                        var worker_bankname = a.getString("worker_bankname")
-                        var worker_introduce = a.getString("worker_introduce") ///////  여기까지 값들어
-                        var local_sido = a.getString("local_sido")
-                        var local_sigugun = a.getString("local_sigugun")
-                        var j=0
-
-                        var k = arrayOf("0", "1", "2")
-                        for (i in 0 until a.length()-12) {
-                            var s = a.getJSONObject(k[i])
-                            jobname[i] = s.getString("jobname")
-                            jobcareer[i] = s.getString("jobcareer")
-                            jobcode[i]=s.getString("job_code")
-                            Sharedpreference.set_Jobcareer(applicationContext(), "jobname" + i, jobname[i], "memberinfo")
-                            Sharedpreference.set_Jobname(applicationContext(), "jobcareer" + i, jobcareer[i], "memberinfo")
-                            Sharedpreference.set_Jobcode(applicationContext(), "jobcode" + i, jobcode[i], "memberinfo")
-                            j++;
-                        } ///실행되다가
-
-                        Sharedpreference.set_numofjob(applicationContext(), "numofjob", j.toString(), "memberinfo")
-
-                        Sharedpreference.set_email(applicationContext(), "worker_email", worker_email, "memberinfo")
-                        Sharedpreference.set_Nickname(applicationContext(), "worker_name", worker_name, "memberinfo")
-                        Sharedpreference.set_Password(applicationContext(), "worker_pw", password, "memberinfo")
-                        Sharedpreference.set_Gender(applicationContext(), "worker_gender", worker_gender, "memberinfo")
-                        Sharedpreference.set_Birth(applicationContext(), "worker_birth", worker_birth, "memberinfo")
-                        Sharedpreference.set_Phonenum(applicationContext(), "worker_phonenum", worker_phonenum, "memberinfo")
-                        Sharedpreference.set_Bankaccount(applicationContext(), "worker_bankaccount", worker_bankaccount, "memberinfo")
-                        Sharedpreference.set_Bankname(applicationContext(), "worker_bankname", worker_bankname, "memberinfo")
-                        Sharedpreference.set_introduce(applicationContext(), "worker_introduce", worker_introduce, "memberinfo")
-
-                        Sharedpreference.set_Hope_local_sido(applicationContext(), "local_sido", local_sido, "memberinfo")
-                        Sharedpreference.set_Hope_local_sigugun(applicationContext(), "local_sigugun", local_sigugun, "memberinfo")// 파일에 맵핑형식으로 저장
-
-                        intent() //
-                        //Toast.makeText(FindPasswordInfoActivity.this, "등록된 "+worker_pw, Toast.LENGTH_SHORT).show();
-                    } else {  // 회원이 존재하지 않는다면
-                        Toast.makeText(this@MainActivity, "로그인실패", Toast.LENGTH_SHORT).show();
-                    }
-                } catch (e: Exception) {
-                    Log.d("mytest", e.toString()) // 오류 출력
-                }
-
-            }
-            }
-            val lRequest = kr.co.ilg.activity.login.LoginRequest(autoid, autopw, aListener) // Request 처리 클래스
-            val queue = Volley.newRequestQueue(this) // 데이터 전송에 사용할 Volley의 큐 객체 생성
-
-            queue.add(lRequest) // Volley로 구현된 큐에 ValidateRequest 객체를 넣어둠으로써 실제로 서버 연동 발생
-        }
-
 
         fun signup(email: String, pw: String) {
             var intent1 = Intent(application, SignupUserInfoActivity::class.java)
@@ -437,9 +367,7 @@ class MainActivity : Activity() {
         loginBtn.setOnClickListener {
             val worker_email: String = idET.getText().toString()
             val worker_pw: String = pwET.getText().toString()
-            checkbox.setOnCheckedChangeListener{ buttonView: CompoundButton?, isChecked: Boolean ->
-                auto = isChecked
-            }
+
             val rListener: Response.Listener<String?> = object : Response.Listener<String?> {
 
                 override fun onResponse(response: String?) {
@@ -475,20 +403,7 @@ class MainActivity : Activity() {
                                 Sharedpreference.set_Jobname(applicationContext(), "jobcareer" + i, jobcareer[i], "memberinfo")
                                 Sharedpreference.set_Jobcode(applicationContext(), "jobcode" + i, jobcode[i], "memberinfo")
                                 j++;
-                            } ///실행되다가
-                            /*checkbox.setOnCheckedChangeListener(object : CompoundButton.OnCheckedChangeListener{
-                                override fun onCheckedChanged(buttonView: CompoundButton?, isChecked: Boolean) {
-                                    if (isChecked) {
-                                        SharedpreferenceAutoLogin.set_id(applicationContext(), "worker_email", worker_email)
-                                        SharedpreferenceAutoLogin.set_pw(applicationContext(), "worker_pw", password)
-                                    }
-                                }
-                            })*/
-                            if(auto==true) {
-                                Sharedpreference.set_id(applicationContext(), "worker_email", worker_email, "autologin")
-                                Sharedpreference.set_pw(applicationContext(), "worker_pw", password, "autologin")
                             }
-                            else Sharedpreference.clear(applicationContext(), "autologin")
 
 
 
@@ -538,9 +453,15 @@ class MainActivity : Activity() {
         mainBackPressCloseHandler.onBackPressed()
     }
 
+    fun logout(){
+        UserApiClient.instance.logout { error ->
+            if (error != null) {
+                Toast.makeText(this, "로그아웃 실패 $error", Toast.LENGTH_SHORT).show()
+            }else {
+                Toast.makeText(this, "로그아웃 성공", Toast.LENGTH_SHORT).show()
+            }
 
-
+        }
+    }
 
 }
-
-

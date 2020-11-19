@@ -29,6 +29,18 @@ public class Sharedpreference {
         editor.commit();
 
     }
+    public static void set_state(Context context, String key, Boolean value, String name) {
+        SharedPreferences prefs = getPreferences(name,context);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putBoolean(key, value);
+        editor.commit();
+
+    }
+    public static Boolean get_state(Context context, String key, String name) {
+        SharedPreferences prefs = getPreferences(name,context);
+        Boolean value = prefs.getBoolean(key, false);
+        return value;
+    }
     public static void set_id(Context context, String key, String value, String name) {
         SharedPreferences prefs = getPreferences(name,context);
         SharedPreferences.Editor editor = prefs.edit();

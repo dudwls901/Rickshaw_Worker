@@ -152,6 +152,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //     getSupportActionBar().setHomeAsUpIndicator(R.drawable.search_white_24dp);
 
         String r = Sharedpreference.get_numofjob(mContext, "numofjob","memberinfo");
+        Log.d("ttttttttt",r);
         int numofjob = Integer.parseInt(r);
         resetjobpost = findViewById(R.id.resetjobpost);
 

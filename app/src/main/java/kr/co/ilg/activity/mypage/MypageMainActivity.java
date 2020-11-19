@@ -58,6 +58,7 @@ public class MypageMainActivity extends AppCompatActivity implements View.OnClic
         List<String> list = new ArrayList<>();
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, list);
         listview.setAdapter(adapter);
+
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
@@ -70,9 +71,12 @@ public class MypageMainActivity extends AppCompatActivity implements View.OnClic
                         startActivity(intent); break;
                     case 2 : intent = new Intent(MypageMainActivity.this, ilgIntrodutionActivity.class);
                         startActivity(intent); break;
-                    case 3 : intent = new Intent(MypageMainActivity.this, com.example.capstone.MainActivity.class);
-                        Sharedpreference.clear(mContext,"autologin");
-                        startActivity(intent); break;
+                    case 3 :
+                            intent = new Intent(MypageMainActivity.this, com.example.capstone.MainActivity.class);
+                            Sharedpreference.clear(mContext,"autologin");
+                            Sharedpreference.set_state(mContext,"switch1",false,"state");
+                            startActivity(intent); break;
+
                 }
             }
         });
