@@ -38,8 +38,6 @@ public class JobSelectActivity extends AppCompatActivity implements View.OnClick
     int[] job_code;
     TextView sltTV;
     String jobcheck = "", jobs = "";
-    int btnFlag = 0;
-    int btnFlag2 = 0;
     int isUpdate;  // 1 > 수정  0 > 회원가입
     int i, j = 0;
     int jobnum;
@@ -98,9 +96,6 @@ public class JobSelectActivity extends AppCompatActivity implements View.OnClick
 
             }
         };
-
-
-
         GetJobsRequest lRequest = new GetJobsRequest(aListener); // Request 처리 클래스
         RequestQueue queue1 = Volley.newRequestQueue(JobSelectActivity.this); // 데이터 전송에 사용할 Volley의 큐 객체 생
         queue1.add(lRequest);

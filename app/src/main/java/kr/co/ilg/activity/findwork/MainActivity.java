@@ -45,6 +45,10 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 //import kr.co.ilg.activity.mypage.MypageMainActivity;
+import kr.co.ilg.activity.mypage.GetJobsRequest;
+import kr.co.ilg.activity.mypage.GetLocalRequest;
+import kr.co.ilg.activity.mypage.JobSelectActivity;
+import kr.co.ilg.activity.mypage.LocalSelectActivity;
 import kr.co.ilg.activity.mypage.MyInfomanageActivity;
 import kr.co.ilg.activity.mypage.MypageMainActivity;
 import kr.co.ilg.activity.mypage.UpdateinfoRequest;
@@ -63,6 +67,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     View dialogview, dialogview1;
     String local_sido = "", local_sigugun = "";
     int k;
+    String[] localSidoList;
+    int sigugunCnt[];
+    String[][] localSigugunList;
     int jp_job_cost[];
     int jp_job_tot_people[], jp_job_current_people[];
     boolean is_urgency[];
@@ -73,7 +80,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             R.id.btn12, R.id.btn13, R.id.btn14, R.id.btn15, R.id.btn16};
     int check[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     int[] job_code = new int[]{0, 0, 0};
-    ;
+    String[] jobnames = new String[16];
+    boolean f=false;
     String jobs = "";
     int i, j = 0, n = 0, a, p = 0;
     int q = 0, w = 0;
@@ -81,6 +89,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     TextView resetjobpost;
     Response.Listener rListener;
     int y, m , d;
+    Date date=null, getdate=null;
+    MainBackPressCloseHandler mainBackPressCloseHandler;
+
+    /*
     final String[][] arrayList1 = {{}, {"종로구", "중구", "용산구", "성동구", "광진구", "동대문구", "중랑구", "성북구", "강북구", "도봉구", "노원구", "은평구", "서대문구", "마포구", "양천구", "강서구", "구로구", "금천구", "영등포구", "동작구", "관악구", "서초구", "강남구", "송파구", "강동구"}
             , {"중구", "서구", "동구", "영도구", "부산진구", "동래구", "남구", "북구", "해운대구", "사하구", "금정구", "강서구", "연제구", "수영구", "사상구", "기장군"}
             , {"중구", "서구", "동구", "남구", "북구", "수성구", "달서구", "달성군"}
@@ -99,10 +111,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             , {"창원시", "마산시", "진해시", "통영시", "사천시", "김해시", "밀양시", "거제시", "양산시", "의령군", "함안군", "창녕군", "고성군", "남해군", "하동군", "산청군", "함양군", "거창군", "합천군"}
             , {"제주시", "서귀포시"}
     };
-    Date date=null,getdate=null;
-    MainBackPressCloseHandler mainBackPressCloseHandler;
-
-
+     */
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -161,6 +170,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             job[i].setOnClickListener(this);  // 직업버튼 인플레이션
         }
 
+        Response.Listener aListener = new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jResponse = new JSONObject(response.substring(response.indexOf("{"), response.lastIndexOf("}") + 1));
+
+                    JSONArray a = jResponse.getJSONArray("response");
+                    Log.d("ttttttttttttttt", String.valueOf(a.length()));
+                    for(int i=0; i<a.length(); i++){
+                        JSONObject item=  a.getJSONObject(i);
+                        jobnames[i] = item.getString("jobname");
+                        job[i+1].setText(jobnames[i]);
+                        Log.d("asdf",jobnames[i]);
+                        f=true;
+                    }
+                } catch (Exception e) {
+                    Log.d("mytest1111111", e.toString()); // 오류 출력
+                }
+
+            }
+        };
+        GetJobsRequest lRequest = new GetJobsRequest(aListener); // Request 처리 클래스
+        RequestQueue queue1 = Volley.newRequestQueue(MainActivity.this); // 데이터 전송에 사용할 Volley의 큐 객체 생
+        queue1.add(lRequest);
+
         sltTV1 = dialogview1.findViewById(R.id.sltTV);
 
         ListView listview = dialogview.findViewById(R.id.listview);
@@ -169,24 +203,67 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         TextView jobsetting = findViewById(R.id.jobsetting);
         localsetting.setText(Sharedpreference.get_Hope_local_sido(mContext, "local_sido","memberinfo") + " " + Sharedpreference.get_Hope_local_sigugun(mContext, "local_sigugun","memberinfo"));
         TextView sltTV = dialogview.findViewById(R.id.sltTV);
-        final String[] arrayList = {"전체", "서울", "부산", "대구", "인천", "대전", "광주", "울산", "세종", "경기",
-                "강원", "충북", "충남", "전북", "전남", "경북", "경남", "제주"}; // 첫번째 지역선택에 들어갈 배열
 
-        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, arrayList); // Adapter 생성
-        listview.setAdapter(adapter); //Adapter 연결
-        listview.setSelection(0); // 첫 인덱스 설정
+        // 지역 가져오기
+        Response.Listener bListener = new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                // 서버연동 시 try-catch문으로 예외 처리하기
+                try {
+                    JSONArray jsonArray_sido = new JSONArray(response.substring(response.indexOf("["), response.indexOf("]") + 1));
+                    int index_search_start = response.indexOf("[") + 1;
+                    int index_search_end = response.indexOf("]") + 1;
+                    JSONArray jsonArray_sigugun = new JSONArray(response.substring(response.indexOf("[", index_search_start), response.indexOf("]", index_search_end) + 1));
+                    int index_search_start2 = response.indexOf("[", index_search_start) + 1;
+                    int index_search_end2 = response.indexOf("]", index_search_end) + 1;
+                    JSONArray jsonArray_sigugunNum = new JSONArray(response.substring(response.indexOf("[", index_search_start2), response.indexOf("]", index_search_end2) + 1));
+
+                    int cnt = jsonArray_sido.length();
+                    sigugunCnt = new int[cnt];
+                    localSidoList = new String[cnt+1];
+                    localSidoList[0] = "전체";
+
+                    for (int i = 0; i < cnt; i++) {
+                        localSidoList[i+1] = jsonArray_sido.getJSONObject(i).getString("local_sido");
+                        sigugunCnt[i] = Integer.parseInt(jsonArray_sigugunNum.getJSONObject(i).getString("singugunNum"));
+                    }
+
+                    localSigugunList = new String[cnt+1][];
+                    localSigugunList[0] = new String[0];
+
+                    int c = 0;
+                    for (int i = 1; i <= cnt; i++) {
+                        int n = sigugunCnt[i-1];
+                        localSigugunList[i] = new String[n];
+                        for (int j = 0; j < n; j++) {
+                            localSigugunList[i][j] = jsonArray_sigugun.getJSONObject(c).getString("local_sigugun");
+                            c++;
+                        }
+                    }
+                    ArrayAdapter adapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, localSidoList); // Adapter 생성
+                    listview.setAdapter(adapter); //Adapter 연결
+                    listview.setSelection(0); // 첫 인덱스 설정
+
+                } catch (Exception e) {
+                    Log.d("mytest", e.toString() + "bbbbbbbbb" + response);
+                }
+            }
+        };
+        GetLocalRequest glRequest = new GetLocalRequest(bListener); // Request 처리 클래스
+        RequestQueue queue2 = Volley.newRequestQueue(MainActivity.this); // 데이터 전송에 사용할 Volley의 큐 객체 생
+        queue2.add(glRequest);
 
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                local_sido = arrayList[position];
-                sltTV.setText(arrayList[position]); // 선택한 지역 상단에 띄우기
+                local_sido = localSidoList[position];
+                sltTV.setText(localSidoList[position]); // 선택한 지역 상단에 띄우기
                 k = position;
                 n++;
                 q = 1;
                 w = 0; // local_sido만 선택했을시 제어할 변수
 
-                ArrayAdapter adapter2 = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, arrayList1[position]); // Adapter 생성
+                ArrayAdapter adapter2 = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, localSigugunList[position]); // Adapter 생성
                 listview1.setAdapter(adapter2); //Adapter 연결
                 listview1.setSelection(0); // 첫 인덱스 설정
 
@@ -195,14 +272,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         w = 1;
                         if (local_sido != "전체") {
-                            local_sigugun = arrayList1[k][position];
+                            local_sigugun = localSigugunList[k][position];
                             sltTV.setText(local_sido + " " + local_sigugun);
                         } else local_sigugun = "";
 
                     }
                 });
-
-
             }
         });
 
