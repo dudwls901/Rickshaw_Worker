@@ -31,8 +31,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:background="@color/colorPrimary"
-        android:text="지원하기"
-        android:textColor="@color/LightColor"
+        android:textColor="@color/WhiteColor"
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"></Button>

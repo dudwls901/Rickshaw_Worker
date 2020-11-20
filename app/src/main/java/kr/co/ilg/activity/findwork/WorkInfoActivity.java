@@ -153,24 +153,29 @@ public class WorkInfoActivity extends AppCompatActivity {
                     public void onResponse(String response) {
                         try {
                             JSONObject jResponse = new JSONObject(response.substring(response.indexOf("{"), response.lastIndexOf("}") + 1));
-                            boolean AlreadyApply = jResponse.getBoolean("AlreadyApply");
                             boolean InsertApplySuccess = jResponse.getBoolean("InsertApplySuccess");
-                            if (!(AlreadyApply)) {
+                            boolean DeleteApplySuccess = jResponse.getBoolean("DeleteApplySuccess");
+                            if ((apply_btn.getText().toString()).equals("지원하기")) {
                                 if (InsertApplySuccess) {
                                     Toast.makeText(getApplicationContext(), "지원이 완료되었습니다.", Toast.LENGTH_SHORT).show();
                                 } else {
                                     Toast.makeText(getApplicationContext(), "지원 실패 : DB Error", Toast.LENGTH_SHORT).show();
                                 }
                             } else {
-                                Toast.makeText(getApplicationContext(), "이미 지원한 구인글입니다.", Toast.LENGTH_SHORT).show();
+                                if (DeleteApplySuccess) {
+                                    Toast.makeText(getApplicationContext(), "지원이 취소되었습니다.", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(getApplicationContext(), "지원 취소 실패 : DB Error", Toast.LENGTH_SHORT).show();
+                                }
                             }
                         } catch (Exception e) {
                             Log.d("mytest", e.toString());
                         }
                     }
                 };
-                ApplyRequest aRequest = new ApplyRequest(Sharedpreference.get_email(WorkInfoActivity.this, "worker_email","memberinfo"), jp_num, rListener);
-
+                ApplyRequest aRequest;
+                if((apply_btn.getText().toString()).equals("지원하기")) aRequest = new ApplyRequest(Sharedpreference.get_email(WorkInfoActivity.this, "worker_email","memberinfo"), jp_num, "apply", rListener);
+                else aRequest = new ApplyRequest(Sharedpreference.get_email(WorkInfoActivity.this, "worker_email","memberinfo"), jp_num, "delete", rListener);
                 RequestQueue queue = Volley.newRequestQueue(WorkInfoActivity.this);
                 queue.add(aRequest);
             }
@@ -234,5 +239,22 @@ public class WorkInfoActivity extends AppCompatActivity {
                 queue.add(stnRequest);
             }
         });
+
+        Response.Listener rListener = new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jResponse = new JSONObject(response.substring(response.indexOf("{"), response.lastIndexOf("}") + 1));
+                    boolean AlreadyApply = jResponse.getBoolean("AlreadyApply");
+                    if (!(AlreadyApply)) apply_btn.setText("지원하기");
+                    else apply_btn.setText("지원 취소");
+                } catch (Exception e) {
+                    Log.d("mytest", e.toString());
+                }
+            }
+        };
+        ApplyRequest aRequest = new ApplyRequest(Sharedpreference.get_email(WorkInfoActivity.this, "worker_email","memberinfo"), jp_num, rListener);
+        RequestQueue queue = Volley.newRequestQueue(WorkInfoActivity.this);
+        queue.add(aRequest);
     }
 }

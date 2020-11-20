@@ -94,8 +94,6 @@
                 android:id="@+id/codeET"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/emailET"
-                app:layout_constraintLeft_toRightOf="@+id/codeTV"
                 android:layout_weight="4"
                 android:paddingLeft="75dp"
                 />
@@ -104,8 +102,6 @@
                 android:id="@+id/codeBtn"
                 android:layout_width="0dp"
                 android:layout_height="45dp"
-                app:layout_constraintTop_toBottomOf="@id/emailET"
-                app:layout_constraintRight_toRightOf="parent"
                 android:layout_weight="1.2"
                 android:layout_gravity="center"
                 android:text="인증"

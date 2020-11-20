@@ -21,6 +21,17 @@ public class ApplyRequest extends StringRequest {
         parameters.put("jp_num", jp_num);
     }
 
+    // 지원하기
+    public ApplyRequest(String worker_email, String jp_num, String key, Response.Listener<String> listener) {  // 서버에 전송될 data, 응답(결과) 처리하는 리스너
+        super(Method.POST, URL, listener, null);  // 가독성 향상을 위해 super에 선언
+
+        // HashMap으로 데이터 정의하고 추가
+        parameters = new HashMap<>();
+        parameters.put("worker_email", worker_email);
+        parameters.put("jp_num", jp_num);
+        parameters.put("key", key);
+    }
+
     // getParams 재정의
     protected Map<String, String> getParams() throws AuthFailureError {
         // 서버에 전송할 문자 데이터들을 Map 객체로 리턴

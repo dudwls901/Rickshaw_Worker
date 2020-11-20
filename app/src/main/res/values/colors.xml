@@ -12,6 +12,5 @@
     <color name="UrgencyColor2">#E3A5A5</color>
     <color name="checkColor">#7CB342</color>
     <color name="black">#000000</color>
-
-
+    <color name="gray">#787777</color>
 </resources>

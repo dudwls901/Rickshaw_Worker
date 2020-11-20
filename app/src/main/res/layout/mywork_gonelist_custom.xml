@@ -14,7 +14,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="7dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginRight="5dp"
         >
         <TextView
             android:id="@+id/title"
@@ -29,10 +29,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="85dp"
                 android:layout_height="wrap_content"
                 android:textSize="15dp"
-                android:text="           날짜 :  "
+                android:gravity="right"
+                android:text="날짜 :  "
                 ></TextView>
             <TextView
                 android:id="@+id/date"
@@ -47,10 +48,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="85dp"
                 android:layout_height="wrap_content"
                 android:textSize="15dp"
-                android:text="           단가 :  "
+                android:gravity="right"
+                android:text="단가 :  "
                 ></TextView>
             <TextView
                 android:id="@+id/pay"
@@ -65,10 +67,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="85dp"
                 android:layout_height="wrap_content"
                 android:textSize="15dp"
-                android:text="   구인 직종 :  "
+                android:gravity="right"
+                android:text="구인 직종 :  "
                 ></TextView>
             <TextView
                 android:id="@+id/job"
@@ -84,10 +87,11 @@
             android:layout_height="wrap_content">
             <TextView
                 android:id="@+id/where"
-                android:layout_width="wrap_content"
+                android:layout_width="85dp"
                 android:layout_height="wrap_content"
                 android:textSize="15dp"
-                android:text="   현장 위치 :  "
+                android:gravity="right"
+                android:text="현장 위치 :  "
                 ></TextView>
             <TextView
                 android:id="@+id/place"
@@ -102,9 +106,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="85dp"
                 android:layout_height="wrap_content"
                 android:textSize="15dp"
+                android:gravity="right"
                 android:text="인력사무소 :  "
                 ></TextView>
             <TextView
