@@ -71,6 +71,7 @@ public class FieldInfoActivity extends AppCompatActivity {
         jp_job_finish_time = receiver.getExtras().getString("jp_job_finish_time");
         jp_contents = receiver.getExtras().getString("jp_contents");
 
+
         field_nameTv.setText(field_name);
         field_addressTv.setText(field_address);
 

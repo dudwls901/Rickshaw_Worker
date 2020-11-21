@@ -635,6 +635,9 @@ public class WorkMapActivity extends AppCompatActivity implements MapView.Curren
                             String[] job_name = new String[jsonArray_job.length()];
                             String[] manager_office_name_MY = new String[jsonArray_Manager.length()];
                             String[] jp_job_tot_people = new String[jsonArray_jp.length()];
+                            String[] jp_job_start_time = new String[jsonArray_jp.length()];
+                            String[] jp_job_finish_time = new String[jsonArray_jp.length()];
+                            String[] jp_contents = new String[jsonArray_jp.length()];
                             Log.d("mytessss",jsonArray_job.toString());
                             for(int i =0; i<jsonArray_jp.length();i++) {
                                 jp_num[i] = jsonArray_jp.getJSONObject(i).getString("jp_num");
@@ -642,6 +645,9 @@ public class WorkMapActivity extends AppCompatActivity implements MapView.Curren
                                 jp_job_date[i] = jsonArray_jp.getJSONObject(i).getString("jp_job_date");
                                 jp_job_cost[i] = jsonArray_jp.getJSONObject(i).getString("jp_job_cost");
                                 jp_job_tot_people[i] = jsonArray_jp.getJSONObject(i).getString("jp_job_tot_people");
+                                jp_job_start_time[i] = jsonArray_jp.getJSONObject(i).getString("jp_job_start_time");
+                                jp_job_finish_time[i] = jsonArray_jp.getJSONObject(i).getString("jp_job_finish_time");
+                                jp_contents[i] = jsonArray_jp.getJSONObject(i).getString("jp_contents");
 
                             }
                             for(int i =0; i<jsonArray_job.length();i++) {
@@ -666,6 +672,11 @@ public class WorkMapActivity extends AppCompatActivity implements MapView.Curren
                             intent.putExtra("job_name", job_name[0]);
                             intent.putExtra("manager_office_name", manager_office_name_MY[0]);
                             intent.putExtra("jp_job_tot_people", jp_job_tot_people[0]);
+                            intent.putExtra("jp_job_start_time",jp_job_start_time[0]);
+                            intent.putExtra("jp_job_finish_time",jp_job_finish_time[0]);
+                            intent.putExtra("jp_contents",jp_contents[0]);
+
+
                             startActivity(intent);
                             finish();
                             mapView.refreshMapTiles();
