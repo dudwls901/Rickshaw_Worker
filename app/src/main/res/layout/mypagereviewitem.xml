@@ -1,33 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="5dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_margin="8dp">
+        android:layout_marginBottom="10dp"
+        android:layout_marginHorizontal="5dp">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:padding="3dp"
             android:id="@+id/noticelayout">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:text="버섯현장"
+                    android:textSize="17dp"
+                    android:layout_marginBottom="3dp"
+                    android:id="@+id/reviewfield"
+                    android:textColor="@android:color/black"/>
+                <TextView
+                    android:id="@+id/dltBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:background="@drawable/line"
+                    android:paddingVertical="2dp"
+                    android:paddingHorizontal="3dp"
+                    android:text="삭제"
+                    android:gravity="center_vertical"
+                    />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="버섯현장"
-                android:textSize="15dp"
-                android:layout_marginBottom="3dp"
-                android:id="@+id/reviewfield"
-                android:textColor="@android:color/black"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_marginVertical="5dp"
                 android:text="초보인데 일 천천히 알려주셔서 감사합니다."
                 android:textSize="15dp"
                 android:id="@+id/mypagereview"

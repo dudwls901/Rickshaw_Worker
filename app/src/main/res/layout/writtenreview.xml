@@ -14,7 +14,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="후기관리"
+            android:text="리뷰 관리"
             android:textColor="@color/WhiteColor"
             android:textSize="20sp" />
 
