@@ -67,7 +67,7 @@ public class OfficeInfoActivity extends AppCompatActivity {
 
         Intent receiver = getIntent();
         String business_reg_num = receiver.getExtras().getString("business_reg_num");
-
+        Log.d("mytest123123123213123",business_reg_num);
         //Toast.makeText(getApplicationContext(), business_reg_num, Toast.LENGTH_SHORT).show();
         office_introduce = findViewById(R.id.office_introduce);
         office_name = findViewById(R.id.office_name);

@@ -93,6 +93,7 @@ public class WorkInfoActivity extends AppCompatActivity {
         jp_job_tot_people = receiver.getExtras().getString("jp_job_tot_people");
         jp_contents = receiver.getExtras().getString("jp_contents");
         field_name = receiver.getExtras().getString("field_name");
+        Log.d("business_regggggggg",business_reg_num);
 
         Log.d("tqtqtqqtqtqtqtqtqtq", field_name + "   " + manager_office_name + " " + business_reg_num);
 
@@ -133,6 +134,8 @@ public class WorkInfoActivity extends AppCompatActivity {
                 intent.putExtra("jp_job_start_time", jp_job_start_time);
                 intent.putExtra("jp_job_finish_time", jp_job_finish_time);
                 intent.putExtra("jp_contents", jp_contents);
+                intent.putExtra("business_reg_num",business_reg_num);
+                intent.putExtra("jp_is_urgency",jp_is_urgency);
                 startActivity(intent);
             }
         });
@@ -153,10 +156,11 @@ public class WorkInfoActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         try {
-                            JSONObject jResponse = new JSONObject(response.substring(response.indexOf("{"), response.lastIndexOf("}") + 1));
+                            JSONObject jResponse = new JSONObject(response.substring(response.indexOf("{"), response.lastIndexOf ("}") + 1));
                             boolean InsertApplySuccess = jResponse.getBoolean("InsertApplySuccess");
                             boolean DeleteApplySuccess = jResponse.getBoolean("DeleteApplySuccess");
-                            boolean AlreadyPicked = jResponse.getBoolean("AlreadyPicked");
+                            boolean AlreadyPicked = jResponse.getBoolean("AlreadyApply");
+                            Log.d("mytestapplyresponse", jResponse.toString());
 
                             if ((apply_btn.getText().toString()).equals("지원하기")) {
                                 if (InsertApplySuccess) {
@@ -177,7 +181,8 @@ public class WorkInfoActivity extends AppCompatActivity {
                                 }
                             }
                         } catch (Exception e) {
-                            Log.d("mytest", e.toString());
+                            Log.d("mytestapply", e.toString());
+
                         }
                     }
                 };

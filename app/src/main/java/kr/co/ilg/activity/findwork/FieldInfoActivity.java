@@ -36,7 +36,8 @@ public class FieldInfoActivity extends AppCompatActivity {
     int k, jp_job_current_people;
     String name[], contents[],datetime[];
     TextView field_nameTv, field_addressTv;
-    String jp_num, field_name, field_address, jp_title, jp_job_date, jp_job_cost, job_name, manager_office_name, jp_job_tot_people, jp_job_start_time, jp_job_finish_time, jp_contents;
+    String jp_num, field_name, field_address, jp_title, jp_job_date, jp_job_cost, job_name, manager_office_name, jp_job_tot_people, jp_job_start_time, jp_job_finish_time, jp_contents,business_reg_num;
+    boolean jp_is_urgency;
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -61,6 +62,7 @@ public class FieldInfoActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Intent receiver = getIntent();
+        business_reg_num = receiver.getExtras().getString("business_reg_num");
         jp_num = receiver.getExtras().getString("jp_num");
         field_name = receiver.getExtras().getString("field_name");
         field_address = receiver.getExtras().getString("field_address");
@@ -73,7 +75,8 @@ public class FieldInfoActivity extends AppCompatActivity {
         jp_job_start_time = receiver.getExtras().getString("jp_job_start_time");
         jp_job_finish_time = receiver.getExtras().getString("jp_job_finish_time");
         jp_contents = receiver.getExtras().getString("jp_contents");
-
+        jp_is_urgency = receiver.getExtras().getBoolean("jp_is_urgency");
+        Log.d("business_regggggggg",business_reg_num);
 
         field_nameTv.setText(field_name);
         field_addressTv.setText(field_address);
@@ -88,21 +91,23 @@ public class FieldInfoActivity extends AppCompatActivity {
             public void onResponse(String response) {
                 try {
                     JSONObject jResponse = new JSONObject(response.substring(response.indexOf("{"), response.lastIndexOf("}") + 1));
-                    jp_job_current_people = Integer.parseInt(jResponse.getString("crrntP"));
+                   Log.d("mytestzdfmkmfkqmkd",jResponse.toString());
+                    jp_job_current_people = Integer.parseInt(jResponse.getString("current_people"));
                 } catch (Exception e) {
                     Log.d("mytest1111111", e.toString()); // 오류 출력
                 }
 
             }
         };
+      //  Log.d("mytest12u412u94jifj9e",jp_num);
         CrrntPRequest cpRequest = new CrrntPRequest(jp_num, aListener); // Request 처리 클래스
         RequestQueue queue1 = Volley.newRequestQueue(FieldInfoActivity.this); // 데이터 전송에 사용할 Volley의 큐 객체 생
         queue1.add(cpRequest);
 
         Log.d("ttttttttqqqqqqqqqqq", jp_num + " " + String.valueOf(jp_job_current_people));
         workInfoArrayList = new ArrayList<>();
-        workInfoArrayList.add(new ListViewItem(jp_title, jp_job_date, Integer.parseInt(jp_job_cost), job_name, field_address, manager_office_name, jp_job_current_people,
-                Integer.parseInt(jp_job_tot_people), jp_job_start_time, jp_job_finish_time, jp_contents, field_name));
+        workInfoArrayList.add(new ListViewItem(business_reg_num,jp_num,jp_title, jp_job_date,Integer.parseInt(jp_job_cost), job_name, field_address, manager_office_name, jp_job_current_people,
+                Integer.parseInt(jp_job_tot_people),jp_is_urgency, jp_job_start_time, jp_job_finish_time, jp_contents, field_name));
         //workInfoArrayList.add(new ListViewItem("레미안 건축","2020-06-14",150000,"상수 레미안 아파트","건축","개미인력소",1,3));
 
         ListAdapter workAdapter = new ListAdapter(getApplicationContext(), workInfoArrayList);
@@ -136,7 +141,7 @@ public class FieldInfoActivity extends AppCompatActivity {
                         name[i] = MainRequest.getString("name");
                         contents[i] = MainRequest.getString("contents");
                         datetime[i] = MainRequest.getString("datetime");
-                        reviewList.add(new ReviewItem(name[i], contents[i], datetime[i]));
+                        reviewList.add(new ReviewItem(name[i], datetime[i],contents[i]));
                     } // 값넣기*/
                     myAdapter = new ReviewAdapter(reviewList);
                     review_RecyclerView.setAdapter(myAdapter);

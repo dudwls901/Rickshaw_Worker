@@ -638,6 +638,7 @@ public class WorkMapActivity extends AppCompatActivity implements MapView.Curren
                             String[] jp_job_start_time = new String[jsonArray_jp.length()];
                             String[] jp_job_finish_time = new String[jsonArray_jp.length()];
                             String[] jp_contents = new String[jsonArray_jp.length()];
+                            String[] business_reg_num = new String[jsonArray_Manager.length()];
                             Log.d("mytessss",jsonArray_job.toString());
                             for(int i =0; i<jsonArray_jp.length();i++) {
                                 jp_num[i] = jsonArray_jp.getJSONObject(i).getString("jp_num");
@@ -655,6 +656,7 @@ public class WorkMapActivity extends AppCompatActivity implements MapView.Curren
                             }
                             for(int i =0; i<jsonArray_Manager.length();i++) {
                                 manager_office_name_MY[i] = jsonArray_Manager.getJSONObject(i).getString("manager_office_name");
+                                business_reg_num[i] = jsonArray_Manager.getJSONObject(i).getString("business_reg_num");
                             }
                             for(int i =0; i<jsonArray_Field.length();i++) {
                                 field_name_MY[i] = jsonArray_Field.getJSONObject(i).getString("field_name");
@@ -675,7 +677,7 @@ public class WorkMapActivity extends AppCompatActivity implements MapView.Curren
                             intent.putExtra("jp_job_start_time",jp_job_start_time[0]);
                             intent.putExtra("jp_job_finish_time",jp_job_finish_time[0]);
                             intent.putExtra("jp_contents",jp_contents[0]);
-
+                            intent.putExtra("business_reg_num",business_reg_num[0]);
 
                             startActivity(intent);
                             finish();
