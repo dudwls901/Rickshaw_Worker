@@ -66,10 +66,10 @@ public class JobSelectActivity extends AppCompatActivity implements View.OnClick
         isUpdate = modifyIntent.getIntExtra("isUpdate", 0);  // modify
         jobnum =modifyIntent.getIntExtra("exjobnum", 0);
 
-        Toast.makeText(getApplicationContext(), "어디서 왔나~ " + isUpdate, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getApplicationContext(), "어디서 왔나~ " + isUpdate, Toast.LENGTH_SHORT).show();
 
         for (i = 1; i < 17; i++) {
-            Log.d("kkk", "왜 이것부터하니");
+//            Log.d("kkk", "왜 이것부터하니");
             job[i] = findViewById(jobid[i]);
             job[i].setOnClickListener(this);  // 직업버튼 인플레이션
         }

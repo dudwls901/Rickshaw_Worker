@@ -73,7 +73,7 @@ public class AccountAddActivity extends AppCompatActivity {
         Intent modifyIntent = getIntent();
         isUpdate = modifyIntent.getIntExtra("isUpdate", 0);  // modify
 
-        Toast.makeText(getApplicationContext(), "어디서 왔나~ " + isUpdate, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getApplicationContext(), "어디서 왔나~ " + isUpdate, Toast.LENGTH_SHORT).show();
 
         addBtn = findViewById(R.id.addBtn);
         nextTimeTV = findViewById(R.id.nextTimeTV);

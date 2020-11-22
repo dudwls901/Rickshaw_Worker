@@ -45,7 +45,7 @@
             android:value="@string/kakao_app_key" />
 
 <!--       <activity android:name="kr.co.ilg.activity.findwork.MainActivity" android:label="일자리 찾기">-->
-           <activity android:name="kr.co.ilg.activity.login.SplashActivity" android:theme="@style/SplashTheme" android:label="스플래시">
+           <activity android:name="kr.co.ilg.activity.login.SplashActivity" android:theme="@style/SplashTheme" android:label="인력거_구직자">
 <!--        <activity android:name="kr.co.ilg.activity.login.SignupEmailActivity" android:label="회원가입">-->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
