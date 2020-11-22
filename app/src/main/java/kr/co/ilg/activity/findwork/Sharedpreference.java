@@ -29,10 +29,34 @@ public class Sharedpreference {
         editor.commit();
 
     }
+    public static void set_token(Context context, String key, String value, String name) {
+        SharedPreferences prefs = getPreferences(name,context);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString(key, value);
+        editor.commit();
+
+    }
+    public static String get_token(Context context, String key, String name) {
+        SharedPreferences prefs = getPreferences(name,context);
+        String  value = prefs.getString(key, null);
+        return value;
+    }
     public static void set_state(Context context, String key, Boolean value, String name) {
         SharedPreferences prefs = getPreferences(name,context);
         SharedPreferences.Editor editor = prefs.edit();
         editor.putBoolean(key, value);
+        editor.commit();
+
+    }
+    public static String get_anything(Context context, String key, String name) {
+        SharedPreferences prefs = getPreferences(name,context);
+        String  value = prefs.getString(key, null);
+        return value;
+    }
+    public static void set_anything(Context context, String key, String value, String name) {
+        SharedPreferences prefs = getPreferences(name,context);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString(key, value);
         editor.commit();
 
     }

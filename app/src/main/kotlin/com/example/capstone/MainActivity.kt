@@ -10,6 +10,8 @@ import android.util.Log
 import android.widget.*
 import com.android.volley.Response
 import com.android.volley.toolbox.Volley
+import com.google.firebase.FirebaseApp
+import com.google.firebase.iid.FirebaseInstanceId
 import com.kakao.sdk.auth.LoginClient
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.model.AuthErrorCause.*
@@ -47,6 +49,7 @@ class MainActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.login);
+        FirebaseApp.initializeApp(this)
 
 
         Sharedpreference.clear(applicationContext, "memberinfo")
@@ -173,6 +176,7 @@ class MainActivity : Activity() {
                                             Sharedpreference.set_Hope_local_sigugun(applicationContext(), "local_sigugun", local_sigugun, "memberinfo")// 파일에 맵핑형식으로 저장// 파일에 맵핑형식으로 저장
 
                                             Toast.makeText(this@MainActivity, "로그인에 성공하였습니다.", Toast.LENGTH_SHORT).show()
+                                            FirebaseInstanceId.getInstance().token
                                             intent() //
                                             //Toast.makeText(FindPasswordInfoActivity.this, "등록된 "+worker_pw, Toast.LENGTH_SHORT).show();
                                         } else {  // 회원이 존재하지 않는다면
@@ -243,7 +247,7 @@ class MainActivity : Activity() {
 
                                             Sharedpreference.set_Hope_local_sido(applicationContext(), "local_sido", local_sido, "memberinfo")
                                             Sharedpreference.set_Hope_local_sigugun(applicationContext(), "local_sigugun", local_sigugun, "memberinfo")// 파일에 맵핑형식으로 저장// 파일에 맵핑형식으로 저장
-
+                                            FirebaseInstanceId.getInstance().token
                                             intent() //
                                             //Toast.makeText(FindPasswordInfoActivity.this, "등록된 "+worker_pw, Toast.LENGTH_SHORT).show();
                                         } else {  // 회원이 존재하지 않는다면
@@ -329,7 +333,7 @@ class MainActivity : Activity() {
 
                                                             Sharedpreference.set_Hope_local_sido(applicationContext(), "local_sido", local_sido, "memberinfo")
                                                             Sharedpreference.set_Hope_local_sigugun(applicationContext(), "local_sigugun", local_sigugun, "memberinfo")// 파일에 맵핑형식으로 저장파일에 맵핑형식으로 저장
-
+                                                            FirebaseInstanceId.getInstance().token
                                                             intent() //
                                                             //Toast.makeText(FindPasswordInfoActivity.this, "등록된 "+worker_pw, Toast.LENGTH_SHORT).show();
                                                         } else {  // 회원이 존재하지 않는다면
@@ -410,6 +414,8 @@ class MainActivity : Activity() {
                                 Sharedpreference.set_id(applicationContext(), "worker_email", worker_email, "autologin")
                                 Sharedpreference.set_pw(applicationContext(), "worker_pw", worker_pw, "autologin")
                                 Sharedpreference.set_state(applicationContext(), "switch1", true, "state");
+                                Sharedpreference.set_token(applicationContext(),"token",FirebaseInstanceId.getInstance().getToken(),"state")
+
                             }
 
                             Sharedpreference.set_numofjob(applicationContext(), "numofjob", j.toString(), "memberinfo")
@@ -426,7 +432,7 @@ class MainActivity : Activity() {
 
                             Sharedpreference.set_Hope_local_sido(applicationContext(), "local_sido", local_sido, "memberinfo")
                             Sharedpreference.set_Hope_local_sigugun(applicationContext(), "local_sigugun", local_sigugun, "memberinfo")// 파일에 맵핑형식으로 저장
-
+                            FirebaseInstanceId.getInstance().token
                             intent() //
                             //Toast.makeText(FindPasswordInfoActivity.this, "등록된 "+worker_pw, Toast.LENGTH_SHORT).show();
                         } else {  // 회원이 존재하지 않는다면

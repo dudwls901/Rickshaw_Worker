@@ -1,5 +1,6 @@
 package kr.co.ilg.activity.findwork;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -36,6 +37,7 @@ public class FieldInfoActivity extends AppCompatActivity {
     int k, jp_job_current_people;
     String name[], contents[],datetime[];
     TextView field_nameTv, field_addressTv;
+    Context mContext;
     String jp_num, field_name, field_address, jp_title, jp_job_date, jp_job_cost, job_name, manager_office_name, jp_job_tot_people, jp_job_start_time, jp_job_finish_time, jp_contents;
 
     @Override
@@ -59,20 +61,21 @@ public class FieldInfoActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        mContext = this;
 
-        Intent receiver = getIntent();
-        jp_num = receiver.getExtras().getString("jp_num");
-        field_name = receiver.getExtras().getString("field_name");
-        field_address = receiver.getExtras().getString("field_address");
-        jp_title = receiver.getExtras().getString("jp_title");
-        jp_job_date = receiver.getExtras().getString("jp_job_date");
-        jp_job_cost = receiver.getExtras().getString("jp_job_cost");
-        job_name = receiver.getExtras().getString("job_name");
-        manager_office_name = receiver.getExtras().getString("manager_office_name");
-        jp_job_tot_people = receiver.getExtras().getString("jp_job_tot_people");
-        jp_job_start_time = receiver.getExtras().getString("jp_job_start_time");
-        jp_job_finish_time = receiver.getExtras().getString("jp_job_finish_time");
-        jp_contents = receiver.getExtras().getString("jp_contents");
+
+        jp_num = Sharedpreference.get_anything(mContext,"jp_num","memberinfo");
+        field_name =Sharedpreference.get_anything(mContext,"field_name","memberinfo");
+        field_address = Sharedpreference.get_anything(mContext,"field_address","memberinfo");
+        jp_title =Sharedpreference.get_anything(mContext,"jp_title","memberinfo");
+        jp_job_date = Sharedpreference.get_anything(mContext,"jp_job_date","memberinfo");
+        jp_job_cost = Sharedpreference.get_anything(mContext,"jp_job_cost","memberinfo");
+        job_name = Sharedpreference.get_anything(mContext,"job_name","memberinfo");
+        manager_office_name =Sharedpreference.get_anything(mContext,"manager_office_name","memberinfo");
+        jp_job_tot_people = Sharedpreference.get_anything(mContext,"jp_job_tot_people","memberinfo");
+        jp_job_start_time = Sharedpreference.get_anything(mContext,"jp_job_start_time","memberinfo").substring(0, 5);
+        jp_job_finish_time = Sharedpreference.get_anything(mContext,"jp_job_finish_time","memberinfo").substring(0, 5);
+        jp_contents =  Sharedpreference.get_anything(mContext,"jp_contents","memberinfo");
 
 
         field_nameTv.setText(field_name);
@@ -82,16 +85,25 @@ public class FieldInfoActivity extends AppCompatActivity {
         work_info_RecyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         work_info_RecyclerView.setLayoutManager(layoutManager);
+        workInfoArrayList = new ArrayList<>();
 
         Response.Listener aListener = new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
                     JSONObject jResponse = new JSONObject(response.substring(response.indexOf("{"), response.lastIndexOf("}") + 1));
-                    jp_job_current_people = Integer.parseInt(jResponse.getString("crrntP"));
+                    String jp_job_current_people = jResponse.getString("current_people");
+                    Log.d("mytest000000",response);
+                    Log.d("mytest00000",jp_title+ jp_job_date+ Integer.parseInt(jp_job_cost)+ job_name+ field_address+ manager_office_name+ Integer.parseInt(jp_job_current_people)+
+                            Integer.parseInt(jp_job_tot_people)+ jp_job_start_time+ jp_job_finish_time+ jp_contents+ field_name);
+               //todo 비즈니스넘이랑 jpnu new ListViewItem(jp_title 앞에 추가해야함
+                    workInfoArrayList.add(new ListViewItem(jp_title, jp_job_date, Integer.parseInt(jp_job_cost), job_name, field_address, manager_office_name, Integer.parseInt(jp_job_current_people),
+                            Integer.parseInt(jp_job_tot_people), jp_job_start_time, jp_job_finish_time, jp_contents, field_name));
                 } catch (Exception e) {
                     Log.d("mytest1111111", e.toString()); // 오류 출력
                 }
+                ListAdapter workAdapter = new ListAdapter(getApplicationContext(), workInfoArrayList);
+                work_info_RecyclerView.setAdapter(workAdapter);
 
             }
         };
@@ -100,13 +112,10 @@ public class FieldInfoActivity extends AppCompatActivity {
         queue1.add(cpRequest);
 
         Log.d("ttttttttqqqqqqqqqqq", jp_num + " " + String.valueOf(jp_job_current_people));
-        workInfoArrayList = new ArrayList<>();
-        workInfoArrayList.add(new ListViewItem(jp_title, jp_job_date, Integer.parseInt(jp_job_cost), job_name, field_address, manager_office_name, jp_job_current_people,
-                Integer.parseInt(jp_job_tot_people), jp_job_start_time, jp_job_finish_time, jp_contents, field_name));
+
         //workInfoArrayList.add(new ListViewItem("레미안 건축","2020-06-14",150000,"상수 레미안 아파트","건축","개미인력소",1,3));
 
-        ListAdapter workAdapter = new ListAdapter(getApplicationContext(), workInfoArrayList);
-        work_info_RecyclerView.setAdapter(workAdapter);
+
 
 
         review_RecyclerView = findViewById(R.id.review_list);
@@ -136,7 +145,7 @@ public class FieldInfoActivity extends AppCompatActivity {
                         name[i] = MainRequest.getString("name");
                         contents[i] = MainRequest.getString("contents");
                         datetime[i] = MainRequest.getString("datetime");
-                        reviewList.add(new ReviewItem(name[i], contents[i], datetime[i]));
+                        reviewList.add(new ReviewItem(name[i], datetime[i],contents[i]));
                     } // 값넣기*/
                     myAdapter = new ReviewAdapter(reviewList);
                     review_RecyclerView.setAdapter(myAdapter);

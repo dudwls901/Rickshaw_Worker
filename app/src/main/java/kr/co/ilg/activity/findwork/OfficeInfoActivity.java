@@ -1,5 +1,6 @@
 package kr.co.ilg.activity.findwork;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -42,6 +43,7 @@ public class OfficeInfoActivity extends AppCompatActivity {
     String name[], contents[], datetime[], key[];
     RecyclerView.LayoutManager layoutManager;
     String mapAddress;
+    Context mContext;
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -64,9 +66,10 @@ public class OfficeInfoActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        mContext = this;
 
-        Intent receiver = getIntent();
-        String business_reg_num = receiver.getExtras().getString("business_reg_num");
+
+        String business_reg_num =  Sharedpreference.get_anything(mContext,"business_reg_num","memberinfo");
 
         //Toast.makeText(getApplicationContext(), business_reg_num, Toast.LENGTH_SHORT).show();
         office_introduce = findViewById(R.id.office_introduce);

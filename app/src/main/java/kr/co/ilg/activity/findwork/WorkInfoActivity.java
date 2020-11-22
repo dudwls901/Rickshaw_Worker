@@ -2,6 +2,7 @@ package kr.co.ilg.activity.findwork;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.net.Uri;
@@ -37,6 +38,7 @@ public class WorkInfoActivity extends AppCompatActivity {
     boolean jp_is_urgency;
     Intent intent;
     String mapAddress;
+    Context mContext;
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         switch (id) {
@@ -52,6 +54,8 @@ public class WorkInfoActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.work_info);
+        mContext = this;
+
         //ActionBar ad=getActionBar();
         //ad.setDisplayHomeAsUpEnabled(true);
         toolbar = findViewById(R.id.toolbar);
@@ -78,21 +82,21 @@ public class WorkInfoActivity extends AppCompatActivity {
         office_info_tv.setPaintFlags(office_info_tv.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
 
         //TODO ListAdapter에서 intent로 값만 넘기면 됨
-        Intent receiver = getIntent();
-        business_reg_num = receiver.getExtras().getString("business_reg_num");
-        jp_num = receiver.getExtras().getString("jp_num");
-        jp_title = receiver.getExtras().getString("jp_title");
-        field_address = receiver.getExtras().getString("field_address");
+
+        business_reg_num = Sharedpreference.get_anything(mContext,"business_reg_num","memberinfo");
+        jp_num = Sharedpreference.get_anything(mContext,"jp_num","memberinfo");
+        jp_title = Sharedpreference.get_anything(mContext,"jp_title","memberinfo");
+        field_address = Sharedpreference.get_anything(mContext,"field_address","memberinfo");
         mapAddress = field_address;
-        manager_office_name = receiver.getExtras().getString("manager_office_name");
-        job_name = receiver.getExtras().getString("job_name");
-        jp_job_cost = receiver.getExtras().getString("jp_job_cost");
-        jp_job_date = receiver.getExtras().getString("jp_job_date");
-        jp_job_start_time = receiver.getExtras().getString("jp_job_start_time").substring(0, 5);
-        jp_job_finish_time = receiver.getExtras().getString("jp_job_finish_time").substring(0, 5);
-        jp_job_tot_people = receiver.getExtras().getString("jp_job_tot_people");
-        jp_contents = receiver.getExtras().getString("jp_contents");
-        field_name = receiver.getExtras().getString("field_name");
+        manager_office_name = Sharedpreference.get_anything(mContext,"manager_office_name","memberinfo");
+        job_name = Sharedpreference.get_anything(mContext,"job_name","memberinfo");
+        jp_job_cost =Sharedpreference.get_anything(mContext,"jp_job_cost","memberinfo");
+        jp_job_date = Sharedpreference.get_anything(mContext,"jp_job_date","memberinfo");
+        jp_job_start_time = Sharedpreference.get_anything(mContext,"jp_job_start_time","memberinfo").substring(0, 5);
+        jp_job_finish_time = Sharedpreference.get_anything(mContext,"jp_job_finish_time","memberinfo").substring(0, 5);
+        jp_job_tot_people = Sharedpreference.get_anything(mContext,"jp_job_tot_people","memberinfo");
+        jp_contents = Sharedpreference.get_anything(mContext,"jp_contents","memberinfo");
+        field_name = Sharedpreference.get_anything(mContext,"field_name","memberinfo");
 
         Log.d("tqtqtqqtqtqtqtqtqtq", field_name + "   " + manager_office_name + " " + business_reg_num);
 
@@ -121,18 +125,6 @@ public class WorkInfoActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(WorkInfoActivity.this, FieldInfoActivity.class);
-                intent.putExtra("jp_num", jp_num);
-                intent.putExtra("field_name", field_name);
-                intent.putExtra("field_address", field_address);
-                intent.putExtra("jp_title", jp_title);
-                intent.putExtra("jp_job_date", jp_job_date);
-                intent.putExtra("jp_job_cost", jp_job_cost);
-                intent.putExtra("job_name", job_name);
-                intent.putExtra("manager_office_name", manager_office_name);
-                intent.putExtra("jp_job_tot_people", jp_job_tot_people);
-                intent.putExtra("jp_job_start_time", jp_job_start_time);
-                intent.putExtra("jp_job_finish_time", jp_job_finish_time);
-                intent.putExtra("jp_contents", jp_contents);
                 startActivity(intent);
             }
         });
@@ -141,7 +133,6 @@ public class WorkInfoActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(WorkInfoActivity.this, OfficeInfoActivity.class);
-                intent.putExtra("business_reg_num", business_reg_num);
                 startActivity(intent);
             }
         });
@@ -257,10 +248,11 @@ public class WorkInfoActivity extends AppCompatActivity {
                     if (!(AlreadyApply)) apply_btn.setText("지원하기");
                     else apply_btn.setText("지원 취소");
                 } catch (Exception e) {
-                    Log.d("mytest", e.toString());
+                    Log.d("mytest11111111111", e.toString());
                 }
             }
         };
+        String key="apply";
         ApplyRequest aRequest = new ApplyRequest(Sharedpreference.get_email(WorkInfoActivity.this, "worker_email","memberinfo"), jp_num, rListener);
         RequestQueue queue = Volley.newRequestQueue(WorkInfoActivity.this);
         queue.add(aRequest);
