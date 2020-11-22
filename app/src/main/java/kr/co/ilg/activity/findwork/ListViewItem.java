@@ -2,7 +2,7 @@ package kr.co.ilg.activity.findwork;
 
 public class ListViewItem {
 
-    public String title,date,job,place,business_reg_num,office,paid,jp_job_start_time, jp_job_finish_time, jp_contents, jp_num, fieldname;
+    public String title,date,job,place,business_reg_num,office,paid,jp_job_start_time, jp_job_finish_time, jp_contents, jp_num, fieldname, fieldcode;
     public int pay, current_people, total_people;
     public boolean urgency ;
     // 현장 정보의 일자리 정보

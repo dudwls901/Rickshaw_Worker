@@ -123,14 +123,14 @@ public class Fragment2 extends Fragment {
                         job_name[i] = JPInfo.getString("job_name");
                         field_address[i] = JPInfo.getString("field_address");
                         field_name[i] = JPInfo.getString("field_name");
-                        jp_job_picked_people[i]= JPInfo.getInt("jp_job_picked_people");
+                        jp_job_picked_people[i]= JPInfo.getInt("jp_job_current_people");
                         manager_office_name[i] = JPInfo.getString("manager_office_name");
 
 //                        jp_job_tot_people[i] = JPInfo.getInt("jp_job_tot_people");
 //                        jp_job_current_people[i]= JPInfo.getInt("current_people");
 //                        jp_contents[i] = JPInfo.getString("jp_contents");
 //                        jp_datetime[i] = JPInfo.getString("jp_datetime");
-                        Log.d("=====================", jp_title[i] + " | " + jp_num[i] + " | " + jp_job_cost[i] + " | " + jp_job_tot_people[i] + " | " + jp_job_picked_people[i]);
+                        //Log.d("=====================", jp_title[i] + " | " + jp_num[i] + " | " + jp_job_cost[i] + " | " + jp_job_tot_people[i] + " | " + jp_job_picked_people[i]);
 
                         if (is_picked[i])
                             pickworkInfoArrayList.add(new ListViewItem(jp_num[i], jp_title[i], jp_job_date[i], jp_job_cost[i], job_name[i], field_address[i], manager_office_name[i],

@@ -32,8 +32,9 @@ public class WorkInfoActivity extends AppCompatActivity {
     Toolbar toolbar;
     TextView title_tv, place_tv, office_info_tv, title_name_tv, job_tv, pay_tv, date_tv, time_tv, people_tv, contents_tv, address_tv;
     Button map_btn, apply_btn, call_btn, message_btn;
-    String jp_title, field_address, manager_office_name, job_name, jp_job_cost, jp_job_date, jp_job_start_time, jp_job_finish_time, jp_job_tot_people, jp_contents,
+    String jp_title, field_address, manager_office_name, job_name, jp_job_cost, jp_job_date, jp_job_start_time, jp_job_finish_time, jp_job_tot_people, jp_contents, field_code,
             business_reg_num, jp_num, field_name, manager_office_telnum, manager_phonenum;
+    boolean jp_is_urgency;
     Intent intent;
     String mapAddress;
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -155,17 +156,24 @@ public class WorkInfoActivity extends AppCompatActivity {
                             JSONObject jResponse = new JSONObject(response.substring(response.indexOf("{"), response.lastIndexOf("}") + 1));
                             boolean InsertApplySuccess = jResponse.getBoolean("InsertApplySuccess");
                             boolean DeleteApplySuccess = jResponse.getBoolean("DeleteApplySuccess");
+                            boolean AlreadyPicked = jResponse.getBoolean("AlreadyPicked");
+
                             if ((apply_btn.getText().toString()).equals("지원하기")) {
                                 if (InsertApplySuccess) {
                                     Toast.makeText(getApplicationContext(), "지원이 완료되었습니다.", Toast.LENGTH_SHORT).show();
+                                    apply_btn.setText("지원 취소");
                                 } else {
                                     Toast.makeText(getApplicationContext(), "지원 실패 : DB Error", Toast.LENGTH_SHORT).show();
                                 }
                             } else {
                                 if (DeleteApplySuccess) {
                                     Toast.makeText(getApplicationContext(), "지원이 취소되었습니다.", Toast.LENGTH_SHORT).show();
+                                    apply_btn.setText("지원하기");
                                 } else {
-                                    Toast.makeText(getApplicationContext(), "지원 취소 실패 : DB Error", Toast.LENGTH_SHORT).show();
+                                    //Toast.makeText(getApplicationContext(), "지원 취소 실패 : DB Error", Toast.LENGTH_SHORT).show();
+                                }
+                                if (AlreadyPicked) {
+                                    Toast.makeText(getApplicationContext(), "이미 선발되었습니다. 사무소로 취소 문의바랍니다.", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         } catch (Exception e) {

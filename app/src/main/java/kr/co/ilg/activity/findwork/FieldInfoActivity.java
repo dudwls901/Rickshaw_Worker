@@ -6,6 +6,8 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import kr.co.ilg.activity.mypage.GetJobsRequest;
+import kr.co.ilg.activity.mypage.JobSelectActivity;
 import kr.co.ilg.activity.mypage.getReviewRequest;
 
 import androidx.annotation.Nullable;
@@ -27,10 +29,11 @@ import java.util.ArrayList;
 public class FieldInfoActivity extends AppCompatActivity {
     RecyclerView work_info_RecyclerView, review_RecyclerView;
     RecyclerView.LayoutManager layoutManager, review_layoutManager;
+    ArrayList<ListViewItem> workInfoArrayList;
     Toolbar toolbar;
     ReviewAdapter myAdapter;
     Response.Listener aListener;
-    int k;
+    int k, jp_job_current_people;
     String name[], contents[],datetime[];
     TextView field_nameTv, field_addressTv;
     String jp_num, field_name, field_address, jp_title, jp_job_date, jp_job_cost, job_name, manager_office_name, jp_job_tot_people, jp_job_start_time, jp_job_finish_time, jp_contents;
@@ -80,8 +83,25 @@ public class FieldInfoActivity extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         work_info_RecyclerView.setLayoutManager(layoutManager);
 
-        ArrayList<ListViewItem> workInfoArrayList = new ArrayList<>();
-        workInfoArrayList.add(new ListViewItem(jp_title, jp_job_date, Integer.parseInt(jp_job_cost), job_name, field_address, manager_office_name, 1,
+        Response.Listener aListener = new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jResponse = new JSONObject(response.substring(response.indexOf("{"), response.lastIndexOf("}") + 1));
+                    jp_job_current_people = Integer.parseInt(jResponse.getString("crrntP"));
+                } catch (Exception e) {
+                    Log.d("mytest1111111", e.toString()); // 오류 출력
+                }
+
+            }
+        };
+        CrrntPRequest cpRequest = new CrrntPRequest(jp_num, aListener); // Request 처리 클래스
+        RequestQueue queue1 = Volley.newRequestQueue(FieldInfoActivity.this); // 데이터 전송에 사용할 Volley의 큐 객체 생
+        queue1.add(cpRequest);
+
+        Log.d("ttttttttqqqqqqqqqqq", jp_num + " " + String.valueOf(jp_job_current_people));
+        workInfoArrayList = new ArrayList<>();
+        workInfoArrayList.add(new ListViewItem(jp_title, jp_job_date, Integer.parseInt(jp_job_cost), job_name, field_address, manager_office_name, jp_job_current_people,
                 Integer.parseInt(jp_job_tot_people), jp_job_start_time, jp_job_finish_time, jp_contents, field_name));
         //workInfoArrayList.add(new ListViewItem("레미안 건축","2020-06-14",150000,"상수 레미안 아파트","건축","개미인력소",1,3));
 
@@ -93,10 +113,6 @@ public class FieldInfoActivity extends AppCompatActivity {
         review_RecyclerView.setHasFixedSize(true);
         review_layoutManager = new LinearLayoutManager(this);
         review_RecyclerView.setLayoutManager(review_layoutManager);
-
-
-
-
 
 
         aListener = new Response.Listener<String>() {
@@ -133,8 +149,8 @@ public class FieldInfoActivity extends AppCompatActivity {
         };
         getReviewRequest mainRequest = new getReviewRequest(jp_num, 2 , aListener);  // Request 처리 클래스
 
-        RequestQueue queue1 = Volley.newRequestQueue(FieldInfoActivity.this);  // 데이터 전송에 사용할 Volley의 큐 객체 생성
-        queue1.add(mainRequest);
+        RequestQueue queue2 = Volley.newRequestQueue(FieldInfoActivity.this);  // 데이터 전송에 사용할 Volley의 큐 객체 생성
+        queue2.add(mainRequest);
 
 
     }
