@@ -48,11 +48,12 @@ public class Sharedpreference {
         editor.commit();
 
     }
-    public static String get_anything(Context context, String key, String name) {
+    public static Boolean get_state(Context context, String key, String name) {
         SharedPreferences prefs = getPreferences(name,context);
-        String  value = prefs.getString(key, null);
+        Boolean value = prefs.getBoolean(key, false);
         return value;
     }
+
     public static void set_anything(Context context, String key, String value, String name) {
         SharedPreferences prefs = getPreferences(name,context);
         SharedPreferences.Editor editor = prefs.edit();
@@ -60,11 +61,12 @@ public class Sharedpreference {
         editor.commit();
 
     }
-    public static Boolean get_state(Context context, String key, String name) {
+    public static String get_anything(Context context, String key, String name) {
         SharedPreferences prefs = getPreferences(name,context);
-        Boolean value = prefs.getBoolean(key, false);
+        String  value = prefs.getString(key, null);
         return value;
     }
+
     public static void set_id(Context context, String key, String value, String name) {
         SharedPreferences prefs = getPreferences(name,context);
         SharedPreferences.Editor editor = prefs.edit();

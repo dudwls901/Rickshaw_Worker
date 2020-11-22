@@ -416,7 +416,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         }
 
                     }
-                    ListAdapter urgencyAdapter = new ListAdapter(getApplicationContext(), workInfoArrayList);
+                    ListAdapter urgencyAdapter = new ListAdapter(getApplicationContext(), workInfoArrayList, 0);
                     //urgencyAdapter.notifyDataSetChanged();
                     urgency_RecyclerView.setAdapter(urgencyAdapter);
 

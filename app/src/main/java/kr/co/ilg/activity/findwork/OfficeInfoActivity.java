@@ -201,7 +201,6 @@ public class OfficeInfoActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Log.d("mappppp",mapAddress);
                 Intent intent = new Intent(OfficeInfoActivity.this, WorkMapActivity.class);
-                intent.putExtra("mapAddress",mapAddress);
                 startActivity(intent);
             }
         });

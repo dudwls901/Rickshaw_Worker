@@ -38,9 +38,11 @@ public class ListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private  Context context;
     private ArrayList<ListViewItem> workInfo;
-    public ListAdapter(Context context, ArrayList<ListViewItem> workInfo){
+    private int k;
+    public ListAdapter(Context context, ArrayList<ListViewItem> workInfo, int k){
         this.context=context;
         this.workInfo=workInfo;
+        this.k=k;
     }
 
 
@@ -87,8 +89,9 @@ public class ListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             public void onClick(View view) {
                 Context context=view.getContext();
                 Intent intent=new Intent(context,WorkInfoActivity.class);
-
+                if(k==0)
                 Sharedpreference.set_anything(context, "business_reg_num",workInfo.get(position).business_reg_num,"memberinfo");
+                else Sharedpreference.set_anything(context, "business_reg_num",Sharedpreference.get_anything(context,"business_reg_num","memberinfo"),"memberinfo");
                 Sharedpreference.set_anything(context, "jp_num",workInfo.get(position).jp_num,"memberinfo");
                 Sharedpreference.set_anything(context, "jp_title",workInfo.get(position).title,"memberinfo");
                 Sharedpreference.set_anything(context, "field_address",workInfo.get(position).place,"memberinfo");
@@ -101,6 +104,7 @@ public class ListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 Sharedpreference.set_anything(context, "jp_job_tot_people",String.valueOf(workInfo.get(position).total_people),"memberinfo");
                 Sharedpreference.set_anything(context, "jp_contents",workInfo.get(position).jp_contents,"memberinfo");
                 Sharedpreference.set_anything(context, "field_name",workInfo.get(position).fieldname,"memberinfo");
+                Sharedpreference.set_anything(context, "current_people",String.valueOf(workInfo.get(position).current_people),"memberinfo");
 
 
                 /*intent.putExtra("business_reg_num", workInfo.get(position).business_reg_num);

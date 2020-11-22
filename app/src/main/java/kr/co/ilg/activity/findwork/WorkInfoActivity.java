@@ -39,6 +39,8 @@ public class WorkInfoActivity extends AppCompatActivity {
     Intent intent;
     String mapAddress;
     Context mContext;
+    int a=0;
+    String state;
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         switch (id) {
@@ -111,12 +113,39 @@ public class WorkInfoActivity extends AppCompatActivity {
         people_tv.setText(jp_job_tot_people + "명");
         contents_tv.setText(jp_contents);
         address_tv.setText(field_address);
+        /*if(Integer.parseInt(Sharedpreference.get_anything(mContext,"apply","memberinfo")) == 1){
+            apply_btn.setText("지원취소");
+        }
+        else apply_btn.setText("지원하기");*/
+
+        Response.Listener rListener = new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jResponse = new JSONObject(response.substring(response.indexOf("{"), response.lastIndexOf("}") + 1));
+                    Boolean apply = jResponse.getBoolean("apply"); // 첫번째에 true면 이미 지원함
+                    if(apply) {apply_btn.setText("지원취소"); state="지원취소";} else {apply_btn.setText("지원하기"); state="지원하기";}
+                    Boolean done = jResponse.getBoolean("done");
+                    if(done) apply_btn.setEnabled(false);
+                    Log.d("asdfasdfasdfasdfasdfads", apply +"   "+ done);
+                    if(a!=0){
+                        if(apply) Toast.makeText(WorkInfoActivity.this,"지원되었습니다",Toast.LENGTH_SHORT).show();
+                        else Toast.makeText(WorkInfoActivity.this,"지원 취소되었습니다",Toast.LENGTH_SHORT).show();
+                    }
+                } catch (Exception e) {
+                    Log.d("mytest", e.toString());
+                }
+            }
+        }; // 버튼
+        ApplyRequest aRequest = new ApplyRequest(Sharedpreference.get_email(WorkInfoActivity.this, "worker_email","memberinfo"), jp_num, "10",  rListener);
+        RequestQueue queue = Volley.newRequestQueue(WorkInfoActivity.this);
+        queue.add(aRequest);
 
         map_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(WorkInfoActivity.this, WorkMapActivity.class);
-                intent.putExtra("mapAddress",mapAddress);
+                //intent.putExtra("mapAddress",mapAddress);
                 startActivity(intent);
             }
         });
@@ -140,41 +169,8 @@ public class WorkInfoActivity extends AppCompatActivity {
         apply_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Response.Listener rListener = new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-                            JSONObject jResponse = new JSONObject(response.substring(response.indexOf("{"), response.lastIndexOf("}") + 1));
-                            boolean InsertApplySuccess = jResponse.getBoolean("InsertApplySuccess");
-                            boolean DeleteApplySuccess = jResponse.getBoolean("DeleteApplySuccess");
-                            boolean AlreadyPicked = jResponse.getBoolean("AlreadyPicked");
-
-                            if ((apply_btn.getText().toString()).equals("지원하기")) {
-                                if (InsertApplySuccess) {
-                                    Toast.makeText(getApplicationContext(), "지원이 완료되었습니다.", Toast.LENGTH_SHORT).show();
-                                    apply_btn.setText("지원 취소");
-                                } else {
-                                    Toast.makeText(getApplicationContext(), "지원 실패 : DB Error", Toast.LENGTH_SHORT).show();
-                                }
-                            } else {
-                                if (DeleteApplySuccess) {
-                                    Toast.makeText(getApplicationContext(), "지원이 취소되었습니다.", Toast.LENGTH_SHORT).show();
-                                    apply_btn.setText("지원하기");
-                                } else {
-                                    //Toast.makeText(getApplicationContext(), "지원 취소 실패 : DB Error", Toast.LENGTH_SHORT).show();
-                                }
-                                if (AlreadyPicked) {
-                                    Toast.makeText(getApplicationContext(), "이미 선발되었습니다. 사무소로 취소 문의바랍니다.", Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        } catch (Exception e) {
-                            Log.d("mytest", e.toString());
-                        }
-                    }
-                };
-                ApplyRequest aRequest;
-                if((apply_btn.getText().toString()).equals("지원하기")) aRequest = new ApplyRequest(Sharedpreference.get_email(WorkInfoActivity.this, "worker_email","memberinfo"), jp_num, "apply", rListener);
-                else aRequest = new ApplyRequest(Sharedpreference.get_email(WorkInfoActivity.this, "worker_email","memberinfo"), jp_num, "delete", rListener);
+                a++;
+                ApplyRequest aRequest = new ApplyRequest(Sharedpreference.get_email(WorkInfoActivity.this, "worker_email","memberinfo"), jp_num,"0",  rListener);
                 RequestQueue queue = Volley.newRequestQueue(WorkInfoActivity.this);
                 queue.add(aRequest);
             }
@@ -239,22 +235,6 @@ public class WorkInfoActivity extends AppCompatActivity {
             }
         });
 
-        Response.Listener rListener = new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                try {
-                    JSONObject jResponse = new JSONObject(response.substring(response.indexOf("{"), response.lastIndexOf("}") + 1));
-                    boolean AlreadyApply = jResponse.getBoolean("AlreadyApply");
-                    if (!(AlreadyApply)) apply_btn.setText("지원하기");
-                    else apply_btn.setText("지원 취소");
-                } catch (Exception e) {
-                    Log.d("mytest11111111111", e.toString());
-                }
-            }
-        };
-        String key="apply";
-        ApplyRequest aRequest = new ApplyRequest(Sharedpreference.get_email(WorkInfoActivity.this, "worker_email","memberinfo"), jp_num, rListener);
-        RequestQueue queue = Volley.newRequestQueue(WorkInfoActivity.this);
-        queue.add(aRequest);
+
     }
 }

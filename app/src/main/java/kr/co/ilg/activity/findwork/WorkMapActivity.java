@@ -2,6 +2,7 @@ package kr.co.ilg.activity.findwork;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -63,14 +64,15 @@ public class WorkMapActivity extends AppCompatActivity implements MapView.Curren
     Boolean fieldCheck, managerCheck;
     String firstScreen =null;
     private GpsTracker gpsTracker;
+    Context mContext;
 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mContext = this;
 //지도 생성
-        Intent receiver = getIntent();
-         firstScreen = receiver.getExtras().getString("mapAddress");
+         firstScreen =  Sharedpreference.get_anything(mContext,"field_address","memberinfo");
         mapView = new MapView(this);
         setContentView(R.layout.work_map);
         back = findViewById(R.id.back);
@@ -584,7 +586,8 @@ public class WorkMapActivity extends AppCompatActivity implements MapView.Curren
 
 
                             Intent intent = new Intent(WorkMapActivity.this, OfficeInfoActivity.class);
-                            intent.putExtra("business_reg_num", business_reg_num[0]);
+
+                            Sharedpreference.set_anything(mContext,"business_reg_num",business_reg_num[0],"memberinfo");
                             startActivity(intent);
                             mapView.refreshMapTiles();
                             finish();

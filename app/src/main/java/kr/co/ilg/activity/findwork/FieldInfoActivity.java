@@ -34,11 +34,11 @@ public class FieldInfoActivity extends AppCompatActivity {
     Toolbar toolbar;
     ReviewAdapter myAdapter;
     Response.Listener aListener;
-    int k, jp_job_current_people;
+    int k;
     String name[], contents[],datetime[];
     TextView field_nameTv, field_addressTv;
     Context mContext;
-    String jp_num, field_name, field_address, jp_title, jp_job_date, jp_job_cost, job_name, manager_office_name, jp_job_tot_people, jp_job_start_time, jp_job_finish_time, jp_contents;
+    String jp_num, field_name, field_address, jp_title,jp_job_current_people, jp_job_date, jp_job_cost, job_name, manager_office_name, jp_job_tot_people, jp_job_start_time, jp_job_finish_time, jp_contents;
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -76,6 +76,7 @@ public class FieldInfoActivity extends AppCompatActivity {
         jp_job_start_time = Sharedpreference.get_anything(mContext,"jp_job_start_time","memberinfo").substring(0, 5);
         jp_job_finish_time = Sharedpreference.get_anything(mContext,"jp_job_finish_time","memberinfo").substring(0, 5);
         jp_contents =  Sharedpreference.get_anything(mContext,"jp_contents","memberinfo");
+        jp_job_current_people = Sharedpreference.get_anything(mContext,"current_people","memberinfo");
 
 
         field_nameTv.setText(field_name);
@@ -87,29 +88,11 @@ public class FieldInfoActivity extends AppCompatActivity {
         work_info_RecyclerView.setLayoutManager(layoutManager);
         workInfoArrayList = new ArrayList<>();
 
-        Response.Listener aListener = new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                try {
-                    JSONObject jResponse = new JSONObject(response.substring(response.indexOf("{"), response.lastIndexOf("}") + 1));
-                    String jp_job_current_people = jResponse.getString("current_people");
-                    Log.d("mytest000000",response);
-                    Log.d("mytest00000",jp_title+ jp_job_date+ Integer.parseInt(jp_job_cost)+ job_name+ field_address+ manager_office_name+ Integer.parseInt(jp_job_current_people)+
-                            Integer.parseInt(jp_job_tot_people)+ jp_job_start_time+ jp_job_finish_time+ jp_contents+ field_name);
-               //todo 비즈니스넘이랑 jpnu new ListViewItem(jp_title 앞에 추가해야함
-                    workInfoArrayList.add(new ListViewItem(jp_title, jp_job_date, Integer.parseInt(jp_job_cost), job_name, field_address, manager_office_name, Integer.parseInt(jp_job_current_people),
-                            Integer.parseInt(jp_job_tot_people), jp_job_start_time, jp_job_finish_time, jp_contents, field_name));
-                } catch (Exception e) {
-                    Log.d("mytest1111111", e.toString()); // 오류 출력
-                }
-                ListAdapter workAdapter = new ListAdapter(getApplicationContext(), workInfoArrayList);
-                work_info_RecyclerView.setAdapter(workAdapter);
+        workInfoArrayList.add(new ListViewItem(jp_title, jp_job_date, Integer.parseInt(jp_job_cost), job_name, field_address, manager_office_name, Integer.parseInt(jp_job_current_people),
+                Integer.parseInt(jp_job_tot_people), jp_job_start_time, jp_job_finish_time, jp_contents, field_name));
+        ListAdapter workAdapter = new ListAdapter(getApplicationContext(), workInfoArrayList, 1);
+        work_info_RecyclerView.setAdapter(workAdapter);
 
-            }
-        };
-        CrrntPRequest cpRequest = new CrrntPRequest(jp_num, aListener); // Request 처리 클래스
-        RequestQueue queue1 = Volley.newRequestQueue(FieldInfoActivity.this); // 데이터 전송에 사용할 Volley의 큐 객체 생
-        queue1.add(cpRequest);
 
         Log.d("ttttttttqqqqqqqqqqq", jp_num + " " + String.valueOf(jp_job_current_people));
 
