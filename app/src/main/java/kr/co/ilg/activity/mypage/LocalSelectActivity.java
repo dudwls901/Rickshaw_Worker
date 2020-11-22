@@ -61,7 +61,7 @@ public class LocalSelectActivity extends AppCompatActivity {
         Intent modifyIntent = getIntent();
         isUpdate = modifyIntent.getIntExtra("isUpdate", 0);  // modify
 
-//        Toast.makeText(getApplicationContext(), "어디서 왔나~ " + isUpdate, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getApplicationContext(), "어디서 왔나~ " + isUpdate, Toast.LENGTH_SHORT).show();
 
         listview = findViewById(R.id.listview);
         listview1 = findViewById(R.id.listview1); // 지역 선택 리스트뷰

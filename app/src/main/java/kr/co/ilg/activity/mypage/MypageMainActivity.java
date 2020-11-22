@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -16,7 +17,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.Volley;
 import com.example.capstone.R;
+import com.example.capstone.TokenRequest;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
@@ -58,6 +63,16 @@ public class MypageMainActivity extends AppCompatActivity implements View.OnClic
         List<String> list = new ArrayList<>();
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, list);
         listview.setAdapter(adapter);
+        Response.Listener rListener = new Response.Listener<String>() {  // Generics를 String타입으로 한정
+            @Override
+            public void onResponse(String response) {
+                try {
+
+                } catch (Exception e) {
+                    Log.d("mytest", e.toString());
+                }
+            }
+        };
 
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -75,6 +90,10 @@ public class MypageMainActivity extends AppCompatActivity implements View.OnClic
                             intent = new Intent(MypageMainActivity.this, com.example.capstone.MainActivity.class);
                             Sharedpreference.clear(mContext,"autologin");
                             Sharedpreference.set_state(mContext,"switch1",false,"state");
+                            TokenRequest tokenRequest = new TokenRequest(Sharedpreference.get_email(mContext,"worker_email","memberinfo"), Sharedpreference.get_token(mContext,"token","state"),rListener);
+                            RequestQueue queue = Volley.newRequestQueue(MypageMainActivity.this);
+                            queue.add(tokenRequest);
+                            Sharedpreference.set_token(mContext,"token",null,"state");
                             startActivity(intent); break;
 
                 }
