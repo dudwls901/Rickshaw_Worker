@@ -31,8 +31,6 @@ public class CareerRVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         }
     }
 
-
-
     CareerRVAdapter(ArrayList<CareerRVItem> cList) {
         this.cList = cList;
     }

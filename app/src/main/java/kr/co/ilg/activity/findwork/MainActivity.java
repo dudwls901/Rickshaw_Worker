@@ -221,7 +221,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     }
                     ArrayAdapter adapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, localSidoList); // Adapter 생성
                     listview.setAdapter(adapter); //Adapter 연결
-                    listview.setSelection(0); // 첫 인덱스 설정
+                    //listview.setSelection(0); // 첫 인덱스 설정
 
                 } catch (Exception e) {
                     Log.d("mytest", e.toString() + "bbbbbbbbb" + response);
@@ -237,6 +237,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 local_sido = localSidoList[position];
                 sltTV.setText(localSidoList[position]); // 선택한 지역 상단에 띄우기
+                local_sigugun = "0";
                 k = position;
                 n++;
                 q = 1;
@@ -253,7 +254,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         if (local_sido != "전체") {
                             local_sigugun = localSigugunList[k][position];
                             sltTV.setText(local_sido + " " + local_sigugun);
-                        } else local_sigugun = "";
+                        } else local_sigugun = "0";
 
                     }
                 });
@@ -317,14 +318,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         }
                         if (j > 0) {
                             String jobs1[] = jobs.split(" ");
-                            for (int i = 0; i < jobs1.length; i++) {
-                                text2 = jobs1[i] + " " + text2;
+                            Log.d("jobjob",jobs);
+                            for (int i = 1; i < jobs1.length; i++) {
+                                text2 = text2 + " "+jobs1[i];
                             }
+                            jobsetting.setText(text2);
                         }
                         if (j == 0) {
-                            jobsetting.setText("전체선택");
+                            jobsetting.setText("전체");
+                            job_code[0] = 0;
+                            job_code[1] = 0;
+                            job_code[2] = 0;
                         }
-                        else jobsetting.setText(text2);
                     }
                 });
                 dlg.setNeutralButton("전체", new DialogInterface.OnClickListener() {
@@ -416,12 +421,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                        }
 
                     }
-                    ListAdapter urgencyAdapter = new ListAdapter(getApplicationContext(), workInfoArrayList, 0);
+                    ListAdapter urgencyAdapter = new ListAdapter(getApplicationContext(), workInfoArrayList);
                     //urgencyAdapter.notifyDataSetChanged();
                     urgency_RecyclerView.setAdapter(urgencyAdapter);
 
                 } catch (Exception e) {
-                    Log.d("mytest", e.toString());
+                    Log.d("mytestmain", e.toString());
                 }
             }
         };
@@ -526,6 +531,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         jobs = "";
         a = 0;
+        for (int i=0; i<3; i++){
+            job_code[i]=0;
+        }
 
         for (int k = 1; k < 17; k++) {
 
@@ -534,14 +542,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                     job[k].setBackground(getDrawable(R.drawable.custom_btn_mainclr));
                     check[k] = 1;
-                    j += 1;/*
-
-                    if(j==1){
-                        Sharedpreference.removejobcode12(mContext);
-                    }
-                    else if(j==2){
-                        Sharedpreference.removejobcode2(mContext);
-                    }*/
+                    j += 1;
 
                 } else if (check[k] == 1){
                     j -= 1;
@@ -552,14 +553,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             if(check[k]==1){
 
-                jobs = job[k].getText().toString() + "  " + jobs;
+                jobs = jobs+" "+job[k].getText().toString();
                 job_code[a] = k;
-                /*Sharedpreference.set_Jobcode(mContext,"jobcode"+a,String.valueOf(job_code[a]));
-                if(a==0){
-                    Sharedpreference.removejobcode12(mContext);
-                }else if (a==1){
-                    Sharedpreference.removejobcode2(mContext);
-                }*/
+
                 a++;
             }
         }

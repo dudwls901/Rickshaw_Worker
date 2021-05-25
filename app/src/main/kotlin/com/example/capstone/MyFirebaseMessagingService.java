@@ -16,6 +16,7 @@ import androidx.core.app.NotificationCompat;
 import com.google.firebase.messaging.RemoteMessage;
 
 import java.util.Map;
+import java.util.Random;
 
 import kr.co.ilg.activity.login.SplashActivity;
 
@@ -41,6 +42,7 @@ public class MyFirebaseMessagingService extends com.google.firebase.messaging.Fi
          String titleData = data.get("title");
 
          sendNotification(titleData,messageData);
+         // JSON형태로 갖고온 데이터들을 풀어서 알림형태로 띄워줌
      }
      @RequiresApi(api = Build.VERSION_CODES.O)
      private void sendNotification(String title, String message) {
@@ -58,7 +60,7 @@ public class MyFirebaseMessagingService extends com.google.firebase.messaging.Fi
          NotificationCompat.Builder notificationBuilder;
          NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
-         //SDK26부터 푸쉬에 채널항목에 대한 세팅이 필요하다.
+         //푸쉬에 채널항목에 대한 세팅
          if (Build.VERSION.SDK_INT >= 26) {
 
              String channelId = "test push";
@@ -84,9 +86,10 @@ public class MyFirebaseMessagingService extends com.google.firebase.messaging.Fi
                  .setAutoCancel(true)
                  .setSound(defaultSoundUri)
                  .setContentIntent(pendingIntent)
-                 .setContentText(message);
+                 .setContentText(message); // 알림 설정
+         Random random = new Random(); // 알림 ID를 모두 다르게 하여 겹쳐서 뜨지 않게 함
 
-         notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
+         notificationManager.notify(random.nextInt(10000) /* ID of notification */, notificationBuilder.build());
      }
 }
 

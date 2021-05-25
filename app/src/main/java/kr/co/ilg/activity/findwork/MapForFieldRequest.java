@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MapForFieldRequest extends StringRequest {
-    final static private String URL ="http://14.63.162.160/MapForField.php";
+    final static private String URL ="http://14.63.220.50/MapForField.php";
     private Map<String, String> parameters;
 
 

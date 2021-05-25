@@ -99,7 +99,7 @@ public class CareerActivity extends AppCompatActivity {
 
         cList = new ArrayList<>();
 
-        for (int i = 0; i < jobarray.length; i++) {
+        for (int i = 1; i < jobarray.length; i++) {
             cList.add(new CareerRVItem(jobarray[i]));
         }
 
@@ -145,11 +145,12 @@ public class CareerActivity extends AppCompatActivity {
             okBtn.setText("수정");
         else
             okBtn.setText("확인");
-        okBtn.setOnClickListener(new View.OnClickListener() {
+        okBtn.setOnClickListener(new View.OnClickListener() { // 회원가입과 나의 정보 페이지에서의 수정 페이지를 구분해줌
             @Override
             public void onClick(View v) {
                 String email = Sharedpreference.get_email(mContext, "worker_email","memberinfo");
                 Intent intent = new Intent(CareerActivity.this, AccountAddActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
                 Intent updateIntent = new Intent(CareerActivity.this, MyInfomanageActivity.class);
                 updateIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

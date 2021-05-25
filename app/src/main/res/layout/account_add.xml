@@ -28,13 +28,24 @@
         app:layout_constraintLeft_toLeftOf="parent"
         android:padding="10dp">
 
+        <TextView
+            android:id="@+id/bankTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@+id/bankSelectSpn"
+            app:layout_constraintBottom_toBottomOf="@+id/bankSelectSpn"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:text="은  행  명"
+            android:textSize="18sp" />
 
-            <Spinner
+        <Spinner
             android:id="@+id/bankSelectSpn"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/bankTV"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginLeft="10dp"
             android:spinnerMode="dialog"
             />
 
@@ -55,7 +66,7 @@
             app:layout_constraintTop_toBottomOf="@+id/bankSelectSpn"
             app:layout_constraintLeft_toLeftOf="parent"
             android:inputType="number"
-            android:paddingLeft="80dp" />
+            android:paddingLeft="85dp" />
 
         <Button
             android:id="@+id/addBtn"
@@ -71,7 +82,7 @@
             android:textSize="18sp"
             android:textColor="@color/WhiteColor"/>
 
-        <TextView
+<!--        <TextView
             android:id="@+id/nextTimeTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -79,7 +90,7 @@
             app:layout_constraintRight_toRightOf="parent"
             android:layout_margin="10dp"
             android:clickable="true"
-            android:text="건너뛰기"/>
+            android:text="건너뛰기"/>-->
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

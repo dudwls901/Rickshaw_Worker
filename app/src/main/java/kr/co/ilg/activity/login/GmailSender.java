@@ -49,7 +49,7 @@ public class GmailSender extends javax.mail.Authenticator {
                 ,"1", "2", "3", "4", "5", "6", "7", "8", "9"};
         String newCode = new String();
 
-        for (int x = 0; x < 5; x++) {
+        for (int x = 0; x < 5; x++) { // 난수 토큰을 만들어 인증번호 전송
             int random = (int) (Math.random() * str.length);
             newCode += str[random];
         }

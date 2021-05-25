@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.capstone.MainActivity;
 import com.example.capstone.R;
+import com.kakao.sdk.common.util.Utility;
 
 
 public class FindPasswordShowActivity extends AppCompatActivity {
@@ -39,5 +40,6 @@ public class FindPasswordShowActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
     }
 }

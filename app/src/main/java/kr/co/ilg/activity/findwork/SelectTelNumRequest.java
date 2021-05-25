@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class SelectTelNumRequest extends StringRequest {
-    final static private String URL = "http://14.63.162.160/SelectTelNum.php";
+    final static private String URL = "http://14.63.220.50/SelectTelNum.php";
 
     private Map<String, String> parameters;
 

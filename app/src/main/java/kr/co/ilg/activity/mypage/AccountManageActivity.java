@@ -44,7 +44,10 @@ public class AccountManageActivity extends Activity {
         ImageButton accountDelete = findViewById(R.id.accountDelete);
 
         membernickname.setText(Sharedpreference.get_Nickname(mContext, "worker_name","memberinfo"));
-        bankaccount.setText(Sharedpreference.get_bankaccount(mContext,"worker_bankaccount","memberinfo"));
+        if(!Sharedpreference.get_bankaccount(mContext,"worker_bankaccount","memberinfo").equals("")) {
+            bankaccount.setText(Sharedpreference.get_bankaccount(mContext, "worker_bankaccount", "memberinfo"));
+        }
+        else bankaccount.setText("계좌를 추가해주세요");
         bankname.setText(Sharedpreference.get_bankname(mContext,"worker_bankname","memberinfo"));
 
         accountmodify.setOnClickListener(new View.OnClickListener() {

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Paint;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.Html;
 import android.util.Log;
 import android.view.MenuItem;
@@ -37,6 +38,7 @@ public class WorkInfoActivity extends AppCompatActivity {
     boolean jp_is_urgency;
     Intent intent;
     String mapAddress;
+    WorkMapActivity workMapActivity = new WorkMapActivity();
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         switch (id) {
@@ -83,6 +85,7 @@ public class WorkInfoActivity extends AppCompatActivity {
         jp_num = receiver.getExtras().getString("jp_num");
         jp_title = receiver.getExtras().getString("jp_title");
         field_address = receiver.getExtras().getString("field_address");
+        jp_is_urgency = receiver.getExtras().getBoolean("urgency");
         mapAddress = field_address;
         manager_office_name = receiver.getExtras().getString("manager_office_name");
         job_name = receiver.getExtras().getString("job_name");
@@ -114,7 +117,17 @@ public class WorkInfoActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(WorkInfoActivity.this, WorkMapActivity.class);
                 intent.putExtra("mapAddress",mapAddress);
+                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);;
                 startActivity(intent);
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        workMapActivity.setMapCenter(mapAddress);
+                    }
+                }, 100); //딜레이 타임 조절 0.1초
+
             }
         });
 
@@ -122,6 +135,7 @@ public class WorkInfoActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(WorkInfoActivity.this, FieldInfoActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.putExtra("jp_num", jp_num);
                 intent.putExtra("field_name", field_name);
                 intent.putExtra("field_address", field_address);
@@ -144,6 +158,7 @@ public class WorkInfoActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(WorkInfoActivity.this, OfficeInfoActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.putExtra("business_reg_num", business_reg_num);
                 startActivity(intent);
             }
@@ -159,7 +174,7 @@ public class WorkInfoActivity extends AppCompatActivity {
                             JSONObject jResponse = new JSONObject(response.substring(response.indexOf("{"), response.lastIndexOf ("}") + 1));
                             boolean InsertApplySuccess = jResponse.getBoolean("InsertApplySuccess");
                             boolean DeleteApplySuccess = jResponse.getBoolean("DeleteApplySuccess");
-                            boolean AlreadyPicked = jResponse.getBoolean("AlreadyApply");
+                            boolean AlreadyPicked = jResponse.getBoolean("AlreadyPicked");
                             Log.d("mytestapplyresponse", jResponse.toString());
 
                             if ((apply_btn.getText().toString()).equals("지원하기")) {
@@ -170,19 +185,19 @@ public class WorkInfoActivity extends AppCompatActivity {
                                     Toast.makeText(getApplicationContext(), "지원 실패 : DB Error", Toast.LENGTH_SHORT).show();
                                 }
                             } else {
-                                if (DeleteApplySuccess) {
-                                    Toast.makeText(getApplicationContext(), "지원이 취소되었습니다.", Toast.LENGTH_SHORT).show();
-                                    apply_btn.setText("지원하기");
-                                } else {
-                                    //Toast.makeText(getApplicationContext(), "지원 취소 실패 : DB Error", Toast.LENGTH_SHORT).show();
-                                }
                                 if (AlreadyPicked) {
                                     Toast.makeText(getApplicationContext(), "이미 선발되었습니다. 사무소로 취소 문의바랍니다.", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    if (DeleteApplySuccess) {
+                                        Toast.makeText(getApplicationContext(), "지원이 취소되었습니다.", Toast.LENGTH_SHORT).show();
+                                        apply_btn.setText("지원하기");
+                                    } else {
+                                        Toast.makeText(getApplicationContext(), "지원 취소 실패 : DB Error", Toast.LENGTH_SHORT).show();
+                                    }
                                 }
                             }
                         } catch (Exception e) {
                             Log.d("mytestapply", e.toString());
-
                         }
                     }
                 };
@@ -207,6 +222,7 @@ public class WorkInfoActivity extends AppCompatActivity {
                                 manager_phonenum = jResponse.getString("manager_phonenum");
                                 Uri uri = Uri.parse("tel:" + manager_phonenum);
                                 intent = new Intent(Intent.ACTION_DIAL, uri);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 startActivity(intent);
                             } else {
                                 Toast.makeText(WorkInfoActivity.this, "연락처 로드 실패", Toast.LENGTH_SHORT).show();
@@ -235,6 +251,7 @@ public class WorkInfoActivity extends AppCompatActivity {
                             if (selectTelNum) {
                                 manager_phonenum = jResponse.getString("manager_phonenum");
                                 intent = new Intent(Intent.ACTION_SENDTO);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 intent.putExtra("sms_body", "인력거 보고 연락드립니다.");
                                 intent.setData(Uri.parse("smsto:" + Uri.encode(manager_phonenum)));
                                 startActivity(intent);

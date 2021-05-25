@@ -29,18 +29,6 @@ public class Sharedpreference {
         editor.commit();
 
     }
-    public static void set_token(Context context, String key, String value, String name) {
-        SharedPreferences prefs = getPreferences(name,context);
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.putString(key, value);
-        editor.commit();
-
-    }
-    public static String get_token(Context context, String key, String name) {
-        SharedPreferences prefs = getPreferences(name,context);
-        String  value = prefs.getString(key, null);
-        return value;
-    }
     public static void set_state(Context context, String key, Boolean value, String name) {
         SharedPreferences prefs = getPreferences(name,context);
         SharedPreferences.Editor editor = prefs.edit();
@@ -53,20 +41,18 @@ public class Sharedpreference {
         Boolean value = prefs.getBoolean(key, false);
         return value;
     }
-
-    public static void set_anything(Context context, String key, String value, String name) {
+    public static void set_state1(Context context, String key, Boolean value, String name) {
         SharedPreferences prefs = getPreferences(name,context);
         SharedPreferences.Editor editor = prefs.edit();
-        editor.putString(key, value);
+        editor.putBoolean(key, value);
         editor.commit();
 
     }
-    public static String get_anything(Context context, String key, String name) {
+    public static Boolean get_state1(Context context, String key, String name) {
         SharedPreferences prefs = getPreferences(name,context);
-        String  value = prefs.getString(key, null);
+        Boolean value = prefs.getBoolean(key, true);
         return value;
     }
-
     public static void set_id(Context context, String key, String value, String name) {
         SharedPreferences prefs = getPreferences(name,context);
         SharedPreferences.Editor editor = prefs.edit();
@@ -75,6 +61,18 @@ public class Sharedpreference {
 
     }
     public static String get_id(Context context, String key, String name) {
+        SharedPreferences prefs = getPreferences(name,context);
+        String value = prefs.getString(key, null);
+        return value;
+    }
+    public static void set_token(Context context, String key, String value, String name) {
+        SharedPreferences prefs = getPreferences(name,context);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString(key, value);
+        editor.commit();
+
+    }
+    public static String get_token(Context context, String key, String name) {
         SharedPreferences prefs = getPreferences(name,context);
         String value = prefs.getString(key, null);
         return value;
@@ -112,7 +110,7 @@ public class Sharedpreference {
     }
     public static String get_email(Context context, String key, String name) {
         SharedPreferences prefs = getPreferences(name,context);
-        String value = prefs.getString(key, "memberinfo");
+        String value = prefs.getString(key, null);
         return value;
     } // 일반이메일 저장
     public static void set_Password(Context context, String key, String value, String name) {
@@ -172,7 +170,7 @@ public class Sharedpreference {
 
     }public static String get_Phonenum(Context context, String key, String name) {
         SharedPreferences prefs = getPreferences(name,context);
-        String value = prefs.getString(key, "memberinfo");
+        String value = prefs.getString(key, null);
         return value;
     } // 휴대전화번호 저장
 
@@ -184,7 +182,7 @@ public class Sharedpreference {
 
     }public static String get_bankaccount(Context context, String key, String name) {
         SharedPreferences prefs = getPreferences(name,context);
-        String value = prefs.getString(key, "memberinfo");
+        String value = prefs.getString(key, null);
         return value;
     } // 은행계좌 저장
     public static void set_Bankname(Context context, String key, String value, String name) {
@@ -208,7 +206,7 @@ public class Sharedpreference {
 
     }public static String get_introduce(Context context, String key, String name) {
         SharedPreferences prefs = getPreferences(name,context);
-        String value = prefs.getString(key, "memberinfo");
+        String value = prefs.getString(key, null);
         return value;
     } // 한줄소개 저장
     public static void set_Jobname(Context context, String key, String value, String name) {

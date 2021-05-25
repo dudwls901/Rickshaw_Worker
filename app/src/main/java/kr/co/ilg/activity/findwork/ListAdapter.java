@@ -38,11 +38,9 @@ public class ListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private  Context context;
     private ArrayList<ListViewItem> workInfo;
-    private int k;
-    public ListAdapter(Context context, ArrayList<ListViewItem> workInfo, int k){
+    public ListAdapter(Context context, ArrayList<ListViewItem> workInfo){
         this.context=context;
         this.workInfo=workInfo;
-        this.k=k;
     }
 
 
@@ -89,25 +87,8 @@ public class ListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             public void onClick(View view) {
                 Context context=view.getContext();
                 Intent intent=new Intent(context,WorkInfoActivity.class);
-                if(k==0)
-                Sharedpreference.set_anything(context, "business_reg_num",workInfo.get(position).business_reg_num,"memberinfo");
-                else Sharedpreference.set_anything(context, "business_reg_num",Sharedpreference.get_anything(context,"business_reg_num","memberinfo"),"memberinfo");
-                Sharedpreference.set_anything(context, "jp_num",workInfo.get(position).jp_num,"memberinfo");
-                Sharedpreference.set_anything(context, "jp_title",workInfo.get(position).title,"memberinfo");
-                Sharedpreference.set_anything(context, "field_address",workInfo.get(position).place,"memberinfo");
-                Sharedpreference.set_anything(context, "manager_office_name",workInfo.get(position).office,"memberinfo");
-                Sharedpreference.set_anything(context, "job_name",workInfo.get(position).job,"memberinfo");
-                Sharedpreference.set_anything(context, "jp_job_cost",String.valueOf(workInfo.get(position).pay),"memberinfo");
-                Sharedpreference.set_anything(context, "jp_job_date",workInfo.get(position).date,"memberinfo");
-                Sharedpreference.set_anything(context, "jp_job_start_time",workInfo.get(position).jp_job_start_time,"memberinfo");
-                Sharedpreference.set_anything(context, "jp_job_finish_time",workInfo.get(position).jp_job_finish_time,"memberinfo");
-                Sharedpreference.set_anything(context, "jp_job_tot_people",String.valueOf(workInfo.get(position).total_people),"memberinfo");
-                Sharedpreference.set_anything(context, "jp_contents",workInfo.get(position).jp_contents,"memberinfo");
-                Sharedpreference.set_anything(context, "field_name",workInfo.get(position).fieldname,"memberinfo");
-                Sharedpreference.set_anything(context, "current_people",String.valueOf(workInfo.get(position).current_people),"memberinfo");
-
-
-                /*intent.putExtra("business_reg_num", workInfo.get(position).business_reg_num);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.putExtra("business_reg_num", workInfo.get(position).business_reg_num);
                 intent.putExtra("jp_num", workInfo.get(position).jp_num);
                 intent.putExtra("jp_title",workInfo.get(position).title);
                 intent.putExtra("field_address",workInfo.get(position).place);
@@ -120,8 +101,10 @@ public class ListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 intent.putExtra("jp_job_tot_people",String.valueOf(workInfo.get(position).total_people));
                 intent.putExtra("jp_contents",workInfo.get(position).jp_contents);
                 intent.putExtra("field_name",workInfo.get(position).fieldname);
-                Log.d("mytest00000",workInfo.get(position).business_reg_num+workInfo.get(position).jp_num+workInfo.get(position).title+workInfo.get(position).place+workInfo.get(position).office+workInfo.get(position).job+workInfo.get(position).pay+workInfo.get(position).date+workInfo.get(position).jp_job_start_time+workInfo.get(position).jp_job_finish_time+workInfo.get(position).total_people+workInfo.get(position).jp_contents+workInfo.get(position).fieldname);*/
+                intent.putExtra("urgency",workInfo.get(position).urgency);
                 context.startActivity(intent);
+                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);;
             }
 
         });
@@ -130,6 +113,6 @@ public class ListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
     @Override
     public int getItemCount() {
-        return workInfo.size();
+        return  workInfo.size();
     }
 }

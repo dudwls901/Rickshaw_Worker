@@ -43,15 +43,15 @@ public class SignupEmailActivity extends AppCompatActivity {
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               if (sign == true ) {
+             //  if (sign == true ) {
 
                     Intent intent = new Intent(SignupEmailActivity.this, SignupPasswordActivity.class);
                    intent.putExtra("worker_email",emailET.getText().toString());
                     startActivity(intent);
-               }
-                else{
+               //}
+               // else{
                     Toast.makeText(SignupEmailActivity.this, "인증 완료해주십시오", Toast.LENGTH_SHORT).show();
-                }
+              //  }
 
 
             }
@@ -62,6 +62,8 @@ public class SignupEmailActivity extends AppCompatActivity {
                 if (Code.equals(codeET.getText().toString()) ) {
                     Toast.makeText(SignupEmailActivity.this, "인증 완료", Toast.LENGTH_SHORT).show();
                     codeBtn.setEnabled(false);
+                    emailET.setFocusable(false);
+                    codeET.setFocusable(false);
                     sign = true;
                 }
                 else{
@@ -75,15 +77,16 @@ public class SignupEmailActivity extends AppCompatActivity {
         sendCodeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                GmailSender sender = new GmailSender("sun83324@gmail.com", "sun0811****");
+                GmailSender sender = new GmailSender("sun83324@gmail.com", "sun0811****"); // 발신 이메일과 비밀번호 설정
                 Code = sender.getEmailCode();
+                Log.d("CODE : ",Code);
 
                 if (android.os.Build.VERSION.SDK_INT > 9) {
                     StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
                     StrictMode.setThreadPolicy(policy);
                 }
                 try {
-                    sender.sendMail("인력거 인증번호 알림", "인증번호 : "+Code , emailET.getText().toString());// 넣을것
+                    sender.sendMail("인력거 인증번호 알림", "인증번호 : "+Code , emailET.getText().toString());
                     Toast.makeText(SignupEmailActivity.this, "발송 완료", Toast.LENGTH_SHORT).show();
                     codeBtn.setEnabled(true);
                 }

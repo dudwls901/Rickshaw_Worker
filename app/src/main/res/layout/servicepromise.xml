@@ -13,7 +13,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="이용약관"
+            android:text="서비스 약관"
             android:textColor="@color/WhiteColor"
             android:textSize="20sp" />
 
@@ -67,7 +67,7 @@
                 android:background="@drawable/line"
                 android:textColor="@android:color/black"
                 android:layout_weight="1"
-                android:text="개인정보 제3자 제공동의"/>
+                android:text="개인정보처리방침"/>
             <Button
                 android:id="@+id/btn4"
                 android:layout_width="wrap_content"
@@ -88,8 +88,8 @@
         android:layout_marginBottom="10dp"
         android:background="@drawable/line"
         android:id="@+id/text1"
-        android:text="약관 내용"
-        android:padding="25dp"
+        android:scrollbars="vertical"
+        android:padding="20dp"
         />
 
 

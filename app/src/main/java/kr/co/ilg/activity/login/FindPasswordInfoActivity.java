@@ -28,7 +28,7 @@ public class FindPasswordInfoActivity extends AppCompatActivity {
     String Code, worker_email;
     String worker_name = "";
     String worker_phonenum = "";
-    boolean sign=false;
+    boolean sign = false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -53,12 +53,13 @@ public class FindPasswordInfoActivity extends AppCompatActivity {
         codeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (Code.equals(codeET.getText().toString()) ) {
+                if (Code.equals(codeET.getText().toString())) {
                     Toast.makeText(FindPasswordInfoActivity.this, "인증 완료", Toast.LENGTH_SHORT).show();
                     codeBtn.setEnabled(false);
+                    emailET.setFocusable(false);
+                    codeET.setFocusable(false);
                     sign = true;
-                }
-                else{
+                } else {
                     Toast.makeText(FindPasswordInfoActivity.this, "인증 오류입니다", Toast.LENGTH_SHORT).show();
                     sign = false;
                 }
@@ -87,12 +88,10 @@ public class FindPasswordInfoActivity extends AppCompatActivity {
                             //searchID = jResponse.getString("userID");
 
 
+                            if (isExistEmail) {  // ID가 존재 하면
 
-                            if(isExistEmail) {  // ID가 존재 하면
-
-                                Toast.makeText(FindPasswordInfoActivity.this, "등록된 이메일입니다." + worker_email, Toast.LENGTH_SHORT).show();
-/*
-                                GmailSender sender = new GmailSender("sun83324@gmail.com", "wjdtjsdn2");
+                                //Toast.makeText(FindPasswordInfoActivity.this, "등록된 이메일입니다." + worker_email, Toast.LENGTH_SHORT).show();
+                                GmailSender sender = new GmailSender("sun83324@gmail.com", "sun0811****");
                                 Code = sender.getEmailCode();
 
                                 if (android.os.Build.VERSION.SDK_INT > 9) {
@@ -100,27 +99,23 @@ public class FindPasswordInfoActivity extends AppCompatActivity {
                                     StrictMode.setThreadPolicy(policy);
                                 }
                                 try {
-                                    sender.sendMail("인력거 인증번호 알림", "인증번호 : "+Code , worker_email);// 넣을것
+                                    sender.sendMail("인력거 인증번호 알림", "인증번호 : " + Code, worker_email);// 넣을것
                                     Toast.makeText(FindPasswordInfoActivity.this, "발송 완료", Toast.LENGTH_SHORT).show();
                                     codeBtn.setEnabled(true);
-                                }
-                                catch (Exception e)
-                                {
+                                } catch (Exception e) {
                                     Log.e("SendMail", e.getMessage(), e);
                                     Toast.makeText(FindPasswordInfoActivity.this, "올바른 메일을 입력해주십시오", Toast.LENGTH_SHORT).show();
                                 }
 
- */
                             } else {  // ID가 존재 하지 않는다면
-                                Toast.makeText(FindPasswordInfoActivity.this, "등록되지 않은 이메일입니다." + worker_email, Toast.LENGTH_SHORT).show();
+                                Toast.makeText(FindPasswordInfoActivity.this, "등록되지 않은 이메일입니다.", Toast.LENGTH_SHORT).show();
                             }
-
                         } catch (Exception e) {
                             Log.d("mytest", e.toString());
                         }
                     }
                 };
- //               FindPwRequest fpRequest = new FindPwRequest(worker_email, rListener);  // Request 처리 클래스
+                //               FindPwRequest fpRequest = new FindPwRequest(worker_email, rListener);  // Request 처리 클래스
                 FindPwRequest fpRequest = new FindPwRequest("emailCheck", worker_email, worker_name, worker_phonenum, rListener);  // Request 처리 클래스
                 //FindPwRequest fpRequest = new FindPwRequest("emailCheck", worker_email, rListener);  // Request 처리 클래스
 
@@ -136,40 +131,48 @@ public class FindPasswordInfoActivity extends AppCompatActivity {
                 worker_name = nameET.getText().toString();
                 worker_phonenum = phonenumET.getText().toString();
 
-                Response.Listener rListener = new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
+                if (sign) {  // 인증완료
+                    if ((worker_name.trim()).equals("") || (worker_phonenum.trim()).equals("")) {
+                        Toast.makeText(FindPasswordInfoActivity.this, "모든 값을 입력해주세요.", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Response.Listener rListener = new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
 
-                        try {
-                            JSONObject jResponse = new JSONObject(response.substring(response.indexOf("{"), response.lastIndexOf("}") + 1));
+                                try {
+                                    JSONObject jResponse = new JSONObject(response.substring(response.indexOf("{"), response.lastIndexOf("}") + 1));
 
-                            boolean isExistWorker = jResponse.getBoolean("isExistWorker");
+                                    boolean isExistWorker = jResponse.getBoolean("isExistWorker");
 
-                            if(isExistWorker) {  // 회원이 존재하면
-                                String worker_pw = jResponse.getString("worker_pw");
-                                String worker_email = jResponse.getString("worker_email");
+                                    if (isExistWorker) {  // 회원이 존재하면
+                                        String worker_pw = jResponse.getString("worker_pw");
+                                        String worker_email = jResponse.getString("worker_email");
 
-                                Intent intent = new Intent(FindPasswordInfoActivity.this, FindPasswordShowActivity.class);
-                                intent.putExtra("pw", worker_pw);
-                                intent.putExtra("email", worker_email);
-                                startActivity(intent);
+                                        Intent intent = new Intent(FindPasswordInfoActivity.this, FindPasswordShowActivity.class);
+                                        intent.putExtra("pw", worker_pw);
+                                        intent.putExtra("email", worker_email);
+                                        startActivity(intent);
 
-                                //Toast.makeText(FindPasswordInfoActivity.this, "등록된 "+worker_pw, Toast.LENGTH_SHORT).show();
+                                        //Toast.makeText(FindPasswordInfoActivity.this, "등록된 "+worker_pw, Toast.LENGTH_SHORT).show();
 
-                            } else {  // 회원이 존재하지 않는다면
+                                    } else {  // 회원이 존재하지 않는다면
 
-                                Toast.makeText(FindPasswordInfoActivity.this, "등록되지 않은 회원입니다.", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(FindPasswordInfoActivity.this, "등록되지 않은 회원입니다.", Toast.LENGTH_SHORT).show();
+                                    }
+
+                                } catch (Exception e) {
+                                    Log.d("mytest", e.toString());
+                                }
                             }
+                        };
+                        FindPwRequest fpRequest = new FindPwRequest("workerCheck", worker_email, worker_name, worker_phonenum, rListener);  // Request 처리 클래스
 
-                        } catch (Exception e) {
-                            Log.d("mytest", e.toString());
-                        }
+                        RequestQueue queue = Volley.newRequestQueue(FindPasswordInfoActivity.this);  // 데이터 전송에 사용할 Volley의 큐 객체 생성
+                        queue.add(fpRequest);  // Volley로 구현된 큐에 ValidateRequest 객체를 넣어둠으로써 실제로 서버 연동 발생
                     }
-                };
-                FindPwRequest fpRequest = new FindPwRequest("workerCheck", worker_email, worker_name, worker_phonenum, rListener);  // Request 처리 클래스
-
-                RequestQueue queue = Volley.newRequestQueue(FindPasswordInfoActivity.this);  // 데이터 전송에 사용할 Volley의 큐 객체 생성
-                queue.add(fpRequest);  // Volley로 구현된 큐에 ValidateRequest 객체를 넣어둠으로써 실제로 서버 연동 발생
+                } else {
+                    Toast.makeText(FindPasswordInfoActivity.this, "이메일 인증을 완료해주세요.", Toast.LENGTH_SHORT).show();
+                }
             }
 
         });

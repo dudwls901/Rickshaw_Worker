@@ -20,23 +20,13 @@ public class MyFirebaseInstanceservice extends FirebaseInstanceIdService {
                   " " + refreshedToken);
           // 생성한 토큰을 서버로 날려서 저장하기 위해서 만든거
           sendRegistrationToServer(refreshedToken);
+          // 앱 설치시, 앱의 변동이 클시 한번 호출됨.
      }
      private void sendRegistrationToServer(String token) {
-         String id = Sharedpreference.get_email(getApplicationContext(),"worker_email","memberinfo");
-         Log.d(TAG,id);
-         Response.Listener rListener = new Response.Listener<String>() {  // Generics를 String타입으로 한정
-             @Override
-             public void onResponse(String response) {
-                 try {
 
-                 } catch (Exception e) {
-                     Log.d("mytest", e.toString());
-                 }
-             }
-         };
-         TokenRequest tokenRequest = new TokenRequest(id,token,rListener);
-         RequestQueue queue = Volley.newRequestQueue(MyFirebaseInstanceservice.this);
-         queue.add(tokenRequest);
+         Log.d("ㅡㅡ토큰이 변경되었다ㅡㅡ",token);
+         // 토큰의 변동이있을때마다 로그를 찍어줌.
+         //서버에 토큰 정보 저장은 로그인할때 되게끔 연동함
 
      }
 }

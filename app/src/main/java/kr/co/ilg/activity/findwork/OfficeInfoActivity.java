@@ -3,6 +3,7 @@ package kr.co.ilg.activity.findwork;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -41,6 +42,7 @@ public class OfficeInfoActivity extends AppCompatActivity {
     int k;
     String name[], contents[], datetime[], key[];
     RecyclerView.LayoutManager layoutManager;
+    WorkMapActivity workMapActivity = new WorkMapActivity();
     String mapAddress;
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -98,7 +100,12 @@ public class OfficeInfoActivity extends AppCompatActivity {
                         mapAddress =jResponse.getString("manager_office_address");
                         office_manager_name.setText(jResponse.getString("manager_name"));
                         office_manager_tel.setText(officemanagertel);
-                        office_introduce.setText(jResponse.getString("manager_office_info"));
+                        if(jResponse.getString("manager_office_info").equals("null")) {
+                            office_introduce.setText("안녕하세요. "+jResponse.getString("manager_office_name")+"입니다");
+                        }
+                        else {
+                            office_introduce.setText(jResponse.getString("manager_office_info"));
+                        }
                         //office_introduce.setText("안녕하세요 ★개미인력★입니다.\n현재 마포구 일대의 보내는 인력만 20명이 넘습니다.\n단가는 평균 15만원에서 16만원 정도이구요,\n초보 경력 상관없이 일자리 많으니까 많은 지원부탁드립니다!");
                     } else {
                         Toast.makeText(getApplicationContext(), "사무소 정보 로드 실패", Toast.LENGTH_SHORT).show();
@@ -199,7 +206,16 @@ public class OfficeInfoActivity extends AppCompatActivity {
                 Log.d("mappppp",mapAddress);
                 Intent intent = new Intent(OfficeInfoActivity.this, WorkMapActivity.class);
                 intent.putExtra("mapAddress",mapAddress);
+                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        workMapActivity.setMapCenter(mapAddress);
+                    }
+                }, 100); //딜레이 타임 조절 0.1초
             }
         });
     }

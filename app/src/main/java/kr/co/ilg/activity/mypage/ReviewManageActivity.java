@@ -47,6 +47,7 @@ public class ReviewManageActivity extends Activity {
     String key[],name[], contents[], datetime[], ForOInfo[];
     String worker_email;
     Context mContext;
+    TextView nonereview;
     int k, flag;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -55,8 +56,9 @@ public class ReviewManageActivity extends Activity {
 
         setContentView(R.layout.writtenreview);
 
-        mRecyclerView = findViewById(R.id.reviewrecycle3);
+        mRecyclerView = findViewById(R.id.reviewrecycle);
         spinner = findViewById(R.id.reviewspinner);
+        nonereview = findViewById(R.id.nonereview);
         worker_email = Sharedpreference.get_email(mContext,"worker_email","memberinfo");
 
         mRecyclerView.setHasFixedSize(true);
@@ -69,12 +71,7 @@ public class ReviewManageActivity extends Activity {
         spinner.setAdapter(adapter);
         spinner.setSelection(0);
 
-
-
-        // 구분선 넣기
-
-
-        rListener = new Response.Listener<String>() {
+        rListener = new Response.Listener<String>() { // 리뷰 채워넣기
             @Override
             public void onResponse(String response) {
 
@@ -91,6 +88,7 @@ public class ReviewManageActivity extends Activity {
                     ForOInfo =  new String[k];
 
                     cList = new ArrayList<>();
+                    int u=0;
 
                     for (int i = 0; i < array.length(); i++) {
                         JSONObject MainRequest = array.getJSONObject(i);
@@ -98,14 +96,19 @@ public class ReviewManageActivity extends Activity {
                         contents[i] = MainRequest.getString("contents");
                         datetime[i] = MainRequest.getString("datetime");
                         key[i] = MainRequest.getString("key");
+                        if(key[i].equals("0")) u++;
                         ForOInfo[i] = MainRequest.getString("ForOInfo");
                         Log.d("ttttttttttttttt",key[i]+"           "+name[i]);
                         if(key[i].equals("0")) {  // 현장
                             cList.add(new mypagereviewitem(name[i], contents[i], datetime[i], ForOInfo[i]));
 
-                        } else {
+                        } else { //모든 리뷰를 한꺼번에 다 갖고온 후 키값을 통해서 구분하여 list에 넣어주기
                         }
                     } // 값넣기*/
+                    if(u==0){
+                        nonereview.setVisibility(View.VISIBLE);
+                    }
+                    else nonereview.setVisibility(View.INVISIBLE);
                     myAdapter = new mypagereviewAdapter(cList);
                     mRecyclerView.setAdapter(myAdapter);
                     myAdapter.setOnItemClickListener(new mypagereviewAdapter.OnItemClickListener() { // 리싸이클러뷰 속 버튼이 클릭될 시 이벤트
@@ -162,28 +165,48 @@ public class ReviewManageActivity extends Activity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                 if(position==0){
+                    int j=0;
                     cList = new ArrayList<>();
                     for (int i=0; i<k; i++){
                         if(key[i].equals("0")) {  // 현장
                             cList.add(new mypagereviewitem(name[i], contents[i], datetime[i], ForOInfo[i]));
                             flag = 0;
                             Log.d("asdfasdfasdf",name[i] + " " + contents[i]+ " "+ datetime[i]);
+                            j++;
                         }
                     }
+                    if(j==0){
+                        nonereview.setVisibility(View.VISIBLE);
+                    }
+                    else nonereview.setVisibility(View.INVISIBLE);
+                    /*if(k==0){
+                        cList.add(new mypagereviewitem("", "첫 리뷰를 써주세요!!", "", ""));
+                        flag=0;
+                    }*/
                     myAdapter = new mypagereviewAdapter(cList);
-                    mRecyclerView.setAdapter(myAdapter);
+                    mRecyclerView.setAdapter(myAdapter); // 값구분을 통해서 다른 list에 넣어준다
 
                 }
                 else{
                     cList = new ArrayList<>();
+                    int j=0;
                     for (int i=0; i<k; i++){
                         if(key[i].equals("1")) {  // 사무소
                             cList.add(new mypagereviewitem(name[i], contents[i], datetime[i], ForOInfo[i]));
                             flag = 1;
+                            j++;
                             Log.d("asdfasdfasdf",name[i] + " " + contents[i]+ " "+ datetime[i]);
                         }
                     }
-                    myAdapter = new mypagereviewAdapter(cList);
+                    if(j==0){
+                        nonereview.setVisibility(View.VISIBLE);
+                    }
+                    else nonereview.setVisibility(View.INVISIBLE);
+                    /*if(k==0){
+                        cList.add(new mypagereviewitem("", "첫 리뷰를 써주세요!!", "", ""));
+                        flag=1;
+                    }*/
+                    myAdapter = new mypagereviewAdapter(cList);// 값구분을 통해서 다른 list에 넣어준다
                     mRecyclerView.setAdapter(myAdapter);
                 }
                 myAdapter.setOnItemClickListener(new mypagereviewAdapter.OnItemClickListener() { // 리싸이클러뷰 속 버튼이 클릭될 시 이벤트
@@ -231,46 +254,6 @@ public class ReviewManageActivity extends Activity {
 
             }
         });
-
-        /*DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getApplicationContext(),new LinearLayoutManager(this).getOrientation());
-        mRecyclerView.addItemDecoration(dividerItemDecoration);
-
-
-        final GestureDetector gestureDetector = new GestureDetector(ReviewManageActivity.this, new GestureDetector.SimpleOnGestureListener() {
-            @Override
-            public boolean onSingleTapUp(MotionEvent e) {
-                return true;
-            }
-        });
-
-        mRecyclerView.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
-            @Override
-            public boolean onInterceptTouchEvent(@NonNull RecyclerView rv, @NonNull MotionEvent e) {
-
-                View child = rv.findChildViewUnder(e.getX(), e.getY());
-
-                if(child!=null&&gestureDetector.onTouchEvent(e))
-                {
-                    //현재 터치된 곳의 position을 가져옴
-                    int position = rv.getChildAdapterPosition(child);
-
-                    TextView bName = rv.getChildViewHolder(child).itemView.findViewById(R.id.reviewfield);
-                    Toast.makeText(getApplicationContext(), position+"번 째 항목 선택", Toast.LENGTH_SHORT).show();
-
-                }
-                return false;
-            }
-
-            @Override
-            public void onTouchEvent(@NonNull RecyclerView rv, @NonNull MotionEvent e) {
-
-            }
-
-            @Override
-            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
-
-            }
-        });*/
 
     }
 

@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MapForOfficeRequest extends StringRequest {
-    final static private String URL ="http://14.63.162.160/MapForOffice.php";
+    final static private String URL ="http://14.63.220.50/MapForOffice.php";
     private Map<String, String> parameters;
 
 

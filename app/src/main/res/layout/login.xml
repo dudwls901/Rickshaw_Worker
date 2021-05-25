@@ -45,6 +45,7 @@
             android:background="@drawable/edittext_custom1"
             android:hint="비밀번호"
             android:inputType="textPassword"
+            android:maxLength="20"
             android:padding="15dp"
             app:layout_constraintLeft_toLeftOf="@id/guideline9"
             app:layout_constraintRight_toRightOf="@id/guideline10"

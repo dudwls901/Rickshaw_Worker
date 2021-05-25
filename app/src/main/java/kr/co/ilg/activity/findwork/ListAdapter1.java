@@ -1,5 +1,6 @@
 package kr.co.ilg.activity.findwork;
 
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -20,15 +21,13 @@ import com.example.capstone.R;
 import java.util.ArrayList;
 
 public class ListAdapter1 extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
-    View dialogView;
-    Button btnPay, btnReview;
     Context dcontext;
-    ConstraintLayout workinfoCons, fieldReview, supervisorReview;
     Intent intent;
-
+    View clickedView;
     public static class MyViewHolder extends RecyclerView.ViewHolder{
         TextView title,date,pay,job,place,office,current_people,total_people,paid;
-        LinearLayout linear1;
+        LinearLayout btnWorkInfo, btnBuilding, btnPeople, expanded_menu;
+
         MyViewHolder(View view){
             super(view);
             title=view.findViewById(R.id.title);
@@ -38,6 +37,10 @@ public class ListAdapter1 extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
             job=view.findViewById(R.id.job);
             place=view.findViewById(R.id.place);
             office=view.findViewById(R.id.office);
+            btnWorkInfo = view.findViewById(R.id.btnWorkInfo);
+            btnBuilding = view.findViewById(R.id.btnBuilding);
+            btnPeople = view.findViewById(R.id.btnPeople);
+            expanded_menu = view.findViewById(R.id.expanded_menu);
         }
     }
 
@@ -74,25 +77,37 @@ public class ListAdapter1 extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
             @Override
             public void onClick(View view) {
                 context =view.getContext();
-                final AlertDialog.Builder dlg = new AlertDialog.Builder(context);
-                dialogView = View.inflate(context, R.layout.workpickoutdialog, null);
-                dlg.setView(dialogView);
-                workinfoCons = dialogView.findViewById(R.id.workinfo);
-                fieldReview = dialogView.findViewById(R.id.fieldReview);
-                supervisorReview = dialogView.findViewById(R.id.supervisorReview);
-
-                dlg.setNegativeButton("닫기", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                //전에 클릭한 것이 없을 때
+                if(clickedView==null)
+                {
+                    clickedView=myViewHolder.expanded_menu;
+                    changeVisibility(true,clickedView);
+                    // recyclerView.smoothScrollToPosition();
+                    //    Log.d("viewposition",(int)view.getY()-1+"");
+                }
+                else//전에 클릭한 것이 있을 때
+                {
+//                        같은 거 클릭했을 때
+                    if(clickedView == myViewHolder.expanded_menu) {
+                        changeVisibility(false,clickedView);
+                        clickedView = null;
+                    }
+                    //다른 거 클릭했을 때
+                    else {
+                        changeVisibility(true,myViewHolder.expanded_menu);;
+                        changeVisibility(false,clickedView);;
+                        clickedView = myViewHolder.expanded_menu;
 
                     }
-                });
+                }
 
-                workinfoCons.setOnClickListener(new View.OnClickListener() {
+
+                myViewHolder.btnWorkInfo.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         context =v.getContext();
                         intent = new Intent(context, WorkInfoActivity.class);
+                        intent.putExtra("jp_num",workInfo.get(position).jp_num);
                         intent.putExtra("jp_title",workInfo.get(position).title);
                         intent.putExtra("field_address",workInfo.get(position).place);
                         intent.putExtra("manager_office_name",workInfo.get(position).office);
@@ -109,7 +124,7 @@ public class ListAdapter1 extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
                     }
                 });
 
-                fieldReview.setOnClickListener(new View.OnClickListener() {//현장후기작성
+                myViewHolder.btnBuilding.setOnClickListener(new View.OnClickListener() {//현장후기작성
                     @Override
                     public void onClick(View v) {
 
@@ -126,7 +141,7 @@ public class ListAdapter1 extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
                     }
                 });
-                supervisorReview.setOnClickListener(new View.OnClickListener() {//인력사무소(구인자)후기작성
+                myViewHolder.btnPeople.setOnClickListener(new View.OnClickListener() {//인력사무소(구인자)후기작성
                     @Override
                     public void onClick(View v) {
 
@@ -144,12 +159,28 @@ public class ListAdapter1 extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
                     }
                 });
-                dlg.show();
-            }
 
+            }
+//itemview클릭리스너끝
         });
 
 
+    }
+    private void changeVisibility(final boolean isExpanded, View view) {
+        // ValueAnimator.ofInt(int... values)는 View가 변할 값을 지정, 인자는 int 배열
+        ValueAnimator va = isExpanded ? ValueAnimator.ofInt(0, 300) : ValueAnimator.ofInt(600, 0);
+        // Animation이 실행되는 시간, n/1000초
+        va.setDuration(200);
+        va.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                view.getLayoutParams().height = (int) animation.getAnimatedValue();
+                view.requestLayout();
+                view.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
+            }
+        });
+        // Animation start
+        va.start();
     }
     @Override
     public int getItemCount() {

@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class TimeCheckRequest extends StringRequest {
-    final static private String URL = "http://14.63.162.160/TimeCheck.php";
+    final static private String URL = "http://14.63.220.50/TimeCheck.php";
 
     private Map<String, String> parameters;
 

@@ -23,6 +23,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.capstone.R;
 import com.example.capstone.TokenRequest;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,16 +64,6 @@ public class MypageMainActivity extends AppCompatActivity implements View.OnClic
         List<String> list = new ArrayList<>();
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, list);
         listview.setAdapter(adapter);
-        Response.Listener rListener = new Response.Listener<String>() {  // Generics를 String타입으로 한정
-            @Override
-            public void onResponse(String response) {
-                try {
-
-                } catch (Exception e) {
-                    Log.d("mytest", e.toString());
-                }
-            }
-        };
 
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -90,11 +81,23 @@ public class MypageMainActivity extends AppCompatActivity implements View.OnClic
                             intent = new Intent(MypageMainActivity.this, com.example.capstone.MainActivity.class);
                             Sharedpreference.clear(mContext,"autologin");
                             Sharedpreference.set_state(mContext,"switch1",false,"state");
-                            TokenRequest tokenRequest = new TokenRequest(Sharedpreference.get_email(mContext,"worker_email","memberinfo"), Sharedpreference.get_token(mContext,"token","state"),rListener);
-                            RequestQueue queue = Volley.newRequestQueue(MypageMainActivity.this);
-                            queue.add(tokenRequest);
-                            Sharedpreference.set_token(mContext,"token",null,"state");
-                            startActivity(intent); break;
+                            String token = FirebaseInstanceId.getInstance().getToken();
+                            Log.d("asdfasdf",token);
+                            Response.Listener kListener = new Response.Listener<String>() {  // Generics를 String타입으로 한정
+                                @Override
+                                public void onResponse(String response) {
+                                    try {
+
+                                    } catch (Exception e) {
+                                    Log.d("mytest", e.toString());
+                                    }
+                                }
+                            };
+                            TokenRequest tokenRequest = new TokenRequest("0",token,kListener);
+                            RequestQueue queue3 = Volley.newRequestQueue(MypageMainActivity.this);
+                            queue3.add(tokenRequest);
+
+                            startActivity(intent); break; // 로그아웃시 사용자의 토큰관리, 자동로그인 관리, 스위치 정보 저장 관리 등
 
                 }
             }

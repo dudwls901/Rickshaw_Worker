@@ -1,30 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/balloon_main_layout"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/balloon_overlay_bg_selector"
+    android:minWidth="200dp"
+    android:orientation="horizontal"
+    android:paddingBottom="25dp"
+    android:paddingLeft="10dp"
+    android:paddingRight="0dp"
+    android:paddingTop="0dp"
+
+    >
+    <LinearLayout
+        android:id="@+id/balloon_inner_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:layout_weight="1" >
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/building"
+            android:id="@+id/badge"
+            android:layout_gravity="center"
+            />
+        <LinearLayout
+            android:layout_marginTop="5dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:minHeight="40dp"
+            android:orientation="vertical"
+            android:layout_marginLeft="5dp"
+            >
+
+            <TextView
+                android:id="@+id/balloon_item_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="명지전문대학"
+                android:textStyle="bold"
+                android:textSize="15dp"
+                />
+
+            <TextView
+                android:id="@+id/balloon_item_address"
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:text="(033665) 서울 서대문구 증가로10길 28 남가좌제2동주민센터"
+                android:textColor="#8A8989"
+                android:textSize="11dp"
+                />
+        </LinearLayout>
+
+
+    </LinearLayout>
 
     <ImageView
+        android:id="@+id/balloon_disclosure"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:ignore="MissingConstraints"
-        android:id="@+id/badge"
-        />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/title"
-        app:layout_constraintRight_toLeftOf="@id/badge"
-        app:layout_constraintTop_toTopOf="parent"
-        />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/desc"
-        app:layout_constraintRight_toLeftOf="@id/title"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        android:layout_height="fill_parent"
+        android:layout_gravity="center_vertical"
+        android:paddingTop="3dp"
+        android:layout_marginBottom="2dp"
+        android:src="@drawable/balloon_disclosure"
+         />
+<!--    <ImageView-->
+<!--        android:id="@+id/balloon_close"-->
+<!--        android:layout_width="40dp"-->
+<!--        android:layout_height="40dp"-->
+<!--        android:paddingBottom="10dp"-->
+<!--        android:paddingLeft="10dp"-->
+<!--        android:paddingRight="5dp"-->
+<!--        android:paddingTop="5dp"-->
+<!--        android:src="@drawable/balloon_overlay_close"-->
+<!--        android:tint="#636363"-->
+<!--        />-->
 
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

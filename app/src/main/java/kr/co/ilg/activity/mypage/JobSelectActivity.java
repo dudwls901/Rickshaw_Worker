@@ -166,7 +166,7 @@ public class JobSelectActivity extends AppCompatActivity implements View.OnClick
             }
 
             if (check[k] == 1) {
-                jobs = job[k].getText().toString() + "  " + jobs;
+                jobs = jobs+"  "+job[k].getText().toString();
 
                 job_code[a] = k;
                 a++;

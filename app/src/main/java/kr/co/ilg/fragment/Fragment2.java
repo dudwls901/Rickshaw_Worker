@@ -142,7 +142,7 @@ public class Fragment2 extends Fragment {
                     ListWorkPickOutAdapter myworkAdapter1 = new ListWorkPickOutAdapter(context.getApplicationContext(), pickworkInfoArrayList);
                     recyclerView1.setAdapter(myworkAdapter1);
 
-                    ListAdapter myworkAdapter2 = new ListAdapter(context.getApplicationContext(), workInfoArrayList,1);
+                    ListAdapter myworkAdapter2 = new ListAdapter(context.getApplicationContext(), workInfoArrayList);
                     recyclerView2.setAdapter(myworkAdapter2);
 
                 } catch (Exception e) {

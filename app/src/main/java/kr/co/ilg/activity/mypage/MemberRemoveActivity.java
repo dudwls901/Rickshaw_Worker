@@ -19,6 +19,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.capstone.MainActivity;
 import com.example.capstone.R;
 import com.example.capstone.TokenRequest;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import org.json.JSONObject;
 
@@ -28,7 +29,6 @@ public class MemberRemoveActivity extends Activity{
 
     Context mContext;
     String worker_email, worker_pw, worker_check_pw;
-    Response.Listener rListener;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -40,7 +40,6 @@ public class MemberRemoveActivity extends Activity{
         EditText checkPwET = findViewById(R.id.checkPwET);
         EditText passwdET = findViewById(R.id.passwdET);
 
-
         remove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -48,8 +47,6 @@ public class MemberRemoveActivity extends Activity{
                 worker_email = Sharedpreference.get_email(mContext, "worker_email","memberinfo");
                 worker_pw = passwdET.getText().toString();
                 worker_check_pw = checkPwET.getText().toString();
-
-
 
                 if ((worker_pw.equals("")) || (worker_check_pw.equals(""))) {
                     Toast.makeText(MemberRemoveActivity.this, "모든 값을 입력해 주세요.", Toast.LENGTH_SHORT).show();
@@ -73,7 +70,9 @@ public class MemberRemoveActivity extends Activity{
                                         startActivity(intent);
                                         Sharedpreference.clear(mContext,"autologin");
                                         Sharedpreference.set_state(mContext, "switch1",false,"state");
-                                        Response.Listener rListener = new Response.Listener<String>() {  // Generics를 String타입으로 한정
+                                        String token = FirebaseInstanceId.getInstance().getToken();
+                                        Log.d("asdfasdf",token);
+                                        Response.Listener kListener = new Response.Listener<String>() {  // Generics를 String타입으로 한정
                                             @Override
                                             public void onResponse(String response) {
                                                 try {
@@ -83,10 +82,9 @@ public class MemberRemoveActivity extends Activity{
                                                 }
                                             }
                                         };
-                                        TokenRequest tokenRequest = new TokenRequest(Sharedpreference.get_email(mContext,"worker_email","memberinfo"), Sharedpreference.get_token(mContext,"token","state"),rListener);
-                                        RequestQueue queue = Volley.newRequestQueue(MemberRemoveActivity.this);
-                                        queue.add(tokenRequest);
-                                        Sharedpreference.set_state(mContext,"token",null,"state");
+                                        TokenRequest tokenRequest = new TokenRequest("0",token,kListener);
+                                        RequestQueue queue3 = Volley.newRequestQueue(MemberRemoveActivity.this);
+                                        queue3.add(tokenRequest);
                                     } else {
                                         Toast.makeText(mContext, "비밀번호와 비밀번호 확인이 다릅니다.", Toast.LENGTH_SHORT).show();
                                     }

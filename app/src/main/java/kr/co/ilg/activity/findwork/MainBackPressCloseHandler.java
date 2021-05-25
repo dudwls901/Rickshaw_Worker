@@ -1,9 +1,17 @@
 package kr.co.ilg.activity.findwork;
 
 import android.app.Activity;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.core.app.ActivityCompat;
+
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.Volley;
+import com.example.capstone.MyFirebaseInstanceservice;
+import com.example.capstone.TokenRequest;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 public class MainBackPressCloseHandler {
     private long backKeyPressedTime = 0;
@@ -25,7 +33,25 @@ public class MainBackPressCloseHandler {
             activity.finish();
             ActivityCompat.finishAffinity(activity);
             toast.cancel();
+
+            if(Sharedpreference.get_id(activity,"worker_email","autologin") == null) {
+                Response.Listener rListener = new Response.Listener<String>() {  // Generics를 String타입으로 한정
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+
+                        } catch (Exception e) {
+                            Log.d("mytest", e.toString());
+                        }
+                    }
+                };
+                String token = FirebaseInstanceId.getInstance().getToken();
+                TokenRequest tokenRequest = new TokenRequest("0",token, rListener);
+                RequestQueue queue = Volley.newRequestQueue(activity);
+                queue.add(tokenRequest);
+            }
         }
+
     }
 
     public void showGuide() {

@@ -43,6 +43,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             android:inputType="textPassword"
+            android:maxLength="20"
             android:paddingLeft="120dp" />
 
         <TextView
@@ -63,6 +64,7 @@
             app:layout_constraintTop_toBottomOf="@id/passwdET"
             app:layout_constraintLeft_toLeftOf="parent"
             android:inputType="textPassword"
+            android:maxLength="20"
             android:paddingLeft="120dp" />
 
         <TextView

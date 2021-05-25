@@ -16,7 +16,7 @@ import android.util.Log;
 
 
 
-public class GpsTracker extends Service implements LocationListener {
+public class GpsTracker extends Service implements LocationListener { //GPS를 이용해 위치를 조회하고 좌표로 변환하는 class
 
     private final Context mContext;
     Location location;

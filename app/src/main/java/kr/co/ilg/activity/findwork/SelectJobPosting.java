@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class SelectJobPosting extends StringRequest {
 
-    final static private String URL ="http://14.63.162.160/SelectJobPosting.php";// localhost(127.0.0.1)로 선언하면 AVD에 접속하게 됨
+    final static private String URL ="http://14.63.220.50/SelectJobPosting.php";// localhost(127.0.0.1)로 선언하면 AVD에 접속하게 됨
     private Map<String, String> parameters;
 
     //요청                클라이언트로 전송할 데이터(userID)

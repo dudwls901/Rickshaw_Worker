@@ -42,6 +42,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
 import com.android.volley.Response;
 
 
@@ -54,7 +55,8 @@ public class CertificateConfirmActivity extends AppCompatActivity implements Vie
     String worker_email, worker_pw, worker_name, worker_gender, worker_birth, worker_phonenum, worker_certicipate;
     final String TAG = getClass().getSimpleName();
     final static int TAKE_PICTURE = 1;
-    String phpUrl ="http://14.63.162.160/ImageUpload.php";
+    boolean takePicture = false;
+    String phpUrl = "http://14.63.220.50/ImageUpload.php";
     URL url;
     String mCurrentPhotoPath;
     static final int REQUEST_TAKE_PHOTO = 1;
@@ -81,27 +83,30 @@ public class CertificateConfirmActivity extends AppCompatActivity implements Vie
         uploadBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(CertificateConfirmActivity.this, LocalSelectActivity.class);
-                intent.putExtra("worker_email", worker_email);
-                intent.putExtra("worker_pw", worker_pw);
-                intent.putExtra("worker_gender", worker_gender);
-                intent.putExtra("worker_name", worker_name);
-                intent.putExtra("worker_birth",worker_birth);
-                intent.putExtra("worker_phonenum", worker_phonenum);
-                intent.putExtra("worker_certicipate", worker_certicipate);
+                if(takePicture) {
+                    Intent intent = new Intent(CertificateConfirmActivity.this, LocalSelectActivity.class);
+                    intent.putExtra("worker_email", worker_email);
+                    intent.putExtra("worker_pw", worker_pw);
+                    intent.putExtra("worker_gender", worker_gender);
+                    intent.putExtra("worker_name", worker_name);
+                    intent.putExtra("worker_birth", worker_birth);
+                    intent.putExtra("worker_phonenum", worker_phonenum);
+                    intent.putExtra("worker_certicipate", worker_certicipate);
 
-          //이미지 업로드 하기
-            //이미지 총 경로(서버에 쓸 거)    mCurrentPhotoPath
-            //이미지 이름(db에 넘어갈 것)      certicipate
-            atask at = new atask();
-            at.execute(mCurrentPhotoPath);
+                    //이미지 업로드 하기
+                    //이미지 총 경로(서버에 쓸 거)    mCurrentPhotoPath
+                    //이미지 이름(db에 넘어갈 것)      certicipate
+                    atask at = new atask();
+                    at.execute(mCurrentPhotoPath);
 
-
-                startActivity(intent);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(CertificateConfirmActivity.this, "이수증 사진을 촬영해주세요.", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
-        nextTimeTV.setPaintFlags(nextTimeTV.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG);
+        nextTimeTV.setPaintFlags(nextTimeTV.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         nextTimeTV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -110,7 +115,7 @@ public class CertificateConfirmActivity extends AppCompatActivity implements Vie
                 intent.putExtra("worker_pw", worker_pw);
                 intent.putExtra("worker_gender", worker_gender);
                 intent.putExtra("worker_name", worker_name);
-                intent.putExtra("worker_birth",worker_birth);
+                intent.putExtra("worker_birth", worker_birth);
                 intent.putExtra("worker_phonenum", worker_phonenum);
                 intent.putExtra("worker_certicipate", "noImage");
                 //사진 건너뛰기 시 worker_certicipate에는 "noImage"가 들어감;
@@ -118,12 +123,12 @@ public class CertificateConfirmActivity extends AppCompatActivity implements Vie
             }
         });
 
-        // 카메라 버튼에 리스터 추가
+        // 카메라 버튼에 리스너 추가
         cameraBtn.setOnClickListener(this);
 
         // 6.0 마쉬멜로우 이상일 경우에는 권한 체크 후 권한 요청
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED ) {
+            if (checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
                 Log.d(TAG, "권한 설정 완료");
             } else {
                 Log.d(TAG, "권한 설정 요청");
@@ -137,7 +142,7 @@ public class CertificateConfirmActivity extends AppCompatActivity implements Vie
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         Log.d(TAG, "onRequestPermissionsResult");
-        if (grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED ) {
+        if (grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
             Log.d(TAG, "Permission: " + permissions[0] + "was " + grantResults[0]);
         }
     }
@@ -145,7 +150,7 @@ public class CertificateConfirmActivity extends AppCompatActivity implements Vie
     // 버튼 onClick리스터 처리부분
     @Override
     public void onClick(View v) {
-        switch(v.getId()){
+        switch (v.getId()) {
             case R.id.cameraBtn:
                 // 카메라 앱을 여는 소스
                 dispatchTakePictureIntent();
@@ -181,7 +186,7 @@ public class CertificateConfirmActivity extends AppCompatActivity implements Vie
 
                             Bitmap rotatedBitmap = null;
                             // 각도 처리
-                            switch(orientation) {
+                            switch (orientation) {
 
                                 case ExifInterface.ORIENTATION_ROTATE_90:
                                     rotatedBitmap = rotateImage(bitmap, 90);
@@ -199,8 +204,10 @@ public class CertificateConfirmActivity extends AppCompatActivity implements Vie
                                 default:
                                     rotatedBitmap = bitmap;
                             }
-
+                            takePicture = true;
                             certificateImg.setImageBitmap(rotatedBitmap);
+                        } else{
+                            takePicture = false;
                         }
                     }
                     break;
@@ -266,56 +273,57 @@ public class CertificateConfirmActivity extends AppCompatActivity implements Vie
                 matrix, true);
     }
 
-    private class atask extends AsyncTask<String, String, String>
-    {
+    private class atask extends AsyncTask<String, String, String> {
         @Override
         protected String doInBackground(String... strings) {
-           String imgPath = strings[0]; //이미지파일 경로 받아오기
+            String imgPath = strings[0]; //이미지파일 경로 받아오기
 
             DataOutputStream os = null;
             String border = "#";
             String two = "--";
-            String nl ="\n";
+            String nl = "\n";
             byte[] buf = null;
-            int bufSz = 1024*1024, ret=0;
+            int bufSz = 1024 * 1024, ret = 0;
             File imgFile = new File(imgPath);
-            Log.d("ccccisfile",String.valueOf(imgFile.isFile()));
-            if(imgFile.isFile())
-            { Log.d("cccc됐놔용?","1");
+            Log.d("ccccisfile", String.valueOf(imgFile.isFile()));
+            if (imgFile.isFile()) {
+                Log.d("cccc됐놔용?", "1");
                 try {
-                    Log.d("cccc됐냐고?","2");
+                    Log.d("cccc됐냐고?", "2");
                     FileInputStream fis = new FileInputStream(imgFile);
                     url = new URL(phpUrl);
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                     conn.setDoOutput(true);
                     conn.setDoInput(true);
                     conn.setRequestMethod("POST");
-                    conn.setRequestProperty("Content-Type", "multipart/form-data;boundary="+ border);
+                    conn.setRequestProperty("Content-Type", "multipart/form-data;boundary=" + border);
                     os = new DataOutputStream(conn.getOutputStream());
                     os.writeBytes(two + border + nl);
-                    os.writeBytes("Content-Disposition: form-data; name=\"phone\";filename=\""+imgPath+"\"" + nl);
+                    os.writeBytes("Content-Disposition: form-data; name=\"phone\";filename=\"" + imgPath + "\"" + nl);
                     os.writeBytes(nl);
-                    Log.d("cccc됐냐고?","3");
+                    Log.d("cccc됐냐고?", "3");
                     do {
-                        if(buf ==null) buf = new byte[bufSz];
-                        ret = fis.read(buf,0,bufSz); //그림파일 입력
-                        os.write(buf,0,bufSz);
-                    }while(ret>0);
+                        if (buf == null) buf = new byte[bufSz];
+                        ret = fis.read(buf, 0, bufSz); //그림파일 입력
+                        os.write(buf, 0, bufSz);
+                    } while (ret > 0);
 
                     os.writeBytes(nl + two + border + two + nl); //--#  --#--
                     conn.getResponseCode();
                     fis.close();
                     os.close();
-                Log.d("cccc됐니?","4");
-                }catch(Exception ex) {ex.printStackTrace();}
+                    Log.d("cccc됐니?", "4");
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
 
             }
 
             return "=>imgUploading OK";
         }
-        protected void onPostExecute(String string)
-        {
-         Log.d("cccccc",string);
+
+        protected void onPostExecute(String string) {
+            Log.d("cccccc", string);
         }
     }
 }
