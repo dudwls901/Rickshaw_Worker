@@ -6,7 +6,7 @@
 ## 1.시스템 구조도
 ![image](https://user-images.githubusercontent.com/66052467/119632190-8bab0e00-be4b-11eb-96fb-48d8ca5076ab.png)
 ## 2.시연 영상
-[![인력거_시연동영상](https://img.youtube.com/vi/w5krUhMxZTc/0.jpg)](https://youtu.be/w5krUhMxZTc?t=0s)
+[![인력거_시연동영상](https://img.youtube.com/vi/w5krUhMxZTc/hqdefault.jpg)](https://youtu.be/w5krUhMxZTc?t=0s)
 ## 3.주요 기능
 ## 4.DB
 ## 5.사용 기술 및 개발환경
