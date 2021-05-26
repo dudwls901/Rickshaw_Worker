@@ -9,7 +9,9 @@
 [![인력거_시연동영상](https://img.youtube.com/vi/w5krUhMxZTc/0.jpg)](https://youtu.be/w5krUhMxZTc?t=0s)
 ## 3.주요 기능
 ## 4.DB
+###한글
 ![인력거DB-한글](https://user-images.githubusercontent.com/66052467/119671200-8ca46580-be74-11eb-833f-49d94d25acdb.png)
+###영어
 ![인력거DB-English 최신 (1)](https://user-images.githubusercontent.com/66052467/119671206-8dd59280-be74-11eb-8f46-4a9d0df55201.png)
 
 ## 5.사용 기술 및 개발환경
