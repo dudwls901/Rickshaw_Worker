@@ -15,7 +15,7 @@
 ![인력거DB-English 최신 (1)](https://user-images.githubusercontent.com/66052467/119671206-8dd59280-be74-11eb-8f46-4a9d0df55201.png)
 
 ## 5.사용 기술 및 개발환경
-[!뱃지이름](http://https://img.shields.io/badge/language-java-red)
+[!java](http://https://img.shields.io/badge/language-java-red)
 ## 6.Git 브랜치 전략
 ## 7.이슈 관리
 ## 8.프로젝트를 진행하며 고민한 Technical Issue
