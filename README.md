@@ -16,7 +16,7 @@
 
 ## 5.사용 기술 및 개발환경
 
- [!java](http://https://img.shields.io/badge/language-java-red)
+![java](http://https://img.shields.io/badge/language-java-red)
 ## 6.Git 브랜치 전략
 ## 7.이슈 관리
 ## 8.프로젝트를 진행하며 고민한 Technical Issue
