@@ -48,9 +48,9 @@ API : Volley, 카메라, 카카오 맵, 카카오 로그인, Gmail Sender, Fireb
 
 ## 6.DB
 ### ✅ 한글
-![인력거DB-한글](https://user-images.githubusercontent.com/66052467/119671200-8ca46580-be74-11eb-833f-49d94d25acdb.png)
+![인력거DB-포폴용_한글](https://user-images.githubusercontent.com/66052467/120096191-fd919900-c164-11eb-9e5e-c14f58fae4bb.png)
 ### ✅ 영어
-![인력거DB-English 최신 (1)](https://user-images.githubusercontent.com/66052467/119671206-8dd59280-be74-11eb-8f46-4a9d0df55201.png)
+![인력거DB-포폴용_영어](https://user-images.githubusercontent.com/66052467/120096195-02eee380-c165-11eb-9cc6-9ce7e0c6271c.png)
 
 ## 7.Git Branch Strategy
 
