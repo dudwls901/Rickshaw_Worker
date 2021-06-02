@@ -6,23 +6,30 @@
 일용직 근로자는 현장에 지원할 수 있는 비대면 구인/구직 애플리케이션<br>
 
 ## 1.Implemeentation Tools
-<a href="" target="_blank"><img src="https://img.shields.io/badge/-Java-007396?style=flat-square&logo=Java&logoColor=white"/></a>
-<a href="" target="_blank"><img src="https://img.shields.io/badge/-PHP-777BB4?style=flat-square&logo=PHP&logoColor=white"/></a>
-<a href="" target="_blank"><img src="https://img.shields.io/badge/-Kotlin-0095D5?style=flat-square&logo=Kotlin&logoColor=white"/></a>
-<a href="" target="_blank"><img src="https://img.shields.io/badge/-XML-777BB4?style=flat-square&logo=XML&logoColor=orange"/></a>
+<a href="https://github.com/dudwls901" target="_blank"><img src="https://img.shields.io/badge/-Java-007396?style=flat-square&logo=Java&logoColor=white"/></a>
+<a href="https://github.com/dudwls901" target="_blank"><img src="https://img.shields.io/badge/-PHP-777BB4?style=flat-square&logo=PHP&logoColor=white"/></a>
+<a href="https://github.com/dudwls901" target="_blank"><img src="https://img.shields.io/badge/-Kotlin-0095D5?style=flat-square&logo=Kotlin&logoColor=white"/></a>
+<a href="https://github.com/dudwls901" target="_blank"><img src="https://img.shields.io/badge/-XML-777BB4?style=flat-square&logo=XML&logoColor=orange"/></a>
 
 
-<a href="" target="_blank"><img src="https://img.shields.io/badge/-Android Studio-3DDC84?style=flat-square&logo=Android+Studio&logoColor=white"/></a>
-<a href="" target="_blank"><img src="https://img.shields.io/badge/-Android-3DDC84?style=flat-square&logo=Android&logoColor=white"/></a>
-<a href="" target="_blank"><img src="https://img.shields.io/badge/-Adobe Photoshop-31A8FF?style=flat-square&logo=Adobe+Photoshop&logoColor=white"/></a>
+<a href="https://github.com/dudwls901" target="_blank"><img src="https://img.shields.io/badge/-Android Studio-3DDC84?style=flat-square&logo=Android+Studio&logoColor=white"/></a>
+<a href="https://github.com/dudwls901" target="_blank"><img src="https://img.shields.io/badge/-Android-3DDC84?style=flat-square&logo=Android&logoColor=white"/></a>
+<a href="https://github.com/dudwls901" target="_blank"><img src="https://img.shields.io/badge/-Adobe Photoshop-31A8FF?style=flat-square&logo=Adobe+Photoshop&logoColor=white"/></a>
 
-<a href="" target="_blank"><img src="https://img.shields.io/badge/-Apache Tomcat-F8DC75?style=flat-square&logo=Apache+Tomcat&logoColor=black"/></a>
-<a href="" target="_blank"><img src="https://img.shields.io/badge/-MySQL-4479A1?style=flat-square&logo=MySQL&logoColor=white"/></a>
-<a href="" target="_blank"><img src="https://img.shields.io/badge/-Firebase-FFCA28?style=flat-square&logo=Firebase&logoColor=black"/></a>
-<a href="" target="_blank"><img src="https://img.shields.io/badge/-FileZilla-BF0000?style=flat-square&logo=FileZilla&logoColor=black"/></a>
+<a href="https://github.com/dudwls901" target="_blank"><img src="https://img.shields.io/badge/-Apache Tomcat-F8DC75?style=flat-square&logo=Apache+Tomcat&logoColor=black"/></a>
+<a href="https://github.com/dudwls901" target="_blank"><img src="https://img.shields.io/badge/-MySQL-4479A1?style=flat-square&logo=MySQL&logoColor=white"/></a>
+<a href="https://github.com/dudwls901" target="_blank"><img src="https://img.shields.io/badge/-Firebase-FFCA28?style=flat-square&logo=Firebase&logoColor=black"/></a>
+<a href="https://github.com/dudwls901" target="_blank"><img src="https://img.shields.io/badge/-FileZilla-BF0000?style=flat-square&logo=FileZilla&logoColor=black"/></a>
 
-API : Volley, 카메라, 카카오 맵, 카카오 로그인, Gmail Sender, Firebase FCM, 다음 도로명 주소 찾기
-
+### ✅ API<br>
+   - Volley
+   - 카메라
+   - 카카오 맵
+   - 카카오 로그인
+   - Gmail Sender
+   - FireBase FCM
+   - 다음 도로명 주소 찾기
+   <br>
 
 ## 2.Demonstration Video
 [![인력거_시연동영상](https://img.youtube.com/vi/w5krUhMxZTc/0.jpg)](https://youtu.be/w5krUhMxZTc?t=0s)
@@ -71,6 +78,6 @@ API : Volley, 카메라, 카카오 맵, 카카오 로그인, Gmail Sender, Fireb
 ![image](https://user-images.githubusercontent.com/66052467/119841035-71069100-bf40-11eb-9478-3a9e30303a28.png)
 ![image](https://user-images.githubusercontent.com/66052467/119841503-d064a100-bf40-11eb-9045-e64bc3aa55b1.png)
 ![image](https://user-images.githubusercontent.com/66052467/119841163-8bd90580-bf40-11eb-988a-c562f51aa3bb.png)
-
+<!--
 ## 9.프로젝트를 진행하며 고민한 Technical Issue
-
+-->
