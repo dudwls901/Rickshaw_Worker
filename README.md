@@ -3,7 +3,7 @@
 ## 0.인력거?
 ’인력거’는 기존 오프라인 인력사무소의 대면 구인/구직 프로세스에 불편함을 느껴 고안한 사업 아이템으로,<br>
 인력사무소 측에서 ‘인력거’ 애플리케이션을 통하여 구인 광고를 업로드하고<br>
-일용직 근로자는 현장에 지원할 수 있는 비대면 구인/구직 애플리케이션<br>
+일용직 근로자는 현장에 지원할 수 있는 비대면 구인/구직 애플리케이션입니다.<br>
 
 ## 1.Implemeentation Tools
 <a href="https://github.com/dudwls901" target="_blank"><img src="https://img.shields.io/badge/-Java-007396?style=flat-square&logo=Java&logoColor=white"/></a>
