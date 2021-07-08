@@ -74,7 +74,7 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;　　　　　
 
 ## 8.Issue Management
-### Google Spread Sheet를 통해 실시간 에러 공유 
+### Google Spread Sheet를 통 실시간 이슈 공유 
 ![image](https://user-images.githubusercontent.com/66052467/119841035-71069100-bf40-11eb-9478-3a9e30303a28.png)
 ![image](https://user-images.githubusercontent.com/66052467/119841503-d064a100-bf40-11eb-9045-e64bc3aa55b1.png)
 ![image](https://user-images.githubusercontent.com/66052467/119841163-8bd90580-bf40-11eb-988a-c562f51aa3bb.png)
